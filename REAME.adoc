@@ -1,0 +1,93 @@
+== Haskell examples
+
+.Environment
+* Ubuntu 18.04 LTS
+* Haskell Stack
+** GHC 8.10.4
+
+=== Install WSL
+
+. Install haskell-platform
++
+[source,console]
+----
+sudo apt install haskell-platform
+----
+
+=== Install other Ubuntu
+
+* https://docs.haskellstack.org/en/stable/install_and_upgrade/#ubuntu[Install/upgrade - The Haskell Tool Stack^]
+
+. Install haskell-stack
++
+[source,console]
+----
+$ sudo apt install haskell-stack
+----
+
+. Upgrade haskell-stack
++
+[source,console]
+----
+$ stack upgrade --binary-only
+$ which stack
+/home/foo/.local/bin/stack
+$
+----
+
+. add PATH to `$HOME/.local/bin`
+
+. Check version
++
+[source,console]
+----
+$ stack --version
+Version 2.5.1, Git revision d6ab861544918185236cf826cb2028abb266d6d5 x86_64 hpack-0.33.0
+----
+
+. Setup stack
++
+[source,console]
+----
+$ stack setup
+----
+
+=== Examples
+
+==== Functions
+
+.2乗を計算する関数 square
+[source,haskell]
+----
+Prelude> let square x = x * x
+Prelude> square 42
+1764
+Prelude>
+----
+
+.自然数の階乗を計算する関数 fact
+----
+Prelude> let fact n = product [1..n]
+Prelude> fact 5
+120
+Prelude> fact 10
+3628800
+Prelude>
+----
+
+==== Condition
+[source,haskell]
+----
+Prelude> fact 5 == 120
+True
+Prelude>
+----
+
+=== リストの内包表記
+.3の倍数を抽出する
+[source,haskell]
+----
+Prelude> [p | p <- [1..10], p `mod` 3 == 0]
+[3,6,9]
+Prelude>
+----
