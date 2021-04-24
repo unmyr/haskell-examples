@@ -91,3 +91,36 @@ Prelude> [p | p <- [1..10], p `mod` 3 == 0]
 [3,6,9]
 Prelude>
 ----
+
+.Making a list of divisors in Haskell
+[source,haskell]
+----
+Prelude> [x | x <- [2..9], 10 `mod` x == 0]
+[2,5]
+Prelude>
+----
+
+.三乗根を抽出する
+[source,haskell]
+----
+Prelude> [x | x <- [2..7], x * x * x == 8]
+[2]
+Prelude>
+----
+
+----
+isPrime k = if k > 1 then null [ x | x <- [2..k - 1], k `mod` x == 0] else False
+----
+
+=== Monad
+
+[source,haskell]
+----
+Prelude> Just 1 >>= \x -> return (x*2)
+Just 2
+Prelude> Nothing >>= \x -> return (x*2)
+Nothing
+Prelude> [1,2,3] >>= \x -> return (x * 2)
+[2,4,6]
+Prelude>
+----
