@@ -1,0 +1,46 @@
+=== no optimize
+
+[source,console]
+----
+$ time ./digits_sum_has_nth_roots
+[2401,4913,5832]
+
+real    0m0.027s
+user    0m0.031s
+sys     0m0.000s
+----
+
+=== -O2
+
+[source,console]
+----
+$ $ time ./digits_sum_has_nth_roots
+[2401,4913,5832]
+
+real    0m0.016s
+user    0m0.000s
+sys     0m0.016s
+----
+
+=== -O2 -funfolding-use-threshold=16
+
+[source,console]
+----
+$ time ./digits_sum_has_nth_roots
+[2401,4913,5832]
+
+real    0m0.015s
+user    0m0.016s
+sys     0m0.000s
+----
+
+=== -O2 -optc-O3
+
+----
+$ time ./digits_sum_has_nth_roots
+[2401,4913,5832]
+
+real    0m0.019s
+user    0m0.016s
+sys     0m0.000s
+----
