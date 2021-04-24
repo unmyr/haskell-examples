@@ -36,6 +36,7 @@ sys     0m0.000s
 
 === -O2 -optc-O3
 
+[source,console]
 ----
 $ time ./digits_sum_has_nth_roots
 [2401,4913,5832]
