@@ -7,15 +7,6 @@ digitSum = digitSumHelper 0
       else
         ds + n
 
-hasNthRoot :: Int -> Int -> Bool
-hasNthRoot n 1 = n == 1
-hasNthRoot n p = hasNthRootHelper n p
-  where
-    hasNthRootHelper n p
-      | p < n && n `mod` p == 0 = hasNthRootHelper (n `div` p) p
-      | n <= p && n `mod` p == 0 = True
-      | n `mod` p /= 0 = False
-
 getNthRoot :: Int -> Int -> (Bool,Int,Int,Int)
 getNthRoot n 1 = (n == 1, n, 1, 1)
 getNthRoot n p = getNthRootHelper n n p 1
@@ -35,7 +26,4 @@ getMatch (match, _, _, _) = match
 main :: IO ()
 main = do
   let range = [1000..9999]
-  -- let number_list = [ n | n <- range, hasNthRoot n (digitSum n)]
-  -- print(number_list)
-  -- mapM_ putStrLn [showDetails (getNthRoot n (digitSum n)) | n <- number_list, hasNthRoot n (digitSum n)]
   mapM_ putStrLn [showDetails (getNthRoot n (digitSum n)) | n <- range, getMatch (getNthRoot n (digitSum n))]
