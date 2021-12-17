@@ -14,6 +14,14 @@
 sudo apt install haskell-platform
 ----
 
+. Check version
++
+[source,console]
+----
+$ ghci --version
+The Glorious Glasgow Haskell Compilation System, version 8.0.2
+----
+
 === Install other Ubuntu
 
 * https://docs.haskellstack.org/en/stable/install_and_upgrade/#ubuntu[Install/upgrade - The Haskell Tool Stack^]

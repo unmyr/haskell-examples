@@ -1,0 +1,43 @@
+== Code samples
+
+==== Functions
+
+===== Single results
+
+* using parameters
++
+[source,haskell]
+.add_2arg_int.hs
+----
+add :: Integer -> Integer -> Integer
+add x y = x + y
+main = do
+    print(add 42 13)
+----
+
+* using tuple
++
+[source,haskell]
+----
+add :: (Integer, Integer) -> Integer
+add (x, y) = x + y
+main = do
+    print(add(42, 13))
+----
+
+===== Multiple results
+
+[source,haskell]
+.swap.hs
+----
+swap :: String -> String -> (String, String)
+swap a b = (b, a)
+main = do
+    let (a, b) = swap "hello" "world"
+    putStrLn (a ++ " " ++ b)
+----
++
+.Results
+----
+world hello
+----
