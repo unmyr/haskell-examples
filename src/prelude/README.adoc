@@ -36,7 +36,7 @@ main = do
     let (a, b) = swap "hello" "world"
     putStrLn (a ++ " " ++ b)
 ----
-+
+
 .Results
 ----
 world hello
@@ -44,6 +44,8 @@ world hello
 
 ===== Higher-order function
 
+* using a function
++
 [source,haskell]
 .higher_order_function.hs
 ----
@@ -54,6 +56,21 @@ hypot :: (Double, Double) -> Double
 hypot (x, y) = sqrt (x^2 + y^2)
 
 main = do
+    print $ hypot(5, 12)
+    print $ compute(hypot)
+    print $ compute((\(x, y) -> x**y))
+----
+
+* using a anonymous function
++
+[source,haskell]
+.higher_order_function.hs
+----
+compute :: ((Double, Double) -> Double) -> Double
+compute (f) = f (3::Double, 4::Double)
+
+main = do
+    let hypot = \(x, y) -> sqrt (x^2 + y^2)
     print $ hypot(5, 12)
     print $ compute(hypot)
     print $ compute((\(x, y) -> x**y))
