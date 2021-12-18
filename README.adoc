@@ -60,7 +60,64 @@ Version 2.5.1, Git revision d6ab861544918185236cf826cb2028abb266d6d5 x86_64 hpac
 $ stack setup
 ----
 
-=== Examples
+=== Code examples
+
+==== Type annotations
+
+===== same types
+
+[source,haskell]
+----
+Prelude> (+) 2 3 ::Double
+5.0
+----
+
+===== different types
+
+[source,haskell]
+----
+add_int_and_float :: Integer -> Float -> Float
+add_int_and_float x y = fromIntegral(x) + y
+main = do
+    print(add_int_and_float 1 1.5)
+----
+
+.Results
+* No type annotations
++
+[source,haskell]
+----
+*Main> add_int_and_float 3 4.5
+7.5
+----
+
+* NG: Both add type annotations as Integer
++
+[source,haskell]
+----
+*Main> add_int_and_float 3 4.5 :: Integer
+
+<interactive>:3:1: error:
+    • Couldn't match expected type ‘Integer’ with actual type ‘Float’
+    • In the expression: add_int_and_float 3 4.5 :: Integer
+      In an equation for ‘it’: it = add_int_and_float 3 4.5 :: Integer
+----
+
+* Add type annotations as Float to right parameter
++
+[source,haskell]
+----
+*Main> add_int_and_float 3 (4.5::Float)
+7.5
+----
+
+* Add different type annotations to both variables
++
+[source,haskell]
+----
+*Main> add_int_and_float (3::Integer) (4.5::Float)
+7.5
+----
 
 ==== Functions
 
@@ -73,6 +130,7 @@ Prelude> square 42
 Prelude>
 ----
 
+[source,haskell]
 .自然数の階乗を計算する関数 fact
 ----
 Prelude> let fact n = product [1..n]

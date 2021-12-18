@@ -44,10 +44,25 @@ world hello
 
 ===== Higher-order function
 
-* using a function
+* using arguments
 +
 [source,haskell]
-.higher_order_function.hs
+.higher_order_tuple.hs
+----
+compute :: (Double -> Double -> Double) -> Double
+compute f = f 3 4 ::Double
+
+main = do
+    let hypot = \x y -> sqrt (x^2 + y^2)
+    print $ hypot 5 12
+    print $ compute hypot
+    print $ compute (**)
+----
+
+* using tuple
++
+[source,haskell]
+.higher_order_tuple.hs
 ----
 compute :: ((Double, Double) -> Double) -> Double
 compute (f) = f (3::Double, 4::Double)
@@ -64,7 +79,7 @@ main = do
 * using a anonymous function
 +
 [source,haskell]
-.higher_order_function.hs
+.higher_order_tuple.hs
 ----
 compute :: ((Double, Double) -> Double) -> Double
 compute (f) = f (3::Double, 4::Double)
