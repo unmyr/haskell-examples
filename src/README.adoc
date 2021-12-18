@@ -65,6 +65,141 @@ main = do
 
 === Flow control statements
 
+==== Loop using counter
+
+* not using using guards
++
+[source,haskell]
+.loop_counter_no_guards.hs
+----
+main = do
+    let loop 6 = return ()
+        loop i = do
+            print i
+            loop (i + 1)
+    loop 1
+----
++
+[source,haskell]
+----
+*Main> :load src/prelude/loop_counter_no_guards.hs
+[1 of 1] Compiling Main             ( src/prelude/loop_counter_no_guards.hs, interpreted )
+Ok, modules loaded: Main.
+*Main> main
+1
+2
+3
+4
+5
+*Main>
+----
+
+* using guards
++
+[source,haskell]
+.loop_counter_using_guards.hs
+----
+main = do
+    let loop i
+          | i <= 5 = do
+              print i
+              loop (i + 1)
+          | otherwise = return ()
+    loop 1
+----
++
+[source,haskell]
+----
+*Main> :load src/prelude/loop_counter_using_guards.hs
+[1 of 1] Compiling Main             ( src/prelude/loop_counter_using_guards.hs, interpreted )
+Ok, modules loaded: Main.
+*Main> main
+1
+2
+3
+4
+5
+*Main>
+----
+
+* loop 1 million
++
+[source,haskell]
+----
+import Data.Time.Clock
+
+main = do
+    let sum_1million total
+          | total < 10^6 = do
+              sum_1million (total + 1)
+          | otherwise = return total
+    t0 <- getCurrentTime
+    sum_1million 0 >>= print
+    t1 <- getCurrentTime
+    print (t1 `diffUTCTime` t0)
+----
++
+[source,haskell]
+----
+Prelude> :load src/prelude/loop_1million.hs
+[1 of 1] Compiling Main             ( src/prelude/loop_1million.hs, interpreted )
+Ok, modules loaded: Main.
+*Main> main
+1000000
+3.0136357s
+----
++
+[source,console]
+.No optimization: compiled with no flags with ghc
+----
+$ ../../bin/loop_1million
+1000000
+1.5058498s
+----
++
+[source,console]
+.compiled with `-O2` flags with ghc
+----
+$ ../../bin/loop_1million
+1000000
+0.023587s
+----
++
+[NOTE]
+Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐらい。
++
+.References
+* https://github.com/nh2/loop[Fast loops for Haskell (for when GHC can't optimize ... - GitHub^]
+* https://www.channable.com/tech/how-we-made-haskell-search-strings-as-fast-as-rust[How we made Haskell search strings as fast as Rust^]
+
+==== Loop using range
+
+[source,haskell]
+.loop_using_range.hs
+----
+main = do
+    let loop is_true i n
+          | is_true == True = do
+              print i
+              loop ((i + 1) < n) (i + 1) n
+          | is_true /= True = return ()
+    loop (1 < 6) 1 6
+----
+
+[source,haskell]
+----
+*Main> :load src/prelude/loop_using_range.hs
+[1 of 1] Compiling Main             ( src/prelude/loop_using_range.hs, interpreted )
+Ok, modules loaded: Main.
+*Main> main
+1
+2
+3
+4
+5
+*Main>
+----
+
 ==== Condition
 [source,haskell]
 ----
