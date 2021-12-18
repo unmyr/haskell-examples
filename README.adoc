@@ -1,3 +1,9 @@
+ifndef::leveloffset[]
+:toc: left
+:toclevels: 3
+:icons: font
+endif::[]
+
 == Haskell examples
 
 .Environment
@@ -60,133 +66,31 @@ Version 2.5.1, Git revision d6ab861544918185236cf826cb2028abb266d6d5 x86_64 hpac
 $ stack setup
 ----
 
-=== Code examples
+=== Using GHCi
 
-==== Type annotations
-
-===== same types
-
-[source,haskell]
+. Run ghci
++
+[source,console]
 ----
-Prelude> (+) 2 3 ::Double
-5.0
-----
-
-===== different types
-
-[source,haskell]
-----
-add_int_and_float :: Integer -> Float -> Float
-add_int_and_float x y = fromIntegral(x) + y
-main = do
-    print(add_int_and_float 1 1.5)
+$ ghci src/hello.hs
+GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
+[1 of 1] Compiling Main             ( src/hello.hs, interpreted )
+Ok, modules loaded: Main.
+*Main> 
 ----
 
-.Results
-* No type annotations
+. Execute main
 +
 [source,haskell]
 ----
-*Main> add_int_and_float 3 4.5
-7.5
+*Main> main
+Hello world!
 ----
 
-* NG: Both add type annotations as Integer
+. Exit GHCi
 +
 [source,haskell]
 ----
-*Main> add_int_and_float 3 4.5 :: Integer
-
-<interactive>:3:1: error:
-    • Couldn't match expected type ‘Integer’ with actual type ‘Float’
-    • In the expression: add_int_and_float 3 4.5 :: Integer
-      In an equation for ‘it’: it = add_int_and_float 3 4.5 :: Integer
-----
-
-* Add type annotations as Float to right parameter
-+
-[source,haskell]
-----
-*Main> add_int_and_float 3 (4.5::Float)
-7.5
-----
-
-* Add different type annotations to both variables
-+
-[source,haskell]
-----
-*Main> add_int_and_float (3::Integer) (4.5::Float)
-7.5
-----
-
-==== Functions
-
-.2乗を計算する関数 square
-[source,haskell]
-----
-Prelude> let square x = x * x
-Prelude> square 42
-1764
-Prelude>
-----
-
-[source,haskell]
-.自然数の階乗を計算する関数 fact
-----
-Prelude> let fact n = product [1..n]
-Prelude> fact 5
-120
-Prelude> fact 10
-3628800
-Prelude>
-----
-
-==== Condition
-[source,haskell]
-----
-Prelude> fact 5 == 120
-True
-Prelude>
-----
-
-=== リストの内包表記
-.3の倍数を抽出する
-[source,haskell]
-----
-Prelude> [p | p <- [1..10], p `mod` 3 == 0]
-[3,6,9]
-Prelude>
-----
-
-.Making a list of divisors in Haskell
-[source,haskell]
-----
-Prelude> [x | x <- [2..9], 10 `mod` x == 0]
-[2,5]
-Prelude>
-----
-
-.三乗根を抽出する
-[source,haskell]
-----
-Prelude> [x | x <- [2..7], x * x * x == 8]
-[2]
-Prelude>
-----
-
-----
-isPrime k = if k > 1 then null [ x | x <- [2..k - 1], k `mod` x == 0] else False
-----
-
-=== Monad
-
-[source,haskell]
-----
-Prelude> Just 1 >>= \x -> return (x*2)
-Just 2
-Prelude> Nothing >>= \x -> return (x*2)
-Nothing
-Prelude> [1,2,3] >>= \x -> return (x * 2)
-[2,4,6]
-Prelude>
+*Main> :quit
+Leaving GHCi.
 ----
