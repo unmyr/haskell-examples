@@ -308,7 +308,7 @@ world hello
 * using arguments
 +
 [source,haskell]
-.higher_order_tuple.hs
+.higher_order_args.hs
 ----
 compute :: (Double -> Double -> Double) -> Double
 compute f = f 3 4 ::Double
@@ -319,25 +319,15 @@ main = do
     print $ compute hypot
     print $ compute (**)
 ----
-
-* using tuple
 +
-[source,haskell]
-.higher_order_tuple.hs
+.Results
 ----
-compute :: ((Double, Double) -> Double) -> Double
-compute (f) = f (3::Double, 4::Double)
-
-hypot :: (Double, Double) -> Double
-hypot (x, y) = sqrt (x^2 + y^2)
-
-main = do
-    print $ hypot(5, 12)
-    print $ compute(hypot)
-    print $ compute((\(x, y) -> x**y))
+13.0
+5.0
+81.0
 ----
 
-* using a anonymous function
+* using tuple and a anonymous function
 +
 [source,haskell]
 .higher_order_tuple.hs
@@ -351,6 +341,55 @@ main = do
     print $ compute(hypot)
     print $ compute((\(x, y) -> x**y))
 ----
++
+.Results
+----
+13.0
+5.0
+81.0
+----
+
+* using tuple and a named function
++
+[source,haskell]
+----
+compute :: ((Double, Double) -> Double) -> Double
+compute (f) = f (3::Double, 4::Double)
+
+hypot :: (Double, Double) -> Double
+hypot (x, y) = sqrt (x^2 + y^2)
+
+main = do
+    print $ hypot(5, 12)
+    print $ compute(hypot)
+    print $ compute((\(x, y) -> x**y))
+----
++
+.Results
+----
+13.0
+5.0
+81.0
+----
+
+===== Map
+
+[source,haskell]
+----
+Prelude> map (\n -> n + 1) [1,2,3]
+[2,3,4]
+----
+
+===== Composing functions (合成)
+
+[source,haskell]
+----
+Prelude> ((+ 1) . (* 2)) 3
+7
+Prelude> (+ 1) $ (* 2) 3
+7
+Prelude>
+----
 
 === Monad
 
@@ -363,4 +402,43 @@ Nothing
 Prelude> [1,2,3] >>= \x -> return (x * 2)
 [2,4,6]
 Prelude>
+----
+
+=== Math
+
+[source,haskell]
+.abs
+----
+*Main> abs (-1)
+1
+*Main>
+----
+
+[source,haskell]
+----
+*Main> 1254 `div` 1000
+1
+*Main> 1254 `rem` 1000
+254
+*Main> 
+----
+
+[source,haskell]
+.`mod`
+----
+*Main> (-4) `mod` 3
+2
+*Main> (-1) `mod` 3
+2
+*Main>
+----
+
+[source,haskell]
+.`rem`
+----
+*Main> (-4) `rem` 3
+-1
+*Main> (-1) `rem` 3
+-1
+*Main>
 ----
