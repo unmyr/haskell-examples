@@ -276,6 +276,27 @@ main = do
     print(add 42 13)
 ----
 
+* using strings
++
+[source,haskell]
+.src/prelude/combine_strings.hs
+----
+combine_strings :: String -> String -> String
+combine_strings s1 s2 = s1 ++ s2
+----
++
+[source,console]
+----
+$ ghci src/prelude/combine_strings.hs
+----
++
+[source,haskell]
+.src/prelude/combine_strings.hs
+----
+*Main> combine_strings "hello" " world"
+"hello world"
+----
+
 * using tuple
 +
 [source,haskell]
@@ -288,19 +309,83 @@ main = do
 
 ==== Multiple results
 
+* An example of a use of tuples
++
 [source,haskell]
-.swap.hs
+.src/prelude/swap.hs
 ----
-swap :: String -> String -> (String, String)
-swap a b = (b, a)
+swap :: (String, String) -> (String, String)
+swap (a, b) = (b, a)
 main = do
-    let (a, b) = swap "hello" "world"
+    let (a, b) = swap ("hello", "world")
     putStrLn (a ++ " " ++ b)
 ----
-
++
+[source,console]
+----
+$ ghci src/prelude/swap.hs
+----
++
+[source,haskell]
 .Results
 ----
+*Main> main
 world hello
+*Main> swap("hello", "world")
+("world","hello")
+*Main> swap(swap("hello", "world"))
+("hello","world")
+*Main> (swap . swap)("hello", "world")
+("hello","world")
+*Main> swap $ swap("hello", "world")
+("hello","world")
+----
+
+* Single integer to list of integers 
++
+[source,haskell]
+.src/prelude/func_int_to_list.hs
+----
+get_int_list :: Int -> [Int]
+get_int_list n = [n] ++ [n]
+main = do
+    print(get_int_list 3)
+----
++
+[source,console]
+----
+$ ghci src/prelude/func_int_to_list.hs
+----
++
+[source,haskell]
+----
+*Main> main
+[3,3]
+*Main> get_int_list 4
+[4,4]
+----
+
+==== Recursion
+
+* Collatz map
++
+[source,haskell]
+----
+collatz :: Integer -> [Integer]
+collatz n | n == 1         = [1]
+          | n `mod` 2 == 0 = [n] ++ collatz (n `div` 2)
+          | n `mod` 2 == 1 = [n] ++ collatz (n * 3 + 1)
+----
++
+[source,console]
+----
+$ ghci src/prelude/collatz.hs
+----
++
+[source,haskell]
+----
+*Main> collatz 3
+[3,10,5,16,8,4,2,1]
 ----
 
 ==== Higher-order function
