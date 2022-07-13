@@ -63,6 +63,142 @@ main = do
 7.5
 ----
 
+==== List
+
+* Returns the first item of a list
++
+[source,haskell]
+----
+Prelude> head [1, 2, 3]
+1
+Prelude> take 1 [1, 2, 3]
+[1]
+----
+
+* returns the last item of a list
++
+[source,haskell]
+----
+Prelude> last [1, 2, 3]
+3
+----
+
+* it accepts a list and returns the list without its last item
++
+[source,haskell]
+----
+Prelude> init [1, 2, 3]
+[1,2]
+----
+
+* it accepts a list and returns the list without its first item
++
+[source,haskell]
+----
+Prelude> tail ["A", "B", "C"]
+["B","C"]
+Prelude> drop 1 ["A", "B", "C"]
+["B","C"]
+----
+
+* Program to left rotate a list
++
+[source,haskell]
+----
+Prelude> let rotate_l a = tail a ++ take 1 a
+Prelude> :t rotate_l
+rotate_l :: [a] -> [a]
+Prelude> rotate_l [1, 2, 3]
+[2,3,1]
+Prelude> rotate_l $ rotate_l [1, 2, 3]
+[3,1,2]
+Prelude> rotate_l $ rotate_l $ rotate_l [1, 2, 3]
+[1,2,3]
+----
+
+* Program to right rotate a list
++
+[source,haskell]
+----
+Prelude> let rotate_r a = [last a] ++ init a
+Prelude> :t rotate_r
+rotate_r :: [a] -> [a]
+Prelude> rotate_r [1, 2, 3]
+[3,1,2]
+Prelude> rotate_r $ rotate_r [1, 2, 3]
+[2,3,1]
+Prelude> rotate_r $ rotate_r $ rotate_r [1, 2, 3]
+[1,2,3]
+Prelude> rotate_l $ rotate_r [1, 2, 3]
+[1,2,3]
+----
+
+==== List comprehension (リストの内包表記)
+
+[source,haskell]
+.3の倍数を抽出する
+----
+Prelude> [p | p <- [1..10], p `mod` 3 == 0]
+[3,6,9]
+Prelude>
+----
+
+[source,haskell]
+.Making a list of divisors in Haskell
+----
+Prelude> [x | x <- [2..9], 10 `mod` x == 0]
+[2,5]
+Prelude>
+----
+
+[source,haskell]
+.三乗根を抽出する
+----
+Prelude> [x | x <- [2..7], x * x * x == 8]
+[2]
+Prelude>
+----
+
+[source,haskell]
+----
+isPrime k = if k > 1 then null [ x | x <- [2..k - 1], k `mod` x == 0] else False
+----
+
+==== Tuples
+
+[source,console]
+----
+$ ghci
+GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
+----
+
+[source,haskell]
+----
+Prelude> fst(1, 2)
+1
+Prelude> snd(1, 2)
+2
+----
+
+[source,haskell]
+----
+Prelude> import Data.Tuple
+Prelude Data.Tuple> swap("hello", "world")
+("world","hello")
+Prelude Data.Tuple> swap $ swap("hello", "world")
+("hello","world")
+Prelude Data.Tuple> (swap . swap)("hello", "world")
+("hello","world")
+----
+
+----
+Prelude> curry fst "hello" "world"
+"hello"
+Prelude> uncurry div (10, 5)
+2
+Prelude>
+----
+
 === Flow control statements
 
 ==== Loop using counter
@@ -206,37 +342,6 @@ Ok, modules loaded: Main.
 Prelude> fact 5 == 120
 True
 Prelude>
-----
-
-==== List comprehension (リストの内包表記)
-
-[source,haskell]
-.3の倍数を抽出する
-----
-Prelude> [p | p <- [1..10], p `mod` 3 == 0]
-[3,6,9]
-Prelude>
-----
-
-[source,haskell]
-.Making a list of divisors in Haskell
-----
-Prelude> [x | x <- [2..9], 10 `mod` x == 0]
-[2,5]
-Prelude>
-----
-
-[source,haskell]
-.三乗根を抽出する
-----
-Prelude> [x | x <- [2..7], x * x * x == 8]
-[2]
-Prelude>
-----
-
-[source,haskell]
-----
-isPrime k = if k > 1 then null [ x | x <- [2..k - 1], k `mod` x == 0] else False
 ----
 
 === Functions
