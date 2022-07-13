@@ -191,6 +191,7 @@ Prelude Data.Tuple> (swap . swap)("hello", "world")
 ("hello","world")
 ----
 
+[source,haskell]
 ----
 Prelude> curry fst "hello" "world"
 "hello"
