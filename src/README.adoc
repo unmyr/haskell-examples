@@ -6,6 +6,14 @@ endif::[]
 
 == Code examples
 
+=== ghci
+
+[source,console]
+----
+$ ghci
+GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
+----
+
 === Type annotations
 
 ==== same types
@@ -69,10 +77,30 @@ main = do
 +
 [source,haskell]
 ----
+Prelude> head []
+*** Exception: Prelude.head: empty list
 Prelude> head [1, 2, 3]
 1
+----
++
+[source,haskell]
+----
+Prelude> take 1 []
+[]
 Prelude> take 1 [1, 2, 3]
 [1]
+----
++
+[source,haskell]
+----
+Prelude> foldr (\x _ -> [x]) [] []
+[]
+Prelude> foldr (\x _ -> [x]) [] [1, 2, 3]
+[1]
+Prelude> foldr (\s _ -> [s]) [] []
+[]
+Prelude> foldr (\s _ -> [s]) [] ["apple", "banana", "cherry", "durian"]
+["apple"]
 ----
 
 * returns the last item of a list
@@ -99,6 +127,37 @@ Prelude> tail ["A", "B", "C"]
 ["B","C"]
 Prelude> drop 1 ["A", "B", "C"]
 ["B","C"]
+----
+
+* The length of a list
++
+[source,haskell]
+----
+Prelude> :t length
+length :: Foldable t => t a -> Int
+Prelude> length ["apple", "banana", "cherry", "durian"]
+4
+----
++
+[source,haskell]
+.The length of a list without the "length" function in Haskell
+----
+Prelude> foldr (\_ n -> n + 1) 0 ["apple", "banana", "cherry", "durian"]
+4
+----
+
+* Reverse a list in haskell
++
+[source,haskell]
+----
+Prelude> reverse ["apple","banana","cherry"]
+["cherry","banana","apple"]
+----
++
+[source,haskell]
+----
+Prelude> foldr (\x xs -> xs ++ [x]) [] ["apple", "banana", "cherry"]
+["cherry","banana","apple"]
 ----
 
 * Program to left rotate a list
@@ -140,7 +199,8 @@ Prelude> rotate_l $ rotate_r [1, 2, 3]
 ----
 Prelude> [p | p <- [1..10], p `mod` 3 == 0]
 [3,6,9]
-Prelude>
+Prelude> [1..10] >>= \x -> if x `mod` 3 == 0 then pure x else []
+[3,6,9]
 ----
 
 [source,haskell]
@@ -148,15 +208,17 @@ Prelude>
 ----
 Prelude> [x | x <- [2..9], 10 `mod` x == 0]
 [2,5]
-Prelude>
+Prelude> [2..9] >>= \x -> if 10 `mod` x == 0 then pure x else []
+[2,5]
 ----
 
 [source,haskell]
-.三乗根を抽出する
+.Find cubic root of a number
 ----
 Prelude> [x | x <- [2..7], x * x * x == 8]
 [2]
-Prelude>
+Prelude> [2..7] >>= \x -> if x * x * x == 8 then pure x else []
+[2]
 ----
 
 [source,haskell]
@@ -165,12 +227,6 @@ isPrime k = if k > 1 then null [ x | x <- [2..k - 1], k `mod` x == 0] else False
 ----
 
 ==== Tuples
-
-[source,console]
-----
-$ ghci
-GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
-----
 
 [source,haskell]
 ----
@@ -343,6 +399,53 @@ Ok, modules loaded: Main.
 Prelude> fact 5 == 120
 True
 Prelude>
+----
+
+==== Recursion
+
+* Implement recursion using recursive calls
++
+[source,haskell]
+----
+Prelude> let fac n = if n == 0 then 1 else n * fac (n-1)
+Prelude> fac 42
+1405006117752879898543142606244511569936384000000000
+Prelude> fac 3
+6
+Prelude>
+----
+
+* Implement recursion using `foldr` in haskell
++
+[source,haskell]
+----
+Prelude> let fac_r n = foldr (*) 1 [1..n]
+Prelude> fac_r 42
+1405006117752879898543142606244511569936384000000000
+Prelude> fac_r 3
+6
+----
+
+* Implement recursion using `foldr` in haskell
++
+[source,haskell]
+----
+Prelude> let fac_r n = foldr (*) 1 [1..n]
+Prelude> fac_r 42
+1405006117752879898543142606244511569936384000000000
+Prelude> fac_r 3
+6
+----
+
+* Implement recursion using `foldl` in haskell
++
+[source,haskell]
+----
+Prelude> let fac_l n = foldl (*) 1 [1..n]
+Prelude> fac_l 42
+1405006117752879898543142606244511569936384000000000
+Prelude> fac_l 3
+6
 ----
 
 === Functions
