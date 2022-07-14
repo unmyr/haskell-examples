@@ -71,11 +71,110 @@ main = do
 7.5
 ----
 
+==== String
+
+===== Concatenate vector of chars into single string
+
+
+* Chars
++
+[source,haskell]
+----
+Prelude> ['a', 'b', 'c']
+"abc"
+----
+
+* Using `:`
+
+[source,haskell]
+----
+Prelude> 'a':'b':'c':[]
+"abc"
+----
+
+===== Concatenate vector of strings into single string
+
+* Using `(++)`
++
+[source,haskell]
+----
+Prelude> :t (++)
+(++) :: [a] -> [a] -> [a]
+Prelude> "abc" ++ "123" ++ "cdf"
+"abc123cdf"
+Prelude>
+----
+
+* Using `concat`
++
+[source,haskell]
+----
+Prelude> :t concat
+concat :: Foldable t => t [a] -> [a]
+Prelude> concat ["abc", "123", "cdf"]
+"abc123cdf"
+Prelude>
+----
+
+* Using `Control.Monad.join`
++
+[source,haskell]
+----
+Prelude> Control.Monad.join ["abc", "123", "cdf"]
+"abc123cdf"
+----
++
+[source,haskell]
+----
+Prelude> import Control.Monad
+Prelude Control.Monad> join ["abc", "123", "cdf"]
+"abc123cdf"
+Prelude Control.Monad>
+----
+
+* You can also use the list monad to reduce the list to a single string, then re-wrap the result in a list.
++
+[source,haskell]
+----
+Prelude> ["abc", "123", "cdf"] >>= id
+"abc123cdf"
+Prelude>
+----
+
+* using `foldr` and `foldl`
++
+[source,haskell]
+----
+Prelude> foldr (\s_prepend s -> s_prepend ++ s) "" ["abc", "123", "cdf"]
+"abc123cdf"
+Prelude> foldl (\s s_add -> s ++ s_add) "" ["abc", "123", "cdf"]
+"abc123cdf"
+----
+
+===== Join strings with a delimiter
+
+* Using `Data.List.intercalate`
++
+[source,haskell]
+----
+Prelude> Data.List.intercalate ", " ["John", "Due"]
+"John, Due"
+----
++
+[source,haskell]
+----
+Prelude> import Data.List
+Prelude Data.List> intercalate ", " ["John", "Due"]
+"John, Due"
+Prelude Data.List>
+----
+
 ==== List
 
 * Returns the first item of a list
 +
 [source,haskell]
+.Using `head`
 ----
 Prelude> head []
 *** Exception: Prelude.head: empty list
@@ -84,6 +183,7 @@ Prelude> head [1, 2, 3]
 ----
 +
 [source,haskell]
+.Using `take`
 ----
 Prelude> take 1 []
 []
@@ -92,6 +192,7 @@ Prelude> take 1 [1, 2, 3]
 ----
 +
 [source,haskell]
+.Using `foldr`
 ----
 Prelude> foldr (\x _ -> [x]) [] []
 []
@@ -106,8 +207,16 @@ Prelude> foldr (\s _ -> [s]) [] ["apple", "banana", "cherry", "durian"]
 * returns the last item of a list
 +
 [source,haskell]
+.Using `last`
 ----
 Prelude> last [1, 2, 3]
+3
+----
++
+[source,haskell]
+.Using `foldl`
+----
+Prelude> foldl (\_ x -> x) 0 [1, 2, 3]
 3
 ----
 
@@ -228,6 +337,8 @@ isPrime k = if k > 1 then null [ x | x <- [2..k - 1], k `mod` x == 0] else False
 
 ==== Tuples
 
+* fst and snd
++
 [source,haskell]
 ----
 Prelude> fst(1, 2)
@@ -236,6 +347,8 @@ Prelude> snd(1, 2)
 2
 ----
 
+* swap
++
 [source,haskell]
 ----
 Prelude> import Data.Tuple
