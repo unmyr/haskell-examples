@@ -21,8 +21,6 @@ jobs:
       with:
         source: "gh-pages.gitignore"
         target: "dist/.gitignore"
-    - name: Print execution time
-      run: echo "Time ${{ steps.adocbuild.outputs.time }}"
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
