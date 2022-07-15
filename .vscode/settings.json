@@ -1,5 +1,7 @@
 {
   "cSpell.words": [
+    "adocbuild",
+    "canastro",
     "collatz",
     "concat",
     "foldl",
@@ -10,6 +12,8 @@
     "hypot",
     "leveloffset",
     "optc",
+    "peaceiris",
+    "tonynv",
     "uncurry"
   ]
 }
