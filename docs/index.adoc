@@ -918,3 +918,98 @@ Prelude>
 -1
 *Main>
 ----
+
+==== Sum
+
+* sum
++
+[source,haskell]
+----
+Prelude> :set +s
+Prelude> sum [1..1000000]
+500000500000
+(0.88 secs, 161,299,720 bytes)
+Prelude> sum [1..1000000]
+500000500000
+(0.69 secs, 161,299,720 bytes)
+Prelude> sum [1..1000000]
+500000500000
+(0.72 secs, 161,299,720 bytes)
+Prelude> sum [1..1000000]
+500000500000
+(0.73 secs, 161,300,296 bytes)
+Prelude> sum [1..1000000]
+500000500000
+(0.64 secs, 161,299,144 bytes)
+----
+
+* sum'
++
+[source,haskell]
+----
+Prelude> let sum'(x:xs) = x + sum(xs)
+Prelude> :set +s
+Prelude> sum' [1..1000000]
+500000500000
+(0.53 secs, 161,299,344 bytes)
+Prelude> sum' [1..1000000]
+500000500000
+(0.67 secs, 161,299,344 bytes)
+Prelude> sum' [1..1000000]
+500000500000
+(0.56 secs, 161,299,344 bytes)
+Prelude> sum' [1..1000000]
+500000500000
+(0.64 secs, 161,299,344 bytes)
+Prelude> sum' [1..1000000]
+500000500000
+(0.72 secs, 161,297,672 bytes)
+----
+
+* foldr
++
+[source,haskell]
+----
+Prelude> :set +s
+Prelude> foldr (+) 0 [1..1000000]
+500000500000
+(0.50 secs, 161,589,312 bytes)
+Prelude> foldr (+) 0 [1..1000000]
+500000500000
+(0.52 secs, 161,589,224 bytes)
+Prelude> foldr (+) 0 [1..1000000]
+500000500000
+(0.41 secs, 161,590,416 bytes)
+Prelude> foldr (+) 0 [1..1000000]
+500000500000
+(0.56 secs, 161,589,400 bytes)
+Prelude> foldr (+) 0 [1..1000000]
+500000500000
+(0.64 secs, 161,590,416 bytes)
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.59 secs, 161,298,944 bytes)
+----
+
+* sum'
++
+[source,haskell]
+----
+Prelude> :set +s
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.59 secs, 161,298,944 bytes)
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.72 secs, 161,297,312 bytes)
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.72 secs, 161,297,312 bytes)
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.66 secs, 161,297,312 bytes)
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.67 secs, 161,297,312 bytes)
+----
+
