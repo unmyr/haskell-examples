@@ -455,8 +455,8 @@ main = do
 +
 [source,haskell]
 ----
-*Main> :load src/prelude/loop_counter_no_guards.hs
-[1 of 1] Compiling Main             ( src/prelude/loop_counter_no_guards.hs, interpreted )
+*Main> :load src/ghci/loop_counter_no_guards.hs
+[1 of 1] Compiling Main             ( src/ghci/loop_counter_no_guards.hs, interpreted )
 Ok, modules loaded: Main.
 *Main> main
 1
@@ -483,8 +483,8 @@ main = do
 +
 [source,haskell]
 ----
-*Main> :load src/prelude/loop_counter_using_guards.hs
-[1 of 1] Compiling Main             ( src/prelude/loop_counter_using_guards.hs, interpreted )
+*Main> :load src/ghci/loop_counter_using_guards.hs
+[1 of 1] Compiling Main             ( src/ghci/loop_counter_using_guards.hs, interpreted )
 Ok, modules loaded: Main.
 *Main> main
 1
@@ -514,8 +514,8 @@ main = do
 +
 [source,haskell]
 ----
-Prelude> :load src/prelude/loop_1million.hs
-[1 of 1] Compiling Main             ( src/prelude/loop_1million.hs, interpreted )
+Prelude> :load src/ghci/loop_1million.hs
+[1 of 1] Compiling Main             ( src/ghci/loop_1million.hs, interpreted )
 Ok, modules loaded: Main.
 *Main> main
 1000000
@@ -561,8 +561,8 @@ main = do
 
 [source,haskell]
 ----
-*Main> :load src/prelude/loop_using_range.hs
-[1 of 1] Compiling Main             ( src/prelude/loop_using_range.hs, interpreted )
+*Main> :load src/ghci/loop_using_range.hs
+[1 of 1] Compiling Main             ( src/ghci/loop_using_range.hs, interpreted )
 Ok, modules loaded: Main.
 *Main> main
 1
@@ -668,7 +668,7 @@ main = do
 * using strings
 +
 [source,haskell]
-.src/prelude/combine_strings.hs
+.src/ghci/combine_strings.hs
 ----
 combine_strings :: String -> String -> String
 combine_strings s1 s2 = s1 ++ s2
@@ -676,11 +676,11 @@ combine_strings s1 s2 = s1 ++ s2
 +
 [source,console]
 ----
-$ ghci src/prelude/combine_strings.hs
+$ ghci src/ghci/combine_strings.hs
 ----
 +
 [source,haskell]
-.src/prelude/combine_strings.hs
+.src/ghci/combine_strings.hs
 ----
 *Main> combine_strings "hello" " world"
 "hello world"
@@ -701,7 +701,7 @@ main = do
 * An example of a use of tuples
 +
 [source,haskell]
-.src/prelude/swap.hs
+.src/ghci/swap.hs
 ----
 swap :: (String, String) -> (String, String)
 swap (a, b) = (b, a)
@@ -712,7 +712,7 @@ main = do
 +
 [source,console]
 ----
-$ ghci src/prelude/swap.hs
+$ ghci src/ghci/swap.hs
 ----
 +
 [source,haskell]
@@ -733,7 +733,7 @@ world hello
 * Single integer to list of integers 
 +
 [source,haskell]
-.src/prelude/func_int_to_list.hs
+.src/ghci/func_int_to_list.hs
 ----
 get_int_list :: Int -> [Int]
 get_int_list n = [n] ++ [n]
@@ -743,7 +743,7 @@ main = do
 +
 [source,console]
 ----
-$ ghci src/prelude/func_int_to_list.hs
+$ ghci src/ghci/func_int_to_list.hs
 ----
 +
 [source,haskell]
@@ -768,7 +768,7 @@ collatz n | n == 1         = [1]
 +
 [source,console]
 ----
-$ ghci src/prelude/collatz.hs
+$ ghci src/ghci/collatz.hs
 ----
 +
 [source,haskell]
