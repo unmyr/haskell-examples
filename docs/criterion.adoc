@@ -12,6 +12,9 @@ include::header.adoc[]
 
 == criterion
 
+.References
+* http://www.serpentine.com/criterion/tutorial.html[A criterion tutorial^]
+
 === Install criterion
 
 * https://hackage.haskell.org/package/criterion[criterion: Robust, reliable performance measurement and analysis^]
