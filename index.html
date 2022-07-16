@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<title>Code examples</title>
+<title>Haskell examples</title>
 <style>
 @import url(https://fonts.googleapis.com/css?family=Varela+Round|Open+Sans:400italic,600italic,400,600|Ubuntu+Mono:400);
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
@@ -966,7 +966,7 @@ pre.rouge {
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_code_examples">Code examples</a>
+<li><a href="#_haskell_examples">Haskell examples</a>
 <ul class="sectlevel2">
 <li><a href="#_ghci">ghci</a></li>
 <li><a href="#_type_annotations">Type annotations</a>
@@ -996,15 +996,23 @@ pre.rouge {
 </ul>
 </li>
 <li><a href="#_monad">Monad</a></li>
-<li><a href="#_math">Math</a></li>
+<li><a href="#_math">Math</a>
+<ul class="sectlevel3">
+<li><a href="#_sum">Sum</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
+<div class="paragraph">
+<p><a href="#">Haskell</a> |
+<a href="install.html">Install</a><br></p>
+</div>
 <div class="sect1">
-<h2 id="_code_examples">Code examples</h2>
+<h2 id="_haskell_examples">Haskell examples</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_ghci">ghci</h3>
@@ -1208,6 +1216,50 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
+<p>Make a list</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="kt">[]</span>
+<span class="kt">[]</span> <span class="o">::</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Using the colon operator</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="o">:</span><span class="mi">3</span><span class="o">:</span><span class="kt">[]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="p">(</span><span class="o">:</span><span class="p">)</span>
+<span class="p">(</span><span class="o">:</span><span class="p">)</span> <span class="o">::</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Prepend the item to the list</p>
+<div class="listingblock">
+<div class="title">Using the colon operator. colon is the "prepend" operator</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span><span class="o">:</span><span class="mi">3</span><span class="o">:</span><span class="kt">[]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="s">"apple"</span><span class="o">:</span><span class="s">"banana"</span><span class="o">:</span><span class="s">"cherry"</span><span class="o">:</span><span class="p">[</span><span class="s">"durian"</span><span class="p">]</span>
+<span class="p">[</span><span class="s">"apple"</span><span class="p">,</span><span class="s">"banana"</span><span class="p">,</span><span class="s">"cherry"</span><span class="p">,</span><span class="s">"durian"</span><span class="p">]</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Prelude&gt; (:) 1 []
+[1]
+Prelude&gt; (:) 1 ((:) 2 ((:) 3 []))
+[1,2,3]
+Prelude&gt; (:) 1 $ (:) 2 $ (:) 3 []
+[1,2,3]
+Prelude&gt; ((:) 1 . (:) 2 . (:) 3) []
+[1,2,3]</pre>
+</div>
+</div>
+</li>
+<li>
 <p>Returns the first item of a list</p>
 <div class="listingblock">
 <div class="title">Using <code>head</code></div>
@@ -1216,6 +1268,20 @@ pre.rouge {
 <span class="o">***</span> <span class="kt">Exception</span><span class="o">:</span> <span class="kt">Prelude</span><span class="o">.</span><span class="n">head</span><span class="o">:</span> <span class="n">empty</span> <span class="n">list</span>
 <span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">head</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="mi">1</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">head'</span> <span class="p">(</span><span class="n">h</span><span class="o">:</span><span class="kr">_</span><span class="p">)</span> <span class="o">=</span> <span class="n">h</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="n">head'</span>
+<span class="n">head'</span> <span class="o">::</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">t</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">head'</span> <span class="kt">[]</span>
+<span class="o">***</span> <span class="kt">Exception</span><span class="o">:</span> <span class="o">&lt;</span><span class="n">interactive</span><span class="o">&gt;:</span><span class="mi">61</span><span class="o">:</span><span class="mi">5</span><span class="o">-</span><span class="mi">19</span><span class="o">:</span> <span class="kt">Non</span><span class="o">-</span><span class="n">exhaustive</span> <span class="n">patterns</span> <span class="kr">in</span> <span class="n">function</span> <span class="n">head'</span>
+
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">head'</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="mi">1</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">head'</span> <span class="p">[</span><span class="s">"apple"</span><span class="p">,</span> <span class="s">"banana"</span><span class="p">,</span> <span class="s">"cherry"</span><span class="p">,</span> <span class="s">"durian"</span><span class="p">]</span>
+<span class="s">"apple"</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1274,6 +1340,18 @@ pre.rouge {
 <pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">tail</span> <span class="p">[</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">,</span> <span class="s">"C"</span><span class="p">]</span>
 <span class="p">[</span><span class="s">"B"</span><span class="p">,</span><span class="s">"C"</span><span class="p">]</span>
 <span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">drop</span> <span class="mi">1</span> <span class="p">[</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">,</span> <span class="s">"C"</span><span class="p">]</span>
+<span class="p">[</span><span class="s">"B"</span><span class="p">,</span><span class="s">"C"</span><span class="p">]</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">tail'</span> <span class="p">(</span><span class="kr">_</span><span class="o">:</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">t</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="n">tail'</span>
+<span class="n">tail'</span> <span class="o">::</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">tail'</span> <span class="kt">[]</span>
+<span class="o">***</span> <span class="kt">Exception</span><span class="o">:</span> <span class="o">&lt;</span><span class="n">interactive</span><span class="o">&gt;:</span><span class="mi">67</span><span class="o">:</span><span class="mi">5</span><span class="o">-</span><span class="mi">19</span><span class="o">:</span> <span class="kt">Non</span><span class="o">-</span><span class="n">exhaustive</span> <span class="n">patterns</span> <span class="kr">in</span> <span class="n">function</span> <span class="n">tail'</span>
+
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">tail'</span> <span class="p">[</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">,</span> <span class="s">"C"</span><span class="p">]</span>
 <span class="p">[</span><span class="s">"B"</span><span class="p">,</span><span class="s">"C"</span><span class="p">]</span></code></pre>
 </div>
 </div>
@@ -1446,8 +1524,8 @@ pre.rouge {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">prelude</span><span class="o">/</span><span class="n">loop_counter_no_guards</span><span class="o">.</span><span class="n">hs</span>
-<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">prelude</span><span class="o">/</span><span class="n">loop_counter_no_guards</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_counter_no_guards</span><span class="o">.</span><span class="n">hs</span>
+<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_counter_no_guards</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
 <span class="kt">Ok</span><span class="p">,</span> <span class="n">modules</span> <span class="n">loaded</span><span class="o">:</span> <span class="kt">Main</span><span class="o">.</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
 <span class="mi">1</span>
@@ -1475,8 +1553,8 @@ pre.rouge {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">prelude</span><span class="o">/</span><span class="n">loop_counter_using_guards</span><span class="o">.</span><span class="n">hs</span>
-<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">prelude</span><span class="o">/</span><span class="n">loop_counter_using_guards</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_counter_using_guards</span><span class="o">.</span><span class="n">hs</span>
+<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_counter_using_guards</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
 <span class="kt">Ok</span><span class="p">,</span> <span class="n">modules</span> <span class="n">loaded</span><span class="o">:</span> <span class="kt">Main</span><span class="o">.</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
 <span class="mi">1</span>
@@ -1507,8 +1585,8 @@ pre.rouge {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">prelude</span><span class="o">/</span><span class="n">loop_1million</span><span class="o">.</span><span class="n">hs</span>
-<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">prelude</span><span class="o">/</span><span class="n">loop_1million</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_1million</span><span class="o">.</span><span class="n">hs</span>
+<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_1million</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
 <span class="kt">Ok</span><span class="p">,</span> <span class="n">modules</span> <span class="n">loaded</span><span class="o">:</span> <span class="kt">Main</span><span class="o">.</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
 <span class="mi">1000000</span>
@@ -1569,8 +1647,8 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">prelude</span><span class="o">/</span><span class="n">loop_using_range</span><span class="o">.</span><span class="n">hs</span>
-<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">prelude</span><span class="o">/</span><span class="n">loop_using_range</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_using_range</span><span class="o">.</span><span class="n">hs</span>
+<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_using_range</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
 <span class="kt">Ok</span><span class="p">,</span> <span class="n">modules</span> <span class="n">loaded</span><span class="o">:</span> <span class="kt">Main</span><span class="o">.</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
 <span class="mi">1</span>
@@ -1693,7 +1771,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <li>
 <p>using strings</p>
 <div class="listingblock">
-<div class="title">src/prelude/combine_strings.hs</div>
+<div class="title">src/ghci/combine_strings.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">combine_strings</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
 <span class="n">combine_strings</span> <span class="n">s1</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">s1</span> <span class="o">++</span> <span class="n">s2</span></code></pre>
@@ -1701,11 +1779,11 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/prelude/combine_strings.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/ghci/combine_strings.hs</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">src/prelude/combine_strings.hs</div>
+<div class="title">src/ghci/combine_strings.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">combine_strings</span> <span class="s">"hello"</span> <span class="s">" world"</span>
 <span class="s">"hello world"</span></code></pre>
@@ -1733,7 +1811,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <li>
 <p>An example of a use of tuples</p>
 <div class="listingblock">
-<div class="title">src/prelude/swap.hs</div>
+<div class="title">src/ghci/swap.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">swap</span> <span class="o">::</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span>
 <span class="n">swap</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
@@ -1744,7 +1822,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/prelude/swap.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/ghci/swap.hs</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1766,7 +1844,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <li>
 <p>Single integer to list of integers</p>
 <div class="listingblock">
-<div class="title">src/prelude/func_int_to_list.hs</div>
+<div class="title">src/ghci/func_int_to_list.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">get_int_list</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
 <span class="n">get_int_list</span> <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span>
@@ -1776,7 +1854,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/prelude/func_int_to_list.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/ghci/func_int_to_list.hs</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1807,7 +1885,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/prelude/collatz.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/ghci/collatz.hs</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1975,13 +2053,116 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span></code></pre>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_sum">Sum</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>sum</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">set</span> <span class="o">+</span><span class="n">s</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.88</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">720</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.69</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">720</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.72</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">720</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.73</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">296</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.64</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">144</span> <span class="n">bytes</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>sum'</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">sum'</span><span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">set</span> <span class="o">+</span><span class="n">s</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.53</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">344</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.67</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">344</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.56</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">344</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.64</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">344</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.72</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">297</span><span class="p">,</span><span class="mi">672</span> <span class="n">bytes</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>foldr</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">set</span> <span class="o">+</span><span class="n">s</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.50</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">589</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.52</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">589</span><span class="p">,</span><span class="mi">224</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.41</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">590</span><span class="p">,</span><span class="mi">416</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.56</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">589</span><span class="p">,</span><span class="mi">400</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.64</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">590</span><span class="p">,</span><span class="mi">416</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.59</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">298</span><span class="p">,</span><span class="mi">944</span> <span class="n">bytes</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>sum'</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">set</span> <span class="o">+</span><span class="n">s</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.59</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">298</span><span class="p">,</span><span class="mi">944</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.72</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">297</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.72</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">297</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.66</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">297</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
+<span class="mi">500000500000</span>
+<span class="p">(</span><span class="mf">0.67</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">297</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-15 16:50:11 UTC
+Last updated 2022-07-16 02:22:12 UTC
 </div>
 </div>
 </body>
