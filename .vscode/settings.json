@@ -1,8 +1,12 @@
 {
   "cSpell.words": [
     "adocbuild",
+    "aeson",
+    "Backjump",
+    "backjumps",
     "canastro",
     "collatz",
+    "compat",
     "concat",
     "foldl",
     "foldr",
@@ -10,7 +14,10 @@
     "ghci",
     "hpack",
     "hypot",
+    "ifdef",
+    "imagesdir",
     "leveloffset",
+    "microstache",
     "optc",
     "peaceiris",
     "tonynv",
