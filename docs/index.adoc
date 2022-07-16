@@ -4,7 +4,7 @@ ifndef::leveloffset[]
 :icons: font
 endif::[]
 
-== Code examples
+== Haskell examples
 
 === ghci
 
@@ -171,6 +171,47 @@ Prelude Data.List>
 
 ==== List
 
+* Make a list
++
+[source,haskell]
+----
+Prelude> [1, 2, 3]
+[1,2,3]
+Prelude> :t []
+[] :: [t]
+----
++
+[source,haskell]
+.Using the colon operator
+----
+Prelude> 1:2:3:[]
+[1,2,3]
+Prelude> :t (:)
+(:) :: a -> [a] -> [a]
+----
+
+* Prepend the item to the list
++
+.Using the colon operator. colon is the "prepend" operator
+[source,haskell]
+----
+Prelude> 1:2:3:[]
+[1,2,3]
+Prelude> "apple":"banana":"cherry":["durian"]
+["apple","banana","cherry","durian"]
+----
++
+----
+Prelude> (:) 1 []
+[1]
+Prelude> (:) 1 ((:) 2 ((:) 3 []))
+[1,2,3]
+Prelude> (:) 1 $ (:) 2 $ (:) 3 []
+[1,2,3]
+Prelude> ((:) 1 . (:) 2 . (:) 3) []
+[1,2,3]
+----
+
 * Returns the first item of a list
 +
 [source,haskell]
@@ -180,6 +221,20 @@ Prelude> head []
 *** Exception: Prelude.head: empty list
 Prelude> head [1, 2, 3]
 1
+----
++
+[source,haskell]
+----
+Prelude> let head' (h:_) = h
+Prelude> :t head'
+head' :: [t] -> t
+Prelude> head' []
+*** Exception: <interactive>:61:5-19: Non-exhaustive patterns in function head'
+
+Prelude> head' [1, 2, 3]
+1
+Prelude> head' ["apple", "banana", "cherry", "durian"]
+"apple"
 ----
 +
 [source,haskell]
@@ -235,6 +290,18 @@ Prelude> init [1, 2, 3]
 Prelude> tail ["A", "B", "C"]
 ["B","C"]
 Prelude> drop 1 ["A", "B", "C"]
+["B","C"]
+----
++
+[source,haskell]
+----
+Prelude> let tail' (_:t) = t
+Prelude> :t tail'
+tail' :: [t] -> [t]
+Prelude> tail' []
+*** Exception: <interactive>:67:5-19: Non-exhaustive patterns in function tail'
+
+Prelude> tail' ["A", "B", "C"]
 ["B","C"]
 ----
 
