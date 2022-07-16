@@ -975,7 +975,6 @@ pre.rouge {
 <li><a href="#_different_types">different types</a></li>
 <li><a href="#_string">String</a></li>
 <li><a href="#_list">List</a></li>
-<li><a href="#_list_comprehension_リストの内包表記">List comprehension (リストの内包表記)</a></li>
 <li><a href="#_tuples">Tuples</a></li>
 </ul>
 </li>
@@ -999,6 +998,7 @@ pre.rouge {
 <li><a href="#_math">Math</a>
 <ul class="sectlevel3">
 <li><a href="#_sum">Sum</a></li>
+<li><a href="#_prime_number">Prime number</a></li>
 </ul>
 </li>
 </ul>
@@ -1267,6 +1267,8 @@ Prelude&gt; ((:) 1 . (:) 2 . (:) 3) []
 <pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">head</span> <span class="kt">[]</span>
 <span class="o">***</span> <span class="kt">Exception</span><span class="o">:</span> <span class="kt">Prelude</span><span class="o">.</span><span class="n">head</span><span class="o">:</span> <span class="n">empty</span> <span class="n">list</span>
 <span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">head</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="mi">1</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">head</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">]</span>
 <span class="mi">1</span></code></pre>
 </div>
 </div>
@@ -1280,6 +1282,8 @@ Prelude&gt; ((:) 1 . (:) 2 . (:) 3) []
 
 <span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">head'</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="mi">1</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">head'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">]</span>
+<span class="mi">1</span>
 <span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">head'</span> <span class="p">[</span><span class="s">"apple"</span><span class="p">,</span> <span class="s">"banana"</span><span class="p">,</span> <span class="s">"cherry"</span><span class="p">,</span> <span class="s">"durian"</span><span class="p">]</span>
 <span class="s">"apple"</span></code></pre>
 </div>
@@ -1290,7 +1294,9 @@ Prelude&gt; ((:) 1 . (:) 2 . (:) 3) []
 <pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">1</span> <span class="kt">[]</span>
 <span class="kt">[]</span>
 <span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">1</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">]</span></code></pre>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">3</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1299,6 +1305,8 @@ Prelude&gt; ((:) 1 . (:) 2 . (:) 3) []
 <pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="kr">_</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="kt">[]</span> <span class="kt">[]</span>
 <span class="kt">[]</span>
 <span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="kr">_</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="kt">[]</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="kr">_</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="kt">[]</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">]</span>
 <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="nf">\</span><span class="n">s</span> <span class="kr">_</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="kt">[]</span> <span class="kt">[]</span>
 <span class="kt">[]</span>
@@ -1425,15 +1433,18 @@ Prelude&gt; ((:) 1 . (:) 2 . (:) 3) []
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_list_comprehension_リストの内包表記">List comprehension (リストの内包表記)</h4>
+<div class="sect4">
+<h5 id="_list_comprehension_リストの内包表記">List comprehension (リストの内包表記)</h5>
 <div class="listingblock">
 <div class="title">3の倍数を抽出する</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">p</span> <span class="o">|</span> <span class="n">p</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">],</span> <span class="n">p</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
 <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">3</span> <span class="p">[</span><span class="n">p</span> <span class="o">|</span> <span class="n">p</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">],</span> <span class="n">p</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
 <span class="kt">Prelude</span><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">]</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="kr">if</span> <span class="n">x</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span> <span class="n">pure</span> <span class="n">x</span> <span class="kr">else</span> <span class="kt">[]</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">3</span> <span class="o">$</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">]</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="kr">if</span> <span class="n">x</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span> <span class="n">pure</span> <span class="n">x</span> <span class="kr">else</span> <span class="kt">[]</span>
 <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span></code></pre>
 </div>
 </div>
@@ -1458,6 +1469,46 @@ Prelude&gt; ((:) 1 . (:) 2 . (:) 3) []
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">isPrime</span> <span class="n">k</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="kr">then</span> <span class="n">null</span> <span class="p">[</span> <span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">k</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="kr">else</span> <span class="kt">False</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_infinite_list">Infinite list</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Gets the first one element from the infinite list.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">head</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">]</span>
+<span class="mi">1</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Takeing the first three elements from the infinite list.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">3</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Determine if there is an element that meets the conditions in the infinite list.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">set</span> <span class="o">+</span><span class="n">s</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">null</span> <span class="p">[</span><span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">],</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="kt">False</span>
+<span class="p">(</span><span class="mf">0.00</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span><span class="mi">016</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">null</span> <span class="p">[</span><span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">],</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">100000</span><span class="p">]</span>
+<span class="kt">False</span>
+<span class="p">(</span><span class="mf">0.05</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span><span class="mi">865</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -2156,13 +2207,48 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_prime_number">Prime number</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Prime numbers up to 100</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="p">[</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="mi">100</span><span class="p">],</span> <span class="n">null</span> <span class="p">[</span><span class="n">k</span> <span class="o">|</span> <span class="n">k</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span><span class="mi">67</span><span class="p">,</span><span class="mi">71</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">79</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">97</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">length</span> <span class="p">[</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="mi">100</span><span class="p">],</span> <span class="n">null</span> <span class="p">[</span><span class="n">k</span> <span class="o">|</span> <span class="n">k</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="mi">25</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Taking the first 25 primes from an infinite list</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">25</span> <span class="p">[</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">],</span> <span class="n">null</span> <span class="p">[</span><span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span><span class="mi">67</span><span class="p">,</span><span class="mi">71</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">79</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">97</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">length</span> <span class="o">$</span> <span class="n">take</span> <span class="mi">25</span> <span class="p">[</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">],</span> <span class="n">null</span> <span class="p">[</span><span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="mi">25</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">25</span> <span class="o">$</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">]</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="kr">if</span> <span class="n">null</span> <span class="p">([</span><span class="mi">2</span><span class="o">..</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="kr">if</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="kr">else</span> <span class="kt">[]</span><span class="p">)</span> <span class="kr">then</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="kr">else</span> <span class="kt">[]</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span><span class="mi">67</span><span class="p">,</span><span class="mi">71</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">79</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">97</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-16 02:22:12 UTC
+Last updated 2022-07-16 04:35:13 UTC
 </div>
 </div>
 </body>
