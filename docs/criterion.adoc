@@ -28,9 +28,6 @@ cabal install criterion
 ====
 Install failed in WSL 1 following errors:
 
-[%collapsible]
-.Message details
-====
 [source,console]
 ----
 $ cabal install criterion
@@ -86,7 +83,6 @@ Prelude> import criterion
 Prelude>
 Leaving GHCi.
 ----
-====
 
 As a workarounds, Rerun with the `--reorder-goals` option
 
@@ -119,6 +115,7 @@ $ ghc -O -o sum sum.hs
 
 === Run
 
+[source,console]
 ----
 $ ./sum --output sum_reports.html
 benchmarking sum/sum'
