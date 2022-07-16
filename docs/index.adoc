@@ -4,6 +4,8 @@ ifndef::leveloffset[]
 :icons: font
 endif::[]
 
+include::header.adoc[]
+
 == Haskell examples
 
 === ghci

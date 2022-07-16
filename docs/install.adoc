@@ -1,0 +1,33 @@
+ifndef::leveloffset[]
+:toc: left
+:toclevels: 3
+:icons: font
+endif::[]
+
+include::header.adoc[]
+
+== Install Haskell
+
+=== Ubuntu
+
+* Install Haskell
++
+[source,shell]
+----
+sudo apt install -y --no-install-recommends ghc
+----
+
+* Upgrade Haskell
++
+[source,shell]
+----
+sudo apt-get --only-upgrade install ghc
+----
+
+* Cabal
++
+[source,shell]
+----
+cabal update
+cabal install <package-name>
+----
