@@ -24,10 +24,12 @@ include::header.adoc[]
 cabal install criterion
 ----
 
-[NOTE]
-====
+* *NOTE* +
 Install failed in WSL 1 following errors:
-
++
+[%collapsible]
+.Message details
+====
 [source,console]
 ----
 $ cabal install criterion
@@ -83,9 +85,10 @@ Prelude> import criterion
 Prelude>
 Leaving GHCi.
 ----
-
+====
++
 As a workarounds, Rerun with the `--reorder-goals` option
-
++
 [source,console]
 ----
 $ cabal install criterion --reorder-goals
@@ -97,7 +100,6 @@ Configuring criterion-1.5.13.0...
 Building criterion-1.5.13.0...
 Installed criterion-1.5.13.0
 ----
-====
 
 === Code
 
