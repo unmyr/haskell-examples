@@ -7,6 +7,21 @@
 ----
 data Vertex = Vertex Int Int deriving (Show)
 
+class DistanceSpace a where
+  distance :: (a, a) -> Float
+
+instance DistanceSpace Vertex where
+  distance (v1, v2) =
+    sqrt(fromIntegral(
+      ((\(Vertex x _) -> x) v2 - (\(Vertex x _) -> x) v1)^2 +
+      ((\(Vertex _ y) -> y) v2 - (\(Vertex _ y) -> y) v1)^2))
+
+global_scoped_distance :: (Vertex, Vertex) -> Float
+global_scoped_distance (v1, v2) =
+  sqrt(fromIntegral(
+    ((\(Vertex x _) -> x) v2 - (\(Vertex x _) -> x) v1)^2 +
+    ((\(Vertex _ y) -> y) v2 - (\(Vertex _ y) -> y) v1)^2))
+
 main = do
   let a = Vertex 3 4
       b = Vertex 2 3
@@ -30,6 +45,14 @@ Vertex 3 4
 4
 5.0
 Vertex 2 3
+*Main> :t distance
+distance :: DistanceSpace a => (a, a) -> Float
+*Main> distance(Vertex 4 5, Vertex 1 1)
+5.0
+*Main> :t global_scoped_distance
+global_scoped_distance :: (Vertex, Vertex) -> Float
+*Main> global_scoped_distance(Vertex 4 5, Vertex 1 1)
+5.0
 ----
 
 === Using named fields
@@ -37,17 +60,28 @@ Vertex 2 3
 [source,haskell]
 .src/ghci/composite-types/vertex_named_fields.hs
 ----
-data Vertex = Vertex { x :: Int, y :: Int }
+data Vertex = Vertex { vertex_x :: Int, vertex_y :: Int }
 instance Show Vertex where
-  show (Vertex x y) = "Vertex (" ++ show x ++ "," ++ show y ++ ")"
+  show (Vertex x y) = "Vertex {x=" ++ show x ++ ",y=" ++ show y ++ "}"
+
+class DistanceSpace a where
+  distance :: (a, a) -> Float
+
+instance DistanceSpace Vertex where
+  distance (v1, v2) =
+    sqrt(fromIntegral ((vertex_x v2 - vertex_x v1)^2 + (vertex_y v2 - vertex_y v1)^2))
+
+global_scoped_distance :: (Vertex, Vertex) -> Float
+global_scoped_distance (v1, v2) =
+    sqrt(fromIntegral ((vertex_x v2 - vertex_x v1)^2 + (vertex_y v2 - vertex_y v1)^2))
 
 main = do
   let a = Vertex 3 4
       b = Vertex 2 3
   print a
-  print $ x a
-  print (y a)
-  print $ (\v -> sqrt(fromIntegral (x v * x v + y v * y v))) a
+  print $ vertex_x a
+  print (vertex_y a)
+  print $ (\v -> sqrt(fromIntegral (vertex_x v ^2 + vertex_y v ^2))) a
   print b
 ----
 
@@ -56,12 +90,31 @@ main = do
 $ ghci src/ghci/composite-types/vertex_named_fields.hs
 ----
 
+* Run main
+*
 [source,haskell]
 ----
 *Main> main
-Vertex (3,4)
+Vertex {x=3,y=4}
 3
 4
 5.0
-Vertex (2,3)
+Vertex {x=2,y=3}
+----
+
+* Calculate distance
++
+[source,haskell]
+----
+*Main> a = Vertex {vertex_x=4,vertex_y=5}
+*Main> a
+Vertex {x=4,y=5}
+*Main> :t distance
+distance :: DistanceSpace a => (a, a) -> Float
+*Main> distance(a, Vertex {vertex_x=1,vertex_y=1})
+5.0
+*Main> :t global_scoped_distance
+global_scoped_distance :: (Vertex, Vertex) -> Float
+*Main> global_scoped_distance(a, Vertex {vertex_x=1,vertex_y=1})
+5.0
 ----
