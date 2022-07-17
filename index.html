@@ -973,6 +973,11 @@ pre.rouge {
 <ul class="sectlevel3">
 <li><a href="#_same_types">same types</a></li>
 <li><a href="#_different_types">different types</a></li>
+<li><a href="#_floating">Floating</a></li>
+</ul>
+</li>
+<li><a href="#_various_types">Various types</a>
+<ul class="sectlevel3">
 <li><a href="#_string">String</a></li>
 <li><a href="#_composite_types">Composite Types</a></li>
 <li><a href="#_list">List</a></li>
@@ -1092,6 +1097,64 @@ pre.rouge {
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_floating">Floating</h4>
+<div class="paragraph">
+<p>Floating is a type class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">pi</span> <span class="o">::</span> <span class="kt">Float</span>
+<span class="mf">3.1415927</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">pi</span> <span class="o">::</span> <span class="kt">Double</span>
+<span class="mf">3.141592653589793</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">src/ghci/circle_area.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">circle_area_float</span> <span class="o">::</span> <span class="kt">Float</span> <span class="o">-&gt;</span> <span class="kt">Float</span>
+<span class="n">circle_area_float</span> <span class="n">r</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">r</span>
+
+<span class="n">circle_area_double</span> <span class="o">::</span> <span class="kt">Double</span> <span class="o">-&gt;</span> <span class="kt">Double</span>
+<span class="n">circle_area_double</span> <span class="n">r</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">r</span>
+
+<span class="n">circle_area_floating</span> <span class="o">::</span> <span class="kt">Floating</span> <span class="n">a</span> <span class="o">=&gt;</span>  <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">circle_area_floating</span> <span class="n">r</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">r</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Run codes</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/ghci/circle_area.hs</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="n">circle_area_float</span>
+<span class="n">circle_area_float</span> <span class="o">::</span> <span class="kt">Float</span> <span class="o">-&gt;</span> <span class="kt">Float</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">circle_area_float</span> <span class="mi">1</span>
+<span class="mf">3.1415927</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="n">circle_area_double</span>
+<span class="n">circle_area_double</span> <span class="o">::</span> <span class="kt">Double</span> <span class="o">-&gt;</span> <span class="kt">Double</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">circle_area_double</span> <span class="mi">1</span>
+<span class="mf">3.141592653589793</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">circle_area_floating</span> <span class="mi">1</span> <span class="o">::</span> <span class="kt">Float</span>
+<span class="mf">3.1415927</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">circle_area_floating</span> <span class="mi">1</span> <span class="o">::</span> <span class="kt">Double</span>
+<span class="mf">3.141592653589793</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_various_types">Various types</h3>
 <div class="sect3">
 <h4 id="_string">String</h4>
 <div class="sect4">
@@ -2426,7 +2489,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-17 12:18:34 UTC
+Last updated 2022-07-17 14:22:02 UTC
 </div>
 </div>
 </body>
