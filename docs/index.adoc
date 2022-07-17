@@ -171,6 +171,78 @@ Prelude Data.List> intercalate ", " ["John", "Due"]
 Prelude Data.List>
 ----
 
+==== Composite Types
+
+===== Vertex
+
+* No field name
++
+[source,haskell]
+----
+Prelude> data Vertex = Vertex Int Int deriving (Show)
+Prelude> :t Vertex
+Vertex :: Int -> Int -> Vertex
+Prelude> let a = Vertex 3 4
+Prelude> a
+Vertex 3 4
+Prelude> (\(Vertex x _) -> x) a
+3
+Prelude> (\(Vertex _ y) -> y) a
+4
+Prelude> (\(Vertex x y) -> sqrt(fromIntegral (x*x + y*y))) a
+5.0
+----
+
+** Implement show
++
+[source,haskell]
+.src/ghci/composite-types/vertex_impl_show.hs
+----
+data Vertex = Vertex Int Int
+instance Show Vertex where
+  show (Vertex x y) = "Vertex (" ++ show x ++ "," ++ show y ++ ")"
+
+main = do
+  let a = Vertex 1 2
+      b = Vertex 2 3
+  print a
+  print b
+----
++
+[source,console]
+----
+$ ghci src/ghci/composite-types/vertex_deriving_show.hs
+----
++
+[source,haskell]
+----
+*Main> main
+Vertex (1,2)
+Vertex (2,3)
+----
+
+* With filed name
++
+[source,haskell]
+----
+Prelude> data Vertex = Vertex { x :: Int, y :: Int } deriving (Show)
+Prelude> :t Vertex
+Vertex :: Int -> Int -> Vertex
+Prelude> :t x
+x :: Vertex -> Int
+Prelude> :t y
+y :: Vertex -> Int
+Prelude> a = Vertex { x = 3, y = 4 }
+Prelude> a
+Vertex {x = 3, y = 4}
+Prelude> x a
+3
+Prelude> y a
+4
+Prelude> (\v -> sqrt ( fromIntegral (x v * x v + y v * y v) )) a
+5.0
+----
+
 ==== List
 
 * Make a list
@@ -717,17 +789,6 @@ Prelude> fac 42
 Prelude> fac 3
 6
 Prelude>
-----
-
-* Implement recursion using `foldr` in haskell
-+
-[source,haskell]
-----
-Prelude> let fac_r n = foldr (*) 1 [1..n]
-Prelude> fac_r 42
-1405006117752879898543142606244511569936384000000000
-Prelude> fac_r 3
-6
 ----
 
 * Implement recursion using `foldr` in haskell
