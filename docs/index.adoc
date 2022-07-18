@@ -221,69 +221,97 @@ Prelude Data.List>
 * No field name
 +
 [source,haskell]
+.src/ghci/composite-types/vertex_ex1_no_named_fields.hs
 ----
-Prelude> data Vertex = Vertex Int Int deriving (Show)
-Prelude> :t Vertex
+include::../src/ghci/composite-types/vertex_ex1_no_named_fields.hs[]
+----
++
+[source,console]
+----
+$ ghci src/ghci/composite-types/vertex_ex1_no_named_fields.hs
+----
++
+[source,haskell]
+----
+*Main> :show modules
+Main             ( src/ghci/composite-types/vertex_ex1_no_named_fields.hs, interpreted )
+*Main> :info Vertex
+data Vertex = Vertex Int Int
+        -- Defined at src/ghci/composite-types/vertex_ex1_no_named_fields.hs:1:1
+instance [safe] Show Vertex
+  -- Defined at src/ghci/composite-types/vertex_ex1_no_named_fields.hs:1:40
+*Main> :t Vertex
 Vertex :: Int -> Int -> Vertex
-Prelude> let a = Vertex 3 4
-Prelude> a
+*Main> a = Vertex 3 4
+*Main> a
 Vertex 3 4
-Prelude> (\(Vertex x _) -> x) a
+*Main> (\(Vertex x _) -> x) a
 3
-Prelude> (\(Vertex _ y) -> y) a
+*Main> (\(Main.Vertex x _) -> x) a
+3
+*Main> (\(Vertex _ y) -> y) a
 4
-Prelude> (\(Vertex x y) -> sqrt(fromIntegral (x*x + y*y))) a
+*Main> (\(Vertex x y) -> sqrt(fromIntegral (x*x + y*y))) a
 5.0
 ----
 
 ** Implement show
 +
 [source,haskell]
-.src/ghci/composite-types/vertex_impl_show.hs
+.src/ghci/composite-types/vertex_ex1_no_named_fields_impl_show.hs
 ----
-data Vertex = Vertex Int Int
-instance Show Vertex where
-  show (Vertex x y) = "Vertex (" ++ show x ++ "," ++ show y ++ ")"
-
-main = do
-  let a = Vertex 1 2
-      b = Vertex 2 3
-  print a
-  print b
+include::../src/ghci/composite-types/vertex_ex1_no_named_fields_impl_show.hs[]
 ----
 +
 [source,console]
 ----
-$ ghci src/ghci/composite-types/vertex_deriving_show.hs
+$ ghci src/ghci/composite-types/vertex_ex1_no_named_fields_impl_show.hs
 ----
 +
 [source,haskell]
 ----
-*Main> main
-Vertex (1,2)
-Vertex (2,3)
+*Main> print $ Vertex 3 4
+Vertex 3 4
+*Main>
 ----
 
 * With filed name
 +
 [source,haskell]
+.src/ghci/composite-types/vertex_ex1_named_fields.hs
 ----
-Prelude> data Vertex = Vertex { x :: Int, y :: Int } deriving (Show)
-Prelude> :t Vertex
+include::../src/ghci/composite-types/vertex_ex1_named_fields.hs[]
+----
++
+[source,console]
+----
+$ ghci src/ghci/composite-types/vertex_ex1_named_fields.hs
+----
++
+[source,haskell]
+----
+*Euclidean2D> :show modules
+Euclidean2D      ( src/ghci/composite-types/vertex_ex1_named_fields.hs, interpreted )
+*Euclidean2D> :info Vertex
+data Vertex = Vertex {x :: Int, y :: Int}
+        -- Defined at src/ghci/composite-types/vertex_ex1_named_fields.hs:2:1
+instance [safe] Show Vertex
+  -- Defined at src/ghci/composite-types/vertex_ex1_named_fields.hs:3:10
+*Euclidean2D> :t Vertex
 Vertex :: Int -> Int -> Vertex
-Prelude> :t x
+*Euclidean2D> :t x
 x :: Vertex -> Int
-Prelude> :t y
-y :: Vertex -> Int
-Prelude> a = Vertex { x = 3, y = 4 }
-Prelude> a
-Vertex {x = 3, y = 4}
-Prelude> x a
+*Euclidean2D> a = Vertex { x = 3, y = 4 }
+*Euclidean2D> a
+Vertex {x=3,y=4}
+*Euclidean2D> x a
 3
-Prelude> y a
-4
-Prelude> (\v -> sqrt ( fromIntegral (x v * x v + y v * y v) )) a
+*Euclidean2D> Euclidean2D.x a
+3
+*Euclidean2D> (\v -> sqrt ( fromIntegral (x v * x v + y v * y v) )) a
 5.0
+*Euclidean2D> (\v -> sqrt ( fromIntegral (x v * x v + y v * y v) )) (Vertex 5 12)
+13.0
 ----
 
 ==== List
