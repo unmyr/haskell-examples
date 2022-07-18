@@ -310,11 +310,15 @@ $ ghci Main.hs
 
 ** Show modules
 +
-[source,console]
+[source,haskell]
 ----
 *Main> :show modules
 Euclidean2D      ( Euclidean2D.hs, interpreted )
 Main             ( Main.hs, interpreted )
+----
++
+[source,console]
+----
 *Main> :info Vertex
 data Vertex = Vertex {x :: Int, y :: Int}
         -- Defined at Euclidean2D.hs:2:1
