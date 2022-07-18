@@ -221,25 +221,25 @@ Prelude Data.List>
 * No field name
 +
 [source,haskell]
-.src/ghci/composite-types/vertex_ex1_no_named_fields.hs
+.src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs
 ----
-include::../src/ghci/composite-types/vertex_ex1_no_named_fields.hs[]
+include::../src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs[]
 ----
 +
 [source,console]
 ----
-$ ghci src/ghci/composite-types/vertex_ex1_no_named_fields.hs
+$ ghci src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs
 ----
 +
 [source,haskell]
 ----
 *Main> :show modules
-Main             ( src/ghci/composite-types/vertex_ex1_no_named_fields.hs, interpreted )
+Main             ( src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs, interpreted )
 *Main> :info Vertex
 data Vertex = Vertex Int Int
-        -- Defined at src/ghci/composite-types/vertex_ex1_no_named_fields.hs:1:1
+        -- Defined at src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs:1:1
 instance [safe] Show Vertex
-  -- Defined at src/ghci/composite-types/vertex_ex1_no_named_fields.hs:1:40
+  -- Defined at src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs:1:40
 *Main> :t Vertex
 Vertex :: Int -> Int -> Vertex
 *Main> a = Vertex 3 4
@@ -253,26 +253,39 @@ Vertex 3 4
 4
 *Main> (\(Vertex x y) -> sqrt(fromIntegral (x*x + y*y))) a
 5.0
+*Main> main
+Vertex 3 4
+3
+3
+4
+5.0
+Vertex 2 3
 ----
 
 ** Implement show
 +
 [source,haskell]
-.src/ghci/composite-types/vertex_ex1_no_named_fields_impl_show.hs
+.src/ghci/composite-types/ex1/vertex_named_fields_deriving_show.hs
 ----
-include::../src/ghci/composite-types/vertex_ex1_no_named_fields_impl_show.hs[]
+include::../src/ghci/composite-types/ex1/vertex_named_fields_deriving_show.hs[]
 ----
 +
 [source,console]
 ----
-$ ghci src/ghci/composite-types/vertex_ex1_no_named_fields_impl_show.hs
+$ ghci src/ghci/composite-types/ex1/vertex_named_fields_deriving_show.hs
 ----
 +
 [source,haskell]
 ----
 *Main> print $ Vertex 3 4
 Vertex 3 4
-*Main>
+*Main> main
+Vertex 3 4
+3
+3
+4
+5.0
+Vertex 2 3
 ----
 
 * With filed name
