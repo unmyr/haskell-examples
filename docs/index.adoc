@@ -291,40 +291,75 @@ Vertex 2 3
 * With filed name
 +
 [source,haskell]
-.src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs
+.src/ghci/composite-types/ex2_named_fields/Euclidean2D.hs
 ----
-include::../src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs[]
+include::../src/ghci/composite-types/ex2_named_fields/Euclidean2D.hs[]
+----
++
+[source,haskell]
+.src/ghci/composite-types/ex2_named_fields/Main.hs
+----
+include::../src/ghci/composite-types/ex2_named_fields/Main.hs[]
 ----
 +
 [source,console]
 ----
-$ ghci src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs
+$ cd src/ghci/composite-types/ex2_named_fields/
+$ ghci Main.hs
 ----
+
+** Show modules
++
+[source,console]
+----
+*Main> :show modules
+Euclidean2D      ( Euclidean2D.hs, interpreted )
+Main             ( Main.hs, interpreted )
+*Main> :info Vertex
+data Vertex = Vertex {x :: Int, y :: Int}
+        -- Defined at Euclidean2D.hs:2:1
+instance [safe] Show Vertex -- Defined at Euclidean2D.hs:3:10
+*Main> :t Vertex
+Vertex :: Int -> Int -> Vertex
+*Main> :t x
+x :: Vertex -> Int
+*Main> :info x
+data Vertex = Vertex {x :: Int, ...}
+        -- Defined at Euclidean2D.hs:2:24
+*Main> :t y
+y :: Vertex -> Int
+*Main> :info y
+data Vertex = Vertex {..., y :: Int}
+        -- Defined at Euclidean2D.hs:2:34
+----
+
+** Use Vertex
 +
 [source,haskell]
 ----
-*Euclidean2D> :show modules
-Euclidean2D      ( src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs, interpreted )
-*Euclidean2D> :info Vertex
-data Vertex = Vertex {x :: Int, y :: Int}
-        -- Defined at src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs:2:1
-instance [safe] Show Vertex
-  -- Defined at src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs:3:10
-*Euclidean2D> :t Vertex
-Vertex :: Int -> Int -> Vertex
-*Euclidean2D> :t x
-x :: Vertex -> Int
-*Euclidean2D> a = Vertex { x = 3, y = 4 }
-*Euclidean2D> a
+*Main> a = Vertex { x = 3, y = 4 }
+*Main> a
 Vertex {x=3,y=4}
-*Euclidean2D> x a
+*Main> x a
 3
-*Euclidean2D> Euclidean2D.x a
+*Main> Euclidean2D.x a
 3
-*Euclidean2D> (\v -> sqrt ( fromIntegral (x v * x v + y v * y v) )) a
+*Main> (\v -> sqrt ( fromIntegral (x v * x v + y v * y v) )) a
 5.0
-*Euclidean2D> (\v -> sqrt ( fromIntegral (x v * x v + y v * y v) )) (Vertex 5 12)
+*Main> (\v -> sqrt ( fromIntegral (x v * x v + y v * y v) )) (Vertex 5 12)
 13.0
+----
+
+** Run main
++
+[source,haskell]
+----
+*Main> main
+Vertex {x=3,y=4}
+3
+3
+4
+5.0
 ----
 
 ==== List
