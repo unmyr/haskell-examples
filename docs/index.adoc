@@ -221,25 +221,25 @@ Prelude Data.List>
 * No field name
 +
 [source,haskell]
-.src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs
+.src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs
 ----
-include::../src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs[]
+include::../src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs[]
 ----
 +
 [source,console]
 ----
-$ ghci src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs
+$ ghci src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs
 ----
 +
 [source,haskell]
 ----
 *Main> :show modules
-Main             ( src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs, interpreted )
+Main             ( src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs, interpreted )
 *Main> :info Vertex
 data Vertex = Vertex Int Int
-        -- Defined at src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs:1:1
+        -- Defined at src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:1
 instance [safe] Show Vertex
-  -- Defined at src/ghci/composite-types/ex1/vertex_no_named_fields_deriving_show.hs:1:40
+  -- Defined at src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:40
 *Main> :t Vertex
 Vertex :: Int -> Int -> Vertex
 *Main> a = Vertex 3 4
@@ -265,14 +265,14 @@ Vertex 2 3
 ** Implement show
 +
 [source,haskell]
-.src/ghci/composite-types/ex1/vertex_named_fields_deriving_show.hs
+.src/ghci/composite-types/ex1_no_named_fields/vertex_impl_show.hs
 ----
-include::../src/ghci/composite-types/ex1/vertex_named_fields_deriving_show.hs[]
+include::../src/ghci/composite-types/ex1_no_named_fields/vertex_impl_show.hs[]
 ----
 +
 [source,console]
 ----
-$ ghci src/ghci/composite-types/ex1/vertex_named_fields_deriving_show.hs
+$ ghci src/ghci/composite-types/ex1_no_named_fields/vertex_impl_show.hs
 ----
 +
 [source,haskell]
@@ -291,25 +291,25 @@ Vertex 2 3
 * With filed name
 +
 [source,haskell]
-.src/ghci/composite-types/vertex_ex1_named_fields.hs
+.src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs
 ----
-include::../src/ghci/composite-types/vertex_ex1_named_fields.hs[]
+include::../src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs[]
 ----
 +
 [source,console]
 ----
-$ ghci src/ghci/composite-types/vertex_ex1_named_fields.hs
+$ ghci src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs
 ----
 +
 [source,haskell]
 ----
 *Euclidean2D> :show modules
-Euclidean2D      ( src/ghci/composite-types/vertex_ex1_named_fields.hs, interpreted )
+Euclidean2D      ( src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs, interpreted )
 *Euclidean2D> :info Vertex
 data Vertex = Vertex {x :: Int, y :: Int}
-        -- Defined at src/ghci/composite-types/vertex_ex1_named_fields.hs:2:1
+        -- Defined at src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs:2:1
 instance [safe] Show Vertex
-  -- Defined at src/ghci/composite-types/vertex_ex1_named_fields.hs:3:10
+  -- Defined at src/ghci/composite-types/ex2_named_fields/vertex_impl_show.hs:3:10
 *Euclidean2D> :t Vertex
 Vertex :: Int -> Int -> Vertex
 *Euclidean2D> :t x
