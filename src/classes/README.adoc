@@ -119,3 +119,37 @@ Orange: I like oranges.
 Kiwi: I like kiwis.
 ----
 
+* Using where bindings
++
+[source,haskell]
+.enum_case_of.hs
+----
+import Data.List
+
+data Fruits = Apple | Orange | Kiwi deriving (Enum, Show)
+
+talk :: Fruits -> String 
+talk sym = what sym
+  where what Apple = "I like apples."
+        what Orange = "I like oranges."
+        what Kiwi = "I like kiwis."
+
+main = do
+  let fruits = [Apple, Orange, Kiwi]
+  putStrLn
+    $ Data.List.intercalate "\n"
+    $ map (\sym -> show sym ++ ": " ++ talk sym) fruits
+----
++
+[source,console]
+----
+$ ghci src/classes/enum_where_binding.hs
+----
++
+[source,haskell]
+----
+*Main> main
+Apple: I like apples.
+Orange: I like oranges.
+Kiwi: I like kiwis.
+----

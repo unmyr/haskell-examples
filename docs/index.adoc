@@ -458,6 +458,27 @@ Orange: I like oranges.
 Kiwi: I like kiwis.
 ----
 
+* Using where bindings
++
+[source,haskell]
+.src/classes/enum_where_binding.hs
+----
+include::../src/classes/enum_where_binding.hs[]
+----
++
+[source,console]
+----
+$ ghci src/classes/enum_where_binding.hs
+----
++
+[source,haskell]
+----
+*Main> main
+Apple: I like apples.
+Orange: I like oranges.
+Kiwi: I like kiwis.
+----
+
 ==== List
 
 * Make a list
