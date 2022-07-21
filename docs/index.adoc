@@ -366,6 +366,98 @@ Vertex {x=3,y=4}
 5.0
 ----
 
+==== Enum
+
+* Enum to Int
++
+[source,haskell]
+.src/classes/enum_to_int.hs
+----
+include::../src/classes/enum_to_int.hs[]
+----
++
+[source,console]
+----
+$ ghci src/classes/enum_to_int.hs
+----
++
+[source,haskell]
+----
+*Main> main
+0
+1
+2
+[0,1,2]
+----
+
+* Int to enum
++
+[source,haskell]
+.src/classes/int_to_enum.hs
+----
+include::../src/classes/int_to_enum.hs[]
+----
++
+[source,console]
+----
+$ ghci src/classes/int_to_enum.hs
+----
++
+[source,haskell]
+----
+*Main> main
+Apple
+Orange
+Kiwi
+[Apple,Orange,Kiwi]
+*Main> :t (map toEnum [0, 1, 2] :: [Fruits])
+(map toEnum [0, 1, 2] :: [Fruits]) :: [Fruits]
+----
+
+===== Matching enum
+
+* Using pattern matching
++
+[source,haskell]
+.src/classes/enum_pattern_matching.hs
+----
+include::../src/classes/enum_pattern_matching.hs[]
+----
++
+[source,console]
+----
+$ ghci src/classes/enum_pattern_matching.hs
+----
++
+[source,haskell]
+----
+*Main> main
+Apple: I like apples.
+Orange: I like oranges.
+Kiwi: I like kiwis.
+----
+
+* Using case expressions
++
+[source,haskell]
+.src/classes/enum_case_of.hs
+----
+include::../src/classes/enum_case_of.hs[]
+----
++
+[source,console]
+----
+$ ghci src/classes/enum_case_of.hs
+----
++
+[source,haskell]
+----
+*Main> main
+Apple: I like apples.
+Orange: I like oranges.
+Kiwi: I like kiwis.
+----
+
 ==== List
 
 * Make a list

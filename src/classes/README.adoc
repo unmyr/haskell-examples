@@ -1,0 +1,121 @@
+== Enum
+
+=== Enum to Int
+
+[source,haskell]
+.enum_to_int.hs
+----
+data Fruits = Apple | Orange | Kiwi deriving (Enum)
+
+main = do
+    print $ fromEnum Apple
+    print $ fromEnum Orange
+    print $ fromEnum Kiwi
+    print $ map fromEnum [Apple, Orange, Kiwi]
+----
+
+[source,haskell]
+----
+*Main> main
+0
+1
+2
+[0,1,2]
+----
+
+=== Int to Enum
+
+[source,haskell]
+.int_to_enum.hs
+----
+data Fruits = Apple | Orange | Kiwi deriving (Enum, Show)
+
+main = do
+    print (toEnum 0 :: Fruits)
+    print (toEnum 1 :: Fruits)
+    print (toEnum 2 :: Fruits)
+    print (map toEnum [0, 1, 2] :: [Fruits])
+----
+
+[source,haskell]
+----
+*Main> main
+Apple
+Orange
+Kiwi
+[Apple,Orange,Kiwi]
+*Main> :t (map toEnum [0, 1, 2] :: [Fruits])
+(map toEnum [0, 1, 2] :: [Fruits]) :: [Fruits]
+----
+
+=== Matching enum
+
+* Using pattern matching
++
+[source,haskell]
+.enum_pattern_matching.hs
+----
+import Data.List
+
+data Fruits = Apple | Orange | Kiwi deriving (Enum, Show)
+
+talk :: Fruits -> String 
+talk Apple = "I like apples."
+talk Orange = "I like oranges."
+talk Kiwi = "I like kiwis."
+
+main = do
+  let fruits = [Apple, Orange, Kiwi]
+  putStrLn
+    $ Data.List.intercalate "\n"
+    $ map (\sym -> show sym ++ ": " ++ talk sym) fruits
+----
++
+[source,console]
+----
+$ ghci src/classes/enum_pattern_matching.hs
+----
++
+[source,haskell]
+----
+*Main> main
+Apple: I like apples.
+Orange: I like oranges.
+Kiwi: I like kiwis.
+----
+
+* Using case expressions
++
+[source,haskell]
+.enum_case_of.hs
+----
+import Data.List
+
+data Fruits = Apple | Orange | Kiwi deriving (Enum, Show)
+
+talk :: Fruits -> String 
+talk sym = case sym of
+  Apple -> "I like apples."
+  Orange -> "I like oranges."
+  Kiwi -> "I like kiwis."
+
+main = do
+  let fruits = [Apple, Orange, Kiwi]
+  putStrLn
+    $ Data.List.intercalate "\n"
+    $ map (\sym -> show sym ++ ": " ++ talk sym) fruits
+----
++
+[source,console]
+----
+$ ghci src/classes/enum_case_of.hs
+----
++
+[source,haskell]
+----
+*Main> main
+Apple: I like apples.
+Orange: I like oranges.
+Kiwi: I like kiwis.
+----
+
