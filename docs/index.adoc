@@ -1181,15 +1181,12 @@ $ ghci src/ghci/func_int_to_list.hs
 +
 [source,haskell]
 ----
-collatz :: Integer -> [Integer]
-collatz n | n == 1         = [1]
-          | n `mod` 2 == 0 = [n] ++ collatz (n `div` 2)
-          | n `mod` 2 == 1 = [n] ++ collatz (n * 3 + 1)
+include::../src/math/collatz.hs[]
 ----
 +
 [source,console]
 ----
-$ ghci src/ghci/collatz.hs
+$ ghci src/math/collatz.hs
 ----
 +
 [source,haskell]
