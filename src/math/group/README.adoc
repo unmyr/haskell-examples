@@ -1,0 +1,200 @@
+== Group
+
+=== C~2~
+
+[source,haskell]
+.group_c2.hs
+----
+c2_e = 0
+
+-- c2_op a b = (a + b) `mod` 2
+c2_op 0 0 = 0
+c2_op 1 1 = 0
+c2_op 0 1 = 1
+c2_op 1 0 = 1
+
+inv x = head [y | y <- [0, 1], c2_op x y == c2_e]
+
+c2 :: [Int] -> [Int]
+c2 [] = []
+c2 [x] = [x]
+c2 (x:xs) = c2 ([c2_op x (head xs)] ++ (tail xs))
+
+main = do
+  putStrLn $ "0^(-1) = " ++ show (inv 0)
+  putStrLn $ "1^(-1) = " ++ show (inv 1)
+  putStrLn $ "1 ⊕ 1 ⊕ 1 = " ++ show (head (c2 [1, 1, 1]))
+  putStrLn $ "1 ⊕ 1 ⊕ 1 ⊕ 1 = " ++ show (head (c2 [1, 1, 1, 1]))
+----
+
+[source,console]
+.Results
+----
+*Main> main
+0^(-1) = 0
+1^(-1) = 1
+1 ⊕ 1 ⊕ 1 = 1
+1 ⊕ 1 ⊕ 1 ⊕ 1 = 0
+----
+
+
+=== C~3~
+
+[source,haskell]
+.group_c3.hs
+----
+c3_e = 0
+c3_op x y = (x + y) `mod` 3
+c3_inv x = head [y | y <- [0, 1, 2], c3_op x y == c3_e]
+
+c3 :: [Int] -> [Int]
+c3 [] = []
+c3 [x] = [x]
+c3 (x:xs) = c3 ([c3_op x (head xs)] ++ (tail xs))
+
+main = do
+  putStrLn $ "0^(-1) = " ++ show (c3_inv 0)
+  putStrLn $ "1^(-1) = " ++ show (c3_inv 1)
+  putStrLn $ "1 * 2 = " ++ show (head (c3 [1, 2]))
+  putStrLn $ "1 * 2 * 1 = " ++ show (head (c3 [1, 2, 1]))
+----
+
+[source,console]
+.Results
+----
+*Main> main
+0^(-1) = 0
+1^(-1) = 2
+1 * 2 = 0
+1 * 2 * 1 = 1
+----
+
+
+=== K~4~
+
+[source,haskell]
+.group_k4.hs
+----
+e = (0, 0)
+p = (0, 1)
+q = (1, 0)
+r = (1, 1)
+
+toSymbol (0, 0) = "e"
+toSymbol (0, 1) = "p"
+toSymbol (1, 0) = "q"
+toSymbol (1, 1) = "r"
+
+k4_op (x1, y1) (x2, y2) = ((x1 + x2) `mod` 2, (y1 + y2) `mod` 2)
+k4_inv (x, y) = head [(p, q) | p <- [0..2], q <- [0..2], k4_op (x, y) (p, q) == (0, 0)]
+
+k4 :: [(Int, Int)] -> [(Int, Int)]
+k4 [] = []
+k4 [x] = [x]
+k4 (x:xs) = k4 ([k4_op x (head xs)] ++ (tail xs))
+
+main = do
+  putStrLn $ "p^(-1) = " ++ toSymbol (k4_inv p)
+  putStrLn $ "r^(-1) = " ++ toSymbol (k4_inv r)
+  putStrLn $ "p q = " ++ toSymbol (head (k4 [p, q]))
+  putStrLn $ "p q r = " ++ toSymbol (head (k4 [p, q, r]))
+----
+
+[source,console]
+.Results
+----
+*Main> main
+p^(-1) = p
+r^(-1) = r
+p q = r
+p q r = e
+----
+
+=== Q~8~
+
+[source,haskell]
+.group_q8.hs
+----
+q8_e = "e"
+
+q8_dot x y | x == q8_e = y
+q8_dot x y | y == q8_e = x
+q8_dot x y | x == "s" && y == "s" = q8_e
+q8_dot x y | x == "i" && y == "i" = "s"
+q8_dot x y | x == "j" && y == "j" = "s"
+q8_dot x y | x == "k" && y == "k" = "s"
+
+q8_dot x y | x == "s" && y == "i" = "si"
+q8_dot x y | x == "s" && y == "si" = "i"
+q8_dot x y | x == "s" && y == "j" = "sj"
+q8_dot x y | x == "s" && y == "sj" = "j"
+q8_dot x y | x == "s" && y == "k" = "sk"
+q8_dot x y | x == "s" && y == "sk" = "k"
+
+q8_dot x y | x == "i" && y == "s" = "si"
+q8_dot x y | x == "i" && y == "si" = q8_e
+q8_dot x y | x == "i" && y == "j" = "k"
+q8_dot x y | x == "i" && y == "sj" = "sk"
+q8_dot x y | x == "i" && y == "k" = "sj"
+q8_dot x y | x == "i" && y == "sk" = "j"
+
+q8_dot x y | x == "si" && y == "s" = "i"
+q8_dot x y | x == "si" && y == "i" = q8_e
+q8_dot x y | x == "si" && y == "si" = "s"
+q8_dot x y | x == "si" && y == "j" = "sk"
+q8_dot x y | x == "si" && y == "sj" = "k"
+q8_dot x y | x == "si" && y == "k" = "j"
+q8_dot x y | x == "si" && y == "sk" = "sj"
+
+q8_dot x y | x == "j" && y == "s" = "sj"
+q8_dot x y | x == "j" && y == "i" = "sk"
+q8_dot x y | x == "j" && y == "si" = "k"
+q8_dot x y | x == "j" && y == "sj" = q8_e
+q8_dot x y | x == "j" && y == "k" = "i"
+q8_dot x y | x == "j" && y == "sk" = "si"
+
+q8_dot x y | x == "sj" && y == "s" = "j"
+q8_dot x y | x == "sj" && y == "i" = "k"
+q8_dot x y | x == "sj" && y == "si" = "sk"
+q8_dot x y | x == "sj" && y == "j" = "sk"
+q8_dot x y | x == "sj" && y == "sj" = "s"
+q8_dot x y | x == "sj" && y == "k" = "si"
+q8_dot x y | x == "sj" && y == "sk" = "i"
+
+q8_dot x y | x == "k" && y == "s" = "sk"
+q8_dot x y | x == "k" && y == "i" = "j"
+q8_dot x y | x == "k" && y == "si" = "sj"
+q8_dot x y | x == "k" && y == "j" = "si"
+q8_dot x y | x == "k" && y == "sj" = "i"
+q8_dot x y | x == "k" && y == "sk" = q8_e
+
+q8_dot x y | x == "sk" && y == "s" = "k"
+q8_dot x y | x == "sk" && y == "i" = "sj"
+q8_dot x y | x == "sk" && y == "si" = "j"
+q8_dot x y | x == "sk" && y == "j" = "i"
+q8_dot x y | x == "sk" && y == "sj" = "si"
+q8_dot x y | x == "sk" && y == "k" = q8_e
+q8_dot x y | x == "sk" && y == "sk" = "s"
+
+
+q8_dot x y = "?"
+
+q8 :: [String] -> [String]
+q8 [] = []
+q8 [x] = [x]
+q8 (x:xs) = q8 ([q8_dot x (head xs)] ++ (tail xs))
+
+q8_inv x = head [x | y <- [q8_e, "s", "i", "si", "j", "sj", "k", "sk"], q8_dot x y == q8_e]
+
+main = do
+  putStrLn $ "i * j * k = " ++ head (q8 ["si", "i", "j", "k"])
+  putStrLn $ "(si)^(-1) = " ++ q8_inv "si"
+----
+
+[source,console]
+.Results
+----
+*Main> main
+i * j * k = i
+(si)^(-1) = si
+----
