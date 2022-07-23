@@ -1055,12 +1055,21 @@ include::../src/recursion/quicksort.hs[]
 +
 [source,haskell]
 ----
-Prelude> let fac n = if n == 0 then 1 else n * fac (n-1)
-Prelude> fac 42
+include::../src/math/factorial/factorial.hs[]
+----
++
+[source,haskell]
+----
+*Main> :set +s
+*Main> fac_p 42
 1405006117752879898543142606244511569936384000000000
-Prelude> fac 3
-6
-Prelude>
+(0.02 secs, 129,936 bytes)
+*Main> fac_g 42
+1405006117752879898543142606244511569936384000000000
+(0.02 secs, 132,320 bytes)
+*Main> fac_if_then_else 42
+1405006117752879898543142606244511569936384000000000
+(0.02 secs, 132,312 bytes)
 ----
 
 * Implement recursion using `foldr` in haskell
