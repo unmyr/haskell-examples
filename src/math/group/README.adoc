@@ -44,8 +44,10 @@ main = do
 .group_o3_c3.hs
 ----
 c3_e = 0
+c3_all = [0, 1, 2]
+
 c3_op x y = (x + y) `mod` 3
-c3_inv x = head [y | y <- [0, 1, 2], c3_op x y == c3_e]
+c3_inv x = head [y | y <- c3_all, c3_op x y == c3_e]
 
 c3 :: [Int] -> [Int]
 c3 [] = []
@@ -53,6 +55,9 @@ c3 [x] = [x]
 c3 (x:xs) = c3 ([c3_op x (head xs)] ++ (tail xs))
 
 main = do
+  print $ [c3_op 0  y | y <- c3_all]
+  print $ [c3_op 1  y | y <- c3_all]
+  print $ [c3_op 2  y | y <- c3_all]
   putStrLn $ "0^(-1) = " ++ show (c3_inv 0)
   putStrLn $ "1^(-1) = " ++ show (c3_inv 1)
   putStrLn $ "1 * 2 = " ++ show (head (c3 [1, 2]))
@@ -63,6 +68,9 @@ main = do
 .Results
 ----
 *Main> main
+[0,1,2]
+[1,2,0]
+[2,0,1]
 0^(-1) = 0
 1^(-1) = 2
 1 * 2 = 0
@@ -171,6 +179,20 @@ main = do
   print $ [d3_dot "srr"  y | y <- d3_all] == ["srr",  "s", "sr",  "r", "rr",  "e"]
   putStrLn $ "s * r * s = " ++ head (d3 ["s", "r", "s"])
   putStrLn $ "(sr)^(-1) = " ++ d3_inv "sr"
+----
+
+[source,console]
+.Results
+----
+*Main> main
+True
+True
+True
+True
+True
+True
+s * r * s = rr
+(sr)^(-1) = sr
 ----
 
 === Q~8~

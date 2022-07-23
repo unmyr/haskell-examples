@@ -1,0 +1,174 @@
+ifndef::leveloffset[]
+:toc: left
+:toclevels: 3
+:icons: font
+:stem: latexmath
+endif::[]
+
+ifndef::imagesdir[]
+:imagesdir: images
+endif::[]
+
+include::header.adoc[]
+
+== Group
+
+=== C~2~
+
+[cols="1h,1d,1d" options="header,autowidth",title="XOR"]
+|===
+ | ⊕ | 0 | 1
+h| 0 | 0 | 1
+h| 1 | 1 | 0
+|===
+
+[source,haskell]
+.group_o2_c2.hs
+----
+include::../src/math/group/group_o2_c2.hs[]
+----
+
+[source,console]
+.Results
+----
+*Main> main
+0^(-1) = 0
+1^(-1) = 1
+1 ⊕ 1 ⊕ 1 = 1
+1 ⊕ 1 ⊕ 1 ⊕ 1 = 0
+----
+
+
+=== C~3~
+
+[cols="1h,1d,1d,1d", options="header,autowidth", title="*__C__~3~*"]
+|===
+ |   | 0 | 1 | 2
+h| 0 | 0 | 1 | 2
+h| 1 | 1 | 2 | 0
+h| 2 | 2 | 0 | 1
+|===
+
+[source,haskell]
+.group_o3_c3.hs
+----
+include::../src/math/group/group_o3_c3.hs[]
+----
+
+[source,console]
+.Results
+----
+*Main> main
+[0,1,2]
+[1,2,0]
+[2,0,1]
+0^(-1) = 0
+1^(-1) = 2
+1 * 2 = 0
+1 * 2 * 1 = 1
+----
+
+
+=== K~4~
+
+[cols="1h,1d,1d,1d,1d" options="header, autowidth" title="_K_~4~"]
+|===
+ |     | _e_ | _p_ | _q_ | _r_
+h| _e_ | _e_ | _p_ | _q_ | _r_
+h| _p_ | _p_ | _e_ | _r_ | _q_
+h| _q_ | _q_ | _r_ | _e_ | _p_
+h| _r_ | _r_ | _q_ | _p_ | _e_
+|===
+
+[source,haskell]
+.group_o4_k4.hs
+----
+include::../src/math/group/group_o4_k4.hs[]
+----
+
+[source,console]
+.Results
+----
+*Main> main
+p^(-1) = p
+r^(-1) = r
+p q = r
+p q r = e
+----
+
+=== D~3~
+
+.The multiplication table (order 6; D~3~)
+[cols="4h,1d,1d,1d,1d,1d,1d", options="header,autowidth"]
+|===
+ |         | _e_     | _r_     | _r_^2^  | _s_     | _sr_    | _sr_^2^
+h| _e_     | _e_     | _r_     | _r_^2^  | _s_     | _sr_    | _sr_^2^
+h| _r_     | _r_     | _r_^2^  | _e_     | _sr_^2^ | _s_     | _sr_
+h| _r_^2^  | _r_^2^  | _e_     | _r_     | _sr_    | _sr_^2^ | _s_
+h| _s_     | _s_     | _sr_    | _sr_^2^ | _e_     | _r_     | _r_^2^
+h| _sr_    | _sr_    | _sr_^2^ | _s_     | _r_^2^  | _e_     | _r_
+h| _sr_^2^ | _sr_^2^ | _s_     | _sr_    | _r_     | _r_^2^  | _e_
+|===
+
+[source,haskell]
+.group_o6_d3.hs
+----
+include::../src/math/group/group_o6_d3.hs[]
+----
+
+[source,console]
+.Results
+----
+*Main> main
+True
+True
+True
+True
+True
+True
+s * r * s = rr
+(sr)^(-1) = sr
+----
+
+=== Q~8~
+
+* center of quaternion group: latexmath:[Z(G)=\{z \in G | zg = gz (\forall \isin G)\}] = {_e_, _x_^2^}
+
+.The multiplication table (order 8; Q8)
+[cols="h,d,d,d,d,d,d,d,d", options="header,autowidth"]
+|===
+ |      | _e_  | _s_  | _i_  | _si_ | _j_  | _sj_ | _k_  | _sk_
+h| _e_  | _e_  | _s_  | _i_  | _si_ | _j_  | _sj_ | _k_  | _sk_
+h| _s_  | _s_  | _e_  | _si_ | _i_  | _sj_ | _j_  | _sk_ | _k_
+h| _i_  | _i_  | _si_ | _s_  | _e_  | _k_  | _sk_ | _sj_ | _j_
+h| _si_ | _si_ | _i_  | _e_  | _s_  | _sk_ | _k_  | _j_  | _sj_
+h| _j_  | _j_  | _sj_ | _sk_ | _k_  | _s_  | _e_  | _i_  | _si_
+h| _sj_ | _sj_ | _j_  | _k_  | _sk_ | _e_  | _s_  | _si_ | _i_
+h| _k_  | _k_  | _sk_ | _j_  | _sj_ | _si_ | _i_  | _s_  | _e_
+h| _sk_ | _sk_ | _k_  | _sj_ | _j_  | _i_  | _si_ | _e_  | _s_
+|===
+
+[source,haskell]
+.group_o8_q8_c.hs
+----
+include::../src/math/group/group_o8_q8_c.hs[]
+----
+
+[source,console]
+.Results
+----
+*Main> main
+True
+True
+True
+True
+True
+True
+True
+True
+si * si = s
+ i * sk = sk
+si * si  = s
+si * i * j * k = i
+(si)^(-1) = si
+----

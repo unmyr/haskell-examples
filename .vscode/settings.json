@@ -16,6 +16,7 @@
     "hypot",
     "ifdef",
     "imagesdir",
+    "latexmath",
     "leveloffset",
     "microstache",
     "optc",
