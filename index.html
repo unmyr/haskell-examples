@@ -2308,13 +2308,42 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <li>
 <p>Implement recursion using recursive calls</p>
 <div class="listingblock">
+<div class="title">src/math/fac.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">fac</span> <span class="n">n</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span> <span class="mi">1</span> <span class="kr">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fac</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">fac</span> <span class="mi">42</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="c1">-- Using pattern matching</span>
+<span class="n">fac_p</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">fac_p</span> <span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">fac_p</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fac_p</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">-- Using conditional guards</span>
+<span class="n">fac_g</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">fac_g</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span>    <span class="o">=</span> <span class="mi">1</span>
+        <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fac_g</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">-- Using if-then-else</span>
+<span class="n">fac_if_then_else</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">fac_if_then_else</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="kr">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span> <span class="mi">1</span> <span class="kr">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fac_if_then_else</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">fac_p</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">fac_g</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">fac_if_then_else</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">set</span> <span class="o">+</span><span class="n">s</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">fac_p</span> <span class="mi">42</span>
 <span class="mi">1405006117752879898543142606244511569936384000000000</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">fac</span> <span class="mi">3</span>
-<span class="mi">6</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span></code></pre>
+<span class="p">(</span><span class="mf">0.02</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">129</span><span class="p">,</span><span class="mi">936</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">fac_g</span> <span class="mi">42</span>
+<span class="mi">1405006117752879898543142606244511569936384000000000</span>
+<span class="p">(</span><span class="mf">0.02</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span><span class="mi">320</span> <span class="n">bytes</span><span class="p">)</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">fac_if_then_else</span> <span class="mi">42</span>
+<span class="mi">1405006117752879898543142606244511569936384000000000</span>
+<span class="p">(</span><span class="mf">0.02</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">132</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </li>
@@ -2346,27 +2375,51 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 </div>
 <div class="sect4">
+<h5 id="_fibonacci_sequence">Fibonacci sequence</h5>
+<div class="listingblock">
+<div class="title">src/math/fib.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">fib</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">fib</span> <span class="mi">0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">fib</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">fib</span> <span class="n">n</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">fib</span> <span class="mi">10</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="_collatz_map">Collatz map</h5>
 <div class="ulist">
 <ul>
 <li>
 <p>Collatz map</p>
 <div class="listingblock">
-<div class="title">src/math/collatz-with-guards.hs</div>
+<div class="title">src/math/collatz_with_guards.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">collatz</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Integer</span><span class="p">]</span>
 <span class="n">collatz</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
           <span class="o">|</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
-          <span class="o">|</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></code></pre>
+          <span class="o">|</span> <span class="n">otherwise</span>      <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">collatz</span> <span class="mi">9</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">src/math/collatz_with-pat.hs</div>
+<div class="title">src/math/collatz_with_pattern.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">collatz</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Integer</span><span class="p">]</span>
 <span class="n">collatz</span> <span class="mi">1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">collatz</span> <span class="n">n</span> <span class="o">|</span> <span class="n">even</span> <span class="n">n</span>    <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
-          <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></code></pre>
+          <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">collatz</span> <span class="mi">9</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -2375,7 +2428,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <p>Run</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/math/collatz-with-guards.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/math/collatz_with_guards.hs</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -2656,7 +2709,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-23 15:56:14 UTC
+Last updated 2022-07-23 18:22:00 UTC
 </div>
 </div>
 </body>
