@@ -132,7 +132,7 @@ s * r * s = rr
 
 === Q~8~
 
-* center of quaternion group: latexmath:[Z(G)=\{z \in G | zg = gz (\forall \isin G)\}] = {_e_, _x_^2^}
+* center of quaternion group: latexmath:[Z(G)=\{z \in G | zg = gz (\forall \in G)\}] = {_e_, _x_^2^}
 
 .The multiplication table (order 8; Q8)
 [cols="h,d,d,d,d,d,d,d,d", options="header,autowidth"]
