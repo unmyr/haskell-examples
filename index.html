@@ -997,7 +997,6 @@ pre.rouge {
 <ul class="sectlevel3">
 <li><a href="#_single_results">Single results</a></li>
 <li><a href="#_multiple_results">Multiple results</a></li>
-<li><a href="#_recursion_2">Recursion</a></li>
 <li><a href="#_higher_order_function">Higher-order function</a></li>
 </ul>
 </li>
@@ -2260,6 +2259,50 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 <div class="sect3">
 <h4 id="_recursion">Recursion</h4>
+<div class="sect4">
+<h5 id="_reverse">Reverse</h5>
+<div class="listingblock">
+<div class="title">src/recursion/reverse.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">reverse'</span> <span class="o">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="n">reverse'</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="n">reverse'</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">reverse</span> <span class="n">xs</span> <span class="o">++</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Results</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">reverse'</span> <span class="s">"abc"</span>
+<span class="s">"cba"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_quicksort">Quicksort</h5>
+<div class="listingblock">
+<div class="title">src/recursion/quicksort.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">quicksort</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="n">quicksort</span> <span class="kt">[]</span> <span class="o">=</span> <span class="kt">[]</span>
+<span class="n">quicksort</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="n">quicksort</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span>
+  <span class="n">quicksort</span><span class="p">(</span><span class="n">filter</span> <span class="p">(</span><span class="o">&lt;</span> <span class="n">x</span><span class="p">)</span> <span class="n">xs</span><span class="p">)</span> <span class="o">++</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">++</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">filter</span> <span class="p">(</span><span class="o">&gt;=</span> <span class="n">x</span><span class="p">)</span> <span class="n">xs</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Results</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">quicksort</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">quicksort</span> <span class="s">"I have a pen."</span>
+<span class="s">"   .Iaaeehnpv"</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">quicksort</span> <span class="p">[</span><span class="s">"Orange"</span><span class="p">,</span> <span class="s">"Apple"</span><span class="p">,</span> <span class="s">"Kiwi"</span><span class="p">,</span> <span class="s">"Banana"</span><span class="p">,</span> <span class="s">"Peach"</span><span class="p">,</span> <span class="s">"Watermelon"</span><span class="p">]</span>
+<span class="p">[</span><span class="s">"Apple"</span><span class="p">,</span><span class="s">"Banana"</span><span class="p">,</span><span class="s">"Kiwi"</span><span class="p">,</span><span class="s">"Orange"</span><span class="p">,</span><span class="s">"Peach"</span><span class="p">,</span><span class="s">"Watermelon"</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_factorial">Factorial</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2300,6 +2343,53 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_collatz_map">Collatz map</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Collatz map</p>
+<div class="listingblock">
+<div class="title">src/math/collatz-with-guards.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">collatz</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Integer</span><span class="p">]</span>
+<span class="n">collatz</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+          <span class="o">|</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
+          <span class="o">|</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">src/math/collatz_with-pat.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">collatz</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Integer</span><span class="p">]</span>
+<span class="n">collatz</span> <span class="mi">1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">collatz</span> <span class="n">n</span> <span class="o">|</span> <span class="n">even</span> <span class="n">n</span>    <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
+          <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Run</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/math/collatz-with-guards.hs</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">collatz</span> <span class="mi">3</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -2446,52 +2536,6 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 </div>
 <div class="sect3">
-<h4 id="_recursion_2">Recursion</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Collatz map</p>
-<div class="listingblock">
-<div class="title">src/math/collatz-with-guards.hs</div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">collatz</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Integer</span><span class="p">]</span>
-<span class="n">collatz</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-          <span class="o">|</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
-          <span class="o">|</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">src/math/collatz_with-pat.hs</div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">collatz</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Integer</span><span class="p">]</span>
-<span class="n">collatz</span> <span class="mi">1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">collatz</span> <span class="n">n</span> <span class="o">|</span> <span class="n">even</span> <span class="n">n</span>    <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
-          <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Run</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/math/collatz-with-guards.hs</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">collatz</span> <span class="mi">3</span>
-<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span></code></pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_higher_order_function">Higher-order function</h4>
 <div class="ulist">
 <ul>
@@ -2612,7 +2656,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-23 10:26:52 UTC
+Last updated 2022-07-23 15:56:14 UTC
 </div>
 </div>
 </body>
