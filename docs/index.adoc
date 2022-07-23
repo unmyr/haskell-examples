@@ -1015,6 +1015,42 @@ Prelude>
 
 ==== Recursion
 
+===== Reverse
+
+[source,haskell]
+.src/recursion/reverse.hs
+----
+include::../src/recursion/reverse.hs[]
+----
+
+[source,haskell]
+.Results
+----
+*Main> reverse' "abc"
+"cba"
+----
+
+===== Quicksort
+
+[source,haskell]
+.src/recursion/quicksort.hs
+----
+include::../src/recursion/quicksort.hs[]
+----
+
+[source,haskell]
+.Results
+----
+*Main> quicksort [6, 1, 1, 8, 6, 5, 3, 7, 2, 1, 4, 3, 8, 9]
+[1,1,1,2,3,3,4,5,6,6,7,8,8,9]
+*Main> quicksort "I have a pen."
+"   .Iaaeehnpv"
+*Main> quicksort ["Orange", "Apple", "Kiwi", "Banana", "Peach", "Watermelon"]
+["Apple","Banana","Kiwi","Orange","Peach","Watermelon"]
+----
+
+===== Factorial
+
 * Implement recursion using recursive calls
 +
 [source,haskell]
@@ -1047,6 +1083,35 @@ Prelude> fac_l 42
 1405006117752879898543142606244511569936384000000000
 Prelude> fac_l 3
 6
+----
+
+===== Collatz map
+
+* Collatz map
++
+[source,haskell]
+.src/math/collatz-with-guards.hs
+----
+include::../src/math/collatz-with-guards.hs[]
+----
++
+[source,haskell]
+.src/math/collatz_with-pat.hs
+----
+include::../src/math/collatz_with-pat.hs[]
+----
+
+** Run
++
+[source,console]
+----
+$ ghci src/math/collatz-with-guards.hs
+----
++
+[source,haskell]
+----
+*Main> collatz 3
+[3,10,5,16,8,4,2,1]
 ----
 
 === Functions
@@ -1173,35 +1238,6 @@ $ ghci src/ghci/func_int_to_list.hs
 [3,3]
 *Main> get_int_list 4
 [4,4]
-----
-
-==== Recursion
-
-* Collatz map
-+
-[source,haskell]
-.src/math/collatz-with-guards.hs
-----
-include::../src/math/collatz-with-guards.hs[]
-----
-+
-[source,haskell]
-.src/math/collatz_with-pat.hs
-----
-include::../src/math/collatz_with-pat.hs[]
-----
-
-** Run
-+
-[source,console]
-----
-$ ghci src/math/collatz-with-guards.hs
-----
-+
-[source,haskell]
-----
-*Main> collatz 3
-[3,10,5,16,8,4,2,1]
 ----
 
 ==== Higher-order function

@@ -1,0 +1,41 @@
+== Recursion
+
+=== Reverse
+
+[source,haskell]
+.reverse.hs
+----
+reverse' :: [a] -> [a]
+reverse' [x] = [x]
+reverse' (x:xs) = reverse xs ++ [x]
+----
+
+[source,haskell]
+.Results
+----
+*Main> reverse' "abc"
+"cba"
+----
+
+=== Quicksort
+
+[source,haskell]
+.quicksort.hs
+----
+quicksort :: (Ord a) => [a] -> [a]
+quicksort [] = []
+quicksort [x] = [x]
+quicksort (x:xs) =
+  quicksort(filter (< x) xs) ++ [x] ++ quicksort(filter (>= x) xs)
+----
+
+[source,haskell]
+.Results
+----
+*Main> quicksort [6, 1, 1, 8, 6, 5, 3, 7, 2, 1, 4, 3, 8, 9]
+[1,1,1,2,3,3,4,5,6,6,7,8,8,9]
+*Main> quicksort "I have a pen."
+"   .Iaaeehnpv"
+*Main> quicksort ["Orange", "Apple", "Kiwi", "Banana", "Peach", "Watermelon"]
+["Apple","Banana","Kiwi","Orange","Peach","Watermelon"]
+----
