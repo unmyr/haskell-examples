@@ -1180,13 +1180,22 @@ $ ghci src/ghci/func_int_to_list.hs
 * Collatz map
 +
 [source,haskell]
+.src/math/collatz-with-guards.hs
 ----
-include::../src/math/collatz.hs[]
+include::../src/math/collatz-with-guards.hs[]
 ----
++
+[source,haskell]
+.src/math/collatz_with-pat.hs
+----
+include::../src/math/collatz_with-pat.hs[]
+----
+
+** Run
 +
 [source,console]
 ----
-$ ghci src/math/collatz.hs
+$ ghci src/math/collatz-with-guards.hs
 ----
 +
 [source,haskell]
