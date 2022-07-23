@@ -132,7 +132,8 @@ s * r * s = rr
 
 === Q~8~
 
-* center of quaternion group: latexmath:[Z(G)=\{z \in G | zg = gz (\forall \in G)\}] = {_e_, _x_^2^}
+* Non-abelian group of order 8
+* Center of quaternion group: latexmath:[Z(G)=\{z \in G | zg = gz (\forall g \in G)\}] = {_e_, _s_}
 
 .The multiplication table (order 8; Q8)
 [cols="h,d,d,d,d,d,d,d,d", options="header,autowidth"]
