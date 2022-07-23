@@ -1,0 +1,31 @@
+== Math
+
+=== Fibonacci sequence
+
+[source,haskell]
+----
+fib :: Int -> Int
+fib 0 = 0
+fib 1 = 1
+fib n = fib(n-2) + fib(n-1)
+----
+
+=== Collatz map
+
+[source,haskell]
+.src/math/collatz-with-guards.hs
+----
+collatz :: Integer -> [Integer]
+collatz n | n == 1         = [1]
+          | n `mod` 2 == 0 = [n] ++ collatz (n `div` 2)
+          | n `mod` 2 == 1 = [n] ++ collatz (n * 3 + 1)
+----
+
+[source,haskell]
+.src/math/collatz_with-pat.hs
+----
+collatz :: Integer -> [Integer]
+collatz 1 = [1]
+collatz n | even n    = [n] ++ collatz (n `div` 2)
+          | otherwise = [n] ++ collatz (n * 3 + 1)
+----
