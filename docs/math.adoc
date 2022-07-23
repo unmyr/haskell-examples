@@ -11,9 +11,187 @@ endif::[]
 
 include::header.adoc[]
 
-== Group
+== Math
 
-=== C~2~
+=== Built-in functions
+
+[source,haskell]
+.abs
+----
+*Main> abs (-1)
+1
+*Main>
+----
+
+[source,haskell]
+----
+*Main> 1254 `div` 1000
+1
+*Main> 1254 `rem` 1000
+254
+*Main> 
+----
+
+[source,haskell]
+.`mod`
+----
+*Main> (-4) `mod` 3
+2
+*Main> (-1) `mod` 3
+2
+*Main>
+----
+
+[source,haskell]
+.`rem`
+----
+*Main> (-4) `rem` 3
+-1
+*Main> (-1) `rem` 3
+-1
+*Main>
+----
+
+=== Sum
+
+* sum
++
+[source,haskell]
+----
+Prelude> :set +s
+Prelude> sum [1..1000000]
+500000500000
+(0.88 secs, 161,299,720 bytes)
+Prelude> sum [1..1000000]
+500000500000
+(0.69 secs, 161,299,720 bytes)
+Prelude> sum [1..1000000]
+500000500000
+(0.72 secs, 161,299,720 bytes)
+Prelude> sum [1..1000000]
+500000500000
+(0.73 secs, 161,300,296 bytes)
+Prelude> sum [1..1000000]
+500000500000
+(0.64 secs, 161,299,144 bytes)
+----
+
+* sum'
++
+[source,haskell]
+----
+Prelude> let sum'(x:xs) = x + sum(xs)
+Prelude> :set +s
+Prelude> sum' [1..1000000]
+500000500000
+(0.53 secs, 161,299,344 bytes)
+Prelude> sum' [1..1000000]
+500000500000
+(0.67 secs, 161,299,344 bytes)
+Prelude> sum' [1..1000000]
+500000500000
+(0.56 secs, 161,299,344 bytes)
+Prelude> sum' [1..1000000]
+500000500000
+(0.64 secs, 161,299,344 bytes)
+Prelude> sum' [1..1000000]
+500000500000
+(0.72 secs, 161,297,672 bytes)
+----
+
+* foldr
++
+[source,haskell]
+----
+Prelude> :set +s
+Prelude> foldr (+) 0 [1..1000000]
+500000500000
+(0.50 secs, 161,589,312 bytes)
+Prelude> foldr (+) 0 [1..1000000]
+500000500000
+(0.52 secs, 161,589,224 bytes)
+Prelude> foldr (+) 0 [1..1000000]
+500000500000
+(0.41 secs, 161,590,416 bytes)
+Prelude> foldr (+) 0 [1..1000000]
+500000500000
+(0.56 secs, 161,589,400 bytes)
+Prelude> foldr (+) 0 [1..1000000]
+500000500000
+(0.64 secs, 161,590,416 bytes)
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.59 secs, 161,298,944 bytes)
+----
+
+* sum'
++
+[source,haskell]
+----
+Prelude> :set +s
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.59 secs, 161,298,944 bytes)
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.72 secs, 161,297,312 bytes)
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.72 secs, 161,297,312 bytes)
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.66 secs, 161,297,312 bytes)
+Prelude> foldl (+) 0 [1..1000000]
+500000500000
+(0.67 secs, 161,297,312 bytes)
+----
+
+=== Prime number
+
+* determining whether an input number is prime
++
+[source,haskell]
+----
+isPrime k = if k > 1 then null [ x | x <- [2..k - 1], k `mod` x == 0] else False
+----
+
+* Prime numbers up to 100
++
+[source,haskell]
+----
+Prelude> [ n | n <- [2..100], null [k | k <- [2..(n-1)], n `mod` k == 0]]
+[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]
+Prelude> length [ n | n <- [2..100], null [k | k <- [2..(n-1)], n `mod` k == 0]]
+25
+----
+
+* Taking the first 25 primes from an infinite list
++
+[source,haskell]
+----
+Prelude> take 25 [ n | n <- [2..], null [x | x <- [2..(n-1)], n `mod` x == 0]]
+[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]
+Prelude> length $ take 25 [ n | n <- [2..], null [x | x <- [2..(n-1)], n `mod` x == 0]]
+25
+----
++
+[source,haskell]
+----
+Prelude> factors x = filter (\y -> x `mod` y == 0) [1..x]
+Prelude> primes = [ x | x <- [1..], factors x == [1,x] ]
+Prelude> take 25 primes
+[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]
+----
++
+[source,haskell]
+----
+Prelude> take 25 $ [2..] >>= \n -> if null ([2..(n-1)] >>= \k -> if n `mod` k == 0 then [k] else []) then [n] else []
+[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]
+----
+
+=== Group
+
+==== C~2~
 
 [cols="1h,1d,1d" options="header,autowidth",title="XOR"]
 |===
@@ -39,7 +217,7 @@ include::../src/math/group/group_o2_c2.hs[]
 ----
 
 
-=== C~3~
+==== C~3~
 
 [cols="1h,1d,1d,1d", options="header,autowidth", title="*__C__~3~*"]
 |===
@@ -69,7 +247,7 @@ include::../src/math/group/group_o3_c3.hs[]
 ----
 
 
-=== K~4~
+==== K~4~
 
 [cols="1h,1d,1d,1d,1d" options="header, autowidth" title="_K_~4~"]
 |===
@@ -96,7 +274,7 @@ p q = r
 p q r = e
 ----
 
-=== D~3~
+==== D~3~
 
 .The multiplication table (order 6; D~3~)
 [cols="4h,1d,1d,1d,1d,1d,1d", options="header,autowidth"]
@@ -130,7 +308,7 @@ s * r * s = rr
 (sr)^(-1) = sr
 ----
 
-=== Q~8~
+==== Q~8~
 
 * Non-abelian group of order 8
 * Center of quaternion group: latexmath:[Z(G)=\{z \in G | zg = gz (\forall g \in G)\}] = {_e_, _s_}
