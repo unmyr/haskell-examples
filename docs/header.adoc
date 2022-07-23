@@ -1,4 +1,4 @@
 <<index.adoc#,Haskell>> {vbar}
 <<install.adoc#,Install>> {vbar}
 <<criterion.adoc#,Criterion>> {vbar}
-<<math_group.adoc#,Group>> +
+<<math.adoc#,Math>> +
