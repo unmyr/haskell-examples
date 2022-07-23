@@ -1095,6 +1095,14 @@ Prelude> fac_l 3
 6
 ----
 
+===== Fibonacci sequence
+
+[source,haskell]
+.src/math/fib.hs
+----
+include::../src/math/fib.hs[]
+----
+
 ===== Collatz map
 
 * Collatz map

@@ -5,7 +5,7 @@ TARGETS=\
 $(TARGET_DIR)/collatz_with_guards \
 $(TARGET_DIR)/collatz_with_pattern \
 $(TARGET_DIR)/fac \
-$(TARGET_DIR)/fibonacci_sequence \
+$(TARGET_DIR)/fib \
 $(TARGET_DIR)/square_root_int
 
 .PHONY: setup
@@ -24,7 +24,7 @@ $(TARGET_DIR)/collatz_with_pattern: collatz_with_pattern.hs
 $(TARGET_DIR)/fac: fac.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
-$(TARGET_DIR)/fibonacci_sequence: fibonacci_sequence.hs
+$(TARGET_DIR)/fib: fib.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 $(TARGET_DIR)/square_root_int: square_root_int.hs
