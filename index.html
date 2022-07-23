@@ -1002,12 +1002,6 @@ pre.rouge {
 </ul>
 </li>
 <li><a href="#_monad">Monad</a></li>
-<li><a href="#_math">Math</a>
-<ul class="sectlevel3">
-<li><a href="#_sum">Sum</a></li>
-<li><a href="#_prime_number">Prime number</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -1018,7 +1012,7 @@ pre.rouge {
 <p><a href="#">Haskell</a> |
 <a href="install.html">Install</a> |
 <a href="criterion.html">Criterion</a> |
-<a href="math_group.html">Group</a><br></p>
+<a href="math.html">Math</a><br></p>
 </div>
 <div class="sect1">
 <h2 id="_haskell_examples">Haskell examples</h2>
@@ -2613,206 +2607,12 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_math">Math</h3>
-<div class="listingblock">
-<div class="title">abs</div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">abs</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="mi">1</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="mi">1254</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">1000</span>
-<span class="mi">1</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="mi">1254</span> <span class="p">`</span><span class="n">rem</span><span class="p">`</span> <span class="mi">1000</span>
-<span class="mi">254</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title"><code>mod</code></div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">3</span>
-<span class="mi">2</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">3</span>
-<span class="mi">2</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title"><code>rem</code></div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="p">`</span><span class="n">rem</span><span class="p">`</span> <span class="mi">3</span>
-<span class="o">-</span><span class="mi">1</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">`</span><span class="n">rem</span><span class="p">`</span> <span class="mi">3</span>
-<span class="o">-</span><span class="mi">1</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span></code></pre>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sum">Sum</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>sum</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">set</span> <span class="o">+</span><span class="n">s</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.88</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">720</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.69</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">720</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.72</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">720</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.73</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">296</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.64</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">144</span> <span class="n">bytes</span><span class="p">)</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>sum'</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">sum'</span><span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">set</span> <span class="o">+</span><span class="n">s</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.53</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">344</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.67</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">344</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.56</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">344</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.64</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">299</span><span class="p">,</span><span class="mi">344</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.72</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">297</span><span class="p">,</span><span class="mi">672</span> <span class="n">bytes</span><span class="p">)</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>foldr</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">set</span> <span class="o">+</span><span class="n">s</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.50</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">589</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.52</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">589</span><span class="p">,</span><span class="mi">224</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.41</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">590</span><span class="p">,</span><span class="mi">416</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.56</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">589</span><span class="p">,</span><span class="mi">400</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.64</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">590</span><span class="p">,</span><span class="mi">416</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.59</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">298</span><span class="p">,</span><span class="mi">944</span> <span class="n">bytes</span><span class="p">)</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>sum'</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">set</span> <span class="o">+</span><span class="n">s</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.59</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">298</span><span class="p">,</span><span class="mi">944</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.72</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">297</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.72</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">297</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.66</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">297</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-<span class="mi">500000500000</span>
-<span class="p">(</span><span class="mf">0.67</span> <span class="n">secs</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span><span class="mi">297</span><span class="p">,</span><span class="mi">312</span> <span class="n">bytes</span><span class="p">)</span></code></pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_prime_number">Prime number</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>determining whether an input number is prime</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">isPrime</span> <span class="n">k</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="kr">then</span> <span class="n">null</span> <span class="p">[</span> <span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">k</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="kr">else</span> <span class="kt">False</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Prime numbers up to 100</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="p">[</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="mi">100</span><span class="p">],</span> <span class="n">null</span> <span class="p">[</span><span class="n">k</span> <span class="o">|</span> <span class="n">k</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]]</span>
-<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span><span class="mi">67</span><span class="p">,</span><span class="mi">71</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">79</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">97</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">length</span> <span class="p">[</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="mi">100</span><span class="p">],</span> <span class="n">null</span> <span class="p">[</span><span class="n">k</span> <span class="o">|</span> <span class="n">k</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]]</span>
-<span class="mi">25</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Taking the first 25 primes from an infinite list</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">25</span> <span class="p">[</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">],</span> <span class="n">null</span> <span class="p">[</span><span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]]</span>
-<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span><span class="mi">67</span><span class="p">,</span><span class="mi">71</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">79</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">97</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">length</span> <span class="o">$</span> <span class="n">take</span> <span class="mi">25</span> <span class="p">[</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">],</span> <span class="n">null</span> <span class="p">[</span><span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]]</span>
-<span class="mi">25</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">factors</span> <span class="n">x</span> <span class="o">=</span> <span class="n">filter</span> <span class="p">(</span><span class="nf">\</span><span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">x</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">primes</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">],</span> <span class="n">factors</span> <span class="n">x</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="p">]</span> <span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">25</span> <span class="n">primes</span>
-<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span><span class="mi">67</span><span class="p">,</span><span class="mi">71</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">79</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">97</span><span class="p">]</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">25</span> <span class="o">$</span> <span class="p">[</span><span class="mi">2</span><span class="o">..</span><span class="p">]</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="kr">if</span> <span class="n">null</span> <span class="p">([</span><span class="mi">2</span><span class="o">..</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="kr">if</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="kr">else</span> <span class="kt">[]</span><span class="p">)</span> <span class="kr">then</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="kr">else</span> <span class="kt">[]</span>
-<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">53</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span><span class="mi">67</span><span class="p">,</span><span class="mi">71</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">79</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">97</span><span class="p">]</span></code></pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-23 10:10:02 UTC
+Last updated 2022-07-23 10:26:52 UTC
 </div>
 </div>
 </body>
