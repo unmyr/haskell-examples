@@ -1054,9 +1054,9 @@ include::../src/recursion/quicksort.hs[]
 * Implement recursion using recursive calls
 +
 [source,haskell]
-.src/math/factorial/fac.hs
+.src/math/fac.hs
 ----
-include::../src/math/factorial/fac.hs[]
+include::../src/math/fac.hs[]
 ----
 +
 [source,haskell]
@@ -1100,22 +1100,22 @@ Prelude> fac_l 3
 * Collatz map
 +
 [source,haskell]
-.src/math/collatz-with-guards.hs
+.src/math/collatz_with_guards.hs
 ----
-include::../src/math/collatz-with-guards.hs[]
+include::../src/math/collatz_with_guards.hs[]
 ----
 +
 [source,haskell]
-.src/math/collatz_with-pat.hs
+.src/math/collatz_with_pattern.hs
 ----
-include::../src/math/collatz_with-pat.hs[]
+include::../src/math/collatz_with_pattern.hs[]
 ----
 
 ** Run
 +
 [source,console]
 ----
-$ ghci src/math/collatz-with-guards.hs
+$ ghci src/math/collatz_with_guards.hs
 ----
 +
 [source,haskell]
