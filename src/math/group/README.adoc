@@ -3,7 +3,7 @@
 === C~2~
 
 [source,haskell]
-.group_c2.hs
+.group_o2_c2.hs
 ----
 c2_e = 0
 
@@ -41,7 +41,7 @@ main = do
 === C~3~
 
 [source,haskell]
-.group_c3.hs
+.group_o3_c3.hs
 ----
 c3_e = 0
 c3_op x y = (x + y) `mod` 3
@@ -73,7 +73,7 @@ main = do
 === K~4~
 
 [source,haskell]
-.group_k4.hs
+.group_o4_k4.hs
 ----
 e = (0, 0)
 p = (0, 1)
