@@ -2458,6 +2458,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <li>
 <p>Collatz map</p>
 <div class="listingblock">
+<div class="title">src/math/collatz-with-guards.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">collatz</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Integer</span><span class="p">]</span>
 <span class="n">collatz</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -2466,8 +2467,21 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 </div>
 <div class="listingblock">
+<div class="title">src/math/collatz_with-pat.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/math/collatz.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">collatz</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Integer</span><span class="p">]</span>
+<span class="n">collatz</span> <span class="mi">1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">collatz</span> <span class="n">n</span> <span class="o">|</span> <span class="n">even</span> <span class="n">n</span>    <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
+          <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Run</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/math/collatz-with-guards.hs</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -2475,6 +2489,9 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">collatz</span> <span class="mi">3</span>
 <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span></code></pre>
 </div>
+</div>
+</li>
+</ul>
 </div>
 </li>
 </ul>
@@ -2795,7 +2812,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-23 09:51:45 UTC
+Last updated 2022-07-23 10:10:02 UTC
 </div>
 </div>
 </body>
