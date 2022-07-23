@@ -1054,8 +1054,9 @@ include::../src/recursion/quicksort.hs[]
 * Implement recursion using recursive calls
 +
 [source,haskell]
+.src/math/factorial/fac.hs
 ----
-include::../src/math/factorial/factorial.hs[]
+include::../src/math/factorial/fac.hs[]
 ----
 +
 [source,haskell]

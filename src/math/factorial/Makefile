@@ -1,4 +1,4 @@
-TARGET=factorial
+TARGET=fac
 
 $(TARGET): $(TARGET).hs
 	ghc -Wall -o $@ $<
