@@ -1170,10 +1170,9 @@ include::../src/functions/add_2arg_int.hs[]
 * using strings
 +
 [source,haskell]
-.src/ghci/combine_strings.hs
+.src/data-types/string/combine_strings.hs
 ----
-combine_strings :: String -> String -> String
-combine_strings s1 s2 = s1 ++ s2
+include::../src/data-types/string/combine_strings.hs[]
 ----
 +
 [source,console]
