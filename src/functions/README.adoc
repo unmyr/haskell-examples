@@ -1,0 +1,104 @@
+== Functions
+
+=== Single results
+
+* using a single parameter
++
+[source,haskell]
+.A function that calculates the square of an integer
+----
+Prelude> let square x = x * x
+Prelude> square 42
+1764
+Prelude>
+----
++
+[source,haskell]
+.A function that calculates the factorial of a natural number
+----
+Prelude> let fact n = product [1..n]
+Prelude> fact 5
+120
+Prelude> fact 10
+3628800
+Prelude>
+----
+
+* using multiple parameters
+
+** Using Int
++
+[source,haskell]
+.add_2arg_int.hs
+----
+add :: Int -> Int -> Int
+add x y = x + y
+----
++
+[source,haskell]
+----
+*Main> add 42 13
+55
+*Main> add 42.0 13.0
+
+<interactive>:3:5: error:
+    • No instance for (Fractional Int) arising from the literal ‘42.0’
+    • In the first argument of ‘add’, namely ‘42.0’
+      In the expression: add 42.0 13.0
+      In an equation for ‘it’: it = add 42.0 13.0
+*Main> add (maxBound :: Int) 0
+9223372036854775807
+*Main> add (maxBound :: Int) 1
+-9223372036854775808
+*Main> add (minBound :: Int) (0)
+-9223372036854775808
+*Main> add (minBound :: Int) (-1)
+9223372036854775807
+----
+
+** Using Num
++
+[source,haskell]
+.add_2arg_num.hs
+----
+add :: (Num a) => a -> a -> a
+add x y = x + y
+----
+
+*** Add variable types
++
+[source,haskell]
+----
+*Main> add (42 :: Int) 13
+55
+*Main> add (42 :: Integer) 13
+55
+*Main> add (42 :: Rational) 13
+55 % 1
+*Main> add 42.0 13.0
+55.0
+*Main> add (42 :: Float) 13
+55.0
+*Main> add (42 :: Double) 13
+55.0
+----
+
+*** Overflow & underflow
++
+[source,haskell]
+.NG: Int
+----
+*Main> add (maxBound :: Int) 1
+-922337203685477580
+*Main> add (minBound :: Int) (-1)
+9223372036854775807
+----
++
+[source,haskell]
+.OK: Integer
+----
+*Main> add (toInteger (maxBound :: Int)) 1
+9223372036854775808
+*Main> add (toInteger (minBound :: Int)) (-1)
+-9223372036854775809
+----

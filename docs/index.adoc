@@ -1160,6 +1160,8 @@ Prelude>
 ----
 
 * using multiple parameters
+
+** Using Int
 +
 [source,haskell]
 .add_2arg_int.hs
@@ -1186,6 +1188,52 @@ include::../src/functions/add_2arg_int.hs[]
 -9223372036854775808
 *Main> add (minBound :: Int) (-1)
 9223372036854775807
+----
+
+** Using Num
++
+[source,haskell]
+.add_2arg_num.hs
+----
+include::../src/functions/add_2arg_num.hs[]
+----
+
+*** Add variable types
++
+[source,haskell]
+----
+*Main> add (42 :: Int) 13
+55
+*Main> add (42 :: Integer) 13
+55
+*Main> add (42 :: Rational) 13
+55 % 1
+*Main> add 42.0 13.0
+55.0
+*Main> add (42 :: Float) 13
+55.0
+*Main> add (42 :: Double) 13
+55.0
+----
+
+*** Overflow & underflow
++
+[source,haskell]
+.NG: Int
+----
+*Main> add (maxBound :: Int) 1
+-922337203685477580
+*Main> add (minBound :: Int) (-1)
+9223372036854775807
+----
++
+[source,haskell]
+.OK: Integer
+----
+*Main> add (toInteger (maxBound :: Int)) 1
+9223372036854775808
+*Main> add (toInteger (minBound :: Int)) (-1)
+-9223372036854775809
 ----
 
 * using strings

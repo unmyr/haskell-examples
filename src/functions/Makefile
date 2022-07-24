@@ -1,6 +1,7 @@
 TARGET_DIR=../bin
 TARGETS=\
 $(TARGET_DIR)/add_2arg_int \
+$(TARGET_DIR)/add_2arg_num \
 $(TARGET_DIR)/add_2arg_tuple \
 $(TARGET_DIR)/func_args_different_types \
 $(TARGET_DIR)/func_int_to_list \
@@ -17,6 +18,9 @@ setup:
 	mkdir -p $(TARGET_DIR)
 
 $(TARGET_DIR)/add_2arg_int: add_2arg_int.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/add_2arg_num: add_2arg_num.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 $(TARGET_DIR)/add_2arg_tuple: add_2arg_tuple.hs
