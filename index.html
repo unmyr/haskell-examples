@@ -1280,7 +1280,7 @@ pre.rouge {
 <li>
 <p>No field name</p>
 <div class="listingblock">
-<div class="title">src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs</div>
+<div class="title">src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="kr">data</span> <span class="kt">Vertex</span> <span class="o">=</span> <span class="kt">Vertex</span> <span class="kt">Int</span> <span class="kt">Int</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Show</span><span class="p">)</span>
 
@@ -1297,38 +1297,44 @@ pre.rouge {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+</li>
+</ul>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">show</span> <span class="n">modules</span>
-<span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">composite</span><span class="o">-</span><span class="n">types</span><span class="o">/</span><span class="n">ex1_no_named_fields</span><span class="o">/</span><span class="n">vertex_deriving_show</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">info</span> <span class="kt">Vertex</span>
-<span class="kr">data</span> <span class="kt">Vertex</span> <span class="o">=</span> <span class="kt">Vertex</span> <span class="kt">Int</span> <span class="kt">Int</span>
-        <span class="c1">-- Defined at src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:1</span>
-<span class="kr">instance</span> <span class="p">[</span><span class="n">safe</span><span class="p">]</span> <span class="kt">Show</span> <span class="kt">Vertex</span>
-  <span class="c1">-- Defined at src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:40</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="kt">Vertex</span>
-<span class="kt">Vertex</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Vertex</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="kt">Vertex</span> <span class="mi">3</span> <span class="mi">4</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">a</span>
-<span class="kt">Vertex</span> <span class="mi">3</span> <span class="mi">4</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="kt">Vertex</span> <span class="n">x</span> <span class="kr">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="n">a</span>
-<span class="mi">3</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="kt">Main</span><span class="o">.</span><span class="kt">Vertex</span> <span class="n">x</span> <span class="kr">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="n">a</span>
-<span class="mi">3</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="kt">Vertex</span> <span class="kr">_</span> <span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">y</span><span class="p">)</span> <span class="n">a</span>
-<span class="mi">4</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="p">(</span><span class="nf">\</span><span class="p">(</span><span class="kt">Vertex</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">fromIntegral</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">)))</span> <span class="n">a</span>
-<span class="mf">5.0</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
-<span class="kt">Vertex</span> <span class="mi">3</span> <span class="mi">4</span>
-<span class="mi">3</span>
-<span class="mi">3</span>
-<span class="mi">4</span>
-<span class="mf">5.0</span>
-<span class="kt">Vertex</span> <span class="mi">2</span> <span class="mi">3</span></code></pre>
+<pre>*Main&gt; :show modules
+Main             ( src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs, interpreted )
+*Main&gt; :info Vertex
+data Vertex = Vertex Int Int
+        -- Defined at src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:1
+instance [safe] Show Vertex
+  -- Defined at src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:40
+*Main&gt; :t Vertex
+Vertex :: Int -&gt; Int -&gt; Vertex
+*Main&gt; a = Vertex 3 4
+*Main&gt; a
+Vertex 3 4
+*Main&gt; (\(Vertex x _) -&gt; x) a
+3
+*Main&gt; (\(Main.Vertex x _) -&gt; x) a
+3
+*Main&gt; (\(Vertex _ y) -&gt; y) a
+4
+*Main&gt; (\(Vertex x y) -&gt; sqrt(fromIntegral (x*x + y*y))) a
+5.0
+*Main&gt; main
+Vertex 3 4
+3
+3
+4
+5.0
+Vertex 2 3</pre>
 </div>
 </div>
 <div class="ulist">
@@ -1336,7 +1342,7 @@ pre.rouge {
 <li>
 <p>Implement show</p>
 <div class="listingblock">
-<div class="title">src/ghci/composite-types/ex1_no_named_fields/vertex_impl_show.hs</div>
+<div class="title">src/data-types/composite-types/ex1_no_named_fields/vertex_impl_show.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="kr">data</span> <span class="kt">Vertex</span> <span class="o">=</span> <span class="kt">Vertex</span> <span class="kt">Int</span> <span class="kt">Int</span>
 <span class="kr">instance</span> <span class="kt">Show</span> <span class="kt">Vertex</span> <span class="kr">where</span>
@@ -1355,7 +1361,7 @@ pre.rouge {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/ghci/composite-types/ex1_no_named_fields/vertex_impl_show.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/data-types/composite-types/ex1_no_named_fields/vertex_impl_show.hs</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1371,14 +1377,12 @@ pre.rouge {
 <span class="kt">Vertex</span> <span class="mi">2</span> <span class="mi">3</span></code></pre>
 </div>
 </div>
-</li>
-</ul>
-</div>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>With filed name</p>
 <div class="listingblock">
-<div class="title">src/ghci/composite-types/ex2_named_fields/Euclidean2D.hs</div>
+<div class="title">src/data-types/composite-types/ex2_named_fields/Euclidean2D.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="kr">module</span> <span class="nn">Euclidean2D</span> <span class="kr">where</span>
 <span class="kr">data</span> <span class="kt">Vertex</span> <span class="o">=</span> <span class="kt">Vertex</span> <span class="p">{</span> <span class="n">x</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">y</span> <span class="o">::</span> <span class="kt">Int</span> <span class="p">}</span>
@@ -1387,7 +1391,7 @@ pre.rouge {
 </div>
 </div>
 <div class="listingblock">
-<div class="title">src/ghci/composite-types/ex2_named_fields/Main.hs</div>
+<div class="title">src/data-types/composite-types/ex2_named_fields/Main.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="kr">module</span> <span class="nn">Main</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="kr">where</span>
 
@@ -1405,12 +1409,14 @@ pre.rouge {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>src/ghci/composite-types/ex2_named_fields/
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>src/data-types/composite-types/ex2_named_fields/
 <span class="gp">$</span><span class="w"> </span>ghci Main.hs</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>Show modules</p>
 <div class="listingblock">
@@ -1470,9 +1476,6 @@ instance [safe] Show Vertex -- Defined at Euclidean2D.hs:3:10
 <span class="mi">4</span>
 <span class="mf">5.0</span></code></pre>
 </div>
-</div>
-</li>
-</ul>
 </div>
 </li>
 </ul>
@@ -2477,20 +2480,127 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </li>
 <li>
 <p>using multiple parameters</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Using Int</p>
 <div class="listingblock">
 <div class="title">add_2arg_int.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">add</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="kt">Integer</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">add</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
 <span class="n">add</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
-    <span class="n">print</span><span class="p">(</span><span class="n">add</span> <span class="mi">42</span> <span class="mi">13</span><span class="p">)</span></code></pre>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="mi">42</span> <span class="mi">13</span> <span class="o">==</span> <span class="mi">55</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">9223372036854775807</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">1</span> <span class="o">==</span> <span class="p">(</span><span class="n">minBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="n">minBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
 </div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="mi">42</span> <span class="mi">13</span>
+<span class="mi">55</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="mf">42.0</span> <span class="mf">13.0</span>
+
+<span class="o">&lt;</span><span class="n">interactive</span><span class="o">&gt;:</span><span class="mi">3</span><span class="o">:</span><span class="mi">5</span><span class="o">:</span> <span class="n">error</span><span class="o">:</span>
+    <span class="err">•</span> <span class="kt">No</span> <span class="kr">instance</span> <span class="n">for</span> <span class="p">(</span><span class="kt">Fractional</span> <span class="kt">Int</span><span class="p">)</span> <span class="n">arising</span> <span class="n">from</span> <span class="n">the</span> <span class="n">literal</span> <span class="err">‘</span><span class="mf">42.0</span><span class="err">’</span>
+    <span class="err">•</span> <span class="kt">In</span> <span class="n">the</span> <span class="n">first</span> <span class="n">argument</span> <span class="kr">of</span> <span class="err">‘</span><span class="n">add</span><span class="err">’</span><span class="p">,</span> <span class="n">namely</span> <span class="err">‘</span><span class="mf">42.0</span><span class="err">’</span>
+      <span class="kt">In</span> <span class="n">the</span> <span class="n">expression</span><span class="o">:</span> <span class="n">add</span> <span class="mf">42.0</span> <span class="mf">13.0</span>
+      <span class="kt">In</span> <span class="n">an</span> <span class="n">equation</span> <span class="n">for</span> <span class="err">‘</span><span class="n">it</span><span class="err">’</span><span class="o">:</span> <span class="n">it</span> <span class="o">=</span> <span class="n">add</span> <span class="mf">42.0</span> <span class="mf">13.0</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">0</span>
+<span class="mi">9223372036854775807</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">1</span>
+<span class="o">-</span><span class="mi">9223372036854775808</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="n">minBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="o">-</span><span class="mi">9223372036854775808</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="n">minBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="mi">9223372036854775807</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Using Num</p>
+<div class="listingblock">
+<div class="title">add_2arg_num.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">add</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">add</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">13</span>      <span class="o">==</span> <span class="mi">55</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="mi">13</span>  <span class="o">==</span> <span class="mi">55</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="mi">13</span> <span class="o">==</span> <span class="mi">55</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Float</span><span class="p">)</span> <span class="mi">13</span>    <span class="o">==</span> <span class="mi">55</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Double</span><span class="p">)</span> <span class="mi">13</span>   <span class="o">==</span> <span class="mi">55</span>
+    <span class="c1">-- NG: Int type overflow </span>
+    <span class="n">print</span> <span class="o">$</span>
+      <span class="n">add</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">1</span>             <span class="o">==</span> <span class="p">(</span><span class="n">minBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span>
+    <span class="c1">-- OK: Integer type</span>
+    <span class="n">print</span> <span class="o">$</span>
+      <span class="n">add</span> <span class="p">(</span><span class="n">toInteger</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">))</span> <span class="mi">1</span> <span class="o">==</span> <span class="p">(</span><span class="n">toInteger</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="c1">-- NG: Int type underflow</span>
+    <span class="n">print</span> <span class="o">$</span>
+      <span class="n">add</span> <span class="p">(</span><span class="n">minBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>             <span class="o">==</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span>
+    <span class="c1">-- OK: Integer type</span>
+    <span class="n">print</span> <span class="o">$</span>
+      <span class="n">add</span> <span class="p">(</span><span class="n">toInteger</span> <span class="p">(</span><span class="n">minBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">))</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">toInteger</span> <span class="p">(</span><span class="n">minBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">))</span> <span class="o">-</span><span class="mi">1</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add variable types</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">13</span>
+<span class="mi">55</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="mi">13</span>
+<span class="mi">55</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="mi">13</span>
+<span class="mi">55</span> <span class="o">%</span> <span class="mi">1</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="mf">42.0</span> <span class="mf">13.0</span>
+<span class="mf">55.0</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Float</span><span class="p">)</span> <span class="mi">13</span>
+<span class="mf">55.0</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Double</span><span class="p">)</span> <span class="mi">13</span>
+<span class="mf">55.0</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Overflow &amp; underflow</p>
+<div class="listingblock">
+<div class="title">NG: Int</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">1</span>
+<span class="o">-</span><span class="mi">922337203685477580</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="n">minBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="mi">9223372036854775807</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">OK: Integer</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="n">toInteger</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">))</span> <span class="mi">1</span>
+<span class="mi">9223372036854775808</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="n">toInteger</span> <span class="p">(</span><span class="n">minBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">))</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">-</span><span class="mi">9223372036854775809</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </li>
 <li>
 <p>using strings</p>
 <div class="listingblock">
-<div class="title">src/ghci/combine_strings.hs</div>
+<div class="title">src/data-types/string/combine_strings.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">combine_strings</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
 <span class="n">combine_strings</span> <span class="n">s1</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">s1</span> <span class="o">++</span> <span class="n">s2</span></code></pre>
@@ -2515,6 +2625,8 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">add</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integer</span><span class="p">,</span> <span class="kt">Integer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Integer</span>
 <span class="n">add</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
     <span class="n">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span></code></pre>
 </div>
@@ -2563,17 +2675,19 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <li>
 <p>Single integer to list of integers</p>
 <div class="listingblock">
-<div class="title">src/ghci/func_int_to_list.hs</div>
+<div class="title">src/functions/func_int_to_list.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">get_int_list</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
 <span class="n">get_int_list</span> <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
     <span class="n">print</span><span class="p">(</span><span class="n">get_int_list</span> <span class="mi">3</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/ghci/func_int_to_list.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/functions/func_int_to_list.hs</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -2582,6 +2696,32 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">get_int_list</span> <span class="mi">4</span>
 <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Various types</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">make_tuple</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Fractional</span> <span class="n">b</span><span class="p">,</span> <span class="kt">Floating</span> <span class="n">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">c</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span>
+<span class="n">make_tuple</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">make_tuple</span> <span class="p">(</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="p">(</span><span class="mf">3.14</span> <span class="o">::</span> <span class="kt">Float</span><span class="p">)</span> <span class="s">"hello"</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">make_tuple</span> <span class="p">(</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="p">(</span><span class="mf">3.14</span> <span class="o">::</span> <span class="kt">Double</span><span class="p">)</span> <span class="s">"world"</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/functions/make_tuple_various_types.hs</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
+<span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span> <span class="o">%</span> <span class="mi">3</span><span class="p">,</span><span class="mf">3.14</span><span class="p">,</span><span class="s">"hello"</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span> <span class="o">%</span> <span class="mi">3</span><span class="p">,</span><span class="mf">3.14</span><span class="p">,</span><span class="s">"world"</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </li>
@@ -2600,10 +2740,11 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">compute</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Double</span> <span class="o">-&gt;</span> <span class="kt">Double</span> <span class="o">-&gt;</span> <span class="kt">Double</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Double</span>
 <span class="n">compute</span> <span class="n">f</span> <span class="o">=</span> <span class="n">f</span> <span class="mi">3</span> <span class="mi">4</span> <span class="o">::</span><span class="kt">Double</span>
 
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
-    <span class="kr">let</span> <span class="n">hypot</span> <span class="o">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">sqrt</span> <span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">print</span> <span class="o">$</span> <span class="n">hypot</span> <span class="mi">5</span> <span class="mi">12</span>
-    <span class="n">print</span> <span class="o">$</span> <span class="n">compute</span> <span class="n">hypot</span>
+    <span class="kr">let</span> <span class="n">hypot_f</span> <span class="o">=</span> <span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">sqrt</span> <span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">hypot_f</span> <span class="mi">5</span> <span class="mi">12</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">compute</span> <span class="n">hypot_f</span>
     <span class="n">print</span> <span class="o">$</span> <span class="n">compute</span> <span class="p">(</span><span class="o">**</span><span class="p">)</span></code></pre>
 </div>
 </div>
@@ -2624,10 +2765,11 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">compute</span> <span class="o">::</span> <span class="p">((</span><span class="kt">Double</span><span class="p">,</span> <span class="kt">Double</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Double</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Double</span>
 <span class="n">compute</span> <span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">=</span> <span class="n">f</span> <span class="p">(</span><span class="mi">3</span><span class="o">::</span><span class="kt">Double</span><span class="p">,</span> <span class="mi">4</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
 
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
-    <span class="kr">let</span> <span class="n">hypot</span> <span class="o">=</span> <span class="nf">\</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sqrt</span> <span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">print</span> <span class="o">$</span> <span class="n">hypot</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
-    <span class="n">print</span> <span class="o">$</span> <span class="n">compute</span><span class="p">(</span><span class="n">hypot</span><span class="p">)</span>
+    <span class="kr">let</span> <span class="n">hypot_f</span> <span class="o">=</span> <span class="nf">\</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sqrt</span> <span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">hypot_f</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="n">compute</span><span class="p">(</span><span class="n">hypot_f</span><span class="p">)</span>
     <span class="n">print</span> <span class="o">$</span> <span class="n">compute</span><span class="p">((</span><span class="nf">\</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="p">))</span></code></pre>
 </div>
 </div>
@@ -2709,7 +2851,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-23 18:22:00 UTC
+Last updated 2022-07-24 04:11:51 UTC
 </div>
 </div>
 </body>
