@@ -8,7 +8,8 @@ $(TARGET_DIR)/func_args_different_types \
 $(TARGET_DIR)/func_int_to_list \
 $(TARGET_DIR)/higher_order_args \
 $(TARGET_DIR)/higher_order_tuple \
-$(TARGET_DIR)/make_tuple_various_types
+$(TARGET_DIR)/make_tuple_various_types \
+$(TARGET_DIR)/max_num
 
 GHC_FLAGS=-Wall -fwarn-unused-do-bind
 
@@ -44,6 +45,9 @@ $(TARGET_DIR)/higher_order_tuple: higher_order_tuple.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 $(TARGET_DIR)/make_tuple_various_types: make_tuple_various_types.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/max_num: max_num.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 clean:

@@ -1332,10 +1332,54 @@ $ ghci src/functions/make_tuple_various_types.hs
 ----
 +
 [source,haskell]
+.Results
 ----
 *Main> main
 (3,1 % 3,3.14,"hello")
 (3,1 % 3,3.14,"world")
+----
+
+==== Order
+
+[source,haskell]
+.src/functions/max_num.hs
+----
+include::../src/functions/max_num.hs[]
+----
+
+.Results
+* max_num
++
+[source,haskell]
+----
+*Main> max_num (3 :: Int) 4
+4
+*Main> max_num (pi::Float) (sqrt(2)::Float)
+3.1415927
+*Main> max_num (pi::Double) (sqrt(2)::Double)
+3.141592653589793
+*Main> max_num (1/3 ::Rational) 1/2
+1 % 2
+----
+
+* max_gen
++
+[source,haskell]
+----
+*Main> max_gen (3 :: Int) 4
+4
+*Main> max_gen (pi::Float) (sqrt(2)::Float)
+3.1415927
+*Main> max_gen (pi::Double) (sqrt(2)::Double)
+3.141592653589793
+*Main> max_gen (1/3 ::Rational) 1/2
+1 % 2
+*Main> max_gen True False
+True
+*Main> max_gen 'z' 'a'
+'z'
+*Main> max_gen "apple" "kiwi"
+"kiwi"
 ----
 
 ==== Higher-order function
