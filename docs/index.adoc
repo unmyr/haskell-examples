@@ -1166,6 +1166,27 @@ Prelude>
 ----
 include::../src/functions/add_2arg_int.hs[]
 ----
++
+[source,haskell]
+----
+*Main> add 42 13
+55
+*Main> add 42.0 13.0
+
+<interactive>:3:5: error:
+    • No instance for (Fractional Int) arising from the literal ‘42.0’
+    • In the first argument of ‘add’, namely ‘42.0’
+      In the expression: add 42.0 13.0
+      In an equation for ‘it’: it = add 42.0 13.0
+*Main> add (maxBound :: Int) 0
+9223372036854775807
+*Main> add (maxBound :: Int) 1
+-9223372036854775808
+*Main> add (minBound :: Int) (0)
+-9223372036854775808
+*Main> add (minBound :: Int) (-1)
+9223372036854775807
+----
 
 * using strings
 +
