@@ -102,3 +102,85 @@ add x y = x + y
 *Main> add (toInteger (minBound :: Int)) (-1)
 -9223372036854775809
 ----
+
+==== Multiple results
+
+* An example of a use of tuples
++
+[source,haskell]
+.src/ghci/swap.hs
+----
+swap :: (String, String) -> (String, String)
+swap (a, b) = (b, a)
+main = do
+    let (a, b) = swap ("hello", "world")
+    putStrLn (a ++ " " ++ b)
+----
++
+[source,console]
+----
+$ ghci src/ghci/swap.hs
+----
++
+[source,haskell]
+.Results
+----
+*Main> main
+world hello
+*Main> swap("hello", "world")
+("world","hello")
+*Main> swap(swap("hello", "world"))
+("hello","world")
+*Main> (swap . swap)("hello", "world")
+("hello","world")
+*Main> swap $ swap("hello", "world")
+("hello","world")
+----
+
+* Single integer to list of integers 
++
+[source,haskell]
+.src/functions/func_int_to_list.hs
+----
+get_int_list :: Int -> [Int]
+get_int_list n = [n] ++ [n]
+----
++
+[source,console]
+----
+$ ghci src/functions/func_int_to_list.hs
+----
++
+[source,haskell]
+----
+*Main> main
+[3,3]
+*Main> get_int_list 4
+[4,4]
+----
+
+* Various types
++
+[source,haskell]
+----
+make_tuple :: (Integral a, Fractional b, Floating c) => a -> b -> c -> String -> (a, b, c, String)
+make_tuple a b c d = (a, b, c, d)
+
+main :: IO ()
+main = do
+    print $ make_tuple (3 :: Int) (1/3 :: Rational) (3.14 :: Float) "hello"
+    print $ make_tuple (3 :: Integer) (1/3 :: Rational) (3.14 :: Double) "world"
+
+----
++
+[source,console]
+----
+$ ghci src/functions/make_tuple_various_types.hs
+----
++
+[source,haskell]
+----
+*Main> main
+(3,1 % 3,3.14,"hello")
+(3,1 % 3,3.14,"world")
+----

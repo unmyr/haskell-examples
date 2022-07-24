@@ -1303,10 +1303,6 @@ world hello
 .src/functions/func_int_to_list.hs
 ----
 include::../src/functions/func_int_to_list.hs[]
-get_int_list :: Int -> [Int]
-get_int_list n = [n] ++ [n]
-main = do
-    print(get_int_list 3)
 ----
 +
 [source,console]
@@ -1320,6 +1316,25 @@ $ ghci src/functions/func_int_to_list.hs
 [3,3]
 *Main> get_int_list 4
 [4,4]
+----
+
+* Various types
++
+[source,haskell]
+----
+include::../src/functions/make_tuple_various_types.hs[]
+----
++
+[source,console]
+----
+$ ghci src/functions/make_tuple_various_types.hs
+----
++
+[source,haskell]
+----
+*Main> main
+(3,1 % 3,3.14,"hello")
+(3,1 % 3,3.14,"world")
 ----
 
 ==== Higher-order function
