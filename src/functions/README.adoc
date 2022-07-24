@@ -3,6 +3,8 @@
 === Single results
 
 * using a single parameter
+
+** Omit types
 +
 [source,haskell]
 .A function that calculates the square of an integer
@@ -22,6 +24,53 @@ Prelude> fact 5
 Prelude> fact 10
 3628800
 Prelude>
+----
+
+** Using Floating +
+Floating is a type class.
++
+[source,haskell]
+----
+Prelude> pi :: Float
+3.1415927
+Prelude> pi :: Double
+3.141592653589793
+----
++
+[source,haskell]
+.src/functions/circle_area.hs
+----
+circle_area_float :: Float -> Float
+circle_area_float r = pi * r * r
+
+circle_area_double :: Double -> Double
+circle_area_double r = pi * r * r
+
+circle_area_floating :: Floating a => a -> a
+circle_area_floating r = pi * r * r
+----
++
+[source,console]
+.Run ghci
+----
+$ ghci src/functions/circle_area.hs
+----
++
+[source,haskell]
+.Results
+----
+*Main> :t circle_area_float
+circle_area_float :: Float -> Float
+*Main> circle_area_float 1
+3.1415927
+*Main> :t circle_area_double
+circle_area_double :: Double -> Double
+*Main> circle_area_double 1
+3.141592653589793
+*Main> circle_area_floating 1 :: Float
+3.1415927
+*Main> circle_area_floating 1 :: Double
+3.141592653589793
 ----
 
 * using multiple parameters
