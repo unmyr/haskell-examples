@@ -996,6 +996,8 @@ pre.rouge {
 <ul class="sectlevel3">
 <li><a href="#_single_results">Single results</a></li>
 <li><a href="#_multiple_results">Multiple results</a></li>
+<li><a href="#_order">Order</a></li>
+<li><a href="#_eq">Eq</a></li>
 <li><a href="#_higher_order_function">Higher-order function</a></li>
 </ul>
 </li>
@@ -2481,6 +2483,180 @@ Floating is a type class.</p>
 </div>
 </div>
 </li>
+<li>
+<p>Using Real, etc</p>
+<div class="listingblock">
+<div class="title">src/math/squared.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Complex</span>
+
+<span class="n">sqInt</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">sqInt</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">sqInteger</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="kt">Integer</span>
+<span class="n">sqInteger</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">sqIntegral</span> <span class="o">::</span> <span class="kt">Integral</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">sqIntegral</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">sqFloat</span> <span class="o">::</span> <span class="kt">Float</span> <span class="o">-&gt;</span> <span class="kt">Float</span>
+<span class="n">sqFloat</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">sqDouble</span> <span class="o">::</span> <span class="kt">Double</span> <span class="o">-&gt;</span> <span class="kt">Double</span>
+<span class="n">sqDouble</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">sqFloating</span> <span class="o">::</span> <span class="kt">Floating</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">sqFloating</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="c1">-- sqComplex :: Num a =&gt; Complex a -&gt; Complex a</span>
+<span class="c1">-- sqComplex x = x * x</span>
+
+<span class="n">sqFractional</span> <span class="o">::</span> <span class="kt">Fractional</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">sqFractional</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">sqReal</span> <span class="o">::</span> <span class="kt">Real</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">sqReal</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">sqRealFrac</span> <span class="o">::</span> <span class="kt">RealFrac</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">sqRealFrac</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">sqRealFloat</span> <span class="o">::</span> <span class="kt">RealFloat</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">sqRealFloat</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">sqNum</span><span class="o">::</span> <span class="kt">Num</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">sqNum</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqInt</span> <span class="mi">3037000499</span> <span class="o">==</span> <span class="mi">9223372030926249001</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqInteger</span> <span class="mi">3037000499</span> <span class="o">==</span> <span class="mi">9223372030926249001</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqIntegral</span> <span class="p">(</span><span class="mi">3037000499</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9223372030926249001</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqInt</span> <span class="mi">3037000500</span> <span class="o">==</span> <span class="p">(</span><span class="o">-</span><span class="mi">9223372036709301616</span><span class="p">)</span> <span class="c1">-- underflow</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqIntegral</span> <span class="p">(</span><span class="mi">3037000500</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="o">-</span><span class="mi">9223372036709301616</span><span class="p">)</span> <span class="c1">-- underflow</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqInteger</span> <span class="mi">3037000500</span>               <span class="o">==</span> <span class="mi">9223372037000250000</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqIntegral</span> <span class="p">(</span><span class="mi">3037000500</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9223372037000250000</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqFloat</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.9999999</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqFloating</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.9999999</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqFractional</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.9999999</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqReal</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.9999999</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqRealFrac</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.9999999</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqRealFloat</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.9999999</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqNum</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.9999999</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqDouble</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0000000000000004</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqFloating</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0000000000000004</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqFractional</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0000000000000004</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqRealFrac</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0000000000000004</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqReal</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0000000000000004</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqRealFloat</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0000000000000004</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqNum</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0000000000000004</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqFractional</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">/</span><span class="mi">9</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqRealFrac</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">/</span><span class="mi">9</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqReal</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">/</span><span class="mi">9</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqNum</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">/</span><span class="mi">9</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqFractional</span> <span class="p">((</span><span class="mi">0</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="p">(</span><span class="mi">1</span><span class="o">::</span><span class="kt">Float</span><span class="p">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqNum</span> <span class="p">((</span><span class="mi">0</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="p">(</span><span class="mi">1</span><span class="o">::</span><span class="kt">Float</span><span class="p">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Integer</p>
+<div class="listingblock">
+<div class="title">3037000499^2</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqInt</span> <span class="mi">3037000499</span>
+<span class="mi">9223372030926249001</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqInteger</span> <span class="mi">3037000499</span>
+<span class="mi">9223372030926249001</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqIntegral</span> <span class="mi">3037000499</span><span class="o">::</span><span class="kt">Int</span>
+<span class="mi">9223372030926249001</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">3037000500^2 - Int</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqInt</span> <span class="mi">3037000500</span>
+<span class="o">-</span><span class="mi">9223372036709301616</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqIntegral</span> <span class="mi">3037000500</span><span class="o">::</span><span class="kt">Int</span>
+<span class="o">-</span><span class="mi">9223372036709301616</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">3037000500^2 - Integer</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqInteger</span>  <span class="mi">3037000500</span>
+<span class="mi">9223372037000250000</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqIntegral</span> <span class="mi">3037000500</span><span class="o">::</span><span class="kt">Integer</span>
+<span class="mi">9223372037000250000</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Floating</p>
+<div class="listingblock">
+<div class="title">sqrt(2) - Float</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqFloat</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>
+<span class="mf">1.9999999</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqFloating</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>
+<span class="mf">1.9999999</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqFractional</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>
+<span class="mf">1.9999999</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqReal</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>
+<span class="mf">1.9999999</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqRealFrac</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>
+<span class="mf">1.9999999</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqRealFloat</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>
+<span class="mf">1.9999999</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqNum</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>
+<span class="mf">1.9999999</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">sqrt(2) - Double</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqDouble</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
+<span class="mf">2.0000000000000004</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqFloating</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
+<span class="mf">2.0000000000000004</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqFractional</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
+<span class="mf">2.0000000000000004</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqReal</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
+<span class="mf">2.0000000000000004</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqRealFrac</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
+<span class="mf">2.0000000000000004</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqRealFloat</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
+<span class="mf">2.0000000000000004</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqNum</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
+<span class="mf">2.0000000000000004</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Rational</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqFractional</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span>
+<span class="mi">1</span> <span class="o">%</span> <span class="mi">9</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqRealFrac</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span>
+<span class="mi">1</span> <span class="o">%</span> <span class="mi">9</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqReal</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span>
+<span class="mi">1</span> <span class="o">%</span> <span class="mi">9</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqNum</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span>
+<span class="mi">1</span> <span class="o">%</span> <span class="mi">9</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Complex numbers</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Complex</span><span class="o">&gt;</span> <span class="n">sqFractional</span> <span class="p">(</span><span class="mi">0</span> <span class="o">:+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">:+</span> <span class="mf">0.0</span>
+<span class="o">*</span><span class="kt">Main</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Complex</span><span class="o">&gt;</span> <span class="n">sqNum</span> <span class="p">(</span><span class="mi">0</span> <span class="o">:+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">:+</span> <span class="mf">0.0</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
 </ul>
 </div>
 </li>
@@ -2724,6 +2900,7 @@ Floating is a type class.</p>
 </div>
 </div>
 <div class="listingblock">
+<div class="title">Results</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
 <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span> <span class="o">%</span> <span class="mi">3</span><span class="p">,</span><span class="mf">3.14</span><span class="p">,</span><span class="s">"hello"</span><span class="p">)</span>
@@ -2732,6 +2909,116 @@ Floating is a type class.</p>
 </div>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_order">Order</h4>
+<div class="listingblock">
+<div class="title">src/functions/max_num.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Int</span>
+
+<span class="c1">-- Get maximum number</span>
+<span class="n">max_num</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">max_num</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span> <span class="kr">then</span> <span class="n">x</span> <span class="kr">else</span> <span class="n">y</span>
+
+<span class="c1">-- Get maximum element</span>
+<span class="n">max_gen</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">max_gen</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span> <span class="kr">then</span> <span class="n">x</span> <span class="kr">else</span> <span class="n">y</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_num</span> <span class="p">(</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Int</span><span class="o">.</span><span class="kt">Int8</span><span class="p">)</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">4</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_num</span> <span class="p">(</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">4</span>           <span class="o">==</span> <span class="mi">4</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_num</span> <span class="p">(</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="mi">4</span>       <span class="o">==</span> <span class="mi">4</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_num</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span><span class="kt">Rational</span><span class="p">)</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>   <span class="o">==</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_num</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>  <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>  <span class="o">==</span> <span class="mf">3.1415927</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_num</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">3.141592653589793</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_gen</span> <span class="p">(</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">4</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_gen</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span><span class="kt">Rational</span><span class="p">)</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>   <span class="o">==</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_gen</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>   <span class="o">==</span> <span class="mf">3.1415927</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_gen</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">3.141592653589793</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_gen</span> <span class="kt">True</span> <span class="kt">False</span> <span class="o">==</span> <span class="kt">True</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_gen</span> <span class="sc">'z'</span> <span class="sc">'a'</span> <span class="o">==</span> <span class="sc">'z'</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">max_gen</span> <span class="s">"apple"</span> <span class="s">"kiwi"</span> <span class="o">==</span> <span class="s">"kiwi"</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<div class="title">Results</div>
+<ul>
+<li>
+<p>max_num</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">max_num</span> <span class="p">(</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">4</span>
+<span class="mi">4</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">max_num</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>
+<span class="mf">3.1415927</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">max_num</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
+<span class="mf">3.141592653589793</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">max_num</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span><span class="kt">Rational</span><span class="p">)</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+<span class="mi">1</span> <span class="o">%</span> <span class="mi">2</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>max_gen</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">max_gen</span> <span class="p">(</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">4</span>
+<span class="mi">4</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">max_gen</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>
+<span class="mf">3.1415927</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">max_gen</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
+<span class="mf">3.141592653589793</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">max_gen</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span><span class="kt">Rational</span><span class="p">)</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+<span class="mi">1</span> <span class="o">%</span> <span class="mi">2</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">max_gen</span> <span class="kt">True</span> <span class="kt">False</span>
+<span class="kt">True</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">max_gen</span> <span class="sc">'z'</span> <span class="sc">'a'</span>
+<span class="sc">'z'</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">max_gen</span> <span class="s">"apple"</span> <span class="s">"kiwi"</span>
+<span class="s">"kiwi"</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_eq">Eq</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">eq</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="n">eq</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span> <span class="kr">then</span> <span class="kt">True</span> <span class="kr">else</span> <span class="kt">False</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="p">(</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">3</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="mf">3.1415927</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="mf">3.141592653589793</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="sc">'a'</span> <span class="sc">'a'</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="s">"hello"</span> <span class="s">"hello"</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">eq</span> <span class="p">(</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">3</span>
+<span class="kt">True</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">eq</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span>
+<span class="kt">True</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">eq</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="mf">3.1415927</span>
+<span class="kt">True</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">eq</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="mf">3.141592653589793</span>
+<span class="kt">True</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">eq</span> <span class="kt">False</span> <span class="kt">False</span>
+<span class="kt">True</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">eq</span> <span class="sc">'a'</span> <span class="sc">'a'</span>
+<span class="kt">True</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">eq</span> <span class="s">"hello"</span> <span class="s">"hello"</span>
+<span class="kt">True</span></code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -2857,7 +3144,7 @@ Floating is a type class.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-24 04:38:30 UTC
+Last updated 2022-07-24 13:19:10 UTC
 </div>
 </div>
 </body>
