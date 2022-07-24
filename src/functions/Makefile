@@ -4,6 +4,7 @@ $(TARGET_DIR)/add_2arg_int \
 $(TARGET_DIR)/add_2arg_num \
 $(TARGET_DIR)/add_2arg_tuple \
 $(TARGET_DIR)/circle_area \
+$(TARGET_DIR)/eq \
 $(TARGET_DIR)/func_args_different_types \
 $(TARGET_DIR)/func_int_to_list \
 $(TARGET_DIR)/higher_order_args \
@@ -30,6 +31,9 @@ $(TARGET_DIR)/add_2arg_tuple: add_2arg_tuple.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 $(TARGET_DIR)/circle_area: circle_area.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/eq: eq.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 $(TARGET_DIR)/func_args_different_types: func_args_different_types.hs

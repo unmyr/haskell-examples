@@ -1382,6 +1382,31 @@ True
 "kiwi"
 ----
 
+==== Eq
+
+[source,haskell]
+----
+include::../src/functions/eq.hs[]
+----
+
+[source,haskell]
+----
+*Main> eq (3 :: Int) 3
+True
+*Main> eq (1/3 :: Rational) (1/3 :: Rational)
+True
+*Main> eq (pi::Float) 3.1415927
+True
+*Main> eq (pi::Double) 3.141592653589793
+True
+*Main> eq False False
+True
+*Main> eq 'a' 'a'
+True
+*Main> eq "hello" "hello"
+True
+----
+
 ==== Higher-order function
 
 * using arguments
