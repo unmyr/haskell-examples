@@ -221,25 +221,26 @@ Prelude Data.List>
 * No field name
 +
 [source,haskell]
-.src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs
+.src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs
 ----
-include::../src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs[]
+include::../src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs[]
 ----
 +
 [source,console]
 ----
-$ ghci src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs
+$ ghci src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs
 ----
++
 +
 [source,haskell]
 ----
 *Main> :show modules
-Main             ( src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs, interpreted )
+Main             ( src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs, interpreted )
 *Main> :info Vertex
 data Vertex = Vertex Int Int
-        -- Defined at src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:1
+        -- Defined at src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:1
 instance [safe] Show Vertex
-  -- Defined at src/ghci/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:40
+  -- Defined at src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:40
 *Main> :t Vertex
 Vertex :: Int -> Int -> Vertex
 *Main> a = Vertex 3 4
@@ -265,14 +266,14 @@ Vertex 2 3
 ** Implement show
 +
 [source,haskell]
-.src/ghci/composite-types/ex1_no_named_fields/vertex_impl_show.hs
+.src/data-types/composite-types/ex1_no_named_fields/vertex_impl_show.hs
 ----
-include::../src/ghci/composite-types/ex1_no_named_fields/vertex_impl_show.hs[]
+include::../src/data-types/composite-types/ex1_no_named_fields/vertex_impl_show.hs[]
 ----
 +
 [source,console]
 ----
-$ ghci src/ghci/composite-types/ex1_no_named_fields/vertex_impl_show.hs
+$ ghci src/data-types/composite-types/ex1_no_named_fields/vertex_impl_show.hs
 ----
 +
 [source,haskell]
@@ -291,20 +292,20 @@ Vertex 2 3
 * With filed name
 +
 [source,haskell]
-.src/ghci/composite-types/ex2_named_fields/Euclidean2D.hs
+.src/data-types/composite-types/ex2_named_fields/Euclidean2D.hs
 ----
-include::../src/ghci/composite-types/ex2_named_fields/Euclidean2D.hs[]
+include::../src/data-types/composite-types/ex2_named_fields/Euclidean2D.hs[]
 ----
 +
 [source,haskell]
-.src/ghci/composite-types/ex2_named_fields/Main.hs
+.src/data-types/composite-types/ex2_named_fields/Main.hs
 ----
-include::../src/ghci/composite-types/ex2_named_fields/Main.hs[]
+include::../src/data-types/composite-types/ex2_named_fields/Main.hs[]
 ----
 +
 [source,console]
 ----
-$ cd src/ghci/composite-types/ex2_named_fields/
+$ cd src/data-types/composite-types/ex2_named_fields/
 $ ghci Main.hs
 ----
 
@@ -1163,10 +1164,7 @@ Prelude>
 [source,haskell]
 .add_2arg_int.hs
 ----
-add :: Integer -> Integer -> Integer
-add x y = x + y
-main = do
-    print(add 42 13)
+include::../src/functions/add_2arg_int.hs[]
 ----
 
 * using strings
@@ -1194,10 +1192,7 @@ $ ghci src/ghci/combine_strings.hs
 +
 [source,haskell]
 ----
-add :: (Integer, Integer) -> Integer
-add (x, y) = x + y
-main = do
-    print(add(42, 13))
+include::../src/functions/add_2arg_tuple.hs[]
 ----
 
 ==== Multiple results
@@ -1237,8 +1232,9 @@ world hello
 * Single integer to list of integers 
 +
 [source,haskell]
-.src/ghci/func_int_to_list.hs
+.src/functions/func_int_to_list.hs
 ----
+include::../src/functions/func_int_to_list.hs[]
 get_int_list :: Int -> [Int]
 get_int_list n = [n] ++ [n]
 main = do
@@ -1247,7 +1243,7 @@ main = do
 +
 [source,console]
 ----
-$ ghci src/ghci/func_int_to_list.hs
+$ ghci src/functions/func_int_to_list.hs
 ----
 +
 [source,haskell]
@@ -1265,14 +1261,7 @@ $ ghci src/ghci/func_int_to_list.hs
 [source,haskell]
 .higher_order_args.hs
 ----
-compute :: (Double -> Double -> Double) -> Double
-compute f = f 3 4 ::Double
-
-main = do
-    let hypot = \x y -> sqrt (x^2 + y^2)
-    print $ hypot 5 12
-    print $ compute hypot
-    print $ compute (**)
+include::../src/functions/higher_order_args.hs[]
 ----
 +
 .Results
@@ -1287,14 +1276,7 @@ main = do
 [source,haskell]
 .higher_order_tuple.hs
 ----
-compute :: ((Double, Double) -> Double) -> Double
-compute (f) = f (3::Double, 4::Double)
-
-main = do
-    let hypot = \(x, y) -> sqrt (x^2 + y^2)
-    print $ hypot(5, 12)
-    print $ compute(hypot)
-    print $ compute((\(x, y) -> x**y))
+include::../src/functions/higher_order_tuple.hs[]
 ----
 +
 .Results
