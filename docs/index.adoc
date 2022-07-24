@@ -1246,11 +1246,11 @@ include::../src/data-types/string/combine_strings.hs[]
 +
 [source,console]
 ----
-$ ghci src/ghci/combine_strings.hs
+$ ghci src/data-types/string/combine_strings.hs
 ----
 +
 [source,haskell]
-.src/ghci/combine_strings.hs
+.src/data-types/string/combine_strings.hs
 ----
 *Main> combine_strings "hello" " world"
 "hello world"
