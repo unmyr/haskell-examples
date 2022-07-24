@@ -86,16 +86,16 @@ Prelude> pi :: Double
 ----
 
 [source,haskell]
-.src/ghci/circle_area.hs
+.src/functions/circle_area.hs
 ----
-include::../src/ghci/circle_area.hs[]
+include::../src/functions/circle_area.hs[]
 ----
 
 * Run codes
 +
 [source,console]
 ----
-$ ghci src/ghci/circle_area.hs
+$ ghci src/functions/circle_area.hs
 ----
 +
 [source,haskell]
