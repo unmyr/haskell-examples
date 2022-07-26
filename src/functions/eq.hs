@@ -1,4 +1,4 @@
-eq :: (Ord a) => a -> a -> Bool
+eq :: (Eq a) => a -> a -> Bool
 eq x y = if x == y then True else False
 
 main :: IO ()
@@ -9,3 +9,4 @@ main = do
   print $ eq (pi::Double) 3.141592653589793
   print $ eq 'a' 'a'
   print $ eq "hello" "hello"
+  print $ eq (1, 2) (1, 2)
