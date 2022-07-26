@@ -1094,9 +1094,9 @@ $ ghci src/math/collatz_with_guards.hs
 
 === Functions
 
-==== Single results
+==== using a single parameter
 
-* using a single parameter
+* Using integers
 
 ** Omit types
 +
@@ -1120,7 +1120,7 @@ Prelude> fact 10
 Prelude>
 ----
 
-** Using Floating type class +
+* Using Floating type class +
 Floating is a type class.
 +
 [source,haskell]
@@ -1160,7 +1160,7 @@ circle_area_double :: Double -> Double
 3.141592653589793
 ----
 
-** Using Real, etc
+* Using Real, etc
 +
 [source,haskell]
 .src/math/squared.hs
@@ -1168,7 +1168,7 @@ circle_area_double :: Double -> Double
 include::../src/math/squared.hs[]
 ----
 
-*** Integer
+** Integer
 +
 [source,haskell]
 .3037000499^2
@@ -1199,7 +1199,7 @@ include::../src/math/squared.hs[]
 9223372037000250000
 ----
 
-*** Floating
+** Floating
 +
 [source,haskell]
 .sqrt(2) - Float
@@ -1242,6 +1242,8 @@ include::../src/math/squared.hs[]
 *Main> sqComplex ((sqrt(2)::Double) :+ 0)
 2.0000000000000004 :+ 0.0
 ----
+
+** Rational
 +
 [source,haskell]
 .Rational
@@ -1255,6 +1257,8 @@ include::../src/math/squared.hs[]
 *Main> sqNum (1/3 :: Rational)
 1 % 9
 ----
+
+** Complex numbers
 +
 [source,haskell]
 .Complex numbers
@@ -1267,9 +1271,9 @@ include::../src/math/squared.hs[]
 (-1.0) :+ 0.0
 ----
 
-* using multiple parameters
+==== Multiple parameters
 
-** Using Int
+* Using Int
 +
 [source,haskell]
 .add_2arg_int.hs
@@ -1298,7 +1302,7 @@ include::../src/functions/add_2arg_int.hs[]
 9223372036854775807
 ----
 
-** Using Num
+* Using Num
 +
 [source,haskell]
 .add_2arg_num.hs
@@ -1306,7 +1310,7 @@ include::../src/functions/add_2arg_int.hs[]
 include::../src/functions/add_2arg_num.hs[]
 ----
 
-*** Add variable types
+** Add variable types
 +
 [source,haskell]
 ----
@@ -1324,7 +1328,7 @@ include::../src/functions/add_2arg_num.hs[]
 55.0
 ----
 
-*** Overflow & underflow
+** Overflow & underflow
 +
 [source,haskell]
 .NG: Int
@@ -1367,8 +1371,17 @@ $ ghci src/data-types/string/combine_strings.hs
 * using tuple
 +
 [source,haskell]
+.src/functions/add_2arg_tuple.hs
 ----
 include::../src/functions/add_2arg_tuple.hs[]
+----
+
+* using list
++
+[source,haskell]
+.src/functions/xor.hs
+----
+include::../src/functions/xor.hs[]
 ----
 
 ==== Multiple results
