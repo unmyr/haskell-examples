@@ -166,6 +166,8 @@ sqNum x = x * x
 1.9999999
 *Main> sqNum (sqrt(2)::Float)
 1.9999999
+*Main> sqComplex ((sqrt(2)::Float) :+ 0)
+1.9999999 :+ 0.0
 ----
 +
 [source,haskell]
@@ -203,9 +205,11 @@ sqNum x = x * x
 [source,haskell]
 .Complex numbers
 ----
-*Main Data.Complex> sqFractional (0 :+ 1)
+*Main> sqComplex (0 :+ 1)
 (-1.0) :+ 0.0
-*Main Data.Complex> sqNum (0 :+ 1)
+*Main> sqFractional (0 :+ 1)
+(-1.0) :+ 0.0
+*Main> sqNum (0 :+ 1)
 (-1.0) :+ 0.0
 ----
 

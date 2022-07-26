@@ -1218,6 +1218,8 @@ include::../src/math/squared.hs[]
 1.9999999
 *Main> sqNum (sqrt(2)::Float)
 1.9999999
+*Main> sqComplex ((sqrt(2)::Float) :+ 0)
+1.9999999 :+ 0.0
 ----
 +
 [source,haskell]
@@ -1237,6 +1239,8 @@ include::../src/math/squared.hs[]
 2.0000000000000004
 *Main> sqNum (sqrt(2)::Double)
 2.0000000000000004
+*Main> sqComplex ((sqrt(2)::Double) :+ 0)
+2.0000000000000004 :+ 0.0
 ----
 +
 [source,haskell]
@@ -1255,9 +1259,11 @@ include::../src/math/squared.hs[]
 [source,haskell]
 .Complex numbers
 ----
-*Main Data.Complex> sqFractional (0 :+ 1)
+*Main> sqComplex (0 :+ 1)
 (-1.0) :+ 0.0
-*Main Data.Complex> sqNum (0 :+ 1)
+*Main> sqFractional (0 :+ 1)
+(-1.0) :+ 0.0
+*Main> sqNum (0 :+ 1)
 (-1.0) :+ 0.0
 ----
 
