@@ -41,6 +41,14 @@ cubed :: (RealFloat a) => Complex a -> Complex a
 cubed x = x * x * x
 ----
 
+[latexmath]
+++++
+\begin{aligned}
+\omega &= \frac{-1 + \sqrt{3}i}{2} \\
+\omega^{3} &= 1
+\end{aligned}
+++++
+
 [source,haskell]
 .float
 ----

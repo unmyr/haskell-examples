@@ -197,6 +197,14 @@ Prelude> take 25 $ [2..] >>= \n -> if null ([2..(n-1)] >>= \k -> if n `mod` k ==
 include::../src/math/complex.hs[]
 ----
 
+[latexmath]
+++++
+\begin{aligned}
+\omega &= \frac{-1 + \sqrt{3}i}{2} \\
+\omega^{3} &= 1
+\end{aligned}
+++++
+
 [source,haskell]
 .float
 ----
