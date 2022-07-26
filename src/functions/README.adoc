@@ -98,8 +98,8 @@ sqDouble x = x * x
 sqFloating :: Floating a => a -> a
 sqFloating x = x * x
 
--- sqComplex :: Num a => Complex a -> Complex a
--- sqComplex x = x * x
+sqComplex :: (RealFloat a) => Complex a -> Complex a
+sqComplex x = x * x
 
 sqFractional :: Fractional a => a -> a
 sqFractional x = x * x
