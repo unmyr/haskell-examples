@@ -3089,8 +3089,9 @@ Floating is a type class.</p>
 <div class="sect3">
 <h4 id="_eq">Eq</h4>
 <div class="listingblock">
+<div class="title">src/functions/eq.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">eq</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Ord</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">eq</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
 <span class="n">eq</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="kr">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span> <span class="kr">then</span> <span class="kt">True</span> <span class="kr">else</span> <span class="kt">False</span>
 
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
@@ -3100,7 +3101,8 @@ Floating is a type class.</p>
   <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="mf">3.1415927</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="p">(</span><span class="n">pi</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="mf">3.141592653589793</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="sc">'a'</span> <span class="sc">'a'</span>
-  <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="s">"hello"</span> <span class="s">"hello"</span></code></pre>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="s">"hello"</span> <span class="s">"hello"</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">eq</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -3118,6 +3120,8 @@ Floating is a type class.</p>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">eq</span> <span class="sc">'a'</span> <span class="sc">'a'</span>
 <span class="kt">True</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">eq</span> <span class="s">"hello"</span> <span class="s">"hello"</span>
+<span class="kt">True</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">eq</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="kt">True</span></code></pre>
 </div>
 </div>
@@ -3245,7 +3249,7 @@ Floating is a type class.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-26 15:26:32 UTC
+Last updated 2022-07-26 15:35:40 UTC
 </div>
 </div>
 </body>
