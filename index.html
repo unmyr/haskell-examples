@@ -2836,6 +2836,10 @@ Floating is a type class.</p>
 </li>
 <li>
 <p>using list</p>
+<div class="ulist">
+<ul>
+<li>
+<p>XOR</p>
 <div class="listingblock">
 <div class="title">src/functions/xor.hs</div>
 <div class="content">
@@ -2853,6 +2857,62 @@ Floating is a type class.</p>
   <span class="n">print</span> <span class="o">$</span> <span class="n">xor</span> <span class="p">(</span><span class="kt">[]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="o">==</span> <span class="kt">[]</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">xor</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span></code></pre>
 </div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">xor</span> <span class="p">(</span><span class="kt">[]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
+<span class="kt">DEBUG[]</span>
+<span class="kt">[]</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">xor</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
+<span class="kt">DEBUG</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="kt">DEBUG</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="kt">[]</span><span class="p">)</span>
+<span class="kt">DEBUG</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">xor</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
+<span class="kt">DEBUG</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="kt">DEBUG</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="kt">DEBUG</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="kt">[]</span><span class="p">)</span>
+<span class="kt">DEBUG</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Remove the second element</p>
+<div class="listingblock">
+<div class="title">src/functions/remove_2nd_element.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">remove2ndElement</span> <span class="o">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="n">remove2ndElement</span> <span class="kt">[]</span> <span class="o">=</span> <span class="kt">[]</span>
+<span class="n">remove2ndElement</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="n">remove2ndElement</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="kr">_</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span><span class="o">:</span><span class="n">xs</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">remove2ndElement</span> <span class="p">(</span><span class="kt">[]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">remove2ndElement</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">remove2ndElement</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">remove2ndElement</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">remove2ndElement</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Results</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">remove2ndElement</span> <span class="p">(</span><span class="kt">[]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
+<span class="kt">[]</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">remove2ndElement</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">remove2ndElement</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">remove2ndElement</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">remove2ndElement</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
 </div>
 </li>
 </ul>
@@ -3185,7 +3245,7 @@ Floating is a type class.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-26 13:41:10 UTC
+Last updated 2022-07-26 15:26:32 UTC
 </div>
 </div>
 </body>

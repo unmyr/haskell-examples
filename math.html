@@ -971,6 +971,7 @@ pre.rouge {
 <li><a href="#_built_in_functions">Built-in functions</a></li>
 <li><a href="#_sum">Sum</a></li>
 <li><a href="#_prime_number">Prime number</a></li>
+<li><a href="#_complex_number">Complex number</a></li>
 <li><a href="#_group">Group</a>
 <ul class="sectlevel3">
 <li><a href="#_c2">C<sub>2</sub></a></li>
@@ -1187,6 +1188,73 @@ pre.rouge {
 </div>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_complex_number">Complex number</h3>
+<div class="listingblock">
+<div class="title">src/math/complex.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Complex</span>
+
+<span class="n">cubed</span> <span class="o">::</span> <span class="p">(</span><span class="kt">RealFloat</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kt">Complex</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Complex</span> <span class="n">a</span>
+<span class="n">cubed</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="kr">let</span> <span class="n">omega_f</span> <span class="o">=</span> <span class="p">((</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">cubed</span> <span class="n">omega_f</span> <span class="o">==</span> <span class="mi">1</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">omega_f</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">==</span> <span class="mf">1.0</span> <span class="o">:+</span> <span class="mf">1.7484555e-7</span>
+  <span class="kr">let</span> <span class="n">omega_d</span> <span class="o">=</span> <span class="p">((</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">:+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">cubed</span> <span class="n">omega_d</span> <span class="o">==</span> <span class="mf">0.9999999999999998</span> <span class="o">:+</span> <span class="mf">1.1102230246251565e-16</span></code></pre>
+</div>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+\omega &amp;= \frac{-1 + \sqrt{3}i}{2} \\
+\omega^{3} &amp;= 1
+\end{aligned}\]
+</div>
+</div>
+<div class="listingblock">
+<div class="title">float</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">omega_f</span> <span class="o">=</span> <span class="p">((</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="p">(</span><span class="o">^</span><span class="p">)</span>
+<span class="p">(</span><span class="o">^</span><span class="p">)</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Integral</span> <span class="n">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">omega_f</span> <span class="o">^</span> <span class="mi">3</span>
+<span class="mf">1.0</span> <span class="o">:+</span> <span class="mf">0.0</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">omega_f</span> <span class="o">*</span> <span class="n">omega_f</span> <span class="o">*</span> <span class="n">omega_f</span>
+<span class="mf">1.0</span> <span class="o">:+</span> <span class="mf">0.0</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">cubed</span> <span class="n">omega_f</span>
+<span class="mf">1.0</span> <span class="o">:+</span> <span class="mf">0.0</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="p">(</span><span class="o">**</span><span class="p">)</span>
+<span class="p">(</span><span class="o">**</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Floating</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">omega_f</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="mf">1.0</span> <span class="o">:+</span> <span class="mf">1.7484555e-7</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">omega_f</span> <span class="o">**</span> <span class="p">((</span><span class="mi">3</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="mi">0</span><span class="p">)</span>
+<span class="mf">1.0</span> <span class="o">:+</span> <span class="mf">1.7484555e-7</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">omega_d</span> <span class="o">=</span> <span class="p">((</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">:+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="p">(</span><span class="o">^</span><span class="p">)</span>
+<span class="p">(</span><span class="o">^</span><span class="p">)</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Integral</span> <span class="n">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">omega_d</span> <span class="o">^</span> <span class="mi">3</span>
+<span class="mf">0.9999999999999998</span> <span class="o">:+</span> <span class="mf">1.1102230246251565e-16</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">omega_d</span> <span class="o">*</span> <span class="n">omega_d</span> <span class="o">*</span> <span class="n">omega_d</span>
+<span class="mf">0.9999999999999998</span> <span class="o">:+</span> <span class="mf">1.1102230246251565e-16</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">cubed</span> <span class="n">omega_d</span>
+<span class="mf">0.9999999999999998</span> <span class="o">:+</span> <span class="mf">1.1102230246251565e-16</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="p">(</span><span class="o">**</span><span class="p">)</span>
+<span class="p">(</span><span class="o">**</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Floating</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">omega_d</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="mf">0.9999999999999997</span> <span class="o">:+</span> <span class="mf">6.432490598706544e-16</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">omega_d</span> <span class="o">**</span> <span class="p">((</span><span class="mi">3</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">:+</span> <span class="mi">0</span><span class="p">)</span>
+<span class="mf">0.9999999999999997</span> <span class="o">:+</span> <span class="mf">6.432490598706544e-16</span></code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1794,7 +1862,7 @@ si * i * j * k = i
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-26 13:41:10 UTC
+Last updated 2022-07-26 15:26:32 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
