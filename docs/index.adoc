@@ -1377,11 +1377,31 @@ include::../src/functions/add_2arg_tuple.hs[]
 ----
 
 * using list
+
+** XOR
 +
 [source,haskell]
 .src/functions/xor.hs
 ----
 include::../src/functions/xor.hs[]
+----
++
+[source,haskell]
+----
+*Main> xor ([] :: [Int])
+DEBUG[]
+[]
+*Main> xor ([1, 1, 1] :: [Int])
+DEBUG(1:1:[1])
+DEBUG(0:1:[])
+DEBUG[1]
+[1]
+*Main> xor ([1, 1, 1, 1] :: [Int])
+DEBUG(1:1:[1,1])
+DEBUG(0:1:[1])
+DEBUG(1:1:[])
+DEBUG[0]
+[0]
 ----
 
 ==== Multiple results

@@ -332,6 +332,8 @@ main = do
 ----
 
 * Using list
+
+** XOR
 +
 [source,haskell]
 .src/functions/xor.hs
@@ -349,6 +351,24 @@ main :: IO ()
 main = do
   print $ xor ([] :: [Int]) == []
   print $ xor ([1, 1, 1, 1] :: [Int]) == [0]
+----
++
+[source,haskell]
+----
+*Main> xor ([] :: [Int])
+DEBUG[]
+[]
+*Main> xor ([1, 1, 1] :: [Int])
+DEBUG(1:1:[1])
+DEBUG(0:1:[])
+DEBUG[1]
+[1]
+*Main> xor ([1, 1, 1, 1] :: [Int])
+DEBUG(1:1:[1,1])
+DEBUG(0:1:[1])
+DEBUG(1:1:[])
+DEBUG[0]
+[0]
 ----
 
 ==== Multiple results
