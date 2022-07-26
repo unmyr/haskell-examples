@@ -994,7 +994,8 @@ pre.rouge {
 </li>
 <li><a href="#_functions">Functions</a>
 <ul class="sectlevel3">
-<li><a href="#_single_results">Single results</a></li>
+<li><a href="#_using_a_single_parameter">using a single parameter</a></li>
+<li><a href="#_multiple_parameters">Multiple parameters</a></li>
 <li><a href="#_multiple_results">Multiple results</a></li>
 <li><a href="#_order">Order</a></li>
 <li><a href="#_eq">Eq</a></li>
@@ -2398,11 +2399,11 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <div class="sect2">
 <h3 id="_functions">Functions</h3>
 <div class="sect3">
-<h4 id="_single_results">Single results</h4>
+<h4 id="_using_a_single_parameter">using a single parameter</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>using a single parameter</p>
+<p>Using integers</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2426,6 +2427,9 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <span class="mi">3628800</span>
 <span class="kt">Prelude</span><span class="o">&gt;</span></code></pre>
 </div>
+</div>
+</li>
+</ul>
 </div>
 </li>
 <li>
@@ -2508,8 +2512,8 @@ Floating is a type class.</p>
 <span class="n">sqFloating</span> <span class="o">::</span> <span class="kt">Floating</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
 <span class="n">sqFloating</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 
-<span class="c1">-- sqComplex :: Num a =&gt; Complex a -&gt; Complex a</span>
-<span class="c1">-- sqComplex x = x * x</span>
+<span class="n">sqComplex</span> <span class="o">::</span> <span class="p">(</span><span class="kt">RealFloat</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kt">Complex</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="kt">Complex</span> <span class="n">a</span>
+<span class="n">sqComplex</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
 
 <span class="n">sqFractional</span> <span class="o">::</span> <span class="kt">Fractional</span> <span class="n">a</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
 <span class="n">sqFractional</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
@@ -2542,6 +2546,7 @@ Floating is a type class.</p>
   <span class="n">print</span> <span class="o">$</span> <span class="n">sqRealFrac</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.9999999</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">sqRealFloat</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.9999999</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">sqNum</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.9999999</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqComplex</span> <span class="p">((</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.9999999</span> <span class="o">:+</span> <span class="mf">0.0</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">sqDouble</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0000000000000004</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">sqFloating</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0000000000000004</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">sqFractional</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">==</span> <span class="mf">2.0000000000000004</span>
@@ -2553,8 +2558,13 @@ Floating is a type class.</p>
   <span class="n">print</span> <span class="o">$</span> <span class="n">sqRealFrac</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">/</span><span class="mi">9</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">sqReal</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">/</span><span class="mi">9</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">sqNum</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="o">/</span><span class="mi">9</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqComplex</span> <span class="p">((</span><span class="mi">0</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="p">(</span><span class="mi">1</span><span class="o">::</span><span class="kt">Float</span><span class="p">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">sqFractional</span> <span class="p">((</span><span class="mi">0</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="p">(</span><span class="mi">1</span><span class="o">::</span><span class="kt">Float</span><span class="p">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
-  <span class="n">print</span> <span class="o">$</span> <span class="n">sqNum</span> <span class="p">((</span><span class="mi">0</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="p">(</span><span class="mi">1</span><span class="o">::</span><span class="kt">Float</span><span class="p">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span></code></pre>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">sqNum</span> <span class="p">((</span><span class="mi">0</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="p">(</span><span class="mi">1</span><span class="o">::</span><span class="kt">Float</span><span class="p">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+  <span class="kr">let</span> <span class="n">omega_f</span> <span class="o">=</span> <span class="p">((</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">omega_f</span> <span class="o">*</span> <span class="n">sqComplex</span> <span class="n">omega_f</span> <span class="o">==</span> <span class="mi">1</span>
+  <span class="kr">let</span> <span class="n">omega_d</span> <span class="o">=</span> <span class="p">((</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">:+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">omega_d</span> <span class="o">*</span> <span class="n">sqComplex</span> <span class="n">omega_d</span> <span class="o">==</span> <span class="mf">0.9999999999999998</span> <span class="o">:+</span> <span class="mf">1.1102230246251565e-16</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -2609,7 +2619,9 @@ Floating is a type class.</p>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqRealFloat</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>
 <span class="mf">1.9999999</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqNum</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span>
-<span class="mf">1.9999999</span></code></pre>
+<span class="mf">1.9999999</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqComplex</span> <span class="p">((</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Float</span><span class="p">)</span> <span class="o">:+</span> <span class="mi">0</span><span class="p">)</span>
+<span class="mf">1.9999999</span> <span class="o">:+</span> <span class="mf">0.0</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -2628,9 +2640,14 @@ Floating is a type class.</p>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqRealFloat</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
 <span class="mf">2.0000000000000004</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqNum</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span>
-<span class="mf">2.0000000000000004</span></code></pre>
+<span class="mf">2.0000000000000004</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqComplex</span> <span class="p">((</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">::</span><span class="kt">Double</span><span class="p">)</span> <span class="o">:+</span> <span class="mi">0</span><span class="p">)</span>
+<span class="mf">2.0000000000000004</span> <span class="o">:+</span> <span class="mf">0.0</span></code></pre>
 </div>
 </div>
+</li>
+<li>
+<p>Rational</p>
 <div class="listingblock">
 <div class="title">Rational</div>
 <div class="content">
@@ -2644,12 +2661,17 @@ Floating is a type class.</p>
 <span class="mi">1</span> <span class="o">%</span> <span class="mi">9</span></code></pre>
 </div>
 </div>
+</li>
+<li>
+<p>Complex numbers</p>
 <div class="listingblock">
 <div class="title">Complex numbers</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Complex</span><span class="o">&gt;</span> <span class="n">sqFractional</span> <span class="p">(</span><span class="mi">0</span> <span class="o">:+</span> <span class="mi">1</span><span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqComplex</span> <span class="p">(</span><span class="mi">0</span> <span class="o">:+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">:+</span> <span class="mf">0.0</span>
-<span class="o">*</span><span class="kt">Main</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Complex</span><span class="o">&gt;</span> <span class="n">sqNum</span> <span class="p">(</span><span class="mi">0</span> <span class="o">:+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqFractional</span> <span class="p">(</span><span class="mi">0</span> <span class="o">:+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">:+</span> <span class="mf">0.0</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">sqNum</span> <span class="p">(</span><span class="mi">0</span> <span class="o">:+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">:+</span> <span class="mf">0.0</span></code></pre>
 </div>
 </div>
@@ -2659,9 +2681,9 @@ Floating is a type class.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>using multiple parameters</p>
+</div>
+<div class="sect3">
+<h4 id="_multiple_parameters">Multiple parameters</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2776,9 +2798,6 @@ Floating is a type class.</p>
 </ul>
 </div>
 </li>
-</ul>
-</div>
-</li>
 <li>
 <p>using strings</p>
 <div class="listingblock">
@@ -2804,6 +2823,7 @@ Floating is a type class.</p>
 <li>
 <p>using tuple</p>
 <div class="listingblock">
+<div class="title">src/functions/add_2arg_tuple.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">add</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integer</span><span class="p">,</span> <span class="kt">Integer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Integer</span>
 <span class="n">add</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
@@ -2811,6 +2831,27 @@ Floating is a type class.</p>
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
     <span class="n">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>using list</p>
+<div class="listingblock">
+<div class="title">src/functions/xor.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Debug.Trace</span>
+
+<span class="n">xor</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Show</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="n">xor</span> <span class="kt">[]</span> <span class="o">=</span> <span class="n">trace</span><span class="p">(</span><span class="s">"DEBUG[]"</span><span class="p">)</span> <span class="kt">[]</span>
+<span class="n">xor</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">trace</span><span class="p">(</span><span class="s">"DEBUG["</span> <span class="o">++</span> <span class="n">show</span> <span class="n">x</span> <span class="o">++</span> <span class="s">"]"</span><span class="p">)</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="n">xor</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">y</span><span class="o">:</span><span class="n">zs</span><span class="p">)</span> <span class="o">=</span>
+  <span class="n">trace</span> <span class="p">(</span><span class="s">"DEBUG("</span> <span class="o">++</span> <span class="n">show</span> <span class="n">x</span> <span class="o">++</span> <span class="s">":"</span> <span class="o">++</span> <span class="n">show</span> <span class="n">y</span> <span class="o">++</span> <span class="s">":"</span> <span class="o">++</span> <span class="n">show</span> <span class="n">zs</span> <span class="o">++</span> <span class="s">")"</span><span class="p">)</span>
+  <span class="n">xor</span> <span class="p">([(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span><span class="p">]</span> <span class="o">++</span> <span class="n">zs</span><span class="p">)</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">xor</span> <span class="p">(</span><span class="kt">[]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="o">==</span> <span class="kt">[]</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">xor</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span></code></pre>
 </div>
 </div>
 </li>
@@ -3144,7 +3185,7 @@ Floating is a type class.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-24 13:19:10 UTC
+Last updated 2022-07-26 13:41:10 UTC
 </div>
 </div>
 </body>
