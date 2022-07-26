@@ -2,6 +2,7 @@ TARGET_DIR=../bin
 TARGETS=\
 $(TARGET_DIR)/collatz_with_guards \
 $(TARGET_DIR)/collatz_with_pattern \
+$(TARGET_DIR)/complex \
 $(TARGET_DIR)/fac \
 $(TARGET_DIR)/fib \
 $(TARGET_DIR)/square_root_int \
@@ -20,6 +21,9 @@ $(TARGET_DIR)/collatz_with_guards: collatz_with_guards.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 $(TARGET_DIR)/collatz_with_pattern: collatz_with_pattern.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/complex: complex.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 $(TARGET_DIR)/fac: fac.hs

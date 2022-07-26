@@ -189,6 +189,54 @@ Prelude> take 25 $ [2..] >>= \n -> if null ([2..(n-1)] >>= \k -> if n `mod` k ==
 [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]
 ----
 
+=== Complex number
+
+[source,haskell]
+.src/math/complex.hs
+----
+include::../src/math/complex.hs[]
+----
+
+[source,haskell]
+.float
+----
+*Main> let omega_f = ((-0.5)::Float) :+ 0.5 * sqrt(3)
+*Main> :t (^)
+(^) :: (Num a, Integral b) => a -> b -> a
+*Main> omega_f ^ 3
+1.0 :+ 0.0
+*Main> omega_f * omega_f * omega_f
+1.0 :+ 0.0
+*Main> cubed omega_f
+1.0 :+ 0.0
+*Main> :t (**)
+(**) :: Floating a => a -> a -> a
+*Main> omega_f ** 3
+1.0 :+ 1.7484555e-7
+*Main> omega_f ** ((3::Float) :+ 0)
+1.0 :+ 1.7484555e-7
+
+----
+
+[source,haskell]
+----
+*Main> let omega_d = ((-0.5)::Double) :+ 0.5 * sqrt(3)
+*Main> :t (^)
+(^) :: (Num a, Integral b) => a -> b -> a
+*Main> omega_d ^ 3
+0.9999999999999998 :+ 1.1102230246251565e-16
+*Main> omega_d * omega_d * omega_d
+0.9999999999999998 :+ 1.1102230246251565e-16
+*Main> cubed omega_d
+0.9999999999999998 :+ 1.1102230246251565e-16
+*Main> :t (**)
+(**) :: Floating a => a -> a -> a
+*Main> omega_d ** 3
+0.9999999999999997 :+ 6.432490598706544e-16
+*Main> omega_d ** ((3::Double) :+ 0)
+0.9999999999999997 :+ 6.432490598706544e-16
+----
+
 === Group
 
 ==== C~2~
