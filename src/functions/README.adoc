@@ -531,8 +531,9 @@ True
 ==== Eq
 
 [source,haskell]
+.src/functions/eq.hs
 ----
-eq :: (Ord a) => a -> a -> Bool
+eq :: (Eq a) => a -> a -> Bool
 eq x y = if x == y then True else False
 ----
 
@@ -551,5 +552,7 @@ True
 *Main> eq 'a' 'a'
 True
 *Main> eq "hello" "hello"
+True
+*Main> eq (1, 2) (1, 2)
 True
 ----

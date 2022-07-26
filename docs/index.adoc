@@ -1548,6 +1548,7 @@ True
 ==== Eq
 
 [source,haskell]
+.src/functions/eq.hs
 ----
 include::../src/functions/eq.hs[]
 ----
@@ -1567,6 +1568,8 @@ True
 *Main> eq 'a' 'a'
 True
 *Main> eq "hello" "hello"
+True
+*Main> eq (1, 2) (1, 2)
 True
 ----
 
