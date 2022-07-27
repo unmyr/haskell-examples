@@ -40,6 +40,8 @@ $(TARGET_DIR)/squared: squared.hs
 
 clean:
 	rm -f *.hi *.o
+	(cd group && make $@)
 
 distclean: clean
 	rm -f $(TARGETS)
+	(cd group && make $@)

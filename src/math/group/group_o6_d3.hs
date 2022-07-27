@@ -1,8 +1,12 @@
 import Debug.Trace
 
+d3_e :: String
 d3_e = "e"
+
+d3_all :: [String]
 d3_all = [d3_e, "r", "rr", "s", "sr", "srr"]
 
+d3_dot :: String -> String -> String
 d3_dot x y | x == d3_e = y
 d3_dot x y | y == d3_e = x
 
@@ -43,8 +47,10 @@ d3 [] = []
 d3 [x] = [x]
 d3 (x:xs) = d3 ([d3_dot x (head xs)] ++ (tail xs))
 
+d3_inv :: String -> String
 d3_inv x = head [x | y <- d3_all, d3_dot x y == d3_e]
 
+main :: IO ()
 main = do
   print $ [d3_dot "e"    y | y <- d3_all] == [  "e",  "r", "rr",  "s", "sr","srr"]
   print $ [d3_dot "r"    y | y <- d3_all] == [  "r", "rr",  "e","srr",  "s", "sr"]

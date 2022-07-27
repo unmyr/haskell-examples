@@ -1,7 +1,13 @@
+c3_e :: Int
 c3_e = 0
+
+c3_all :: [Int]
 c3_all = [0, 1, 2]
 
+c3_op :: Int -> Int -> Int
 c3_op x y = (x + y) `mod` 3
+
+c3_inv :: Int -> Int
 c3_inv x = head [y | y <- c3_all, c3_op x y == c3_e]
 
 c3 :: [Int] -> [Int]
@@ -9,6 +15,7 @@ c3 [] = []
 c3 [x] = [x]
 c3 (x:xs) = c3 ([c3_op x (head xs)] ++ (tail xs))
 
+main :: IO ()
 main = do
   print $ [c3_op 0  y | y <- c3_all]
   print $ [c3_op 1  y | y <- c3_all]

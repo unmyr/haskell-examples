@@ -5,14 +5,18 @@
 [source,haskell]
 .group_o2_c2.hs
 ----
+c2_e :: Int
 c2_e = 0
 
+c2_op :: Int -> Int -> Int
 -- c2_op a b = (a + b) `mod` 2
 c2_op 0 0 = 0
 c2_op 1 1 = 0
 c2_op 0 1 = 1
 c2_op 1 0 = 1
+c2_op _ _ = error "ERROR invalid arguments."
 
+inv :: Int -> Int
 inv x = head [y | y <- [0, 1], c2_op x y == c2_e]
 
 c2 :: [Int] -> [Int]
@@ -20,6 +24,7 @@ c2 [] = []
 c2 [x] = [x]
 c2 (x:xs) = c2 ([c2_op x (head xs)] ++ (tail xs))
 
+main :: IO ()
 main = do
   putStrLn $ "0^(-1) = " ++ show (inv 0)
   putStrLn $ "1^(-1) = " ++ show (inv 1)
@@ -43,10 +48,16 @@ main = do
 [source,haskell]
 .group_o3_c3.hs
 ----
+c3_e :: Int
 c3_e = 0
+
+c3_all :: [Int]
 c3_all = [0, 1, 2]
 
+c3_op :: Int -> Int -> Int
 c3_op x y = (x + y) `mod` 3
+
+c3_inv :: Int -> Int
 c3_inv x = head [y | y <- c3_all, c3_op x y == c3_e]
 
 c3 :: [Int] -> [Int]
@@ -54,6 +65,7 @@ c3 [] = []
 c3 [x] = [x]
 c3 (x:xs) = c3 ([c3_op x (head xs)] ++ (tail xs))
 
+main :: IO ()
 main = do
   print $ [c3_op 0  y | y <- c3_all]
   print $ [c3_op 1  y | y <- c3_all]
@@ -83,29 +95,42 @@ main = do
 [source,haskell]
 .group_o4_k4.hs
 ----
-e = (0, 0)
-p = (0, 1)
-q = (1, 0)
-r = (1, 1)
+k4_e :: (Int, Int)
+k4_e = (0, 0)
 
+k4_p :: (Int, Int)
+k4_p = (0, 1)
+
+k4_q :: (Int, Int)
+k4_q = (1, 0)
+
+k4_r :: (Int, Int)
+k4_r = (1, 1)
+
+toSymbol :: (Int, Int) -> String
 toSymbol (0, 0) = "e"
 toSymbol (0, 1) = "p"
 toSymbol (1, 0) = "q"
 toSymbol (1, 1) = "r"
+toSymbol _ = error "ERROR: Invalid argument."
 
+k4_op :: (Int, Int) -> (Int, Int) -> (Int, Int)
 k4_op (x1, y1) (x2, y2) = ((x1 + x2) `mod` 2, (y1 + y2) `mod` 2)
-k4_inv (x, y) = head [(p, q) | p <- [0..2], q <- [0..2], k4_op (x, y) (p, q) == (0, 0)]
+
+k4_inv :: (Int, Int) -> (Int, Int)
+k4_inv (x, y) = head [(p, q) | p <- [0..2], q <- [0..2], k4_op (x, y) (p, q) == k4_e]
 
 k4 :: [(Int, Int)] -> [(Int, Int)]
 k4 [] = []
 k4 [x] = [x]
 k4 (x:xs) = k4 ([k4_op x (head xs)] ++ (tail xs))
 
+main :: IO ()
 main = do
-  putStrLn $ "p^(-1) = " ++ toSymbol (k4_inv p)
-  putStrLn $ "r^(-1) = " ++ toSymbol (k4_inv r)
-  putStrLn $ "p q = " ++ toSymbol (head (k4 [p, q]))
-  putStrLn $ "p q r = " ++ toSymbol (head (k4 [p, q, r]))
+  putStrLn $ "p^(-1) = " ++ toSymbol (k4_inv k4_p)
+  putStrLn $ "r^(-1) = " ++ toSymbol (k4_inv k4_r)
+  putStrLn $ "p q = " ++ toSymbol (head (k4 [k4_p, k4_q]))
+  putStrLn $ "p q r = " ++ toSymbol (head (k4 [k4_p, k4_q, k4_r]))
 ----
 
 [source,console]
@@ -125,9 +150,13 @@ p q r = e
 ----
 import Debug.Trace
 
+d3_e :: String
 d3_e = "e"
+
+d3_all :: [String]
 d3_all = [d3_e, "r", "rr", "s", "sr", "srr"]
 
+d3_dot :: String -> String -> String
 d3_dot x y | x == d3_e = y
 d3_dot x y | y == d3_e = x
 
@@ -168,8 +197,10 @@ d3 [] = []
 d3 [x] = [x]
 d3 (x:xs) = d3 ([d3_dot x (head xs)] ++ (tail xs))
 
+d3_inv :: String -> String
 d3_inv x = head [x | y <- d3_all, d3_dot x y == d3_e]
 
+main :: IO ()
 main = do
   print $ [d3_dot "e"    y | y <- d3_all] == [  "e",  "r", "rr",  "s", "sr","srr"]
   print $ [d3_dot "r"    y | y <- d3_all] == [  "r", "rr",  "e","srr",  "s", "sr"]
@@ -202,9 +233,13 @@ s * r * s = rr
 ----
 import Debug.Trace
 
+q8_e :: String
 q8_e = "e"
+
+q8_all :: [String]
 q8_all = [q8_e, "s", "i", "si", "j", "sj", "k", "sk"]
 
+q8_dot :: String -> String -> String
 q8_dot x y | x == q8_e = y
 q8_dot x y | y == q8_e = x
 q8_dot x y | x == "s" && y == "s" = q8_e
@@ -238,8 +273,10 @@ q8 [] = []
 q8 [x] = [x]
 q8 (x:xs) = q8 ([q8_dot x (head xs)] ++ (tail xs))
 
+q8_inv :: String -> String
 q8_inv x = head [x | y <- q8_all, q8_dot x y == q8_e]
 
+main :: IO ()
 main = do
   print $ [q8_dot "e"  y | y <- q8_all] == [ "e", "s", "i","si", "j","sj", "k","sk"]
   print $ [q8_dot "s"  y | y <- q8_all] == [ "s", "e","si", "i","sj", "j","sk", "k"]

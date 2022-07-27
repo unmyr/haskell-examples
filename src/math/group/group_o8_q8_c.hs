@@ -1,8 +1,12 @@
 import Debug.Trace
 
+q8_e :: String
 q8_e = "e"
+
+q8_all :: [String]
 q8_all = [q8_e, "s", "i", "si", "j", "sj", "k", "sk"]
 
+q8_dot :: String -> String -> String
 q8_dot x y | x == q8_e = y
 q8_dot x y | y == q8_e = x
 q8_dot x y | x == "s" && y == "s" = q8_e
@@ -36,8 +40,10 @@ q8 [] = []
 q8 [x] = [x]
 q8 (x:xs) = q8 ([q8_dot x (head xs)] ++ (tail xs))
 
+q8_inv :: String -> String
 q8_inv x = head [x | y <- q8_all, q8_dot x y == q8_e]
 
+main :: IO ()
 main = do
   print $ [q8_dot "e"  y | y <- q8_all] == [ "e", "s", "i","si", "j","sj", "k","sk"]
   print $ [q8_dot "s"  y | y <- q8_all] == [ "s", "e","si", "i","sj", "j","sk", "k"]

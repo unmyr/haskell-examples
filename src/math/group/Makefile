@@ -1,0 +1,45 @@
+TARGET_DIR=../../bin
+TARGETS=\
+$(TARGET_DIR)/group_o2_c2 \
+$(TARGET_DIR)/group_o3_c3 \
+$(TARGET_DIR)/group_o4_k4 \
+$(TARGET_DIR)/group_o6_d3 \
+$(TARGET_DIR)/group_o8_q8_c \
+$(TARGET_DIR)/group_o8_q8_nc \
+$(TARGET_DIR)/group_o8_q8_nc_debug
+
+GHC_FLAGS=-Wall -fwarn-unused-do-bind
+
+.PHONY: setup
+
+all: setup $(TARGETS)
+
+setup:
+	mkdir -p $(TARGET_DIR)
+
+$(TARGET_DIR)/group_o2_c2: group_o2_c2.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/group_o3_c3: group_o3_c3.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/group_o4_k4: group_o4_k4.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/group_o6_d3: group_o6_d3.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/group_o8_q8_c: group_o8_q8_c.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/group_o8_q8_nc: group_o8_q8_nc.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/group_o8_q8_nc_debug: group_o8_q8_nc_debug.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+clean:
+	rm -f *.hi *.o
+
+distclean: clean
+	rm -f $(TARGETS)
