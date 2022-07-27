@@ -1297,8 +1297,8 @@ include::../src/functions/add_2arg_num.hs[]
 55
 *Main> add (42 :: Integer) 13
 55
-*Main> add (42 :: Rational) 13
-55 % 1
+*Main> add (1/3) (1/2) :: Rational
+5 % 6
 *Main> add 42.0 13.0
 55.0
 *Main> add (42 :: Float) 13
