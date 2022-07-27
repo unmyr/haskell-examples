@@ -1445,18 +1445,12 @@ pre.rouge {
 <span class="n">c2_inv</span> <span class="o">::</span> <span class="kt">C2</span> <span class="o">-&gt;</span> <span class="kt">C2</span>
 <span class="n">c2_inv</span> <span class="p">(</span><span class="kt">C2</span> <span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">head</span> <span class="p">[</span><span class="kt">C2</span> <span class="n">y</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">],</span> <span class="p">(</span><span class="kt">C2</span> <span class="n">x</span><span class="p">)</span> <span class="p">`</span><span class="n">mappend</span><span class="p">`</span> <span class="p">(</span><span class="kt">C2</span> <span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">mempty</span><span class="p">)]</span>
 
-<span class="n">c2_eval</span> <span class="o">::</span> <span class="p">[</span><span class="kt">C2</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">C2</span><span class="p">]</span>
-<span class="n">c2_eval</span> <span class="kt">[]</span> <span class="o">=</span> <span class="kt">[]</span>
-<span class="n">c2_eval</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
-<span class="n">c2_eval</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="p">`</span><span class="n">mappend</span><span class="p">`</span> <span class="n">y</span><span class="p">)</span><span class="o">:</span><span class="kt">[]</span>
-<span class="n">c2_eval</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">y</span><span class="o">:</span><span class="n">zs</span><span class="p">)</span> <span class="o">=</span> <span class="n">c2_eval</span> <span class="p">((</span><span class="n">c2_eval</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span> <span class="o">++</span> <span class="n">zs</span><span class="p">)</span>
-
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
   <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"0^(-1) = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">c2_inv</span> <span class="p">(</span><span class="kt">C2</span> <span class="mi">0</span><span class="p">))</span>
   <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"1^(-1) = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">c2_inv</span> <span class="p">(</span><span class="kt">C2</span> <span class="mi">1</span><span class="p">))</span>
-  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"1 ⊕ 1 ⊕ 1 = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">c2_eval</span> <span class="p">[(</span><span class="kt">C2</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="kt">C2</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="kt">C2</span> <span class="mi">1</span><span class="p">)]))</span>
-  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"1 ⊕ 1 ⊕ 1 ⊕ 1 = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">c2_eval</span> <span class="p">[(</span><span class="kt">C2</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="kt">C2</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="kt">C2</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="kt">C2</span> <span class="mi">1</span><span class="p">)]))</span></code></pre>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"1 ⊕ 1 ⊕ 1 = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">mconcat</span> <span class="p">[</span><span class="kt">C2</span> <span class="mi">1</span><span class="p">,</span> <span class="kt">C2</span> <span class="mi">1</span><span class="p">,</span> <span class="kt">C2</span> <span class="mi">1</span><span class="p">])</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"1 ⊕ 1 ⊕ 1 ⊕ 1 = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">mconcat</span> <span class="p">[</span><span class="kt">C2</span> <span class="mi">1</span><span class="p">,</span> <span class="kt">C2</span> <span class="mi">1</span><span class="p">,</span> <span class="kt">C2</span> <span class="mi">1</span><span class="p">,</span> <span class="kt">C2</span> <span class="mi">1</span><span class="p">])</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -2108,7 +2102,7 @@ si * i * j * k = i
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-27 17:11:41 UTC
+Last updated 2022-07-27 17:53:25 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
