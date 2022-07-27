@@ -329,32 +329,37 @@ import Debug.Trace
 
 xor :: (Integral a, Show a) => [a] -> [a]
 xor [] = trace("DEBUG[]") []
-xor [x] = trace("DEBUG[" ++ show x ++ "]") [x]
+xor [x] = trace("DEBUG[" ++ show x ++ "]") $ x:[]
+xor [x, y] =
+  trace("DEBUG[" ++ show x ++ "," ++ show y ++ "]") $
+  ((x + y) `mod` 2):[]
 xor (x:y:zs) =
-  trace ("DEBUG(" ++ show x ++ ":" ++ show y ++ ":" ++ show zs ++ ")")
-  xor ([(x + y `mod` 2) `mod` 2] ++ zs)
-
-main :: IO ()
-main = do
-  print $ xor ([] :: [Int]) == []
-  print $ xor ([1, 1, 1, 1] :: [Int]) == [0]
+  trace ("DEBUG(" ++ show x ++ ":" ++ show y ++ ":" ++ show zs ++ ")") $
+  xor (xor [x, y] ++ zs)
 ----
 +
 [source,haskell]
 ----
-*Main> xor ([] :: [Int])
-DEBUG[]
+*Main> xor [] :: [Int]
+DEBUG[] =>
 []
-*Main> xor ([1, 1, 1] :: [Int])
-DEBUG(1:1:[1])
-DEBUG(0:1:[])
+*Main> xor [1] :: [Int]
 DEBUG[1]
 [1]
-*Main> xor ([1, 1, 1, 1] :: [Int])
+*Main> xor [1, 1] :: [Int]
+DEBUG[1,1]
+[0]
+*Main> xor [1, 1, 1] :: [Int]
+DEBUG(1:1:[1])
+DEBUG[1,1]
+DEBUG[0,1]
+[1]
+*Main> xor [1, 1, 1, 1] :: [Int]
 DEBUG(1:1:[1,1])
+DEBUG[1,1]
 DEBUG(0:1:[1])
-DEBUG(1:1:[])
-DEBUG[0]
+DEBUG[0,1]
+DEBUG[1,1]
 [0]
 ----
 
