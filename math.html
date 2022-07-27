@@ -1552,45 +1552,48 @@ pre.rouge {
 </tr>
 </tbody>
 </table>
+<div class="ulist">
+<ul>
+<li>
+<p>Using 2-tuple</p>
 <div class="listingblock">
-<div class="title">group_o4_k4.hs</div>
+<div class="title">src/math/group/group_o4_k4_with_tuple.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">k4_e</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="n">k4_e</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">k4_sym</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="n">k4_sym</span> <span class="s">"e"</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">k4_sym</span> <span class="s">"p"</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">k4_sym</span> <span class="s">"q"</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">k4_sym</span> <span class="s">"r"</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">k4_sym</span>  <span class="kr">_</span>  <span class="o">=</span> <span class="n">error</span> <span class="s">"ERROR: Invalid argument."</span>
 
-<span class="n">k4_p</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="n">k4_p</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">showTuple</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span>
+<span class="n">showTuple</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="s">"e"</span>
+<span class="n">showTuple</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">"p"</span>
+<span class="n">showTuple</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="s">"q"</span>
+<span class="n">showTuple</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">"r"</span>
+<span class="n">showTuple</span> <span class="kr">_</span> <span class="o">=</span> <span class="n">error</span> <span class="s">"ERROR: Invalid argument."</span>
 
-<span class="n">k4_q</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="n">k4_q</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-<span class="n">k4_r</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="n">k4_r</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="n">toSymbol</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span>
-<span class="n">toSymbol</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="s">"e"</span>
-<span class="n">toSymbol</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">"p"</span>
-<span class="n">toSymbol</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="s">"q"</span>
-<span class="n">toSymbol</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">"r"</span>
-<span class="n">toSymbol</span> <span class="kr">_</span> <span class="o">=</span> <span class="n">error</span> <span class="s">"ERROR: Invalid argument."</span>
+<span class="n">c2_op</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">c2_op</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span>
 
 <span class="n">k4_op</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="n">k4_op</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="o">=</span> <span class="p">((</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">y1</span> <span class="o">+</span> <span class="n">y2</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">k4_op</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">c2_op</span> <span class="n">x1</span> <span class="n">x2</span><span class="p">,</span> <span class="n">c2_op</span> <span class="n">y1</span> <span class="n">y2</span><span class="p">)</span>
 
 <span class="n">k4_inv</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="n">k4_inv</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">head</span> <span class="p">[(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">|</span> <span class="n">p</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">],</span> <span class="n">q</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">],</span> <span class="n">k4_op</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">==</span> <span class="n">k4_e</span><span class="p">]</span>
+<span class="n">k4_inv</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">head</span> <span class="p">[(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">|</span> <span class="n">p</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">],</span> <span class="n">q</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">],</span> <span class="n">k4_op</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">==</span> <span class="n">k4_sym</span> <span class="s">"e"</span><span class="p">]</span>
 
-<span class="n">k4</span> <span class="o">::</span> <span class="p">[(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span> <span class="o">-&gt;</span> <span class="p">[(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span>
-<span class="n">k4</span> <span class="kt">[]</span> <span class="o">=</span> <span class="kt">[]</span>
-<span class="n">k4</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
-<span class="n">k4</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">k4</span> <span class="p">([</span><span class="n">k4_op</span> <span class="n">x</span> <span class="p">(</span><span class="n">head</span> <span class="n">xs</span><span class="p">)]</span> <span class="o">++</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">))</span>
+<span class="n">k4_eval</span> <span class="o">::</span> <span class="p">[(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span> <span class="o">-&gt;</span> <span class="p">[(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span>
+<span class="n">k4_eval</span> <span class="kt">[]</span> <span class="o">=</span> <span class="kt">[]</span>
+<span class="n">k4_eval</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="n">k4_eval</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">k4_op</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span><span class="o">:</span><span class="kt">[]</span>
+<span class="n">k4_eval</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">y</span><span class="o">:</span><span class="n">zs</span><span class="p">)</span> <span class="o">=</span> <span class="n">k4_eval</span> <span class="p">((</span><span class="n">k4_eval</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span> <span class="o">++</span> <span class="n">zs</span><span class="p">)</span>
 
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
-  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p^(-1) = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">k4_inv</span> <span class="n">k4_p</span><span class="p">)</span>
-  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"r^(-1) = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">k4_inv</span> <span class="n">k4_r</span><span class="p">)</span>
-  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p q = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">k4</span> <span class="p">[</span><span class="n">k4_p</span><span class="p">,</span> <span class="n">k4_q</span><span class="p">]))</span>
-  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p q r = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">k4</span> <span class="p">[</span><span class="n">k4_p</span><span class="p">,</span> <span class="n">k4_q</span><span class="p">,</span> <span class="n">k4_r</span><span class="p">]))</span></code></pre>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p^(-1) = "</span> <span class="o">++</span> <span class="n">showTuple</span> <span class="p">(</span><span class="n">k4_inv</span> <span class="p">(</span><span class="n">k4_sym</span> <span class="s">"p"</span><span class="p">))</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"r^(-1) = "</span> <span class="o">++</span> <span class="n">showTuple</span> <span class="p">(</span><span class="n">k4_inv</span> <span class="p">(</span><span class="n">k4_sym</span> <span class="s">"r"</span><span class="p">))</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p q = "</span> <span class="o">++</span> <span class="n">showTuple</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">k4_eval</span> <span class="p">[</span><span class="n">k4_sym</span> <span class="s">"p"</span><span class="p">,</span> <span class="n">k4_sym</span> <span class="s">"q"</span><span class="p">]))</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p q r = "</span> <span class="o">++</span> <span class="n">showTuple</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">k4_eval</span> <span class="p">[</span><span class="n">k4_sym</span> <span class="s">"p"</span><span class="p">,</span> <span class="n">k4_sym</span> <span class="s">"q"</span><span class="p">,</span> <span class="n">k4_sym</span> <span class="s">"r"</span><span class="p">]))</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1602,6 +1605,68 @@ r^(-1) = r
 p q = r
 p q r = e</span></code></pre>
 </div>
+</div>
+</li>
+<li>
+<p>Using data</p>
+<div class="listingblock">
+<div class="title">src/math/group/group_o4_k4_with_data.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">data</span> <span class="kt">K4</span> <span class="o">=</span> <span class="kt">C2xC2</span> <span class="kt">Int</span> <span class="kt">Int</span>
+
+<span class="kr">instance</span> <span class="kt">Eq</span> <span class="kt">K4</span> <span class="kr">where</span>
+  <span class="p">(</span><span class="kt">C2xC2</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="kt">C2xC2</span> <span class="n">x'</span> <span class="n">y'</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">==</span> <span class="n">x'</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">==</span> <span class="n">y'</span>
+
+<span class="kr">instance</span> <span class="kt">Show</span> <span class="kt">K4</span> <span class="kr">where</span>
+  <span class="n">show</span> <span class="n">a</span> <span class="o">=</span> <span class="kr">case</span> <span class="n">a</span> <span class="kr">of</span>
+    <span class="kt">C2xC2</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">"e"</span>
+    <span class="kt">C2xC2</span> <span class="mi">0</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">"p"</span>
+    <span class="kt">C2xC2</span> <span class="mi">1</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">"q"</span>
+    <span class="kt">C2xC2</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">"r"</span>
+    <span class="kr">_</span>         <span class="o">-&gt;</span> <span class="s">"?"</span>
+
+<span class="n">k4_sym</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">K4</span>
+<span class="n">k4_sym</span> <span class="s">"e"</span> <span class="o">=</span> <span class="kt">C2xC2</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">k4_sym</span> <span class="s">"p"</span> <span class="o">=</span> <span class="kt">C2xC2</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="n">k4_sym</span> <span class="s">"q"</span> <span class="o">=</span> <span class="kt">C2xC2</span> <span class="mi">1</span> <span class="mi">0</span>
+<span class="n">k4_sym</span> <span class="s">"r"</span> <span class="o">=</span> <span class="kt">C2xC2</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="n">k4_sym</span>  <span class="kr">_</span>  <span class="o">=</span> <span class="n">error</span> <span class="s">"ERROR: Invalid argument."</span>
+
+<span class="n">c2_op</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">c2_op</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span>
+
+<span class="n">k4_op</span> <span class="o">::</span> <span class="kt">K4</span> <span class="o">-&gt;</span> <span class="kt">K4</span> <span class="o">-&gt;</span> <span class="kt">K4</span>
+<span class="n">k4_op</span> <span class="p">(</span><span class="kt">C2xC2</span> <span class="n">x1</span> <span class="n">y1</span><span class="p">)</span> <span class="p">(</span><span class="kt">C2xC2</span> <span class="n">x2</span> <span class="n">y2</span><span class="p">)</span> <span class="o">=</span> <span class="kt">C2xC2</span> <span class="p">(</span><span class="n">c2_op</span> <span class="n">x1</span> <span class="n">x2</span><span class="p">)</span> <span class="p">(</span><span class="n">c2_op</span> <span class="n">y1</span> <span class="n">y2</span><span class="p">)</span>
+
+<span class="n">k4_inv</span> <span class="o">::</span> <span class="kt">K4</span> <span class="o">-&gt;</span> <span class="kt">K4</span>
+<span class="n">k4_inv</span> <span class="p">(</span><span class="kt">C2xC2</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">head</span> <span class="p">[</span><span class="kt">C2xC2</span> <span class="n">p</span> <span class="n">q</span> <span class="o">|</span> <span class="n">p</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">],</span> <span class="n">q</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">],</span> <span class="n">k4_op</span> <span class="p">(</span><span class="kt">C2xC2</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="kt">C2xC2</span> <span class="n">p</span> <span class="n">q</span><span class="p">)</span> <span class="o">==</span> <span class="n">k4_sym</span> <span class="s">"e"</span><span class="p">]</span>
+
+<span class="n">k4_eval</span> <span class="o">::</span> <span class="p">[</span><span class="kt">K4</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">K4</span><span class="p">]</span>
+<span class="n">k4_eval</span> <span class="kt">[]</span> <span class="o">=</span> <span class="kt">[]</span>
+<span class="n">k4_eval</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="n">k4_eval</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">k4_op</span> <span class="n">x</span> <span class="n">y</span><span class="p">)</span><span class="o">:</span><span class="kt">[]</span>
+<span class="n">k4_eval</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">y</span><span class="o">:</span><span class="n">zs</span><span class="p">)</span> <span class="o">=</span> <span class="n">k4_eval</span> <span class="p">((</span><span class="n">k4_eval</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span> <span class="o">++</span> <span class="n">zs</span><span class="p">)</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p^(-1) = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">k4_inv</span> <span class="p">(</span><span class="n">k4_sym</span> <span class="s">"p"</span><span class="p">))</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"r^(-1) = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">k4_inv</span> <span class="p">(</span><span class="n">k4_sym</span> <span class="s">"r"</span><span class="p">))</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p q = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">k4_eval</span> <span class="p">[</span><span class="n">k4_sym</span> <span class="s">"p"</span><span class="p">,</span> <span class="n">k4_sym</span> <span class="s">"q"</span><span class="p">]))</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p q r = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">k4_eval</span> <span class="p">[</span><span class="n">k4_sym</span> <span class="s">"p"</span><span class="p">,</span> <span class="n">k4_sym</span> <span class="s">"q"</span><span class="p">,</span> <span class="n">k4_sym</span> <span class="s">"r"</span><span class="p">]))</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Results</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">*Main&gt;</span><span class="w"> </span>main
+<span class="go">p^(-1) = p
+r^(-1) = r
+p q = r
+p q r = e</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
@@ -1987,7 +2052,7 @@ si * i * j * k = i
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-27 13:51:57 UTC
+Last updated 2022-07-27 16:21:50 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
