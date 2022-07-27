@@ -264,7 +264,6 @@ include::../src/math/complex.hs[]
 1.0 :+ 1.7484555e-7
 *Main> omega_f ** ((3::Float) :+ 0)
 1.0 :+ 1.7484555e-7
-
 ----
 
 [source,haskell]
@@ -285,6 +284,9 @@ include::../src/math/complex.hs[]
 *Main> omega_d ** ((3::Double) :+ 0)
 0.9999999999999997 :+ 6.432490598706544e-16
 ----
+
+.References
+* https://stackoverflow.com/questions/48100794/differences-between-complex-number-implementations-in-haskell-and-python[Differences between complex number implementations in Haskell and Python - Stack Overflow^]
 
 === Group
 
