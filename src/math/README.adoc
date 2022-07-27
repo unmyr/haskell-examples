@@ -1,5 +1,50 @@
 == Math
 
+=== Factorial
+
+[latexmath]
+++++
+n! =
+\begin{cases}
+  1       & if (n = 0) \\
+  n(n-1)! & if (n < 1)
+\end{cases}
+++++
+
+* Using recursion
++
+[source,haskell]
+.src/math/fac.hs
+----
+-- Using pattern matching
+facRecPm :: (Integral a) => a -> a
+facRecPm 0 = 1
+facRecPm n = n * facRecPm (n-1)
+
+-- Using conditional guards
+facRecCg :: (Integral a, Eq a) => a -> a
+facRecCg n | n == 0    = 1
+        | otherwise = n * facRecCg (n-1)
+
+-- Using if-then-else
+facRecIfThenElse :: (Integral a, Eq a) => a -> a
+facRecIfThenElse n =
+  if n == 0 then 1 else n * facRecIfThenElse (n-1)
+----
+
+* Using product
++
+[source,haskell]
+.A function that calculates the factorial of a natural number
+----
+Prelude> let fact n = product [1..n]
+Prelude> fact 5
+120
+Prelude> fact 10
+3628800
+Prelude>
+----
+
 === Fibonacci sequence
 
 [source,haskell]

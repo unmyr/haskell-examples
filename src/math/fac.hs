@@ -1,20 +1,22 @@
 -- Using pattern matching
-fac_p :: (Eq a, Num a) => a -> a
-fac_p 0 = 1
-fac_p n = n * fac_p (n-1)
+facRecPm :: (Integral a) => a -> a
+facRecPm 0 = 1
+facRecPm n = n * facRecPm (n-1)
 
 -- Using conditional guards
-fac_g :: (Eq a, Num a) => a -> a
-fac_g n | n == 0    = 1
-        | otherwise = n * fac_g (n-1)
+facRecCg :: (Integral a, Eq a) => a -> a
+facRecCg n | n == 0    = 1
+        | otherwise = n * facRecCg (n-1)
 
 -- Using if-then-else
-fac_if_then_else :: (Eq a, Num a) => a -> a
-fac_if_then_else n =
-  if n == 0 then 1 else n * fac_if_then_else (n-1)
+facRecIfThenElse :: (Integral a, Eq a) => a -> a
+facRecIfThenElse n =
+  if n == 0 then 1 else n * facRecIfThenElse (n-1)
 
 main :: IO ()
 main = do
-  print $ fac_p (42 :: Integer)
-  print $ fac_g (42 :: Integer)
-  print $ fac_if_then_else (42 :: Integer)
+  print $ facRecPm (20 :: Int) == 2432902008176640000
+  print $ facRecPm (21 :: Int) == -4249290049419214848
+  print $ facRecPm (20 :: Integer) == 2432902008176640000
+  print $ facRecCg (21 :: Integer) == 51090942171709440000
+  print $ facRecIfThenElse (21 :: Integer) == 51090942171709440000

@@ -3,8 +3,6 @@
 === using a single parameter
 
 * Using integers
-
-** Omit types
 +
 [source,haskell]
 .A function that calculates the square of an integer
@@ -12,17 +10,6 @@
 Prelude> let square x = x * x
 Prelude> square 42
 1764
-Prelude>
-----
-+
-[source,haskell]
-.A function that calculates the factorial of a natural number
-----
-Prelude> let fact n = product [1..n]
-Prelude> fact 5
-120
-Prelude> fact 10
-3628800
 Prelude>
 ----
 
