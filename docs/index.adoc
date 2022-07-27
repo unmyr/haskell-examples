@@ -1432,25 +1432,19 @@ include::../src/functions/remove_2nd_element.hs[]
 * An example of a use of tuples
 +
 [source,haskell]
-.src/ghci/swap.hs
+.src/functions/swap_two_tuple.hs
 ----
-swap :: (String, String) -> (String, String)
-swap (a, b) = (b, a)
-main = do
-    let (a, b) = swap ("hello", "world")
-    putStrLn (a ++ " " ++ b)
+include::../src/functions/swap_two_tuple.hs[]
 ----
 +
 [source,console]
 ----
-$ ghci src/ghci/swap.hs
+$ ghci src/functions/swap_two_tuple.hs
 ----
 +
 [source,haskell]
 .Results
 ----
-*Main> main
-world hello
 *Main> swap("hello", "world")
 ("world","hello")
 *Main> swap(swap("hello", "world"))
@@ -1459,6 +1453,8 @@ world hello
 ("hello","world")
 *Main> swap $ swap("hello", "world")
 ("hello","world")
+*Main> swap (1 :: Int, 2) == (2, 1)
+True
 ----
 
 * Single integer to list of integers 

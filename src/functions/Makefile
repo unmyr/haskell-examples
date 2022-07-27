@@ -11,6 +11,7 @@ $(TARGET_DIR)/higher_order_args \
 $(TARGET_DIR)/higher_order_tuple \
 $(TARGET_DIR)/make_tuple_various_types \
 $(TARGET_DIR)/max_num \
+$(TARGET_DIR)/swap_two_tuple \
 $(TARGET_DIR)/xor
 
 GHC_FLAGS=-Wall -fwarn-unused-do-bind
@@ -53,6 +54,9 @@ $(TARGET_DIR)/make_tuple_various_types: make_tuple_various_types.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 $(TARGET_DIR)/max_num: max_num.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/swap_two_tuple: swap_two_tuple.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 $(TARGET_DIR)/xor: xor.hs
