@@ -92,47 +92,48 @@ main = do
 
 === K~4~
 
+* Using 2-tuple
++
 [source,haskell]
 .group_o4_k4.hs
 ----
-k4_e :: (Int, Int)
-k4_e = (0, 0)
+k4_sym :: String -> (Int, Int)
+k4_sym "e" = (0, 0)
+k4_sym "p" = (0, 1)
+k4_sym "q" = (1, 0)
+k4_sym "r" = (1, 1)
+k4_sym  _  = error "ERROR: Invalid argument."
 
-k4_p :: (Int, Int)
-k4_p = (0, 1)
+showTuple :: (Int, Int) -> String
+showTuple (0, 0) = "e"
+showTuple (0, 1) = "p"
+showTuple (1, 0) = "q"
+showTuple (1, 1) = "r"
+showTuple _ = error "ERROR: Invalid argument."
 
-k4_q :: (Int, Int)
-k4_q = (1, 0)
-
-k4_r :: (Int, Int)
-k4_r = (1, 1)
-
-toSymbol :: (Int, Int) -> String
-toSymbol (0, 0) = "e"
-toSymbol (0, 1) = "p"
-toSymbol (1, 0) = "q"
-toSymbol (1, 1) = "r"
-toSymbol _ = error "ERROR: Invalid argument."
+c2_op :: Int -> Int -> Int
+c2_op x y = (x + y) `mod` 2
 
 k4_op :: (Int, Int) -> (Int, Int) -> (Int, Int)
-k4_op (x1, y1) (x2, y2) = ((x1 + x2) `mod` 2, (y1 + y2) `mod` 2)
+k4_op (x1, y1) (x2, y2) = (c2_op x1 x2, c2_op y1 y2)
 
 k4_inv :: (Int, Int) -> (Int, Int)
-k4_inv (x, y) = head [(p, q) | p <- [0..2], q <- [0..2], k4_op (x, y) (p, q) == k4_e]
+k4_inv (x, y) = head [(p, q) | p <- [0..2], q <- [0..2], k4_op (x, y) (p, q) == k4_sym "e"]
 
-k4 :: [(Int, Int)] -> [(Int, Int)]
-k4 [] = []
-k4 [x] = [x]
-k4 (x:xs) = k4 ([k4_op x (head xs)] ++ (tail xs))
+k4_eval :: [(Int, Int)] -> [(Int, Int)]
+k4_eval [] = []
+k4_eval [x] = [x]
+k4_eval [x, y] = (k4_op x y):[]
+k4_eval (x:y:zs) = k4_eval ((k4_eval [x, y]) ++ zs)
 
 main :: IO ()
 main = do
-  putStrLn $ "p^(-1) = " ++ toSymbol (k4_inv k4_p)
-  putStrLn $ "r^(-1) = " ++ toSymbol (k4_inv k4_r)
-  putStrLn $ "p q = " ++ toSymbol (head (k4 [k4_p, k4_q]))
-  putStrLn $ "p q r = " ++ toSymbol (head (k4 [k4_p, k4_q, k4_r]))
+  putStrLn $ "p^(-1) = " ++ showTuple (k4_inv (k4_sym "p"))
+  putStrLn $ "r^(-1) = " ++ showTuple (k4_inv (k4_sym "r"))
+  putStrLn $ "p q = " ++ showTuple (head (k4_eval [k4_sym "p", k4_sym "q"]))
+  putStrLn $ "p q r = " ++ showTuple (head (k4_eval [k4_sym "p", k4_sym "q", k4_sym "r"]))
 ----
-
++
 [source,console]
 .Results
 ----
@@ -141,6 +142,54 @@ p^(-1) = p
 r^(-1) = r
 p q = r
 p q r = e
+----
+
+* Using data
++
+[source,haskell]
+.group_o4_k4_with_data.hs
+----
+data K4 = C2xC2 Int Int
+
+instance Eq K4 where
+  (C2xC2 x y) == (C2xC2 x' y') = x == x' && y == y'
+
+instance Show K4 where
+  show a = case a of
+    C2xC2 0 0 -> "e"
+    C2xC2 0 1 -> "p"
+    C2xC2 1 0 -> "q"
+    C2xC2 1 1 -> "r"
+    _         -> "?"
+
+k4_sym :: String -> K4
+k4_sym "e" = C2xC2 0 0
+k4_sym "p" = C2xC2 0 1
+k4_sym "q" = C2xC2 1 0
+k4_sym "r" = C2xC2 1 1
+k4_sym  _  = error "ERROR: Invalid argument."
+
+c2_op :: Int -> Int -> Int
+c2_op x y = (x + y) `mod` 2
+
+k4_op :: K4 -> K4 -> K4
+k4_op (C2xC2 x1 y1) (C2xC2 x2 y2) = C2xC2 (c2_op x1 x2) (c2_op y1 y2)
+
+k4_inv :: K4 -> K4
+k4_inv (C2xC2 x y) = head [C2xC2 p q | p <- [0..2], q <- [0..2], k4_op (C2xC2 x y) (C2xC2 p q) == k4_sym "e"]
+
+k4_eval :: [K4] -> [K4]
+k4_eval [] = []
+k4_eval [x] = [x]
+k4_eval [x, y] = (k4_op x y):[]
+k4_eval (x:y:zs) = k4_eval ((k4_eval [x, y]) ++ zs)
+
+main :: IO ()
+main = do
+  putStrLn $ "p^(-1) = " ++ show (k4_inv (k4_sym "p"))
+  putStrLn $ "r^(-1) = " ++ show (k4_inv (k4_sym "r"))
+  putStrLn $ "p q = " ++ show (head (k4_eval [k4_sym "p", k4_sym "q"]))
+  putStrLn $ "p q r = " ++ show (head (k4_eval [k4_sym "p", k4_sym "q", k4_sym "r"]))
 ----
 
 === D~3~

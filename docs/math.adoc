@@ -357,12 +357,14 @@ h| _q_ | _q_ | _r_ | _e_ | _p_
 h| _r_ | _r_ | _q_ | _p_ | _e_
 |===
 
+* Using 2-tuple
++
 [source,haskell]
 .group_o4_k4.hs
 ----
 include::../src/math/group/group_o4_k4.hs[]
 ----
-
++
 [source,console]
 .Results
 ----
@@ -371,6 +373,14 @@ p^(-1) = p
 r^(-1) = r
 p q = r
 p q r = e
+----
+
+* Using data
++
+[source,haskell]
+.src/math/group/group_o4_k4_with_data.hs
+----
+include::../src/math/group/group_o4_k4_with_data.hs[]
 ----
 
 ==== D~3~
