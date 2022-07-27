@@ -95,7 +95,7 @@ main = do
 * Using 2-tuple
 +
 [source,haskell]
-.group_o4_k4.hs
+.group_o4_k4_with_tuple.hs
 ----
 k4_sym :: String -> (Int, Int)
 k4_sym "e" = (0, 0)
@@ -190,6 +190,16 @@ main = do
   putStrLn $ "r^(-1) = " ++ show (k4_inv (k4_sym "r"))
   putStrLn $ "p q = " ++ show (head (k4_eval [k4_sym "p", k4_sym "q"]))
   putStrLn $ "p q r = " ++ show (head (k4_eval [k4_sym "p", k4_sym "q", k4_sym "r"]))
+----
++
+[source,console]
+.Results
+----
+*Main> main
+p^(-1) = p
+r^(-1) = r
+p q = r
+p q r = e
 ----
 
 === D~3~

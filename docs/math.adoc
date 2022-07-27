@@ -360,9 +360,9 @@ h| _r_ | _r_ | _q_ | _p_ | _e_
 * Using 2-tuple
 +
 [source,haskell]
-.group_o4_k4.hs
+.src/math/group/group_o4_k4_with_tuple.hs
 ----
-include::../src/math/group/group_o4_k4.hs[]
+include::../src/math/group/group_o4_k4_with_tuple.hs[]
 ----
 +
 [source,console]
@@ -381,6 +381,16 @@ p q r = e
 .src/math/group/group_o4_k4_with_data.hs
 ----
 include::../src/math/group/group_o4_k4_with_data.hs[]
+----
++
+[source,console]
+.Results
+----
+*Main> main
+p^(-1) = p
+r^(-1) = r
+p q = r
+p q r = e
 ----
 
 ==== D~3~

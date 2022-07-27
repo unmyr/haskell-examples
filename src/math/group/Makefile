@@ -2,8 +2,8 @@ TARGET_DIR=../../bin
 TARGETS=\
 $(TARGET_DIR)/group_o2_c2 \
 $(TARGET_DIR)/group_o3_c3 \
-$(TARGET_DIR)/group_o4_k4 \
-$(TARGET_DIR)/group_o4_k4_with_data.hs \
+$(TARGET_DIR)/group_o4_k4_with_tuple \
+$(TARGET_DIR)/group_o4_k4_with_data \
 $(TARGET_DIR)/group_o6_d3 \
 $(TARGET_DIR)/group_o8_q8_c \
 $(TARGET_DIR)/group_o8_q8_nc \
@@ -24,7 +24,7 @@ $(TARGET_DIR)/group_o2_c2: group_o2_c2.hs
 $(TARGET_DIR)/group_o3_c3: group_o3_c3.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
-$(TARGET_DIR)/group_o4_k4: group_o4_k4.hs
+$(TARGET_DIR)/group_o4_k4_with_tuple: group_o4_k4_with_tuple.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 $(TARGET_DIR)/group_o4_k4_with_data: group_o4_k4_with_data.hs
