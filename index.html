@@ -988,7 +988,6 @@ pre.rouge {
 <ul class="sectlevel3">
 <li><a href="#_loop_using_counter">Loop using counter</a></li>
 <li><a href="#_loop_using_range">Loop using range</a></li>
-<li><a href="#_condition">Condition</a></li>
 <li><a href="#_recursion">Recursion</a></li>
 </ul>
 </li>
@@ -2198,16 +2197,6 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 </div>
 </div>
 <div class="sect3">
-<h4 id="_condition">Condition</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">fact</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">120</span>
-<span class="kt">True</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span></code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_recursion">Recursion</h4>
 <div class="sect4">
 <h5 id="_reverse">Reverse</h5>
@@ -2261,25 +2250,27 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <div class="title">src/math/fac.hs</div>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="c1">-- Using pattern matching</span>
-<span class="n">fac_p</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
-<span class="n">fac_p</span> <span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">fac_p</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fac_p</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">facRecPm</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">facRecPm</span> <span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">facRecPm</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">facRecPm</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1">-- Using conditional guards</span>
-<span class="n">fac_g</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
-<span class="n">fac_g</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span>    <span class="o">=</span> <span class="mi">1</span>
-        <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fac_g</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">facRecCg</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">facRecCg</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span>    <span class="o">=</span> <span class="mi">1</span>
+        <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">facRecCg</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1">-- Using if-then-else</span>
-<span class="n">fac_if_then_else</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Eq</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
-<span class="n">fac_if_then_else</span> <span class="n">n</span> <span class="o">=</span>
-  <span class="kr">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span> <span class="mi">1</span> <span class="kr">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fac_if_then_else</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">facRecIfThenElse</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">facRecIfThenElse</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="kr">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span> <span class="mi">1</span> <span class="kr">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">facRecIfThenElse</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
-  <span class="n">print</span> <span class="o">$</span> <span class="n">fac_p</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span>
-  <span class="n">print</span> <span class="o">$</span> <span class="n">fac_g</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span>
-  <span class="n">print</span> <span class="o">$</span> <span class="n">fac_if_then_else</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span></code></pre>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">facRecPm</span> <span class="p">(</span><span class="mi">20</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2432902008176640000</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">facRecPm</span> <span class="p">(</span><span class="mi">21</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4249290049419214848</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">facRecPm</span> <span class="p">(</span><span class="mi">20</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2432902008176640000</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">facRecCg</span> <span class="p">(</span><span class="mi">21</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">51090942171709440000</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">facRecIfThenElse</span> <span class="p">(</span><span class="mi">21</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">51090942171709440000</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -2351,8 +2342,8 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">collatz</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Integer</span><span class="p">]</span>
 <span class="n">collatz</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-          <span class="o">|</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
-          <span class="o">|</span> <span class="n">otherwise</span>      <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+          <span class="o">|</span> <span class="n">n</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">=</span> <span class="n">n</span> <span class="o">:</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
+          <span class="o">|</span> <span class="n">otherwise</span>      <span class="o">=</span> <span class="n">n</span> <span class="o">:</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
@@ -2364,8 +2355,8 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="n">collatz</span> <span class="o">::</span> <span class="kt">Integer</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Integer</span><span class="p">]</span>
 <span class="n">collatz</span> <span class="mi">1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">collatz</span> <span class="n">n</span> <span class="o">|</span> <span class="n">even</span> <span class="n">n</span>    <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
-          <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">++</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">collatz</span> <span class="n">n</span> <span class="o">|</span> <span class="n">even</span> <span class="n">n</span>    <span class="o">=</span> <span class="n">n</span> <span class="o">:</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="p">`</span><span class="n">div</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
+          <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="n">n</span> <span class="o">:</span> <span class="n">collatz</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
@@ -2404,10 +2395,6 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <ul>
 <li>
 <p>Using integers</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Omit types</p>
 <div class="listingblock">
 <div class="title">A function that calculates the square of an integer</div>
 <div class="content">
@@ -2416,20 +2403,6 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <span class="mi">1764</span>
 <span class="kt">Prelude</span><span class="o">&gt;</span></code></pre>
 </div>
-</div>
-<div class="listingblock">
-<div class="title">A function that calculates the factorial of a natural number</div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">fact</span> <span class="n">n</span> <span class="o">=</span> <span class="n">product</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">n</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">fact</span> <span class="mi">5</span>
-<span class="mi">120</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">fact</span> <span class="mi">10</span>
-<span class="mi">3628800</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span></code></pre>
-</div>
-</div>
-</li>
-</ul>
 </div>
 </li>
 <li>
@@ -2925,33 +2898,42 @@ Floating is a type class.</p>
 <li>
 <p>An example of a use of tuples</p>
 <div class="listingblock">
-<div class="title">src/ghci/swap.hs</div>
+<div class="title">src/functions/swap_two_tuple.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">swap</span> <span class="o">::</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">swapString</span> <span class="o">::</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span>
+<span class="n">swapString</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="n">swap</span> <span class="o">::</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 <span class="n">swap</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
-    <span class="kr">let</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="n">swap</span> <span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">)</span>
-    <span class="n">putStrLn</span> <span class="p">(</span><span class="n">a</span> <span class="o">++</span> <span class="s">" "</span> <span class="o">++</span> <span class="n">b</span><span class="p">)</span></code></pre>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">swapString</span> <span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="s">"world"</span><span class="p">,</span> <span class="s">"hello"</span><span class="p">)</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">swap</span> <span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="s">"world"</span><span class="p">,</span> <span class="s">"hello"</span><span class="p">)</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">swap</span><span class="p">(</span><span class="n">swap</span><span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">)</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="p">(</span><span class="n">swap</span> <span class="o">.</span> <span class="n">swap</span><span class="p">)(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">)</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="p">(</span><span class="n">swap</span> <span class="o">$</span> <span class="n">swap</span><span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">))</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">swap</span> <span class="p">(</span><span class="mi">1</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/ghci/swap.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/functions/swap_two_tuple.hs</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Results</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
-<span class="n">world</span> <span class="n">hello</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">swap</span><span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">swap</span><span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">)</span>
 <span class="p">(</span><span class="s">"world"</span><span class="p">,</span><span class="s">"hello"</span><span class="p">)</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">swap</span><span class="p">(</span><span class="n">swap</span><span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">))</span>
 <span class="p">(</span><span class="s">"hello"</span><span class="p">,</span><span class="s">"world"</span><span class="p">)</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">swap</span> <span class="o">.</span> <span class="n">swap</span><span class="p">)(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">)</span>
 <span class="p">(</span><span class="s">"hello"</span><span class="p">,</span><span class="s">"world"</span><span class="p">)</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">swap</span> <span class="o">$</span> <span class="n">swap</span><span class="p">(</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">)</span>
-<span class="p">(</span><span class="s">"hello"</span><span class="p">,</span><span class="s">"world"</span><span class="p">)</span></code></pre>
+<span class="p">(</span><span class="s">"hello"</span><span class="p">,</span><span class="s">"world"</span><span class="p">)</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">swap</span> <span class="p">(</span><span class="mi">1</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="kt">True</span></code></pre>
 </div>
 </div>
 </li>
@@ -3249,7 +3231,7 @@ Floating is a type class.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-26 15:35:40 UTC
+Last updated 2022-07-27 10:42:44 UTC
 </div>
 </div>
 </body>

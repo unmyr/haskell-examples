@@ -970,6 +970,8 @@ pre.rouge {
 <ul class="sectlevel2">
 <li><a href="#_built_in_functions">Built-in functions</a></li>
 <li><a href="#_sum">Sum</a></li>
+<li><a href="#_factorial">Factorial</a></li>
+<li><a href="#_fibonacci_sequence">Fibonacci sequence</a></li>
 <li><a href="#_prime_number">Prime number</a></li>
 <li><a href="#_complex_number">Complex number</a></li>
 <li><a href="#_group">Group</a>
@@ -1137,6 +1139,84 @@ pre.rouge {
 </div>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_factorial">Factorial</h3>
+<div class="paragraph">
+<p>A function that calculates the factorial of a natural number.</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[n! =
+\begin{cases}
+  1       &amp; if (n = 0) \\
+  n(n-1)! &amp; if (n &lt; 1)
+\end{cases}\]
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Using recursion</p>
+<div class="listingblock">
+<div class="title">src/math/fac.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="c1">-- Using pattern matching</span>
+<span class="n">facRecPm</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">facRecPm</span> <span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">facRecPm</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">facRecPm</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">-- Using conditional guards</span>
+<span class="n">facRecCg</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">facRecCg</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span>    <span class="o">=</span> <span class="mi">1</span>
+        <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">facRecCg</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">-- Using if-then-else</span>
+<span class="n">facRecIfThenElse</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
+<span class="n">facRecIfThenElse</span> <span class="n">n</span> <span class="o">=</span>
+  <span class="kr">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span> <span class="mi">1</span> <span class="kr">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">facRecIfThenElse</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">facRecPm</span> <span class="p">(</span><span class="mi">20</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2432902008176640000</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">facRecPm</span> <span class="p">(</span><span class="mi">21</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">4249290049419214848</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">facRecPm</span> <span class="p">(</span><span class="mi">20</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2432902008176640000</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">facRecCg</span> <span class="p">(</span><span class="mi">21</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">51090942171709440000</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">facRecIfThenElse</span> <span class="p">(</span><span class="mi">21</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">51090942171709440000</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Using product</p>
+<div class="listingblock">
+<div class="title">A function that calculates the factorial of a natural number</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">fact</span> <span class="n">n</span> <span class="o">=</span> <span class="n">product</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">n</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">fact</span> <span class="mi">5</span>
+<span class="mi">120</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">fact</span> <span class="mi">10</span>
+<span class="mi">3628800</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fibonacci_sequence">Fibonacci sequence</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">fib</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+<span class="n">fib</span> <span class="mi">0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">fib</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">fib</span> <span class="n">n</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">fib</span> <span class="mi">10</span></code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1862,7 +1942,7 @@ si * i * j * k = i
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-26 15:35:40 UTC
+Last updated 2022-07-27 10:42:44 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
