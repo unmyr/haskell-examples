@@ -1,6 +1,7 @@
 TARGET_DIR=../../bin
 TARGETS=\
-$(TARGET_DIR)/group_o2_c2 \
+$(TARGET_DIR)/group_o2_c2_using_int \
+$(TARGET_DIR)/group_o2_c2_using_monad \
 $(TARGET_DIR)/group_o3_c3 \
 $(TARGET_DIR)/group_o4_k4_with_tuple \
 $(TARGET_DIR)/group_o4_k4_with_data \
@@ -18,7 +19,10 @@ all: setup $(TARGETS)
 setup:
 	mkdir -p $(TARGET_DIR)
 
-$(TARGET_DIR)/group_o2_c2: group_o2_c2.hs
+$(TARGET_DIR)/group_o2_c2_using_int: group_o2_c2_using_int.hs
+	ghc $(GHC_FLAGS) -o $@ $<
+
+$(TARGET_DIR)/group_o2_c2_using_monad: group_o2_c2_using_monad.hs
 	ghc $(GHC_FLAGS) -o $@ $<
 
 $(TARGET_DIR)/group_o3_c3: group_o3_c3.hs
