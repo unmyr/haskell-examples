@@ -6,7 +6,7 @@ facRecPm n = n * facRecPm (n-1)
 -- Using conditional guards
 facRecCg :: (Integral a, Eq a) => a -> a
 facRecCg n | n == 0    = 1
-        | otherwise = n * facRecCg (n-1)
+           | otherwise = n * facRecCg (n-1)
 
 -- Using if-then-else
 facRecIfThenElse :: (Integral a, Eq a) => a -> a
