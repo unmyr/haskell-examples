@@ -2257,7 +2257,7 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <span class="c1">-- Using conditional guards</span>
 <span class="n">facRecCg</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
 <span class="n">facRecCg</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span>    <span class="o">=</span> <span class="mi">1</span>
-        <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">facRecCg</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+           <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">facRecCg</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1">-- Using if-then-else</span>
 <span class="n">facRecIfThenElse</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
@@ -2709,10 +2709,10 @@ Floating is a type class.</p>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
     <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">13</span>      <span class="o">==</span> <span class="mi">55</span>
     <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="mi">13</span>  <span class="o">==</span> <span class="mi">55</span>
-    <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="mi">13</span> <span class="o">==</span> <span class="mi">55</span>
+    <span class="n">print</span> <span class="o">$</span> <span class="p">((</span><span class="o">==</span><span class="p">)</span> <span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">6</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">))</span> <span class="p">(</span><span class="n">add</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span>
     <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Float</span><span class="p">)</span> <span class="mi">13</span>    <span class="o">==</span> <span class="mi">55</span>
     <span class="n">print</span> <span class="o">$</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Double</span><span class="p">)</span> <span class="mi">13</span>   <span class="o">==</span> <span class="mi">55</span>
-    <span class="c1">-- NG: Int type overflow </span>
+    <span class="c1">-- NG: Int type overflow</span>
     <span class="n">print</span> <span class="o">$</span>
       <span class="n">add</span> <span class="p">(</span><span class="n">maxBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">1</span>             <span class="o">==</span> <span class="p">(</span><span class="n">minBound</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span>
     <span class="c1">-- OK: Integer type</span>
@@ -2736,8 +2736,8 @@ Floating is a type class.</p>
 <span class="mi">55</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Integer</span><span class="p">)</span> <span class="mi">13</span>
 <span class="mi">55</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Rational</span><span class="p">)</span> <span class="mi">13</span>
-<span class="mi">55</span> <span class="o">%</span> <span class="mi">1</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Rational</span>
+<span class="mi">5</span> <span class="o">%</span> <span class="mi">6</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="mf">42.0</span> <span class="mf">13.0</span>
 <span class="mf">55.0</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">add</span> <span class="p">(</span><span class="mi">42</span> <span class="o">::</span> <span class="kt">Float</span><span class="p">)</span> <span class="mi">13</span>
@@ -2820,32 +2820,44 @@ Floating is a type class.</p>
 
 <span class="n">xor</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Show</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
 <span class="n">xor</span> <span class="kt">[]</span> <span class="o">=</span> <span class="n">trace</span><span class="p">(</span><span class="s">"DEBUG[]"</span><span class="p">)</span> <span class="kt">[]</span>
-<span class="n">xor</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">trace</span><span class="p">(</span><span class="s">"DEBUG["</span> <span class="o">++</span> <span class="n">show</span> <span class="n">x</span> <span class="o">++</span> <span class="s">"]"</span><span class="p">)</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="n">xor</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">trace</span><span class="p">(</span><span class="s">"DEBUG["</span> <span class="o">++</span> <span class="n">show</span> <span class="n">x</span> <span class="o">++</span> <span class="s">"]"</span><span class="p">)</span> <span class="o">$</span> <span class="n">x</span><span class="o">:</span><span class="kt">[]</span>
+<span class="n">xor</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span>
+  <span class="n">trace</span><span class="p">(</span><span class="s">"DEBUG["</span> <span class="o">++</span> <span class="n">show</span> <span class="n">x</span> <span class="o">++</span> <span class="s">","</span> <span class="o">++</span> <span class="n">show</span> <span class="n">y</span> <span class="o">++</span> <span class="s">"]"</span><span class="p">)</span> <span class="o">$</span>
+  <span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span><span class="o">:</span><span class="kt">[]</span>
 <span class="n">xor</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">y</span><span class="o">:</span><span class="n">zs</span><span class="p">)</span> <span class="o">=</span>
-  <span class="n">trace</span> <span class="p">(</span><span class="s">"DEBUG("</span> <span class="o">++</span> <span class="n">show</span> <span class="n">x</span> <span class="o">++</span> <span class="s">":"</span> <span class="o">++</span> <span class="n">show</span> <span class="n">y</span> <span class="o">++</span> <span class="s">":"</span> <span class="o">++</span> <span class="n">show</span> <span class="n">zs</span> <span class="o">++</span> <span class="s">")"</span><span class="p">)</span>
-  <span class="n">xor</span> <span class="p">([(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span><span class="p">]</span> <span class="o">++</span> <span class="n">zs</span><span class="p">)</span>
+  <span class="n">trace</span> <span class="p">(</span><span class="s">"DEBUG("</span> <span class="o">++</span> <span class="n">show</span> <span class="n">x</span> <span class="o">++</span> <span class="s">":"</span> <span class="o">++</span> <span class="n">show</span> <span class="n">y</span> <span class="o">++</span> <span class="s">":"</span> <span class="o">++</span> <span class="n">show</span> <span class="n">zs</span> <span class="o">++</span> <span class="s">")"</span><span class="p">)</span> <span class="o">$</span>
+  <span class="n">xor</span> <span class="p">(</span><span class="n">xor</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">++</span> <span class="n">zs</span><span class="p">)</span>
 
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">xor</span> <span class="p">(</span><span class="kt">[]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="o">==</span> <span class="kt">[]</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">xor</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">print</span> <span class="o">$</span> <span class="n">xor</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
   <span class="n">print</span> <span class="o">$</span> <span class="n">xor</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">xor</span> <span class="p">(</span><span class="kt">[]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
-<span class="kt">DEBUG[]</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">xor</span> <span class="kt">[]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
+<span class="kt">DEBUG[]</span> <span class="o">=&gt;</span>
 <span class="kt">[]</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">xor</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
-<span class="kt">DEBUG</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="kt">DEBUG</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="kt">[]</span><span class="p">)</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">xor</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
 <span class="kt">DEBUG</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">xor</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">xor</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
+<span class="kt">DEBUG</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">xor</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
+<span class="kt">DEBUG</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="kt">DEBUG</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="kt">DEBUG</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">xor</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
 <span class="kt">DEBUG</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="kt">DEBUG</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 <span class="kt">DEBUG</span><span class="p">(</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="kt">DEBUG</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="kt">[]</span><span class="p">)</span>
-<span class="kt">DEBUG</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="kt">DEBUG</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="kt">DEBUG</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
 <span class="p">[</span><span class="mi">0</span><span class="p">]</span></code></pre>
 </div>
 </div>
@@ -3231,7 +3243,7 @@ Floating is a type class.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-27 11:04:49 UTC
+Last updated 2022-07-27 13:51:57 UTC
 </div>
 </div>
 </body>

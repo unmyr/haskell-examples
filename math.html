@@ -1170,7 +1170,7 @@ pre.rouge {
 <span class="c1">-- Using conditional guards</span>
 <span class="n">facRecCg</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
 <span class="n">facRecCg</span> <span class="n">n</span> <span class="o">|</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span>    <span class="o">=</span> <span class="mi">1</span>
-        <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">facRecCg</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+           <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">facRecCg</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1">-- Using if-then-else</span>
 <span class="n">facRecIfThenElse</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Integral</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Eq</span> <span class="n">a</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="n">a</span>
@@ -1336,6 +1336,14 @@ pre.rouge {
 <span class="mf">0.9999999999999997</span> <span class="o">:+</span> <span class="mf">6.432490598706544e-16</span></code></pre>
 </div>
 </div>
+<div class="ulist">
+<div class="title">References</div>
+<ul>
+<li>
+<p><a href="https://stackoverflow.com/questions/48100794/differences-between-complex-number-implementations-in-haskell-and-python" target="_blank" rel="noopener">Differences between complex number implementations in Haskell and Python - Stack Overflow</a></p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_group">Group</h3>
@@ -1371,14 +1379,18 @@ pre.rouge {
 <div class="listingblock">
 <div class="title">group_o2_c2.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">c2_e</span> <span class="o">=</span> <span class="mi">0</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">c2_e</span> <span class="o">::</span> <span class="kt">Int</span>
+<span class="n">c2_e</span> <span class="o">=</span> <span class="mi">0</span>
 
+<span class="n">c2_op</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
 <span class="c1">-- c2_op a b = (a + b) `mod` 2</span>
 <span class="n">c2_op</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">c2_op</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">c2_op</span> <span class="mi">0</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">c2_op</span> <span class="mi">1</span> <span class="mi">0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">c2_op</span> <span class="kr">_</span> <span class="kr">_</span> <span class="o">=</span> <span class="n">error</span> <span class="s">"ERROR invalid arguments."</span>
 
+<span class="n">inv</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
 <span class="n">inv</span> <span class="n">x</span> <span class="o">=</span> <span class="n">head</span> <span class="p">[</span><span class="n">y</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c2_op</span> <span class="n">x</span> <span class="n">y</span> <span class="o">==</span> <span class="n">c2_e</span><span class="p">]</span>
 
 <span class="n">c2</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
@@ -1386,6 +1398,7 @@ pre.rouge {
 <span class="n">c2</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
 <span class="n">c2</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">c2</span> <span class="p">([</span><span class="n">c2_op</span> <span class="n">x</span> <span class="p">(</span><span class="n">head</span> <span class="n">xs</span><span class="p">)]</span> <span class="o">++</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">))</span>
 
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
   <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"0^(-1) = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">inv</span> <span class="mi">0</span><span class="p">)</span>
   <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"1^(-1) = "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">inv</span> <span class="mi">1</span><span class="p">)</span>
@@ -1446,10 +1459,16 @@ pre.rouge {
 <div class="listingblock">
 <div class="title">group_o3_c3.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">c3_e</span> <span class="o">=</span> <span class="mi">0</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">c3_e</span> <span class="o">::</span> <span class="kt">Int</span>
+<span class="n">c3_e</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">c3_all</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
 <span class="n">c3_all</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 
+<span class="n">c3_op</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
 <span class="n">c3_op</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">3</span>
+
+<span class="n">c3_inv</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
 <span class="n">c3_inv</span> <span class="n">x</span> <span class="o">=</span> <span class="n">head</span> <span class="p">[</span><span class="n">y</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">c3_all</span><span class="p">,</span> <span class="n">c3_op</span> <span class="n">x</span> <span class="n">y</span> <span class="o">==</span> <span class="n">c3_e</span><span class="p">]</span>
 
 <span class="n">c3</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
@@ -1457,6 +1476,7 @@ pre.rouge {
 <span class="n">c3</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
 <span class="n">c3</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">c3</span> <span class="p">([</span><span class="n">c3_op</span> <span class="n">x</span> <span class="p">(</span><span class="n">head</span> <span class="n">xs</span><span class="p">)]</span> <span class="o">++</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">))</span>
 
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
   <span class="n">print</span> <span class="o">$</span> <span class="p">[</span><span class="n">c3_op</span> <span class="mi">0</span>  <span class="n">y</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">c3_all</span><span class="p">]</span>
   <span class="n">print</span> <span class="o">$</span> <span class="p">[</span><span class="n">c3_op</span> <span class="mi">1</span>  <span class="n">y</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">c3_all</span><span class="p">]</span>
@@ -1535,29 +1555,42 @@ pre.rouge {
 <div class="listingblock">
 <div class="title">group_o4_k4.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">e</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">k4_e</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="n">k4_e</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
+<span class="n">k4_p</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="n">k4_p</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">k4_q</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="n">k4_q</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">k4_r</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="n">k4_r</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">toSymbol</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span>
 <span class="n">toSymbol</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="s">"e"</span>
 <span class="n">toSymbol</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">"p"</span>
 <span class="n">toSymbol</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="s">"q"</span>
 <span class="n">toSymbol</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s">"r"</span>
+<span class="n">toSymbol</span> <span class="kr">_</span> <span class="o">=</span> <span class="n">error</span> <span class="s">"ERROR: Invalid argument."</span>
 
+<span class="n">k4_op</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
 <span class="n">k4_op</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="o">=</span> <span class="p">((</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">y1</span> <span class="o">+</span> <span class="n">y2</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">k4_inv</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">head</span> <span class="p">[(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">|</span> <span class="n">p</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">],</span> <span class="n">q</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">],</span> <span class="n">k4_op</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+
+<span class="n">k4_inv</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="n">k4_inv</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">head</span> <span class="p">[(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">|</span> <span class="n">p</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">],</span> <span class="n">q</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">],</span> <span class="n">k4_op</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">==</span> <span class="n">k4_e</span><span class="p">]</span>
 
 <span class="n">k4</span> <span class="o">::</span> <span class="p">[(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span> <span class="o">-&gt;</span> <span class="p">[(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span>
 <span class="n">k4</span> <span class="kt">[]</span> <span class="o">=</span> <span class="kt">[]</span>
 <span class="n">k4</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
 <span class="n">k4</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">k4</span> <span class="p">([</span><span class="n">k4_op</span> <span class="n">x</span> <span class="p">(</span><span class="n">head</span> <span class="n">xs</span><span class="p">)]</span> <span class="o">++</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">))</span>
 
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
-  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p^(-1) = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">k4_inv</span> <span class="n">p</span><span class="p">)</span>
-  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"r^(-1) = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">k4_inv</span> <span class="n">r</span><span class="p">)</span>
-  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p q = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">k4</span> <span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">]))</span>
-  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p q r = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">k4</span> <span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">]))</span></code></pre>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p^(-1) = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">k4_inv</span> <span class="n">k4_p</span><span class="p">)</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"r^(-1) = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">k4_inv</span> <span class="n">k4_r</span><span class="p">)</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p q = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">k4</span> <span class="p">[</span><span class="n">k4_p</span><span class="p">,</span> <span class="n">k4_q</span><span class="p">]))</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"p q r = "</span> <span class="o">++</span> <span class="n">toSymbol</span> <span class="p">(</span><span class="n">head</span> <span class="p">(</span><span class="n">k4</span> <span class="p">[</span><span class="n">k4_p</span><span class="p">,</span> <span class="n">k4_q</span><span class="p">,</span> <span class="n">k4_r</span><span class="p">]))</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1657,9 +1690,13 @@ p q r = e</span></code></pre>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Debug.Trace</span>
 
+<span class="n">d3_e</span> <span class="o">::</span> <span class="kt">String</span>
 <span class="n">d3_e</span> <span class="o">=</span> <span class="s">"e"</span>
+
+<span class="n">d3_all</span> <span class="o">::</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span>
 <span class="n">d3_all</span> <span class="o">=</span> <span class="p">[</span><span class="n">d3_e</span><span class="p">,</span> <span class="s">"r"</span><span class="p">,</span> <span class="s">"rr"</span><span class="p">,</span> <span class="s">"s"</span><span class="p">,</span> <span class="s">"sr"</span><span class="p">,</span> <span class="s">"srr"</span><span class="p">]</span>
 
+<span class="n">d3_dot</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
 <span class="n">d3_dot</span> <span class="n">x</span> <span class="n">y</span> <span class="o">|</span> <span class="n">x</span> <span class="o">==</span> <span class="n">d3_e</span> <span class="o">=</span> <span class="n">y</span>
 <span class="n">d3_dot</span> <span class="n">x</span> <span class="n">y</span> <span class="o">|</span> <span class="n">y</span> <span class="o">==</span> <span class="n">d3_e</span> <span class="o">=</span> <span class="n">x</span>
 
@@ -1700,8 +1737,10 @@ p q r = e</span></code></pre>
 <span class="n">d3</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
 <span class="n">d3</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">d3</span> <span class="p">([</span><span class="n">d3_dot</span> <span class="n">x</span> <span class="p">(</span><span class="n">head</span> <span class="n">xs</span><span class="p">)]</span> <span class="o">++</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">))</span>
 
+<span class="n">d3_inv</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
 <span class="n">d3_inv</span> <span class="n">x</span> <span class="o">=</span> <span class="n">head</span> <span class="p">[</span><span class="n">x</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">d3_all</span><span class="p">,</span> <span class="n">d3_dot</span> <span class="n">x</span> <span class="n">y</span> <span class="o">==</span> <span class="n">d3_e</span><span class="p">]</span>
 
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
   <span class="n">print</span> <span class="o">$</span> <span class="p">[</span><span class="n">d3_dot</span> <span class="s">"e"</span>    <span class="n">y</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">d3_all</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span>  <span class="s">"e"</span><span class="p">,</span>  <span class="s">"r"</span><span class="p">,</span> <span class="s">"rr"</span><span class="p">,</span>  <span class="s">"s"</span><span class="p">,</span> <span class="s">"sr"</span><span class="p">,</span><span class="s">"srr"</span><span class="p">]</span>
   <span class="n">print</span> <span class="o">$</span> <span class="p">[</span><span class="n">d3_dot</span> <span class="s">"r"</span>    <span class="n">y</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">d3_all</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span>  <span class="s">"r"</span><span class="p">,</span> <span class="s">"rr"</span><span class="p">,</span>  <span class="s">"e"</span><span class="p">,</span><span class="s">"srr"</span><span class="p">,</span>  <span class="s">"s"</span><span class="p">,</span> <span class="s">"sr"</span><span class="p">]</span>
@@ -1862,9 +1901,13 @@ s * r * s = rr
 <div class="content">
 <pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Debug.Trace</span>
 
+<span class="n">q8_e</span> <span class="o">::</span> <span class="kt">String</span>
 <span class="n">q8_e</span> <span class="o">=</span> <span class="s">"e"</span>
+
+<span class="n">q8_all</span> <span class="o">::</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span>
 <span class="n">q8_all</span> <span class="o">=</span> <span class="p">[</span><span class="n">q8_e</span><span class="p">,</span> <span class="s">"s"</span><span class="p">,</span> <span class="s">"i"</span><span class="p">,</span> <span class="s">"si"</span><span class="p">,</span> <span class="s">"j"</span><span class="p">,</span> <span class="s">"sj"</span><span class="p">,</span> <span class="s">"k"</span><span class="p">,</span> <span class="s">"sk"</span><span class="p">]</span>
 
+<span class="n">q8_dot</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
 <span class="n">q8_dot</span> <span class="n">x</span> <span class="n">y</span> <span class="o">|</span> <span class="n">x</span> <span class="o">==</span> <span class="n">q8_e</span> <span class="o">=</span> <span class="n">y</span>
 <span class="n">q8_dot</span> <span class="n">x</span> <span class="n">y</span> <span class="o">|</span> <span class="n">y</span> <span class="o">==</span> <span class="n">q8_e</span> <span class="o">=</span> <span class="n">x</span>
 <span class="n">q8_dot</span> <span class="n">x</span> <span class="n">y</span> <span class="o">|</span> <span class="n">x</span> <span class="o">==</span> <span class="s">"s"</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">==</span> <span class="s">"s"</span> <span class="o">=</span> <span class="n">q8_e</span>
@@ -1898,8 +1941,10 @@ s * r * s = rr
 <span class="n">q8</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
 <span class="n">q8</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">q8</span> <span class="p">([</span><span class="n">q8_dot</span> <span class="n">x</span> <span class="p">(</span><span class="n">head</span> <span class="n">xs</span><span class="p">)]</span> <span class="o">++</span> <span class="p">(</span><span class="n">tail</span> <span class="n">xs</span><span class="p">))</span>
 
+<span class="n">q8_inv</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
 <span class="n">q8_inv</span> <span class="n">x</span> <span class="o">=</span> <span class="n">head</span> <span class="p">[</span><span class="n">x</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">q8_all</span><span class="p">,</span> <span class="n">q8_dot</span> <span class="n">x</span> <span class="n">y</span> <span class="o">==</span> <span class="n">q8_e</span><span class="p">]</span>
 
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
   <span class="n">print</span> <span class="o">$</span> <span class="p">[</span><span class="n">q8_dot</span> <span class="s">"e"</span>  <span class="n">y</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">q8_all</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span> <span class="s">"e"</span><span class="p">,</span> <span class="s">"s"</span><span class="p">,</span> <span class="s">"i"</span><span class="p">,</span><span class="s">"si"</span><span class="p">,</span> <span class="s">"j"</span><span class="p">,</span><span class="s">"sj"</span><span class="p">,</span> <span class="s">"k"</span><span class="p">,</span><span class="s">"sk"</span><span class="p">]</span>
   <span class="n">print</span> <span class="o">$</span> <span class="p">[</span><span class="n">q8_dot</span> <span class="s">"s"</span>  <span class="n">y</span> <span class="o">|</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">q8_all</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span> <span class="s">"s"</span><span class="p">,</span> <span class="s">"e"</span><span class="p">,</span><span class="s">"si"</span><span class="p">,</span> <span class="s">"i"</span><span class="p">,</span><span class="s">"sj"</span><span class="p">,</span> <span class="s">"j"</span><span class="p">,</span><span class="s">"sk"</span><span class="p">,</span> <span class="s">"k"</span><span class="p">]</span>
@@ -1942,7 +1987,7 @@ si * i * j * k = i
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-27 11:04:49 UTC
+Last updated 2022-07-27 13:51:57 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
