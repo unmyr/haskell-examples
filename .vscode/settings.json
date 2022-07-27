@@ -21,6 +21,7 @@
     "latexmath",
     "leveloffset",
     "mappend",
+    "mconcat",
     "mempty",
     "microstache",
     "Monoid",
