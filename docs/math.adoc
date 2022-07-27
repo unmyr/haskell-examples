@@ -154,8 +154,8 @@ A function that calculates the factorial of a natural number.
 ++++
 n! =
 \begin{cases}
-  1       & if (n = 0) \\
-  n(n-1)! & if (n < 1)
+  1       & \text{if $(n = 0)$} \\
+  n(n-1)! & \text{if $(n < 1)$}
 \end{cases}
 ++++
 
