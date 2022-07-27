@@ -25,20 +25,21 @@ c2_op 0 1 = 1
 c2_op 1 0 = 1
 c2_op _ _ = error "ERROR invalid arguments."
 
-inv :: Int -> Int
-inv x = head [y | y <- [0, 1], c2_op x y == c2_e]
+c2_inv :: Int -> Int
+c2_inv x = head [y | y <- [0, 1], c2_op x y == c2_e]
 
-c2 :: [Int] -> [Int]
-c2 [] = []
-c2 [x] = [x]
-c2 (x:xs) = c2 ([c2_op x (head xs)] ++ (tail xs))
+c2_eval :: [Int] -> [Int]
+c2_eval [] = []
+c2_eval [x] = [x]
+c2_eval [x, y] = (c2_op x y):[]
+c2_eval (x:y:zs) = c2_eval ((c2_eval [x, y]) ++ zs)
 
 main :: IO ()
 main = do
-  putStrLn $ "0^(-1) = " ++ show (inv 0)
-  putStrLn $ "1^(-1) = " ++ show (inv 1)
-  putStrLn $ "1 ⊕ 1 ⊕ 1 = " ++ show (head (c2 [1, 1, 1]))
-  putStrLn $ "1 ⊕ 1 ⊕ 1 ⊕ 1 = " ++ show (head (c2 [1, 1, 1, 1]))
+  putStrLn $ "0^(-1) = " ++ show (c2_inv 0)
+  putStrLn $ "1^(-1) = " ++ show (c2_inv 1)
+  putStrLn $ "1 ⊕ 1 ⊕ 1 = " ++ show (head (c2_eval [1, 1, 1]))
+  putStrLn $ "1 ⊕ 1 ⊕ 1 ⊕ 1 = " ++ show (head (c2_eval [1, 1, 1, 1]))
 ----
 +
 [source,console]
