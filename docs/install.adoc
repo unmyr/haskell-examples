@@ -24,10 +24,52 @@ sudo apt install -y --no-install-recommends ghc
 sudo apt-get --only-upgrade install ghc
 ----
 
+* Uninstall ghc
++
+[source,shell]
+----
+sudo apt-get remove --auto-remove ghc 
+----
+
 * Cabal
 +
 [source,shell]
 ----
 cabal update
 cabal install <package-name>
+----
+
+=== Haskell platform
+
+[source,shell]
+----
+apt-get install haskell-platform -y
+----
+
+=== Haskell stack
+
+https://docs.haskellstack.org/en/stable/install_and_upgrade/[Install/upgrade - The Haskell Tool Stack^]
+
+. Download and install
++
+[source,shell]
+----
+curl -sSL https://get.haskellstack.org/ | sh
+----
+
+. Upgrade Haskell Tool Stack
++
+[source,console]
+----
+$ stack upgrade --binary-only
+Current Stack version: 2.7.5, available download version: 2.7.5
+Skipping binary upgrade, you are already running the most recent version
+----
+
+. Install GHC, etc
++
+[source,console]
+----
+$ stack setup
+...
 ----
