@@ -320,9 +320,9 @@ include::../src/math/group/group_o2_c2_using_int.hs[]
 * Using Monad
 +
 [source,haskell]
-.src/math/group/group_o2_c2_using_monad.hs
+.src/math/group/group_o2_c2_using_monoid.hs
 ----
-include::../src/math/group/group_o2_c2_using_monad.hs[]
+include::../src/math/group/group_o2_c2_using_monoid.hs[]
 ----
 +
 [source,console]

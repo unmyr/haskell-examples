@@ -55,7 +55,7 @@ main = do
 * Using Monad
 +
 [source,haskell]
-.group_o2_c2_using_monad.hs
+.group_o2_c2_using_monoid.hs
 ----
 data C2 = C2 Int
 
