@@ -1,0 +1,33 @@
+
+== Dice test
+
+=== Create project
+
+[source,console]
+----
+$ mkdir dice-test
+$ cd dice-test/
+$ cabal init --non-interactive --cabal-version=2.4 \
+--is-executable --source-dir=src --license=MIT --author=unmyr \
+-p dice-test
+----
+
+=== Build
+
+[source,console]
+----
+$ cabal v2-build
+----
+
+=== Run
+
+[source,console]
+----
+$ cabal v2-run
+Up to date
+3
+----
+
+=== References
+
+* https://cabal.readthedocs.io/en/latest/nix-local-build.html[4.1. Quickstart — Cabal 3.9.0.0 User's Guide^]
