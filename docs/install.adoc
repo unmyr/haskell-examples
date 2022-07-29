@@ -8,7 +8,12 @@ include::header.adoc[]
 
 == Install Haskell
 
-=== Ubuntu
+=== Ubuntu 18
+
+https://launchpad.net/~hvr/+archive/ubuntu/ghc/+index?field.series_filter=bionic[^GHC : Herbert V. Riedel]
+
+==== Haskell 8.0.2
+
 
 * Install Haskell
 +
@@ -39,16 +44,50 @@ cabal update
 cabal install <package-name>
 ----
 
-=== Haskell platform
+==== Haskell 8.4.x
 
+* Install Haskell
++
+[source,plaintext]
+./etc/apt/sources.list.d/ghc.list
+----
+deb https://ppa.launchpadcontent.net/hvr/ghc/ubuntu bionic main
+deb-src https://ppa.launchpadcontent.net/hvr/ghc/ubuntu bionic main
+----
++
 [source,shell]
 ----
-apt-get install haskell-platform -y
+sudo add-apt-repository ppa:hvr/ghc
+sudo apt update
+sudo apt install ghc-8.4.4 cabal-install-3.0
+----
++
+[source,console]
+----
+$ dpkg -L ghc-8.4.4 | head
+/.
+/opt
+/opt/ghc
+/opt/ghc/8.4.4
+/opt/ghc/8.4.4/bin
+/opt/ghc/8.4.4/bin/ghc-8.4.4
+/opt/ghc/8.4.4/bin/ghc-pkg-8.4.4
+/opt/ghc/8.4.4/bin/ghci-8.4.4
+/opt/ghc/8.4.4/bin/haddock-ghc-8.4.4
+/opt/ghc/8.4.4/bin/hp2ps
+----
++
+[source,console]
+----
+$ /opt/ghc/8.4.4/bin/ghc --version
+The Glorious Glasgow Haskell Compilation System, version 8.4.4
 ----
 
-=== Haskell stack
+.References
+* https://docs.haskellstack.org/en/stable/install_and_upgrade/[Install/upgrade - The Haskell Tool Stack^]
+* https://downloads.haskell.org/debian/[GHC & Cabal APT Repository^]
 
-https://docs.haskellstack.org/en/stable/install_and_upgrade/[Install/upgrade - The Haskell Tool Stack^]
+=== Haskell stack
 
 . Download and install
 +

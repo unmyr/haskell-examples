@@ -9,6 +9,7 @@
     "collatz",
     "compat",
     "concat",
+    "dpkg",
     "foldl",
     "foldr",
     "funfolding",
