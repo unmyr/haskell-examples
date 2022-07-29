@@ -10,8 +10,6 @@ include::header.adoc[]
 
 === Ubuntu 18
 
-https://launchpad.net/~hvr/+archive/ubuntu/ghc/+index?field.series_filter=bionic[^GHC : Herbert V. Riedel]
-
 ==== Haskell 8.0.2
 
 
@@ -59,7 +57,8 @@ deb-src https://ppa.launchpadcontent.net/hvr/ghc/ubuntu bionic main
 ----
 sudo add-apt-repository ppa:hvr/ghc
 sudo apt update
-sudo apt install ghc-8.4.4 cabal-install-3.0
+sudo apt install ghc-8.4.4 cabal-install-2.4
+rm -fR  ~/.cabal
 ----
 +
 [source,console]
@@ -83,7 +82,27 @@ $ /opt/ghc/8.4.4/bin/ghc --version
 The Glorious Glasgow Haskell Compilation System, version 8.4.4
 ----
 
+* Cabal
+
+** Update
++
+[source,shell]
+----
+$ cabal update
+...
+$ cabal install random
+...
+----
+
+* Uninstall Cabal
++
+[source,shell]
+----
+sudo apt-get remove --auto-remove cabal-install-3.0
+----
+
 .References
+* https://launchpad.net/~hvr/+archive/ubuntu/ghc/+index?field.series_filter=bionic[GHC : Herbert V. Riedel^]
 * https://docs.haskellstack.org/en/stable/install_and_upgrade/[Install/upgrade - The Haskell Tool Stack^]
 * https://downloads.haskell.org/debian/[GHC & Cabal APT Repository^]
 
