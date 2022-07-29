@@ -860,16 +860,12 @@ ghci -Wall src/flow-control/loop_counter_no_guards.hs
 +
 [source,haskell]
 ----
-*Main> :load src/flow-control/loop_counter_no_guards.hs
-[1 of 1] Compiling Main             ( src/flow-control/loop_counter_no_guards.hs, interpreted )
-Ok, modules loaded: Main.
 *Main> main
 1
 2
 3
 4
 5
-*Main>
 ----
 
 * using guards
