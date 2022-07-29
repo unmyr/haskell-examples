@@ -837,18 +837,13 @@ Prelude>
 [source,haskell]
 .loop_counter_no_guards.hs
 ----
-main = do
-    let loop 6 = return ()
-        loop i = do
-            print i
-            loop (i + 1)
-    loop 1
+include::../src/flow-control/loop_counter_no_guards.hs[]
 ----
 +
 [source,haskell]
 ----
-*Main> :load src/ghci/loop_counter_no_guards.hs
-[1 of 1] Compiling Main             ( src/ghci/loop_counter_no_guards.hs, interpreted )
+*Main> :load src/flow-control/loop_counter_no_guards.hs
+[1 of 1] Compiling Main             ( src/flow-control/loop_counter_no_guards.hs, interpreted )
 Ok, modules loaded: Main.
 *Main> main
 1
@@ -864,19 +859,13 @@ Ok, modules loaded: Main.
 [source,haskell]
 .loop_counter_using_guards.hs
 ----
-main = do
-    let loop i
-          | i <= 5 = do
-              print i
-              loop (i + 1)
-          | otherwise = return ()
-    loop 1
+include::../src/flow-control/loop_counter_using_guards.hs[]
 ----
 +
 [source,haskell]
 ----
-*Main> :load src/ghci/loop_counter_using_guards.hs
-[1 of 1] Compiling Main             ( src/ghci/loop_counter_using_guards.hs, interpreted )
+*Main> :load src/flow-control/loop_counter_using_guards.hs
+[1 of 1] Compiling Main             ( src/flow-control/loop_counter_using_guards.hs, interpreted )
 Ok, modules loaded: Main.
 *Main> main
 1
@@ -942,19 +931,13 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 [source,haskell]
 .loop_using_range.hs
 ----
-main = do
-    let loop is_true i n
-          | is_true == True = do
-              print i
-              loop ((i + 1) < n) (i + 1) n
-          | is_true /= True = return ()
-    loop (1 < 6) 1 6
+include::../src/flow-control/loop_using_range.hs[]
 ----
 
 [source,haskell]
 ----
-*Main> :load src/ghci/loop_using_range.hs
-[1 of 1] Compiling Main             ( src/ghci/loop_using_range.hs, interpreted )
+*Main> :load src/flow-control/loop_using_range.hs
+[1 of 1] Compiling Main             ( src/flow-control/loop_using_range.hs, interpreted )
 Ok, modules loaded: Main.
 *Main> main
 1
