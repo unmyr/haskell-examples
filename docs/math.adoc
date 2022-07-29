@@ -246,8 +246,9 @@ include::../src/math/complex.hs[]
 \end{aligned}
 ++++
 
+* Float
++
 [source,haskell]
-.float
 ----
 *Main> let omega_f = ((-0.5)::Float) :+ 0.5 * sqrt(3)
 *Main> :t (^)
@@ -266,6 +267,8 @@ include::../src/math/complex.hs[]
 1.0 :+ 1.7484555e-7
 ----
 
+* Double
++
 [source,haskell]
 ----
 *Main> let omega_d = ((-0.5)::Double) :+ 0.5 * sqrt(3)
