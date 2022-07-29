@@ -318,6 +318,16 @@ include::../src/math/group/group_o2_c2_using_int.hs[]
 ----
 
 * Using Monad
+
+** Haskell 7.10 ～ Haskell 8.3
++
+[source,haskell]
+.group_o2_c2_using_monoid.hs
+----
+include::../src/math/group/group_o2_c2_using_monoid_before_GHC_8.4.hs[]
+----
+
+** Haskell 8.4 or later
 +
 [source,haskell]
 .src/math/group/group_o2_c2_using_monoid.hs

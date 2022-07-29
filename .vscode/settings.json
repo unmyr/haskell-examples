@@ -28,6 +28,7 @@
     "Monoid",
     "optc",
     "peaceiris",
+    "Semigroup",
     "tonynv",
     "uncurry"
   ]
