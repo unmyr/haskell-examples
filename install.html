@@ -992,9 +992,6 @@ pre.rouge {
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_ubuntu_18">Ubuntu 18</h3>
-<div class="paragraph">
-<p><a href="https://launchpad.net/~hvr/+archive/ubuntu/ghc/+index?field.series_filter=bionic">^GHC : Herbert V. Riedel</a></p>
-</div>
 <div class="sect3">
 <h4 id="_haskell_8_0_2">Haskell 8.0.2</h4>
 <div class="ulist">
@@ -1052,7 +1049,8 @@ deb-src https://ppa.launchpadcontent.net/hvr/ghc/ubuntu bionic main</code></pre>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="shell"><span class="nb">sudo </span>add-apt-repository ppa:hvr/ghc
 <span class="nb">sudo </span>apt update
-<span class="nb">sudo </span>apt <span class="nb">install </span>ghc-8.4.4 cabal-install-3.0</code></pre>
+<span class="nb">sudo </span>apt <span class="nb">install </span>ghc-8.4.4 cabal-install-2.4
+<span class="nb">rm</span> <span class="nt">-fR</span>  ~/.cabal</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1077,11 +1075,40 @@ deb-src https://ppa.launchpadcontent.net/hvr/ghc/ubuntu bionic main</code></pre>
 </div>
 </div>
 </li>
+<li>
+<p>Cabal</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Update</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nv">$ </span>cabal update
+...
+<span class="nv">$ </span>cabal <span class="nb">install </span>random
+...</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Uninstall Cabal</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">sudo </span>apt-get remove <span class="nt">--auto-remove</span> cabal-install-3.0</code></pre>
+</div>
+</div>
+</li>
 </ul>
 </div>
 <div class="ulist">
 <div class="title">References</div>
 <ul>
+<li>
+<p><a href="https://launchpad.net/~hvr/+archive/ubuntu/ghc/+index?field.series_filter=bionic" target="_blank" rel="noopener">GHC : Herbert V. Riedel</a></p>
+</li>
 <li>
 <p><a href="https://docs.haskellstack.org/en/stable/install_and_upgrade/" target="_blank" rel="noopener">Install/upgrade - The Haskell Tool Stack</a></p>
 </li>
@@ -1131,7 +1158,7 @@ Skipping binary upgrade, you are already running the most recent version</span><
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-29 13:59:03 UTC
+Last updated 2022-07-29 16:22:12 UTC
 </div>
 </div>
 </body>
