@@ -1,7 +1,9 @@
+main :: IO ()
 main = do
-    let loop is_true i n
-          | is_true == True = do
-              print i
-              loop ((i + 1) < n) (i + 1) n
-          | is_true /= True = return ()
-    loop (1 < 6) 1 6
+  let loop i n = case (i < n) of {
+    False -> return ();
+    True -> do
+      print i
+      loop (i + 1) n
+  }
+  loop (1 :: Int) 6

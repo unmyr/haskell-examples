@@ -1,0 +1,93 @@
+== Flow control statements
+
+=== Loop using counter
+
+* not using using guards
++
+[source,haskell]
+.loop_counter_no_guards.hs
+----
+main :: IO ()
+main = do
+  let loop 6 = return ()
+      loop i = do
+        print i
+        loop (i + 1)
+  loop (1 ::Int)
+----
++
+[source,shell]
+----
+ghci -Wall src/flow-control/loop_counter_no_guards.hs
+----
++
+[source,haskell]
+----
+*Main> main
+1
+2
+3
+4
+5
+----
+
+* using guards
++
+[source,haskell]
+.loop_counter_using_guards.hs
+----
+main :: IO ()
+main = do
+  let loop i
+       | i <= 5 = do
+         print i
+         loop (i + 1)
+       | otherwise = return ()
+  loop (1 :: Int)
+----
++
+[source,shell]
+----
+ghci -Wall src/flow-control/loop_counter_using_guards.hs
+----
++
+[source,haskell]
+----
+*Main> main
+1
+2
+3
+4
+5
+----
+
+=== Loop using range
+
+[source,haskell]
+.loop_using_range.hs
+----
+main :: IO ()
+main = do
+  let loop i n = case (i < n) of {
+    False -> return ();
+    True -> do
+      print i
+      loop (i + 1) n
+  }
+  loop (1 :: Int) 6
+----
+
+[source,shell]
+----
+ghci -Wall src/flow-control/loop_using_range.hs
+----
+
+[source,haskell]
+----
+*Main> main
+1
+2
+3
+4
+5
+----

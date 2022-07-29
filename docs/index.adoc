@@ -16,6 +16,19 @@ $ ghci
 GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
 ----
 
+[source,console]
+----
+Prelude> :load src/flow-control/loop_using_range.hs
+[1 of 1] Compiling Main             ( src/flow-control/loop_using_range.hs, interpreted )
+Ok, one module loaded.
+*Main> main
+1
+2
+3
+4
+5
+----
+
 === Type annotations
 
 ==== same types
@@ -840,6 +853,11 @@ Prelude>
 include::../src/flow-control/loop_counter_no_guards.hs[]
 ----
 +
+[source,shell]
+----
+ghci -Wall src/flow-control/loop_counter_no_guards.hs
+----
++
 [source,haskell]
 ----
 *Main> :load src/flow-control/loop_counter_no_guards.hs
@@ -862,18 +880,19 @@ Ok, modules loaded: Main.
 include::../src/flow-control/loop_counter_using_guards.hs[]
 ----
 +
+[source,shell]
+----
+ghci -Wall src/flow-control/loop_counter_using_guards.hs
+----
++
 [source,haskell]
 ----
-*Main> :load src/flow-control/loop_counter_using_guards.hs
-[1 of 1] Compiling Main             ( src/flow-control/loop_counter_using_guards.hs, interpreted )
-Ok, modules loaded: Main.
 *Main> main
 1
 2
 3
 4
 5
-*Main>
 ----
 
 * loop 1 million
@@ -932,6 +951,11 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 .loop_using_range.hs
 ----
 include::../src/flow-control/loop_using_range.hs[]
+----
+
+[source,shell]
+----
+ghci -Wall src/flow-control/loop_using_range.hs
 ----
 
 [source,haskell]
