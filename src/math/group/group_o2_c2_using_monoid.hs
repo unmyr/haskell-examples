@@ -9,12 +9,14 @@ instance Show C2 where
     C2 1 -> "1"
     _    -> "?"
 
+instance Semigroup C2 where
+  (C2 x) <> (C2 y) = C2 ((x + y) `mod` 2)
+
 instance Monoid C2 where
   mempty = C2 0
-  mappend (C2 x) (C2 y) = C2 ((x + y) `mod` 2)
 
 c2_inv :: C2 -> C2
-c2_inv (C2 x) = head [C2 y | y <- [0..2], (C2 x) `mappend` (C2 y) == (mempty)]
+c2_inv (C2 x) = head [C2 y | y <- [0..2], (C2 x) <> (C2 y) == (mempty)]
 
 main :: IO ()
 main = do
