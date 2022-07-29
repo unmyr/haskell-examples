@@ -1025,6 +1025,19 @@ pre.rouge {
 <span class="go">GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help</span></code></pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">Prelude&gt;</span><span class="w"> </span>:load src/flow-control/loop_using_range.hs
+<span class="go">[1 of 1] Compiling Main             ( src/flow-control/loop_using_range.hs, interpreted )
+Ok, one module loaded.
+</span><span class="gp">*Main&gt;</span><span class="w"> </span>main
+<span class="go">1
+2
+3
+4
+5</span></code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_type_annotations">Type annotations</h3>
@@ -2050,18 +2063,24 @@ instance [safe] Show Vertex -- Defined at Euclidean2D.hs:3:10
 <div class="listingblock">
 <div class="title">loop_counter_no_guards.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
-    <span class="kr">let</span> <span class="n">loop</span> <span class="mi">6</span> <span class="o">=</span> <span class="n">return</span> <span class="nb">()</span>
-        <span class="n">loop</span> <span class="n">i</span> <span class="o">=</span> <span class="kr">do</span>
-            <span class="n">print</span> <span class="n">i</span>
-            <span class="n">loop</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">loop</span> <span class="mi">1</span></code></pre>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="kr">let</span> <span class="n">loop</span> <span class="mi">6</span> <span class="o">=</span> <span class="n">return</span> <span class="nb">()</span>
+      <span class="n">loop</span> <span class="n">i</span> <span class="o">=</span> <span class="kr">do</span>
+        <span class="n">print</span> <span class="n">i</span>
+        <span class="n">loop</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="n">loop</span> <span class="p">(</span><span class="mi">1</span> <span class="o">::</span><span class="kt">Int</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_counter_no_guards</span><span class="o">.</span><span class="n">hs</span>
-<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_counter_no_guards</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="shell">ghci <span class="nt">-Wall</span> src/flow-control/loop_counter_no_guards.hs</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">flow</span><span class="o">-</span><span class="n">control</span><span class="o">/</span><span class="n">loop_counter_no_guards</span><span class="o">.</span><span class="n">hs</span>
+<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">flow</span><span class="o">-</span><span class="n">control</span><span class="o">/</span><span class="n">loop_counter_no_guards</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
 <span class="kt">Ok</span><span class="p">,</span> <span class="n">modules</span> <span class="n">loaded</span><span class="o">:</span> <span class="kt">Main</span><span class="o">.</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
 <span class="mi">1</span>
@@ -2078,27 +2097,29 @@ instance [safe] Show Vertex -- Defined at Euclidean2D.hs:3:10
 <div class="listingblock">
 <div class="title">loop_counter_using_guards.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
-    <span class="kr">let</span> <span class="n">loop</span> <span class="n">i</span>
-          <span class="o">|</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="o">=</span> <span class="kr">do</span>
-              <span class="n">print</span> <span class="n">i</span>
-              <span class="n">loop</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-          <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="n">return</span> <span class="nb">()</span>
-    <span class="n">loop</span> <span class="mi">1</span></code></pre>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="kr">let</span> <span class="n">loop</span> <span class="n">i</span>
+       <span class="o">|</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="o">=</span> <span class="kr">do</span>
+         <span class="n">print</span> <span class="n">i</span>
+         <span class="n">loop</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+       <span class="o">|</span> <span class="n">otherwise</span> <span class="o">=</span> <span class="n">return</span> <span class="nb">()</span>
+  <span class="n">loop</span> <span class="p">(</span><span class="mi">1</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_counter_using_guards</span><span class="o">.</span><span class="n">hs</span>
-<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_counter_using_guards</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
-<span class="kt">Ok</span><span class="p">,</span> <span class="n">modules</span> <span class="n">loaded</span><span class="o">:</span> <span class="kt">Main</span><span class="o">.</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
+<pre class="rouge highlight"><code data-lang="shell">ghci <span class="nt">-Wall</span> src/flow-control/loop_counter_using_guards.hs</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
 <span class="mi">1</span>
 <span class="mi">2</span>
 <span class="mi">3</span>
 <span class="mi">4</span>
-<span class="mi">5</span>
-<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span></code></pre>
+<span class="mi">5</span></code></pre>
 </div>
 </div>
 </li>
@@ -2172,19 +2193,26 @@ Rust ではデバッグモードで 32ms, リリースビルドで 2µs ぐら�
 <div class="listingblock">
 <div class="title">loop_using_range.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
-    <span class="kr">let</span> <span class="n">loop</span> <span class="n">is_true</span> <span class="n">i</span> <span class="n">n</span>
-          <span class="o">|</span> <span class="n">is_true</span> <span class="o">==</span> <span class="kt">True</span> <span class="o">=</span> <span class="kr">do</span>
-              <span class="n">print</span> <span class="n">i</span>
-              <span class="n">loop</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="n">n</span>
-          <span class="o">|</span> <span class="n">is_true</span> <span class="o">/=</span> <span class="kt">True</span> <span class="o">=</span> <span class="n">return</span> <span class="nb">()</span>
-    <span class="n">loop</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="mi">1</span> <span class="mi">6</span></code></pre>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="kr">let</span> <span class="n">loop</span> <span class="n">i</span> <span class="n">n</span> <span class="o">=</span> <span class="kr">case</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="kr">of</span> <span class="p">{</span>
+    <span class="kt">False</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="nb">()</span><span class="p">;</span>
+    <span class="kt">True</span> <span class="o">-&gt;</span> <span class="kr">do</span>
+      <span class="n">print</span> <span class="n">i</span>
+      <span class="n">loop</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="n">n</span>
+  <span class="p">}</span>
+  <span class="n">loop</span> <span class="p">(</span><span class="mi">1</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="mi">6</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_using_range</span><span class="o">.</span><span class="n">hs</span>
-<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">ghci</span><span class="o">/</span><span class="n">loop_using_range</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="shell">ghci <span class="nt">-Wall</span> src/flow-control/loop_using_range.hs</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">load</span> <span class="n">src</span><span class="o">/</span><span class="n">flow</span><span class="o">-</span><span class="n">control</span><span class="o">/</span><span class="n">loop_using_range</span><span class="o">.</span><span class="n">hs</span>
+<span class="p">[</span><span class="mi">1</span> <span class="kr">of</span> <span class="mi">1</span><span class="p">]</span> <span class="kt">Compiling</span> <span class="kt">Main</span>             <span class="p">(</span> <span class="n">src</span><span class="o">/</span><span class="n">flow</span><span class="o">-</span><span class="n">control</span><span class="o">/</span><span class="n">loop_using_range</span><span class="o">.</span><span class="n">hs</span><span class="p">,</span> <span class="n">interpreted</span> <span class="p">)</span>
 <span class="kt">Ok</span><span class="p">,</span> <span class="n">modules</span> <span class="n">loaded</span><span class="o">:</span> <span class="kt">Main</span><span class="o">.</span>
 <span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">main</span>
 <span class="mi">1</span>
@@ -3243,7 +3271,7 @@ Floating is a type class.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-29 12:25:40 UTC
+Last updated 2022-07-29 13:59:03 UTC
 </div>
 </div>
 </body>
