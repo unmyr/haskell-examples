@@ -968,7 +968,13 @@ pre.rouge {
 <ul class="sectlevel1">
 <li><a href="#_install_haskell">Install Haskell</a>
 <ul class="sectlevel2">
-<li><a href="#_ubuntu">Ubuntu</a></li>
+<li><a href="#_ubuntu_18">Ubuntu 18</a>
+<ul class="sectlevel3">
+<li><a href="#_haskell_8_0_2">Haskell 8.0.2</a></li>
+<li><a href="#_haskell_8_4_x">Haskell 8.4.x</a></li>
+</ul>
+</li>
+<li><a href="#_haskell_stack">Haskell stack</a></li>
 </ul>
 </li>
 </ul>
@@ -985,7 +991,12 @@ pre.rouge {
 <h2 id="_install_haskell">Install Haskell</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ubuntu">Ubuntu</h3>
+<h3 id="_ubuntu_18">Ubuntu 18</h3>
+<div class="paragraph">
+<p><a href="https://launchpad.net/~hvr/+archive/ubuntu/ghc/+index?field.series_filter=bionic">^GHC : Herbert V. Riedel</a></p>
+</div>
+<div class="sect3">
+<h4 id="_haskell_8_0_2">Haskell 8.0.2</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1005,6 +1016,14 @@ pre.rouge {
 </div>
 </li>
 <li>
+<p>Uninstall ghc</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">sudo </span>apt-get remove <span class="nt">--auto-remove</span> ghc</code></pre>
+</div>
+</div>
+</li>
+<li>
 <p>Cabal</p>
 <div class="listingblock">
 <div class="content">
@@ -1016,12 +1035,103 @@ cabal <span class="nb">install</span> &lt;package-name&gt;</code></pre>
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_haskell_8_4_x">Haskell 8.4.x</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Install Haskell</p>
+<div class="listingblock">
+<div class="title">/etc/apt/sources.list.d/ghc.list</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="plaintext">deb https://ppa.launchpadcontent.net/hvr/ghc/ubuntu bionic main
+deb-src https://ppa.launchpadcontent.net/hvr/ghc/ubuntu bionic main</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"><span class="nb">sudo </span>add-apt-repository ppa:hvr/ghc
+<span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt <span class="nb">install </span>ghc-8.4.4 cabal-install-3.0</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>dpkg <span class="nt">-L</span> ghc-8.4.4 | <span class="nb">head</span>
+<span class="go">/.
+/opt
+/opt/ghc
+/opt/ghc/8.4.4
+/opt/ghc/8.4.4/bin
+/opt/ghc/8.4.4/bin/ghc-8.4.4
+/opt/ghc/8.4.4/bin/ghc-pkg-8.4.4
+/opt/ghc/8.4.4/bin/ghci-8.4.4
+/opt/ghc/8.4.4/bin/haddock-ghc-8.4.4
+/opt/ghc/8.4.4/bin/hp2ps</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>/opt/ghc/8.4.4/bin/ghc <span class="nt">--version</span>
+<span class="go">The Glorious Glasgow Haskell Compilation System, version 8.4.4</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">References</div>
+<ul>
+<li>
+<p><a href="https://docs.haskellstack.org/en/stable/install_and_upgrade/" target="_blank" rel="noopener">Install/upgrade - The Haskell Tool Stack</a></p>
+</li>
+<li>
+<p><a href="https://downloads.haskell.org/debian/" target="_blank" rel="noopener">GHC &amp; Cabal APT Repository</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_haskell_stack">Haskell stack</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Download and install</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">curl <span class="nt">-sSL</span> https://get.haskellstack.org/ | sh</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Upgrade Haskell Tool Stack</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>stack upgrade <span class="nt">--binary-only</span>
+<span class="go">Current Stack version: 2.7.5, available download version: 2.7.5
+Skipping binary upgrade, you are already running the most recent version</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Install GHC, etc</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>stack setup
+<span class="c">...</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-27 17:53:25 UTC
+Last updated 2022-07-29 12:18:46 UTC
 </div>
 </div>
 </body>
