@@ -13,6 +13,11 @@ include::header.adoc[]
 
 :phi: pass:q[__&#981;__]
 :circ: ∘
+:cap: ∩
+:cup: ∪
+:cong: ≅
+:rtimes: &#8906;
+:ltimes: &#8905;
 
 == Math
 
