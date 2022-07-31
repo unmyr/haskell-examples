@@ -508,7 +508,7 @@ s * r * s = rr
 |===
 
 [source,haskell]
-.group_o6_d3_sd.hs
+.src/math/group/group_o6_d3_sd.hs
 ----
 include::../src/math/group/group_o6_d3_sd.hs[]
 ----
@@ -522,9 +522,9 @@ $ ghci -Wall src/math/group/group_o6_d3_sd.hs
 .Results
 ----
 *Main> d3_sym "s" <> d3_sym "r"
-sr
+rrs
 *Main> d3_sym "r" <> d3_sym "s"
-srr
+rs
 *Main> mconcat [d3_sym "s", d3_sym "r", d3_sym "s"]
 rr
 *Main> d3_inv (d3_sym "e")
@@ -535,10 +535,10 @@ rr
 r
 *Main> d3_inv (d3_sym "s")
 s
-*Main> d3_inv (d3_sym "sr")
-sr
-*Main> d3_inv (d3_sym "srr")
-srr
+*Main> d3_inv (d3_sym "rs")
+rs
+*Main> d3_inv (d3_sym "rrs")
+rrs
 ----
 
 ==== Q~8~
