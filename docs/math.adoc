@@ -11,6 +11,9 @@ endif::[]
 
 include::header.adoc[]
 
+:phi: pass:q[__&#981;__]
+:circ: ∘
+
 == Math
 
 === Built-in functions
@@ -457,6 +460,80 @@ True
 True
 s * r * s = rr
 (sr)^(-1) = sr
+----
+
+===== Semidirect products
+
+.NH
+[cols="4h,1d,1d,1d,1d,1d,1d", options="header,autowidth"]
+|===
+|           | _e_       | _r_       | _r_^2^    | _s_       | _rs_      | _r_^2^_s_
+| _e_       | _e_       | _r_       | _r_^2^    | _s_       | _rs_      | _r_^2^_s_
+| _r_       | _r_       | _r_^2^    | _e_       | _rs_      | _r_^2^_s_ | _s_
+| _r_^2^    | _r_^2^    | _e_       | _r_       | _r_^2^_s_ | _s_       | _rs_
+| _s_       | _s_       | _r_^2^_s_ | _rs_      | _e_       | _r_^2^    | _r_
+| _rs_      | _rs_      | _s_       | _r_^2^_s_ | _r_       | _e_       | _r_^2^
+| _r_^2^_s_ | _r_^2^_s_ | _rs_      | _s_       | _r_^2^    | _r_       | _e_
+|===
+
+* normal subgroups: { { _e_ = (_r_^0^, _s_^0^) }, N={ _e_=(_r_^0^, _s_^0^), _r_=(_r_^0^, _s_^1^), _r_^2^=(_r_^2^, _s_^0^)}, _G_ }
+* H={ _e_ = (_r_^0^, _s_^0^), _s_=(_r_^0^, _s_^1^)}
+
+[latexmath]
+++++
+\phi(s)(r^{k}) = 
+\begin{cases}
+  r^{0} & \text{if $(s = 0)$} \\
+  r^{k} & \text{if $(s = 1)$}
+\end{cases}
+++++
+
+(_r_~1~, _s_~1~) {circ} (_r_~2~, _s_~2~) = (_r_~1~ _r_~2~ {phi}(_s_~1~)(_r_~2~), _s_~1~ _s_~2~)
+
+.NH
+[cols="4h,1d,1d,1d,1d,1d,1d", options="header,autowidth"]
+|===
+|                  | (_r_^0^, _s_^0^) | (_r_^1^, _s_^0^) | (_r_^2^, _s_^0^) | (_r_^0^, _s_^1^) | (_r_^1^, _s_^1^) | (_r_^2^, _s_^1^)
+| (_r_^0^, _s_^0^) | (_r_^0^, _s_^0^) | (_r_^1^, _s_^0^) | (_r_^2^, _s_^0^) | (_r_^0^, _s_^1^) | (_r_^1^, _s_^1^) | (_r_^2^, _s_^1^)
+| (_r_^1^, _s_^0^) | (_r_^1^, _s_^0^) | (_r_^2^, _s_^0^) | (_r_^0^, _s_^0^) | (_r_^1^, _s_^1^) | (_r_^2^, _s_^1^) | (_r_^0^, _s_^1^)
+| (_r_^2^, _s_^0^) | (_r_^2^, _s_^0^) | (_r_^0^, _s_^0^) | (_r_^1^, _s_^0^) | (_r_^2^, _s_^1^) | (_r_^0^, _s_^1^) | (_r_^1^, _s_^1^)
+| (_r_^0^, _s_^1^) | (_r_^0^, _s_^1^) | (_r_^2^, _s_^1^) | (_r_^1^, _s_^1^) | (_r_^0^, _s_^0^) | (_r_^2^, _s_^0^) | (_r_^0^, _s_^1^)
+| (_r_^1^, _s_^1^) | (_r_^1^, _s_^1^) | (_r_^0^, _s_^1^) | (_r_^2^, _s_^1^) | (_r_^1^, _s_^0^) | (_r_^0^, _s_^0^) | (_r_^2^, _s_^0^)
+| (_r_^2^, _s_^1^) | (_r_^2^, _s_^1^) | (_r_^1^, _s_^1^) | (_r_^0^, _s_^1^) | (_r_^2^, _s_^0^) | (_r_^1^, _s_^0^) | (_r_^0^, _s_^0^)
+|===
+
+[source,haskell]
+.group_o6_d3_sd.hs
+----
+include::../src/math/group/group_o6_d3_sd.hs[]
+----
+
+[source,console]
+----
+$ ghci -Wall src/math/group/group_o6_d3_sd.hs
+----
+
+[source,haskell]
+.Results
+----
+*Main> d3_sym "s" <> d3_sym "r"
+sr
+*Main> d3_sym "r" <> d3_sym "s"
+srr
+*Main> mconcat [d3_sym "s", d3_sym "r", d3_sym "s"]
+rr
+*Main> d3_inv (d3_sym "e")
+e
+*Main> d3_inv (d3_sym "r")
+rr
+*Main> d3_inv (d3_sym "rr")
+r
+*Main> d3_inv (d3_sym "s")
+s
+*Main> d3_inv (d3_sym "sr")
+sr
+*Main> d3_inv (d3_sym "srr")
+srr
 ----
 
 ==== Q~8~

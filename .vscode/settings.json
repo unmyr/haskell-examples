@@ -26,6 +26,7 @@
     "mconcat",
     "mempty",
     "microstache",
+    "mkdir",
     "Monoid",
     "optc",
     "peaceiris",
