@@ -1,5 +1,5 @@
 <<index.adoc#,Haskell>> {vbar}
-<<list.adoc#,List>> {vbar}
+xref:list.adoc#_list[List] {vbar}
 <<install.adoc#,Install>> {vbar}
 <<criterion.adoc#,Criterion>> {vbar}
 <<math.adoc#,Math>> +
