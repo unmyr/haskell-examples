@@ -452,8 +452,7 @@ Orange: I like oranges.
 Kiwi: I like kiwis.
 ----
 
-==== List
-
+// ==== List
 include::list.adoc[leveloffset=+2]
 
 ==== Tuples

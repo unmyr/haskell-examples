@@ -8,9 +8,7 @@ ifndef::leveloffset[]
 include::header.adoc[]
 endif::[]
 
-ifndef::leveloffset[]
 == List
-endif::[]
 
 * Make a list
 +
