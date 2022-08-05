@@ -11,6 +11,7 @@
     "concat",
     "cond",
     "dpkg",
+    "Endo",
     "foldl",
     "foldr",
     "funfolding",

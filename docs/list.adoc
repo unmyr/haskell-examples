@@ -1,0 +1,461 @@
+ifndef::leveloffset[]
+:toc: left
+:toclevels: 3
+:icons: font
+endif::[]
+
+ifndef::leveloffset[]
+include::header.adoc[]
+endif::[]
+
+ifndef::leveloffset[]
+== List
+endif::[]
+
+* Make a list
++
+[source,haskell]
+----
+Prelude> [1, 2, 3]
+[1,2,3]
+Prelude> :t []
+[] :: [t]
+----
++
+[source,haskell]
+.Using the colon operator
+----
+Prelude> 1:2:3:[]
+[1,2,3]
+Prelude> :t (:)
+(:) :: a -> [a] -> [a]
+----
+
+* Prepend the item to the list
++
+.Using the colon operator. colon is the "prepend" operator
+[source,haskell]
+----
+Prelude> 1:2:3:[]
+[1,2,3]
+Prelude> "apple":"banana":"cherry":["durian"]
+["apple","banana","cherry","durian"]
+----
++
+[source,haskell]
+----
+Prelude> (:) 1 []
+[1]
+Prelude> (:) 1 ((:) 2 ((:) 3 []))
+[1,2,3]
+Prelude> (:) 1 $ (:) 2 $ (:) 3 []
+[1,2,3]
+Prelude> ((:) 1 . (:) 2 . (:) 3) []
+[1,2,3]
+----
+
+* Returns the first item of a list
++
+[source,haskell]
+.Using `head`
+----
+Prelude> head []
+*** Exception: Prelude.head: empty list
+Prelude> head [1, 2, 3]
+1
+Prelude> head [1..]
+1
+----
++
+[source,haskell]
+----
+Prelude> let head' (h:_) = h
+Prelude> :t head'
+head' :: [t] -> t
+Prelude> head' []
+*** Exception: <interactive>:61:5-19: Non-exhaustive patterns in function head'
+
+Prelude> head' [1, 2, 3]
+1
+Prelude> head' [1..]
+1
+Prelude> head' ["apple", "banana", "cherry", "durian"]
+"apple"
+----
++
+[source,haskell]
+.Using `take`
+----
+Prelude> take 1 []
+[]
+Prelude> take 1 [1, 2, 3]
+[1]
+Prelude> take 3 [1..]
+[1,2,3]
+----
++
+[source,haskell]
+.Using `foldr`
+----
+Prelude> foldr (\x _ -> [x]) [] []
+[]
+Prelude> foldr (\x _ -> [x]) [] [1, 2, 3]
+[1]
+Prelude> foldr (\x _ -> [x]) [] [1..]
+[1]
+Prelude> foldr (\s _ -> [s]) [] []
+[]
+Prelude> foldr (\s _ -> [s]) [] ["apple", "banana", "cherry", "durian"]
+["apple"]
+----
+
+* returns the last item of a list
++
+[source,haskell]
+.Using `last`
+----
+Prelude> last [1, 2, 3]
+3
+----
++
+[source,haskell]
+.Using `foldl`
+----
+Prelude> foldl (\_ x -> x) 0 [1, 2, 3]
+3
+----
+
+* it accepts a list and returns the list without its last item
++
+[source,haskell]
+----
+Prelude> init [1, 2, 3]
+[1,2]
+----
+
+* it accepts a list and returns the list without its first item
++
+[source,haskell]
+----
+Prelude> tail ["A", "B", "C"]
+["B","C"]
+Prelude> drop 1 ["A", "B", "C"]
+["B","C"]
+----
++
+[source,haskell]
+----
+Prelude> let tail' (_:t) = t
+Prelude> :t tail'
+tail' :: [t] -> [t]
+Prelude> tail' []
+*** Exception: <interactive>:67:5-19: Non-exhaustive patterns in function tail'
+
+Prelude> tail' ["A", "B", "C"]
+["B","C"]
+----
+
+* The length of a list
++
+[source,haskell]
+----
+Prelude> :t length
+length :: Foldable t => t a -> Int
+Prelude> length ["apple", "banana", "cherry", "durian"]
+4
+----
++
+[source,haskell]
+.The length of a list without the "length" function in Haskell
+----
+Prelude> foldr (\_ n -> n + 1) 0 ["apple", "banana", "cherry", "durian"]
+4
+----
+
+* Reverse a list in haskell
++
+[source,haskell]
+----
+Prelude> reverse ["apple","banana","cherry"]
+["cherry","banana","apple"]
+----
++
+[source,haskell]
+----
+Prelude> foldr (\x xs -> xs ++ [x]) [] ["apple", "banana", "cherry"]
+["cherry","banana","apple"]
+----
+
+* Combine two lists
++
+[source,haskell]
+----
+Prelude> [1, 2, 3] ++ [4, 5, 6]
+[1,2,3,4,5,6]
+----
+
+
+* Program to left rotate a list
++
+[source,haskell]
+----
+Prelude> let rotate_l a = tail a ++ take 1 a
+Prelude> :t rotate_l
+rotate_l :: [a] -> [a]
+Prelude> rotate_l [1, 2, 3]
+[2,3,1]
+Prelude> rotate_l $ rotate_l [1, 2, 3]
+[3,1,2]
+Prelude> rotate_l $ rotate_l $ rotate_l [1, 2, 3]
+[1,2,3]
+----
+
+* Program to right rotate a list
++
+[source,haskell]
+----
+Prelude> let rotate_r a = [last a] ++ init a
+Prelude> :t rotate_r
+rotate_r :: [a] -> [a]
+Prelude> rotate_r [1, 2, 3]
+[3,1,2]
+Prelude> rotate_r $ rotate_r [1, 2, 3]
+[2,3,1]
+Prelude> rotate_r $ rotate_r $ rotate_r [1, 2, 3]
+[1,2,3]
+Prelude> rotate_l $ rotate_r [1, 2, 3]
+[1,2,3]
+----
+
+=== List comprehension (リストの内包表記)
+
+* Filter multiples of 3 from a List
++
+[source,haskell]
+----
+Prelude> [p | p <- [1..10], p `mod` 3 == 0]
+[3,6,9]
+Prelude> filter (\x -> x `mod` 3 == 0) [1..10]
+[3,6,9]
+Prelude> [1..10] >>= \x -> if x `mod` 3 == 0 then pure x else []
+[3,6,9]
+Prelude> [1..10] >>= \x -> if x `mod` 3 == 0 then x:[] else []
+[3,6,9]
+Prelude> [1..10] >>= \x -> if x `mod` 3 == 0 then [x] else []
+[3,6,9]
+----
++
+[source,haskell]
+.Using infinite lists
+----
+Prelude> take 3 [p | p <- [1..], p `mod` 3 == 0]
+[3,6,9]
+Prelude> take 3 $ filter (\x -> x `mod` 3 == 0) [1..]
+[3,6,9]
+Prelude> take 3 $ [1..] >>= \x -> if x `mod` 3 == 0 then pure x else []
+[3,6,9]
+----
+
+* Making a list of divisors in Haskell
++
+[source,haskell]
+----
+Prelude> [x | x <- [2..9], 10 `mod` x == 0]
+[2,5]
+Prelude> filter (\x -> 10 `mod` x == 0) [2..9]
+[2,5]
+Prelude> [2..9] >>= \x -> if 10 `mod` x == 0 then pure x else []
+[2,5]
+----
+
+* Find cubic root of a number
++
+[source,haskell]
+----
+Prelude> [x | x <- [2..7], x * x * x == 8]
+[2]
+Prelude> filter (\x -> x * x * x == 8) [2..7]
+[2]
+Prelude> [2..7] >>= \x -> if x * x * x == 8 then pure x else []
+[2]
+----
++
+[source,haskell]
+.Using infinite lists
+----
+Prelude> take 1 $ [x | x <- [2..], x * x * x == 8]
+[2]
+Prelude> take 1 $ filter (\x -> x * x * x == 8) [2..]
+[2]
+Prelude> take 1 $ [2..] >>= \x -> if x * x * x == 8 then pure x else []
+[2]
+----
+
+* Combining two lists
++
+[source,haskell]
+----
+Prelude> [(x,y) | x <- [1,2], y <- [1,2,3]]
+[(1,1),(1,2),(1,3),(2,1),(2,2),(2,3)]
+----
+
+=== Infinite lists
+
+* Make infinite lists
++
+[source,haskell]
+----
+Prelude> a = 1:a
+Prelude> take 3 a
+[1,1,1]
+Prelude> take 10 [2,4..]
+[2,4,6,8,10,12,14,16,18,20]
+----
++
+[source,haskell]
+----
+Prelude> take 6 ([2, 3] ++ a)
+[2,3,1,1,1,1]
+----
++
+[source,haskell]
+----
+Prelude> c = 1:[x * 2 | x <- c]
+Prelude> take 10 c
+[1,2,4,8,16,32,64,128,256,512]
+----
+
+* Gets the first one element from the infinite list.
++
+[source,haskell]
+----
+Prelude> head [1..]
+1
+----
+
+* Takeing the first three elements from the infinite list.
++
+[source,haskell]
+----
+Prelude> take 3 [1..]
+[1,2,3]
+----
+
+* Determine if there is an element that meets the conditions in the infinite list.
++
+[source,haskell]
+----
+Prelude> :set +s
+Prelude> null [x | x <- [1..], x == 1]
+False
+(0.00 secs, 64,016 bytes)
+Prelude> null [x | x <- [1..], x == 100000]
+False
+(0.05 secs, 8,865,312 bytes)
+----
+
+* Add one
++
+[source,haskell]
+----
+Prelude> take 10 $ map (+ 1) [1..]
+[2,3,4,5,6,7,8,9,10,11]
+Prelude> take 10 [ x + 1 | x <- [1..] ]
+[2,3,4,5,6,7,8,9,10,11]
+----
+
+=== foldl and foldr
+
+[source,haskell]
+.src/functions/foldl_and_foldr.hs
+----
+include::../src/data-types/list/foldl_and_foldr.hs[]
+----
+
+* Results
+
+** Finite lists
++
+[source,haskell]
+.Results
+----
+*Main> main
+-- foldr traceOp 0 ([1, 2, 3] :: [Int])
+traceOp(x - y) = 3 - (0)
+traceOp(x - y) = 2 - (3)
+traceOp(x - y) = 1 - (-1)
+2
+-- traceMyFoldrL traceOp 0 ([1, 2, 3] :: [Int])
+traceMyFoldrL f 0 (1:[2,3]) = f 1 (traceMyFoldrL f 0 [2,3])
+traceMyFoldrL f 0 (2:[3]) = f 2 (traceMyFoldrL f 0 [3])
+traceMyFoldrL f 0 (3:[]) = f 3 (traceMyFoldrL f 0 [])
+traceMyFoldrL _ 0 [] = 0
+traceOp(x - y) = 3 - (0)
+traceOp(x - y) = 2 - (3)
+traceOp(x - y) = 1 - (-1)
+2
+-- traceMyFoldrF traceOp 0 ([1, 2, 3] :: [Int])
+traceMyFoldrF f 0 t) = appEndo (foldMap (Endo . f) t) z 0 t
+traceOp(x - y) = 3 - (0)
+traceOp(x - y) = 2 - (3)
+traceOp(x - y) = 1 - (-1)
+2
+-- foldl traceOp 0 ([1, 2, 3] :: [Int])
+traceOp(x - y) = 0 - (1)
+traceOp(x - y) = -1 - (2)
+traceOp(x - y) = -3 - (3)
+-6
+-- traceMyFoldlL traceOp 0 ([1, 2, 3] :: [Int])
+traceMyFoldlL f 0 (1:[2,3]) = traceMyFoldlL f (f 0 1) [2,3]
+traceOp(x - y) = 0 - (1)
+traceMyFoldlL f -1 (2:[3]) = traceMyFoldlL f (f -1 2) [3]
+traceOp(x - y) = -1 - (2)
+traceMyFoldlL f -3 (3:[]) = traceMyFoldlL f (f -3 3) []
+traceOp(x - y) = -3 - (3)
+traceMyFoldlL f -6 [] = -6
+-6
+-- traceMyFoldlF traceOp 0 ([1, 2, 3] :: [Int])
+traceMyFoldlF f 0t = appEndo (getDual (foldMap (Dual . Endo . flip f) t)) 0
+traceOp(x - y) = 0 - (1)
+traceOp(x - y) = -1 - (2)
+traceOp(x - y) = -3 - (3)
+-6
+----
+
+** Infinite lists
+
+*** foldr
++
+[source,haskell]
+----
+*Main> traceMyFoldrLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
+traceMyFoldrLH f 0 (1:[..]) = f 1 (traceMyFoldrLH f 0 [..])
+(\x y -> x) = 1
+1
+----
+
+*** foldl
++
+[source,haskell]
+----
+*Main> traceMyFoldlLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
+traceMyFoldlLH f 0 (1:[..]) = traceMyFoldlLH f (f 0 1) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (2:[..]) = traceMyFoldlLH f (f 0 2) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (3:[..]) = traceMyFoldlLH f (f 0 3) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (4:[..]) = traceMyFoldlLH f (f 0 4) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (5:[..]) = traceMyFoldlLH f (f 0 5) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (6:[..]) = traceMyFoldlLH f (f 0 6) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (7:[..]) = traceMyFoldlLH f (f 0 7) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (8:[..]) = traceMyFoldlLH f (f 0 8) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (9:[..]) = traceMyFoldlLH f (f 0 9) [..]
+(\x y -> x) = 0
+...
+----

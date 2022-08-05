@@ -1,4 +1,5 @@
 <<index.adoc#,Haskell>> {vbar}
+<<list.adoc#,List>> {vbar}
 <<install.adoc#,Install>> {vbar}
 <<criterion.adoc#,Criterion>> {vbar}
 <<math.adoc#,Math>> +
