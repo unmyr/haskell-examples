@@ -14,14 +14,6 @@ traceMyFoldrF f z t =
   trace("traceMyFoldrF f " ++ (show z) ++ " " ++ "t" ++ " = appEndo (foldMap (Endo . f) t) z " ++ (show z) ++ " " ++ "t")
   $ appEndo (foldMap (Endo . f) t) z
 
-traceMyFoldrLH :: (Show a, Show b) => (a -> b -> b) -> b -> [a] -> b
-traceMyFoldrLH _ z [] =
-  trace("traceMyFoldrLH f " ++ (show z) ++ " [] = " ++ (show z))
-  $ z
-traceMyFoldrLH f z (x:xs) =
-  trace("traceMyFoldrLH f " ++ (show z) ++ " (" ++ (show x) ++ ":[..]) = f " ++ (show x) ++ " (traceMyFoldrLH f " ++ (show z) ++ " [..])")
-  $ f x (traceMyFoldrLH f z xs)
-
 traceMyFoldlL :: (Show a, Show b) => (b -> a -> b) -> b -> [a] -> b
 traceMyFoldlL _ z [] =
   trace("traceMyFoldlL f " ++ (show z) ++ " [] = " ++ (show z))
@@ -34,14 +26,6 @@ traceMyFoldlF :: (Foldable t, Show a, Show b) => (b -> a -> b) -> b -> t a -> b
 traceMyFoldlF f z t =
   trace("traceMyFoldlF f " ++ (show z) ++ "t = appEndo (getDual (foldMap (Dual . Endo . flip f) t)) " ++ (show z))
   $ appEndo (getDual (foldMap (Dual . Endo . flip f) t)) z
-
-traceMyFoldlLH :: (Show a, Show b) => (b -> a -> b) -> b -> [a] -> b
-traceMyFoldlLH _ z [] =
-  trace("traceMyFoldlLH f " ++ (show z) ++ " [] = " ++ (show z))
-  $ z
-traceMyFoldlLH f z (x:xs) =
-  trace("traceMyFoldlLH f " ++ (show z) ++ " (" ++ (show x) ++ ":[..]) = traceMyFoldlLH f (f " ++ (show z) ++ " " ++ (show x) ++ ") [..]")
-  $ traceMyFoldlLH f (f z x) xs
 
 traceOp :: Int -> Int -> Int
 traceOp x y = trace("traceOp(x - y) = " ++ (show x) ++ " - (" ++ (show y) ++ ")") $ x - y
@@ -62,12 +46,3 @@ main = do
   print $ traceMyFoldlL traceOp 0 ([1, 2, 3] :: [Int])
   putStrLn "-- traceMyFoldlF traceOp 0 ([1, 2, 3] :: [Int])"
   print $ traceMyFoldlF traceOp 0 ([1, 2, 3] :: [Int])
-
-  putStrLn "-- traceMyFoldrLH (\\x y -> x) 0 ([1..] :: [Int])"
-  print $ traceMyFoldrLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
-  putStrLn "-- take 5 $ foldr (\\x y -> (x * x) : y) [] ([1..] :: [Int])"
-  print $ take 5 $ foldr (\x y -> (x * x) : y) [] ([1..] :: [Int])
-  putStrLn "-- take 5 $ traceMyFoldrLH (\\x y -> trace(\"(\\x y -> (x * x) : y) = \" ++ (show (x * x)) ++ \":\" ++ show y) $ (x * x) : y) [] ([1..6] :: [Int])"
-  print $ take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":" ++ show y) $ (x * x) : y) [] ([1..6] :: [Int])
-  putStrLn "-- take 5 $ traceMyFoldrLH (\\x y -> trace(\"(\\x y -> (x * x) : y) = \" ++ (show (x * x)) ++ \":y\") $ (x * x) : y) [] ([1..] :: [Int])"
-  print $ take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":y") $ (x * x) : y) [] ([1..] :: [Int])

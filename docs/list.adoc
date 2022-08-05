@@ -362,6 +362,128 @@ Prelude> take 10 [ x + 1 | x <- [1..] ]
 [2,3,4,5,6,7,8,9,10,11]
 ----
 
+=== Square of list in Haskell
+
+[source,haskell]
+.src/data-types/list/square_of_list.hs
+----
+include::../src/data-types/list/square_of_list.hs[]
+----
+
+[source,haskell]
+.Results
+----
+*Main> main
+-- take 5 $ map (\x -> x * x) ([1..] :: [Int])
+[1,4,9,16,25]
+-- take 5 $ fmap (\x -> x * x) ([1..] :: [Int])
+[1,4,9,16,25]
+-- take 5 $ foldr (\x xs -> (x * x) : xs) [] ([1..] :: [Int])
+[1,4,9,16,25]
+-- take 5 $ [x * x | x <- ([1..] :: [Int])]
+[1,4,9,16,25]
+-- traceMyFoldrLH (\x y -> x) 0 ([1..] :: [Int])
+traceMyFoldrLH f 0 (1:[..]) = f 1 (traceMyFoldrLH f 0 [..])
+(\x y -> x) = 1
+1
+-- take 5 $ traceMyFoldrLH (\x y -> trace("(\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":" ++ show y) $ (x * x) : y) [] ([1..6] :: [Int])
+traceMyFoldrLH f [] (1:[..]) = f 1 (traceMyFoldrLH f [] [..])
+traceMyFoldrLH f [] (2:[..]) = f 2 (traceMyFoldrLH f [] [..])
+traceMyFoldrLH f [] (3:[..]) = f 3 (traceMyFoldrLH f [] [..])
+traceMyFoldrLH f [] (4:[..]) = f 4 (traceMyFoldrLH f [] [..])
+traceMyFoldrLH f [] (5:[..]) = f 5 (traceMyFoldrLH f [] [..])
+traceMyFoldrLH f [] (6:[..]) = f 6 (traceMyFoldrLH f [] [..])
+traceMyFoldrLH f [] [] = []
+(\x y -> (x * x) : y) = 36:[]
+(\x y -> (x * x) : y) = 25:[36]
+(\x y -> (x * x) : y) = 16:[25,36]
+(\x y -> (x * x) : y) = 9:[16,25,36]
+(\x y -> (x * x) : y) = 4:[9,16,25,36]
+(\x y -> (x * x) : y) = 1:[4,9,16,25,36]
+[1,4,9,16,25]
+-- take 5 $ traceMyFoldrLH (\x y -> trace("(\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":y") $ (x * x) : y) [] ([1..] :: [Int])
+traceMyFoldrLH f [] (1:[..]) = f 1 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = 1:y
+[1traceMyFoldrLH f [] (2:[..]) = f 2 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = 4:y
+,4traceMyFoldrLH f [] (3:[..]) = f 3 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = 9:y
+,9traceMyFoldrLH f [] (4:[..]) = f 4 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = 16:y
+,16traceMyFoldrLH f [] (5:[..]) = f 5 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = 25:y
+,25]
+----
+
+* Infinite lists
+
+** foldr
++
+[source,haskell]
+----
+*Main> traceMyFoldrLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
+traceMyFoldrLH f 0 (1:[..]) = f 1 (traceMyFoldrLH f 0 [..])
+(\x y -> x) = 1
+1
+*Main> take 5 $ foldr (\x y -> (x * x) : y) [] ([1..] :: [Int])
+[1,4,9,16,25]
+*Main> take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":y") $ (x * x) : y) [] ([1..] :: [Int])
+traceMyFoldrLH f [] (1:[..]) = f 1 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = 1:y
+[1traceMyFoldrLH f [] (2:[..]) = f 2 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = 4:y
+,4traceMyFoldrLH f [] (3:[..]) = f 3 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = 9:y
+,9traceMyFoldrLH f [] (4:[..]) = f 4 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = 16:y
+,16traceMyFoldrLH f [] (5:[..]) = f 5 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = 25:y
+,25]
+----
++
+----
+traceMyFoldrLH f [] (1:[2, 3, 4, ...]) = (1 * 1) : [2, 3, 4, ...]
+traceMyFoldrLH f [] (2:[3, 4, 5, ...]) = (2 * 2) : [3, 4, 5, ...]
+traceMyFoldrLH f [] (3:[4, 5, 6, ...]) = (3 * 3) : [4, 5, 6, ...]
+traceMyFoldrLH f [] (4:[5, 6, 7, ...]) = (4 * 4) : [5, 6, 7, ...]
+traceMyFoldrLH f [] (5:[6, 7, 8, ...]) = (5 * 5) : [6, 7, 8, ...]
+----
++
+----
+(\x y -> (x * x) : y) = x=5,y=[]
+(\x y -> (x * x) : y) = x=4,y=[25]
+(\x y -> (x * x) : y) = x=3,y=[16,25]
+(\x y -> (x * x) : y) = x=2,y=[9,16,25]
+(\x y -> (x * x) : y) = x=1,y=[4,9,16,25]
+[1,4,9,16,25]
+----
+
+** foldl
++
+[source,haskell]
+----
+*Main> traceMyFoldlLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
+traceMyFoldlLH f 0 (1:[..]) = traceMyFoldlLH f (f 0 1) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (2:[..]) = traceMyFoldlLH f (f 0 2) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (3:[..]) = traceMyFoldlLH f (f 0 3) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (4:[..]) = traceMyFoldlLH f (f 0 4) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (5:[..]) = traceMyFoldlLH f (f 0 5) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (6:[..]) = traceMyFoldlLH f (f 0 6) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (7:[..]) = traceMyFoldlLH f (f 0 7) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (8:[..]) = traceMyFoldlLH f (f 0 8) [..]
+(\x y -> x) = 0
+traceMyFoldlLH f 0 (9:[..]) = traceMyFoldlLH f (f 0 9) [..]
+(\x y -> x) = 0
+...
+----
+
 === foldl and foldr
 
 [source,haskell]
@@ -371,8 +493,6 @@ include::../src/data-types/list/foldl_and_foldr.hs[]
 ----
 
 * Results
-
-** Finite lists
 +
 [source,haskell]
 .Results
@@ -418,75 +538,6 @@ traceOp(x - y) = 0 - (1)
 traceOp(x - y) = -1 - (2)
 traceOp(x - y) = -3 - (3)
 -6
-----
-
-** Infinite lists
-
-*** foldr
-+
-[source,haskell]
-----
-*Main> traceMyFoldrLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
-traceMyFoldrLH f 0 (1:[..]) = f 1 (traceMyFoldrLH f 0 [..])
-(\x y -> x) = 1
-1
-*Main> take 5 $ foldr (\x y -> (x * x) : y) [] ([1..] :: [Int])
-[1,4,9,16,25]
-*Main> take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":y") $ (x * x) : y) [] ([1..] :: [Int])
-traceMyFoldrLH f [] (1:[..]) = f 1 (traceMyFoldrLH f [] [..])
-(\x y -> (x * x) : y) = 1:y
-[1traceMyFoldrLH f [] (2:[..]) = f 2 (traceMyFoldrLH f [] [..])
-(\x y -> (x * x) : y) = 4:y
-,4traceMyFoldrLH f [] (3:[..]) = f 3 (traceMyFoldrLH f [] [..])
-(\x y -> (x * x) : y) = 9:y
-,9traceMyFoldrLH f [] (4:[..]) = f 4 (traceMyFoldrLH f [] [..])
-(\x y -> (x * x) : y) = 16:y
-,16traceMyFoldrLH f [] (5:[..]) = f 5 (traceMyFoldrLH f [] [..])
-(\x y -> (x * x) : y) = 25:y
-,25]
-----
-+
-----
-traceMyFoldrLH f [] (1:[2, 3, 4, ...]) = (1 * 1) : [2, 3, 4, ...]
-traceMyFoldrLH f [] (2:[3, 4, 5, ...]) = (2 * 2) : [3, 4, 5, ...]
-traceMyFoldrLH f [] (3:[4, 5, 6, ...]) = (3 * 3) : [4, 5, 6, ...]
-traceMyFoldrLH f [] (4:[5, 6, 7, ...]) = (4 * 4) : [5, 6, 7, ...]
-traceMyFoldrLH f [] (5:[6, 7, 8, ...]) = (5 * 5) : [6, 7, 8, ...]
-----
-+
-----
-(\x y -> (x * x) : y) = x=5,y=[]
-(\x y -> (x * x) : y) = x=4,y=[25]
-(\x y -> (x * x) : y) = x=3,y=[16,25]
-(\x y -> (x * x) : y) = x=2,y=[9,16,25]
-(\x y -> (x * x) : y) = x=1,y=[4,9,16,25]
-[1,4,9,16,25]
-----
-
-*** foldl
-+
-[source,haskell]
-----
-*Main> traceMyFoldlLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
-traceMyFoldlLH f 0 (1:[..]) = traceMyFoldlLH f (f 0 1) [..]
-(\x y -> x) = 0
-traceMyFoldlLH f 0 (2:[..]) = traceMyFoldlLH f (f 0 2) [..]
-(\x y -> x) = 0
-traceMyFoldlLH f 0 (3:[..]) = traceMyFoldlLH f (f 0 3) [..]
-(\x y -> x) = 0
-traceMyFoldlLH f 0 (4:[..]) = traceMyFoldlLH f (f 0 4) [..]
-(\x y -> x) = 0
-traceMyFoldlLH f 0 (5:[..]) = traceMyFoldlLH f (f 0 5) [..]
-(\x y -> x) = 0
-traceMyFoldlLH f 0 (6:[..]) = traceMyFoldlLH f (f 0 6) [..]
-(\x y -> x) = 0
-traceMyFoldlLH f 0 (7:[..]) = traceMyFoldlLH f (f 0 7) [..]
-(\x y -> x) = 0
-traceMyFoldlLH f 0 (8:[..]) = traceMyFoldlLH f (f 0 8) [..]
-(\x y -> x) = 0
-traceMyFoldlLH f 0 (9:[..]) = traceMyFoldlLH f (f 0 9) [..]
-(\x y -> x) = 0
-...
 ----
 
 [source,haskell]

@@ -12,6 +12,7 @@
     "cond",
     "dpkg",
     "Endo",
+    "fmap",
     "foldl",
     "foldr",
     "funfolding",
