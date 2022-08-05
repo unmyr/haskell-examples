@@ -11,7 +11,7 @@ traceMyFoldrL f z (x:xs) =
 
 traceMyFoldrF :: (Foldable t, Show a, Show b) => (a -> b -> b) -> b -> t a -> b
 traceMyFoldrF f z t =
-  trace("traceMyFoldrF f " ++ (show z) ++ " " ++ "t" ++ ") = appEndo (foldMap (Endo . f) t) z " ++ (show z) ++ " " ++ "t")
+  trace("traceMyFoldrF f " ++ (show z) ++ " " ++ "t" ++ " = appEndo (foldMap (Endo . f) t) z " ++ (show z) ++ " " ++ "t")
   $ appEndo (foldMap (Endo . f) t) z
 
 traceMyFoldrLH :: (Show a, Show b) => (a -> b -> b) -> b -> [a] -> b
@@ -65,4 +65,9 @@ main = do
 
   putStrLn "-- traceMyFoldrLH (\\x y -> x) 0 ([1..] :: [Int])"
   print $ traceMyFoldrLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
-  print $ take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> x * x : y) = " ++ (show x)) $ (x * x) : y) [] ([1..] :: [Int])
+  putStrLn "-- take 5 $ foldr (\\x y -> (x * x) : y) [] ([1..] :: [Int])"
+  print $ take 5 $ foldr (\x y -> (x * x) : y) [] ([1..] :: [Int])
+  putStrLn "-- take 5 $ traceMyFoldrLH (\\x y -> trace(\"(\\x y -> (x * x) : y) = \" ++ (show (x * x)) ++ \":\" ++ show y) $ (x * x) : y) [] ([1..6] :: [Int])"
+  print $ take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":" ++ show y) $ (x * x) : y) [] ([1..6] :: [Int])
+  putStrLn "-- take 5 $ traceMyFoldrLH (\\x y -> trace(\"(\\x y -> (x * x) : y) = \" ++ (show (x * x)) ++ \":y\") $ (x * x) : y) [] ([1..] :: [Int])"
+  print $ take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":y") $ (x * x) : y) [] ([1..] :: [Int])

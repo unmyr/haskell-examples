@@ -430,7 +430,12 @@ main = do
 
   putStrLn "-- traceMyFoldrLH (\\x y -> x) 0 ([1..] :: [Int])"
   print $ traceMyFoldrLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
-  print $ take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> x * x : y) = " ++ (show x)) $ (x * x) : y) [] ([1..] :: [Int])
+  putStrLn "-- take 5 $ foldr (\\x y -> (x * x) : y) [] ([1..] :: [Int])"
+  print $ take 5 $ foldr (\x y -> (x * x) : y) [] ([1..] :: [Int])
+  putStrLn "-- take 5 $ traceMyFoldrLH (\\x y -> trace(\"(\\x y -> (x * x) : y) = \" ++ (show (x * x)) ++ \":\" ++ show y) $ (x * x) : y) [] ([1..6] :: [Int])"
+  print $ take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":" ++ show y) $ (x * x) : y) [] ([1..6] :: [Int])
+  putStrLn "-- take 5 $ traceMyFoldrLH (\\x y -> trace(\"(\\x y -> (x * x) : y) = \" ++ (show (x * x)) ++ \":y\") $ (x * x) : y) [] ([1..] :: [Int])"
+  print $ take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":y") $ (x * x) : y) [] ([1..] :: [Int])
 ----
 
 * Results
@@ -456,7 +461,7 @@ traceOp(x - y) = 2 - (3)
 traceOp(x - y) = 1 - (-1)
 2
 -- traceMyFoldrF traceOp 0 ([1, 2, 3] :: [Int])
-traceMyFoldrF f 0 t) = appEndo (foldMap (Endo . f) t) z 0 t
+traceMyFoldrF f 0 t = appEndo (foldMap (Endo . f) t) z 0 t
 traceOp(x - y) = 3 - (0)
 traceOp(x - y) = 2 - (3)
 traceOp(x - y) = 1 - (-1)
@@ -495,17 +500,17 @@ traceMyFoldrLH f 0 (1:[..]) = f 1 (traceMyFoldrLH f 0 [..])
 1
 *Main> take 5 $ foldr (\x y -> (x * x) : y) [] ([1..] :: [Int])
 [1,4,9,16,25]
-*Main> take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = [" ++ (show (x * x)) ++ "]") $ (x * x) : y) [] ([1..] :: [Int])
+*Main> take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":y") $ (x * x) : y) [] ([1..] :: [Int])
 traceMyFoldrLH f [] (1:[..]) = f 1 (traceMyFoldrLH f [] [..])
-(\x y -> (x * x) : y) = [1]
+(\x y -> (x * x) : y) = 1:y
 [1traceMyFoldrLH f [] (2:[..]) = f 2 (traceMyFoldrLH f [] [..])
-(\x y -> (x * x) : y) = [4]
+(\x y -> (x * x) : y) = 4:y
 ,4traceMyFoldrLH f [] (3:[..]) = f 3 (traceMyFoldrLH f [] [..])
-(\x y -> (x * x) : y) = [9]
+(\x y -> (x * x) : y) = 9:y
 ,9traceMyFoldrLH f [] (4:[..]) = f 4 (traceMyFoldrLH f [] [..])
-(\x y -> (x * x) : y) = [16]
+(\x y -> (x * x) : y) = 16:y
 ,16traceMyFoldrLH f [] (5:[..]) = f 5 (traceMyFoldrLH f [] [..])
-(\x y -> (x * x) : y) = [25]
+(\x y -> (x * x) : y) = 25:y
 ,25]
 ----
 +
