@@ -386,6 +386,8 @@ include::../src/data-types/list/square_of_list.hs[]
 [1,4,9,16,25]
 -- take 5 $ ([1..] :: [Int]) >>= \x -> pure (x * x)
 [1,4,9,16,25]
+-- take 5 $ sqList ([1..] :: [Int])
+[1,4,9,16,25]
 -- traceMyFoldrLH (\x y -> x) 0 ([1..] :: [Int])
 traceMyFoldrLH f 0 (1:[..]) = f 1 (traceMyFoldrLH f 0 [..])
 (\x y -> x) = 1

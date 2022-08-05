@@ -1,5 +1,9 @@
 import Debug.Trace
 
+sqList :: (Integral t) => [t] -> [t]
+sqList [] = []
+sqList (x:xs) = (x * x):sqList(xs)
+
 traceMyFoldrLH :: (Show a, Show b) => (a -> b -> b) -> b -> [a] -> b
 traceMyFoldrLH _ z [] =
   trace("traceMyFoldrLH f " ++ (show z) ++ " [] = " ++ (show z))
@@ -30,6 +34,8 @@ main = do
   print $ take 5 $ [x * x | x <- ([1..] :: [Int])]
   putStrLn "-- take 5 $ ([1..] :: [Int]) >>= \\x -> pure (x * x)"
   print $ take 5 $ ([1..] :: [Int]) >>= \x -> pure (x * x)
+  putStrLn "-- take 5 $ sqList ([1..] :: [Int])"
+  print $ take 5 $ sqList ([1..] :: [Int])
 
   putStrLn "-- traceMyFoldrLH (\\x y -> x) 0 ([1..] :: [Int])"
   print $ traceMyFoldrLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
