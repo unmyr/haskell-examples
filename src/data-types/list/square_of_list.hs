@@ -20,12 +20,16 @@ main :: IO ()
 main = do
   putStrLn "-- take 5 $ map (\\x -> x * x) ([1..] :: [Int])"
   print $ take 5 $ map (\x -> x * x) ([1..] :: [Int])
+  putStrLn "-- take 5 $ map (^(2::Int)) ([1..] :: [Int])"
+  print $ take 5 $ map (^(2::Int)) ([1..] :: [Int])
   putStrLn "-- take 5 $ fmap (\\x -> x * x) ([1..] :: [Int])"
   print $ take 5 $ fmap (\x -> x * x) ([1..] :: [Int])
   putStrLn "-- take 5 $ foldr (\\x xs -> (x * x) : xs) [] ([1..] :: [Int])"
   print $ take 5 $ foldr (\x xs -> (x * x) : xs) [] ([1..] :: [Int])
   putStrLn "-- take 5 $ [x * x | x <- ([1..] :: [Int])]"
   print $ take 5 $ [x * x | x <- ([1..] :: [Int])]
+  putStrLn "-- take 5 $ ([1..] :: [Int]) >>= \\x -> pure (x * x)"
+  print $ take 5 $ ([1..] :: [Int]) >>= \x -> pure (x * x)
 
   putStrLn "-- traceMyFoldrLH (\\x y -> x) 0 ([1..] :: [Int])"
   print $ traceMyFoldrLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])

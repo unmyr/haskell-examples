@@ -376,11 +376,15 @@ include::../src/data-types/list/square_of_list.hs[]
 *Main> main
 -- take 5 $ map (\x -> x * x) ([1..] :: [Int])
 [1,4,9,16,25]
+-- take 5 $ map (^(2::Int)) ([1..] :: [Int])
+[1,4,9,16,25]
 -- take 5 $ fmap (\x -> x * x) ([1..] :: [Int])
 [1,4,9,16,25]
 -- take 5 $ foldr (\x xs -> (x * x) : xs) [] ([1..] :: [Int])
 [1,4,9,16,25]
 -- take 5 $ [x * x | x <- ([1..] :: [Int])]
+[1,4,9,16,25]
+-- take 5 $ ([1..] :: [Int]) >>= \x -> pure (x * x)
 [1,4,9,16,25]
 -- traceMyFoldrLH (\x y -> x) 0 ([1..] :: [Int])
 traceMyFoldrLH f 0 (1:[..]) = f 1 (traceMyFoldrLH f 0 [..])
