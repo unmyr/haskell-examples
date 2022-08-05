@@ -65,3 +65,4 @@ main = do
 
   putStrLn "-- traceMyFoldrLH (\\x y -> x) 0 ([1..] :: [Int])"
   print $ traceMyFoldrLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
+  print $ take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> x * x : y) = " ++ (show x)) $ (x * x) : y) [] ([1..] :: [Int])

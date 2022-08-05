@@ -430,6 +430,37 @@ traceOp(x - y) = -3 - (3)
 traceMyFoldrLH f 0 (1:[..]) = f 1 (traceMyFoldrLH f 0 [..])
 (\x y -> x) = 1
 1
+*Main> take 5 $ foldr (\x y -> (x * x) : y) [] ([1..] :: [Int])
+[1,4,9,16,25]
+*Main> take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = [" ++ (show (x * x)) ++ "]") $ (x * x) : y) [] ([1..] :: [Int])
+traceMyFoldrLH f [] (1:[..]) = f 1 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = [1]
+[1traceMyFoldrLH f [] (2:[..]) = f 2 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = [4]
+,4traceMyFoldrLH f [] (3:[..]) = f 3 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = [9]
+,9traceMyFoldrLH f [] (4:[..]) = f 4 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = [16]
+,16traceMyFoldrLH f [] (5:[..]) = f 5 (traceMyFoldrLH f [] [..])
+(\x y -> (x * x) : y) = [25]
+,25]
+----
++
+----
+traceMyFoldrLH f [] (1:[2, 3, 4, ...]) = (1 * 1) : [2, 3, 4, ...]
+traceMyFoldrLH f [] (2:[3, 4, 5, ...]) = (2 * 2) : [3, 4, 5, ...]
+traceMyFoldrLH f [] (3:[4, 5, 6, ...]) = (3 * 3) : [4, 5, 6, ...]
+traceMyFoldrLH f [] (4:[5, 6, 7, ...]) = (4 * 4) : [5, 6, 7, ...]
+traceMyFoldrLH f [] (5:[6, 7, 8, ...]) = (5 * 5) : [6, 7, 8, ...]
+----
++
+----
+(\x y -> (x * x) : y) = x=5,y=[]
+(\x y -> (x * x) : y) = x=4,y=[25]
+(\x y -> (x * x) : y) = x=3,y=[16,25]
+(\x y -> (x * x) : y) = x=2,y=[9,16,25]
+(\x y -> (x * x) : y) = x=1,y=[4,9,16,25]
+[1,4,9,16,25]
 ----
 
 *** foldl
@@ -457,3 +488,27 @@ traceMyFoldlLH f 0 (9:[..]) = traceMyFoldlLH f (f 0 9) [..]
 (\x y -> x) = 0
 ...
 ----
+
+[source,haskell]
+.Performance foldl vs foldl'
+----
+Prelude> :set +s
+Prelude> :m +Data.List
+Prelude Data.List> foldl (+) 0 [1..2000000]
+2000001000000
+(1.38 secs, 322,524,424 bytes)
+Prelude Data.List> foldl' (+) 0 [1..2000000]
+2000001000000
+(0.26 secs, 176,067,456 bytes)
+Prelude Data.List> foldr (+) 0 [1..2000000]
+2000001000000
+(1.14 secs, 323,103,104 bytes)
+Prelude Data.List> sum [1..2000000]
+2000001000000
+(1.51 secs, 322,523,160 bytes)
+----
+
+.References
+* https://qiita.com/autotaker1984/items/09c5ceaa13e9077f5359[foldl vs. foldl'に終止符を打つ - Qiita^]
+* https://elbauldelprogramador.com/org-posts/foldr-infinite-list-haskell.html[Understanding why foldr works on infinite list on Haskell^]
+* https://tnomura9.exblog.jp/15819738/[foldl' と無限リストの foldr : tnomuraのブログ^]
