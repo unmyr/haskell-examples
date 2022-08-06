@@ -76,6 +76,10 @@ main = do
   putStrLn "\n-- traceMyFoldrLH (\\x y -> x) 0 ([1..] :: [Int])"
   print $ traceMyFoldrLH (\x _ -> trace("(\\x y -> x) = " ++ (show x)) $ x) (0 :: Int) ([1..] :: [Int])
   putStrLn "\n-- take 5 $ traceMyFoldrLH (\\x y -> trace(\"(\\x y -> (x * x) : y) = \" ++ (show (x * x)) ++ \":\" ++ show y) $ (x * x) : y) [] ([1..6] :: [Int])"
-  print $ take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":" ++ show y) $ (x * x) : y) [] ([1..6] :: [Int])
+  print $ take 5
+        $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":" ++ show y)
+                          $ (x * x) : y) [] ([1..6] :: [Int])
   putStrLn "\n-- take 5 $ traceMyFoldrLH (\\x y -> trace(\"(\\x y -> (x * x) : y) = \" ++ (show (x * x)) ++ \":y\") $ (x * x) : y) [] ([1..] :: [Int])"
-  print $ take 5 $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":y") $ (x * x) : y) [] ([1..] :: [Int])
+  print $ take 5
+        $ traceMyFoldrLH (\x y -> trace("(\\x y -> (x * x) : y) = " ++ (show (x * x)) ++ ":y")
+                          $ (x * x) : y) [] ([1..] :: [Int])
