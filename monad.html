@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<title>Install Haskell</title>
+<title>Monad</title>
 <style>
 @import url(https://fonts.googleapis.com/css?family=Varela+Round|Open+Sans:400italic,600italic,400,600|Ubuntu+Mono:400);
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
@@ -966,15 +966,12 @@ pre.rouge {
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_install_haskell">Install Haskell</a>
+<li><a href="#_monad">Monad</a>
 <ul class="sectlevel2">
-<li><a href="#_ubuntu_18">Ubuntu 18</a>
-<ul class="sectlevel3">
-<li><a href="#_haskell_8_0_2">Haskell 8.0.2</a></li>
-<li><a href="#_haskell_8_4_x">Haskell 8.4.x</a></li>
-</ul>
-</li>
-<li><a href="#_haskell_stack">Haskell stack</a></li>
+<li><a href="#_references">References</a></li>
+<li><a href="#_functor">Functor</a></li>
+<li><a href="#_list">List</a></li>
+<li><a href="#_maybe">Maybe</a></li>
 </ul>
 </li>
 </ul>
@@ -984,175 +981,64 @@ pre.rouge {
 <div class="paragraph">
 <p><a href="index.html">Haskell</a> |
 <a href="list.html#_list">List</a> |
-<a href="#">Install</a> |
+<a href="install.html">Install</a> |
 <a href="criterion.html">Criterion</a> |
 <a href="math.html">Math</a> |
-<a href="monad.html">Monad</a><br></p>
+<a href="#">Monad</a><br></p>
 </div>
 <div class="sect1">
-<h2 id="_install_haskell">Install Haskell</h2>
+<h2 id="_monad">Monad</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ubuntu_18">Ubuntu 18</h3>
-<div class="sect3">
-<h4 id="_haskell_8_0_2">Haskell 8.0.2</h4>
+<h3 id="_references">References</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Install Haskell</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> <span class="nt">--no-install-recommends</span> ghc</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Upgrade Haskell</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="nb">sudo </span>apt-get <span class="nt">--only-upgrade</span> <span class="nb">install </span>ghc</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Uninstall ghc</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="nb">sudo </span>apt-get remove <span class="nt">--auto-remove</span> ghc</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Cabal</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell">cabal update
-cabal <span class="nb">install</span> &lt;package-name&gt;</code></pre>
-</div>
-</div>
+<p><a href="http://learnyouahaskell.com/functors-applicative-functors-and-monoids" target="_blank" rel="noopener">Functors, Applicative Functors and Monoids - Learn You a Haskell for Great Good!</a></p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_haskell_8_4_x">Haskell 8.4.x</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Install Haskell</p>
-<div class="listingblock">
-<div class="title">/etc/apt/sources.list.d/ghc.list</div>
-<div class="content">
-<pre class="rouge highlight"><code data-lang="plaintext">deb https://ppa.launchpadcontent.net/hvr/ghc/ubuntu bionic main
-deb-src https://ppa.launchpadcontent.net/hvr/ghc/ubuntu bionic main</code></pre>
-</div>
-</div>
+<div class="sect2">
+<h3 id="_functor">Functor</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="nb">sudo </span>add-apt-repository ppa:hvr/ghc
-<span class="nb">sudo </span>apt update
-<span class="nb">sudo </span>apt <span class="nb">install </span>ghc-8.4.4 cabal-install-2.4
-<span class="nb">rm</span> <span class="nt">-fR</span>  ~/.cabal</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>dpkg <span class="nt">-L</span> ghc-8.4.4 | <span class="nb">head</span>
-<span class="go">/.
-/opt
-/opt/ghc
-/opt/ghc/8.4.4
-/opt/ghc/8.4.4/bin
-/opt/ghc/8.4.4/bin/ghc-8.4.4
-/opt/ghc/8.4.4/bin/ghc-pkg-8.4.4
-/opt/ghc/8.4.4/bin/ghci-8.4.4
-/opt/ghc/8.4.4/bin/haddock-ghc-8.4.4
-/opt/ghc/8.4.4/bin/hp2ps</span></code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>/opt/ghc/8.4.4/bin/ghc <span class="nt">--version</span>
-<span class="go">The Glorious Glasgow Haskell Compilation System, version 8.4.4</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Cabal</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Update</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="nv">$ </span>cabal update
-...
-<span class="nv">$ </span>cabal <span class="nb">install </span>random
-...</code></pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Uninstall Cabal</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="nb">sudo </span>apt-get remove <span class="nt">--auto-remove</span> cabal-install-3.0</code></pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title">References</div>
-<ul>
-<li>
-<p><a href="https://launchpad.net/~hvr/+archive/ubuntu/ghc/+index?field.series_filter=bionic" target="_blank" rel="noopener">GHC : Herbert V. Riedel</a></p>
-</li>
-<li>
-<p><a href="https://docs.haskellstack.org/en/stable/install_and_upgrade/" target="_blank" rel="noopener">Install/upgrade - The Haskell Tool Stack</a></p>
-</li>
-<li>
-<p><a href="https://downloads.haskell.org/debian/" target="_blank" rel="noopener">GHC &amp; Cabal APT Repository</a></p>
-</li>
-</ul>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Just</span> <span class="mi">1</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="kt">Just</span> <span class="mi">2</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Nothing</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="kt">Nothing</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span></code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_haskell_stack">Haskell stack</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Download and install</p>
+<h3 id="_list">List</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="shell">curl <span class="nt">-sSL</span> https://get.haskellstack.org/ | sh</code></pre>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]),</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="p">]</span>
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="o">&lt;*&gt;</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="o">&lt;*&gt;</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)]</span></code></pre>
 </div>
 </div>
-</li>
-<li>
-<p>Upgrade Haskell Tool Stack</p>
+</div>
+<div class="sect2">
+<h3 id="_maybe">Maybe</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>stack upgrade <span class="nt">--binary-only</span>
-<span class="go">Current Stack version: 2.7.5, available download version: 2.7.5
-Skipping binary upgrade, you are already running the most recent version</span></code></pre>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="mi">5</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="kt">Just</span> <span class="mi">8</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="p">(</span><span class="kt">Nothing</span> <span class="o">::</span> <span class="kt">Maybe</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="kt">Nothing</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="mi">3</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="mi">5</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="kt">Just</span> <span class="mi">8</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="mi">3</span> <span class="o">&lt;*&gt;</span> <span class="p">(</span><span class="kt">Nothing</span> <span class="o">::</span> <span class="kt">Maybe</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="kt">Nothing</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="p">(</span><span class="kt">Nothing</span> <span class="o">::</span> <span class="kt">Maybe</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="mi">5</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="kt">Nothing</span></code></pre>
 </div>
-</div>
-</li>
-<li>
-<p>Install GHC, etc</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>stack setup
-<span class="c">...</span></code></pre>
-</div>
-</div>
-</li>
-</ol>
 </div>
 </div>
 </div>
