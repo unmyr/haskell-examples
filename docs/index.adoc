@@ -1279,16 +1279,3 @@ Prelude> (+ 1) $ (* 2) 3
 7
 Prelude>
 ----
-
-=== Monad
-
-[source,haskell]
-----
-Prelude> Just 1 >>= \x -> return (x*2)
-Just 2
-Prelude> Nothing >>= \x -> return (x*2)
-Nothing
-Prelude> [1,2,3] >>= \x -> return (x * 2)
-[2,4,6]
-Prelude>
-----
