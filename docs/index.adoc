@@ -189,7 +189,7 @@ Prelude Data.List>
 
 [source,haskell]
 ----
-include::../src/data-types/string/rot13_decoder.hs[]
+include::../src/data-types/string/rot13_decoder_1.hs[]
 ----
 
 [source,haskell]
