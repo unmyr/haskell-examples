@@ -1230,6 +1230,39 @@ Ok, one module loaded.
 </ul>
 </div>
 </div>
+<div class="sect4">
+<h5 id="_rot13">ROT13</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Char</span> <span class="p">(</span><span class="nf">isLower</span><span class="p">,</span> <span class="nf">isUpper</span><span class="p">)</span>
+
+<span class="n">decodeRot13</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
+<span class="n">decodeRot13</span> <span class="n">s</span> <span class="o">=</span> <span class="n">map</span> <span class="p">(</span><span class="n">decodeRot13Char</span><span class="p">)</span> <span class="n">s</span> 
+  <span class="kr">where</span> <span class="n">rotNum</span> <span class="o">=</span> <span class="mi">13</span>
+        <span class="n">numOfAlpha</span> <span class="o">=</span> <span class="mi">26</span> <span class="c1">-- Number of letters in the alphabet</span>
+        <span class="n">offset</span> <span class="n">c1</span> <span class="n">c2</span> <span class="o">=</span> <span class="p">(</span><span class="n">fromEnum</span> <span class="n">c1</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">fromEnum</span> <span class="n">c2</span><span class="p">)</span>
+        <span class="n">decodeRot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">.</span><span class="n">isLower</span> <span class="n">c</span> <span class="o">=</span>
+          <span class="n">toEnum</span> <span class="p">(</span><span class="n">fromEnum</span> <span class="sc">'a'</span> <span class="o">+</span> <span class="p">((</span><span class="n">offset</span> <span class="n">c</span> <span class="sc">'a'</span><span class="p">)</span> <span class="o">+</span> <span class="n">rotNum</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">numOfAlpha</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Char</span>
+        <span class="n">decodeRot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">.</span><span class="n">isUpper</span> <span class="n">c</span> <span class="o">=</span>
+          <span class="n">toEnum</span> <span class="p">(</span><span class="n">fromEnum</span> <span class="sc">'A'</span> <span class="o">+</span> <span class="p">((</span><span class="n">offset</span> <span class="n">c</span> <span class="sc">'A'</span><span class="p">)</span> <span class="o">+</span> <span class="n">rotNum</span><span class="p">)</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="n">numOfAlpha</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Char</span>
+        <span class="n">decodeRot13Char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">show</span> <span class="p">((</span><span class="n">decodeRot13</span> <span class="s">""</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span><span class="p">)</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">show</span> <span class="p">((</span><span class="n">decodeRot13</span> <span class="s">"Lbh penpxrq gur pbqr!"</span><span class="p">)</span> <span class="o">==</span> <span class="s">"You cracked the code!"</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Results</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">decodeRot13</span> <span class="s">""</span>
+<span class="s">""</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">decodeRot13</span> <span class="s">"Lbh penpxrq gur pbqr!"</span>
+<span class="s">"You cracked the code!"</span></code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_composite_types">Composite Types</h4>
@@ -3649,7 +3682,7 @@ Floating is a type class.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-06 15:25:15 UTC
+Last updated 2022-08-08 17:11:11 UTC
 </div>
 </div>
 </body>
