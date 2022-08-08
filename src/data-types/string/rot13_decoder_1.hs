@@ -1,10 +1,12 @@
-import Data.Char (chr, isLower, isUpper, ord)
+import Data.Char (chr, ord)
 
 decodeRot13 :: String -> String
-decodeRot13 s = map rot13Char s 
+decodeRot13 s = map rot13Char s
   where
-    rot13Char c | isLower c = chr . (+ (ord 'a')) $ (`mod` 26) $ (+ 13) $ (+ (- ord 'a')) . ord $ c 
-    rot13Char c | isUpper c = chr . (+ (ord 'A')) $ (`mod` 26) $ (+ 13) $ (+ (- ord 'A')) . ord $ c
+    rot13Char c | 'a' <= c && c <= 'm' = chr $ (+   13 ) $ ord c
+    rot13Char c | 'n' <= c && c <= 'z' = chr $ (+ (-13)) $ ord c
+    rot13Char c | 'A' <= c && c <= 'M' = chr $ (+   13 ) $ ord c
+    rot13Char c | 'N' <= c && c <= 'Z' = chr $ (+ (-13)) $ ord c
     rot13Char c = c
 
 main :: IO ()

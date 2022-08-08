@@ -1,13 +1,14 @@
-import Data.Char (chr, ord)
-
 decodeRot13 :: String -> String
 decodeRot13 s = map rot13Char s
   where
-    rot13Char c | 'a' <= c && c <= 'm' = chr $ (+   13 ) $ ord c
-    rot13Char c | 'n' <= c && c <= 'z' = chr $ (+ (-13)) $ ord c
-    rot13Char c | 'A' <= c && c <= 'M' = chr $ (+   13 ) $ ord c
-    rot13Char c | 'N' <= c && c <= 'Z' = chr $ (+ (-13)) $ ord c
-    rot13Char c = c
+    -- [('a','n'),('b','o'), ...,('z','m')]
+    lowerMap = zip ['a'..'z'] (take (length ['a'..'z']) (drop 13 (cycle ['a'..'z'])))
+    -- [('A','N'),('B','O'), ...,('Z','M')]
+    upperMap = zip ['A'..'Z'] (take (length ['A'..'Z']) (drop 13 (cycle ['A'..'Z'])))
+    alphaMap = lowerMap ++ upperMap
+    rot13Char c = case lookup c alphaMap of
+        Just value -> value
+        Nothing -> c
 
 main :: IO ()
 main = do

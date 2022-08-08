@@ -106,6 +106,26 @@ Prelude Data.List>
 [source,haskell]
 .rot13_decoder_1.hs
 ----
+import Data.Char (chr, ord)
+
+decodeRot13 :: String -> String
+decodeRot13 s = map rot13Char s
+  where
+    rot13Char c | 'a' <= c && c <= 'm' = chr $ (+   13 ) $ ord c
+    rot13Char c | 'n' <= c && c <= 'z' = chr $ (+ (-13)) $ ord c
+    rot13Char c | 'A' <= c && c <= 'M' = chr $ (+   13 ) $ ord c
+    rot13Char c | 'N' <= c && c <= 'Z' = chr $ (+ (-13)) $ ord c
+    rot13Char c = c
+
+main :: IO ()
+main = do
+  putStrLn $ show ((decodeRot13 "") == "")
+  putStrLn $ show ((decodeRot13 "Lbh penpxrq gur pbqr!") == "You cracked the code!")
+----
+
+[source,haskell]
+.rot13_decoder_2.hs
+----
 import Data.Char (chr, isLower, isUpper, ord)
 
 decodeRot13 :: String -> String
@@ -122,7 +142,7 @@ main = do
 ----
 
 [source,haskell]
-.rot13_decoder_2.hs
+.rot13_decoder_3.hs
 ----
 decodeRot13 :: String -> String
 decodeRot13 s = map rot13Char s
@@ -135,26 +155,6 @@ decodeRot13 s = map rot13Char s
     rot13Char c = case lookup c alphaMap of
         Just value -> value
         Nothing -> c
-
-main :: IO ()
-main = do
-  putStrLn $ show ((decodeRot13 "") == "")
-  putStrLn $ show ((decodeRot13 "Lbh penpxrq gur pbqr!") == "You cracked the code!")
-----
-
-[source,haskell]
-.rot13_decoder_3.hs
-----
-import Data.Char (chr, ord)
-
-decodeRot13 :: String -> String
-decodeRot13 s = map rot13Char s
-  where
-    rot13Char c | 'a' <= c && c <= 'm' = chr $ (+   13 ) $ ord c
-    rot13Char c | 'n' <= c && c <= 'z' = chr $ (+ (-13)) $ ord c
-    rot13Char c | 'A' <= c && c <= 'M' = chr $ (+   13 ) $ ord c
-    rot13Char c | 'N' <= c && c <= 'Z' = chr $ (+ (-13)) $ ord c
-    rot13Char c = c
 
 main :: IO ()
 main = do
