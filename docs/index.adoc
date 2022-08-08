@@ -92,7 +92,6 @@ main = do
 
 ===== Concatenate vector of chars into single string
 
-
 * Chars
 +
 [source,haskell]
@@ -184,6 +183,22 @@ Prelude> import Data.List
 Prelude Data.List> intercalate ", " ["John", "Due"]
 "John, Due"
 Prelude Data.List>
+----
+
+===== ROT13
+
+[source,haskell]
+----
+include::../src/data-types/string/rot13_decoder.hs[]
+----
+
+[source,haskell]
+.Results
+----
+*Main> decodeRot13 ""
+""
+*Main> decodeRot13 "Lbh penpxrq gur pbqr!"
+"You cracked the code!"
 ----
 
 ==== Composite Types

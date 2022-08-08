@@ -1,0 +1,134 @@
+ifndef::leveloffset[]
+:toc: left
+:toclevels: 3
+:icons: font
+endif::[]
+
+== String
+
+=== Concatenate vector of chars into single string
+
+* Chars
++
+[source,haskell]
+----
+Prelude> ['a', 'b', 'c']
+"abc"
+----
+
+* Using the colon(`:`) operator to prepend chars
++
+[source,haskell]
+----
+Prelude> 'a':'b':'c':[]
+"abc"
+----
+
+=== Concatenate vector of strings into single string
+
+* Using `(++)`
++
+[source,haskell]
+----
+Prelude> :t (++)
+(++) :: [a] -> [a] -> [a]
+Prelude> "abc" ++ "123" ++ "cdf"
+"abc123cdf"
+Prelude>
+----
+
+* Using `concat`
++
+[source,haskell]
+----
+Prelude> :t concat
+concat :: Foldable t => t [a] -> [a]
+Prelude> concat ["abc", "123", "cdf"]
+"abc123cdf"
+Prelude>
+----
+
+* Using `Control.Monad.join`
++
+[source,haskell]
+----
+Prelude> Control.Monad.join ["abc", "123", "cdf"]
+"abc123cdf"
+----
++
+[source,haskell]
+----
+Prelude> import Control.Monad
+Prelude Control.Monad> join ["abc", "123", "cdf"]
+"abc123cdf"
+Prelude Control.Monad>
+----
+
+* You can also use the list monad to reduce the list to a single string, then re-wrap the result in a list.
++
+[source,haskell]
+----
+Prelude> ["abc", "123", "cdf"] >>= id
+"abc123cdf"
+Prelude>
+----
+
+* using `foldr` and `foldl`
++
+[source,haskell]
+----
+Prelude> foldr (\s_prepend s -> s_prepend ++ s) "" ["abc", "123", "cdf"]
+"abc123cdf"
+Prelude> foldl (\s s_add -> s ++ s_add) "" ["abc", "123", "cdf"]
+"abc123cdf"
+----
+
+=== Join strings with a delimiter
+
+* Using `Data.List.intercalate`
++
+[source,haskell]
+----
+Prelude> Data.List.intercalate ", " ["John", "Due"]
+"John, Due"
+----
++
+[source,haskell]
+----
+Prelude> import Data.List
+Prelude Data.List> intercalate ", " ["John", "Due"]
+"John, Due"
+Prelude Data.List>
+----
+
+=== ROT13
+
+[source,haskell]
+----
+import Data.Char (isLower, isUpper)
+
+decodeRot13 :: String -> String
+decodeRot13 s = map (decodeRot13Char) s 
+  where rotNum = 13
+        numOfAlpha = 26 -- Number of letters in the alphabet
+        offset c1 c2 = (fromEnum c1) - (fromEnum c2)
+        decodeRot13Char c | Data.Char.isLower c =
+          toEnum (fromEnum 'a' + ((offset c 'a') + rotNum) `mod` numOfAlpha) :: Char
+        decodeRot13Char c | Data.Char.isUpper c =
+          toEnum (fromEnum 'A' + ((offset c 'A') + rotNum) `mod` numOfAlpha) :: Char
+        decodeRot13Char c = c
+
+main :: IO ()
+main = do
+  putStrLn $ show ((decodeRot13 "") == "")
+  putStrLn $ show ((decodeRot13 "Lbh penpxrq gur pbqr!") == "You cracked the code!")
+----
+
+[source,haskell]
+.Results
+----
+*Main> decodeRot13 ""
+""
+*Main> decodeRot13 "Lbh penpxrq gur pbqr!"
+"You cracked the code!"
+----
