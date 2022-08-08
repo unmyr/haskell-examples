@@ -1,15 +1,11 @@
-import Data.Char (isLower, isUpper)
+import Data.Char (chr, isLower, isUpper, ord)
 
 decodeRot13 :: String -> String
-decodeRot13 s = map (decodeRot13Char) s 
-  where rotNum = 13
-        numOfAlpha = 26 -- Number of letters in the alphabet
-        offset c1 c2 = (fromEnum c1) - (fromEnum c2)
-        decodeRot13Char c | Data.Char.isLower c =
-          toEnum (fromEnum 'a' + ((offset c 'a') + rotNum) `mod` numOfAlpha) :: Char
-        decodeRot13Char c | Data.Char.isUpper c =
-          toEnum (fromEnum 'A' + ((offset c 'A') + rotNum) `mod` numOfAlpha) :: Char
-        decodeRot13Char c = c
+decodeRot13 s = map rot13Char s 
+  where
+    rot13Char c | isLower c = chr . (+ (ord 'a')) $ (`mod` 26) $ (+ 13) $ (+ (- ord 'a')) . ord $ c 
+    rot13Char c | isUpper c = chr . (+ (ord 'A')) $ (`mod` 26) $ (+ 13) $ (+ (- ord 'A')) . ord $ c
+    rot13Char c = c
 
 main :: IO ()
 main = do

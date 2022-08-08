@@ -193,6 +193,16 @@ include::../src/data-types/string/rot13_decoder_1.hs[]
 ----
 
 [source,haskell]
+----
+include::../src/data-types/string/rot13_decoder_2.hs[]
+----
+
+[source,haskell]
+----
+include::../src/data-types/string/rot13_decoder_3.hs[]
+----
+
+[source,haskell]
 .Results
 ----
 *Main> decodeRot13 ""
