@@ -1,0 +1,116 @@
+== Import
+
+* Import without the `qualified` keyword
+
+** without the `as` keyword
++
+[source,haskell]
+.Import all functions in a module.
+----
+import Data.Char
+
+main :: IO ()
+main = do
+  print $ (Data.Char.chr . Data.Char.ord) 'a'
+  print $ (chr . ord) 'a'
+----
++
+[source,haskell]
+.Selectively import just needed functions.
+----
+import Data.Char (chr, ord)
+
+main :: IO ()
+main = do
+  print $ (Data.Char.chr . Data.Char.ord) 'a'
+  print $ (chr . ord) 'a'
+----
++
+[source,haskell]
+----
+*Main> main
+'a'
+'a'
+----
+
+** Using `as` keyword
++
+[source,haskell]
+.Import all functions in a module.
+----
+import Data.Char as C
+
+main :: IO ()
+main = do
+  -- print $ (Data.Char.chr . Data.Char.ord) 'a' -- NG
+  print $ (C.chr . C.ord) 'a'
+  print $ (chr . ord) 'a'
+----
++
+[source,haskell]
+.Selectively import just needed functions.
+----
+import Data.Char as C (chr, ord)
+
+main :: IO ()
+main = do
+  -- print $ (Data.Char.chr . Data.Char.ord) 'a' -- NG
+  print $ (C.chr . C.ord) 'a'
+  print $ (chr . ord) '
+----
++
+[source,haskell]
+----
+*Main> main
+'a'
+'a'
+----
+
+* Qualified import +
+A qualified import makes the imported entities available only in qualified form, e.g.
+
+** Without `as` keyword
++
+[source,haskell]
+----
+import qualified Data.Char (chr, ord)
+
+main :: IO ()
+main = do
+  -- OK
+  print $ (Data.Char.chr . Data.Char.ord) 'a'
+
+  -- NG: Variable not in scope: chr :: b0 -> a0
+  -- print $ (chr . ord) 'a'
+----
++
+[source,haskell]
+----
+*Main> main
+'a'
+----
+
+** Using `as` keyword
++
+[source,haskell]
+.Rename the qualified import to something shorter:
+----
+import qualified Data.Char as C (chr, ord)
+
+main :: IO ()
+main = do
+  -- NG: No module named ‘Data.Char’ is imported.
+  -- print $ (Data.Char.chr . Data.Char.ord) 'a'
+
+  -- OK
+  print $ (C.chr . C.ord) 'a'
+
+  -- NG: Variable not in scope: chr :: b0 -> a0
+  -- print $ (chr . ord) 'a'
+----
++
+[source,haskell]
+----
+*Main> main
+'a'
+----
