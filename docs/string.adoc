@@ -100,6 +100,54 @@ Prelude Data.Char> toEnum $ (fromEnum 'z' - 1) :: Char
 include::../src/data-types/string/check_case.hs[]
 ----
 
+=== Read from String
+
+[source,haskell]
+----
+Prelude> read "123" :: Int
+123
+Prelude> read "123" :: Double
+123.0
+Prelude> read "[1, 2, 3]" :: [Int]
+[1,2,3]
+Prelude> read "[1, 3.141592, NaN, Infinity, -Infinity, 3.1e5, 3.1e-4]" :: [Double]
+[1.0,3.141592,NaN,Infinity,-Infinity,310000.0,3.1e-4]
+Prelude> read "(1, 'a')" :: (Int, Char)
+(1,'a')
+----
+
+* Date/Time
+
+** Date
++
+[source,haskell]
+----
+Prelude> :m + Data.Time.Calendar
+Prelude Data.Time.Calendar> read "2019-08-31" :: Day
+2019-08-31
+----
+
+** Time
++
+[source,haskell]
+----
+Prelude> :m + Data.Time
+Prelude Data.Time> read "2019-08-31" :: Day
+2019-08-31
+Prelude Data.Time> read "12:12:31" :: TimeOfDay
+12:12:31
+Prelude Data.Time> read "2019-08-31 12:12:31" :: UTCTime
+2019-08-31 12:12:31 UTC
+Prelude Data.Time> read "2019-08-31 12:12:31.123456" :: UTCTime
+2019-08-31 12:12:31.123456 UTC
+Prelude Data.Time> read "2019-08-31 12:12:31.123456Z" :: UTCTime
+2019-08-31 12:12:31.123456 UTC
+Prelude Data.Time> read "2019-08-31 12:12:31.123456" :: LocalTime
+2019-08-31 12:12:31.123456
+Prelude Data.Time> read "2019-08-31 12:12:31.123456+09:00" :: ZonedTime
+2019-08-31 12:12:31.123456 +0900
+----
+
 === Concatenate vector of chars into single string
 
 * Chars
