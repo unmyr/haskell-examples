@@ -243,6 +243,20 @@ Prelude Data.List> intercalate ", " ["John", "Due"]
 Prelude Data.List>
 ----
 
+=== word / unwords
+
+[source,haskell]
+----
+Prelude> words "foo bar baz"
+["foo","bar","baz"]
+Prelude> unwords ["foo","bar","baz"]
+"foo bar baz"
+Prelude> lines "hello\nworld"
+["hello","world"]
+Prelude> unlines ["hello","world"]
+"hello\nworld\n"
+----
+
 === ROT13
 
 * Without `mod`
@@ -276,4 +290,24 @@ include::../src/data-types/string/rot13_decoder_3.hs[]
 ""
 *Main> decodeRot13 "Lbh penpxrq gur pbqr!"
 "You cracked the code!"
+----
+
+=== IO
+
+[source,haskell]
+----
+Prelude> writeFile "temp.txt" $ show [1,2,3]
+Prelude> readFile "temp.txt"
+"[1,2,3]"
+Prelude> do {cs <- readFile "temp.txt"; return (read cs :: [Int])}
+[1,2,3]
+----
+
+[source,haskell]
+----
+Prelude> writeFile "temp.txt" $ unlines $ map show [1,2,3,4,5]
+Prelude> readFile "temp.txt"
+"1\n2\n3\n4\n5\n"
+Prelude> do cs <- readFile "temp.txt"; return $ map (\x->read x :: Int) $ lines cs
+[1,2,3,4,5]
 ----

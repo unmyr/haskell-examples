@@ -36,8 +36,11 @@
     "Monoids",
     "optc",
     "peaceiris",
+    "POSIX",
     "Semigroup",
     "tonynv",
-    "uncurry"
+    "uncurry",
+    "unlines",
+    "unwords"
   ]
 }
