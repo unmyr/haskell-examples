@@ -197,18 +197,24 @@ Prelude Data.List>
 
 === ROT13
 
+* Without `mod`
++
 [source,haskell]
 .src/data-types/string/rot13_decoder_1.hs
 ----
 include::../src/data-types/string/rot13_decoder_1.hs[]
 ----
 
+* Using `mod`
++
 [source,haskell]
 .src/data-types/string/rot13_decoder_2.hs
 ----
 include::../src/data-types/string/rot13_decoder_2.hs[]
 ----
 
+* Using table
++
 [source,haskell]
 .src/data-types/string/rot13_decoder_3.hs
 ----
