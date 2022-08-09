@@ -1289,10 +1289,9 @@ pre.rouge {
     <span class="n">makePairsRot13</span> <span class="n">cl</span> <span class="o">=</span> <span class="n">zip</span> <span class="n">cl</span> <span class="p">((</span><span class="n">drop</span> <span class="mi">13</span> <span class="n">cl</span><span class="p">)</span> <span class="o">++</span> <span class="p">(</span><span class="n">take</span> <span class="mi">13</span> <span class="n">cl</span><span class="p">))</span>
     <span class="n">lowerPairs</span> <span class="o">=</span> <span class="n">makePairsRot13</span> <span class="p">[</span><span class="sc">'a'</span><span class="o">..</span><span class="sc">'z'</span><span class="p">]</span> <span class="c1">-- [('a','n'),('b','o'), ...,('z','m')]</span>
     <span class="n">upperPairs</span> <span class="o">=</span> <span class="n">makePairsRot13</span> <span class="p">[</span><span class="sc">'A'</span><span class="o">..</span><span class="sc">'Z'</span><span class="p">]</span> <span class="c1">-- [('A','N'),('B','O'), ...,('Z','M')]</span>
-    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">=</span> <span class="kr">case</span> <span class="n">c</span> <span class="kr">of</span>
-      <span class="n">ch</span> <span class="o">|</span> <span class="n">isLower</span> <span class="n">ch</span> <span class="o">-&gt;</span> <span class="n">snd</span> <span class="o">$</span> <span class="n">lowerPairs</span> <span class="o">!!</span> <span class="p">(</span><span class="n">fromEnum</span> <span class="n">ch</span> <span class="o">-</span> <span class="n">fromEnum</span> <span class="sc">'a'</span><span class="p">)</span>
-      <span class="n">ch</span> <span class="o">|</span> <span class="n">isUpper</span> <span class="n">ch</span> <span class="o">-&gt;</span> <span class="n">snd</span> <span class="o">$</span> <span class="n">upperPairs</span> <span class="o">!!</span> <span class="p">(</span><span class="n">fromEnum</span> <span class="n">ch</span> <span class="o">-</span> <span class="n">fromEnum</span> <span class="sc">'A'</span><span class="p">)</span>
-      <span class="n">ch</span> <span class="o">-&gt;</span> <span class="n">ch</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="n">isLower</span> <span class="n">c</span> <span class="o">=</span> <span class="n">snd</span> <span class="o">$</span> <span class="n">lowerPairs</span> <span class="o">!!</span> <span class="p">(</span><span class="n">fromEnum</span> <span class="n">c</span> <span class="o">-</span> <span class="n">fromEnum</span> <span class="sc">'a'</span><span class="p">)</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="n">isUpper</span> <span class="n">c</span> <span class="o">=</span> <span class="n">snd</span> <span class="o">$</span> <span class="n">upperPairs</span> <span class="o">!!</span> <span class="p">(</span><span class="n">fromEnum</span> <span class="n">c</span> <span class="o">-</span> <span class="n">fromEnum</span> <span class="sc">'A'</span><span class="p">)</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
 
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
@@ -1318,7 +1317,7 @@ pre.rouge {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-09 10:52:02 UTC
+Last updated 2022-08-09 11:42:11 UTC
 </div>
 </div>
 </body>
