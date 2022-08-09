@@ -1078,6 +1078,35 @@ pre.rouge {
 </div>
 </div>
 </li>
+<li>
+<p>Check letter case</p>
+<div class="listingblock">
+<div class="title">src/data-types/string/check_case.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Char</span> <span class="p">(</span><span class="nf">isLower</span><span class="p">,</span> <span class="nf">isUpper</span><span class="p">)</span>
+
+<span class="kr">data</span> <span class="kt">LetterCase</span> <span class="o">=</span> <span class="kt">LowerCase</span> <span class="o">|</span> <span class="kt">UpperCase</span> <span class="o">|</span> <span class="kt">NonAlphabeticCharacter</span> <span class="kr">deriving</span> <span class="kt">Show</span>
+
+<span class="n">checkCase</span> <span class="o">::</span> <span class="kt">Char</span> <span class="o">-&gt;</span> <span class="kt">LetterCase</span>
+<span class="n">checkCase</span> <span class="n">c</span> <span class="o">=</span> <span class="kr">case</span> <span class="n">c</span> <span class="kr">of</span>
+  <span class="n">ch</span> <span class="o">|</span> <span class="sc">'a'</span> <span class="o">&lt;=</span> <span class="n">ch</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">&lt;=</span> <span class="sc">'z'</span> <span class="o">-&gt;</span> <span class="kt">LowerCase</span>
+  <span class="n">ch</span> <span class="o">|</span> <span class="sc">'A'</span> <span class="o">&lt;=</span> <span class="n">ch</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">&lt;=</span> <span class="sc">'Z'</span> <span class="o">-&gt;</span> <span class="kt">UpperCase</span>
+  <span class="kr">_</span> <span class="o">-&gt;</span> <span class="kt">NonAlphabeticCharacter</span>
+
+<span class="n">checkCase'</span> <span class="o">::</span> <span class="kt">Char</span> <span class="o">-&gt;</span> <span class="kt">LetterCase</span>
+<span class="n">checkCase'</span> <span class="n">c</span> <span class="o">=</span> <span class="kr">case</span> <span class="n">c</span> <span class="kr">of</span>
+  <span class="n">ch</span> <span class="o">|</span> <span class="n">isLower</span> <span class="n">ch</span> <span class="o">-&gt;</span> <span class="kt">LowerCase</span>
+  <span class="n">ch</span> <span class="o">|</span> <span class="n">isUpper</span> <span class="n">ch</span> <span class="o">-&gt;</span> <span class="kt">UpperCase</span>
+  <span class="kr">_</span> <span class="o">-&gt;</span> <span class="kt">NonAlphabeticCharacter</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="kr">let</span> <span class="n">letters</span> <span class="o">=</span> <span class="p">[</span><span class="sc">'a'</span><span class="p">,</span> <span class="sc">'A'</span><span class="p">,</span> <span class="sc">'-'</span><span class="p">]</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"checkCase : "</span> <span class="o">++</span> <span class="n">show</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="o">++</span> <span class="s">" -&gt; "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">map</span> <span class="n">checkCase</span>  <span class="n">letters</span><span class="p">)</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"checkCase': "</span> <span class="o">++</span> <span class="n">show</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span> <span class="o">++</span> <span class="s">" -&gt; "</span> <span class="o">++</span> <span class="n">show</span> <span class="p">(</span><span class="n">map</span> <span class="n">checkCase'</span> <span class="n">letters</span><span class="p">)</span></code></pre>
+</div>
+</div>
+</li>
 </ul>
 </div>
 </div>
@@ -1224,13 +1253,13 @@ pre.rouge {
 <div class="listingblock">
 <div class="title">src/data-types/string/rot13_decoder_2.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Char</span> <span class="p">(</span><span class="nf">chr</span><span class="p">,</span> <span class="nf">isLower</span><span class="p">,</span> <span class="nf">isUpper</span><span class="p">,</span> <span class="nf">ord</span><span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Char</span> <span class="p">(</span><span class="nf">chr</span><span class="p">,</span> <span class="nf">isLower</span><span class="p">,</span> <span class="nf">isUpper</span><span class="p">,</span> <span class="nf">ord</span><span class="p">,</span> <span class="nf">toLower</span><span class="p">,</span> <span class="nf">toUpper</span><span class="p">)</span>
 
 <span class="n">decodeRot13</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
 <span class="n">decodeRot13</span> <span class="n">s</span> <span class="o">=</span> <span class="n">map</span> <span class="n">rot13Char</span> <span class="n">s</span> 
   <span class="kr">where</span>
     <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="n">isLower</span> <span class="n">c</span> <span class="o">=</span> <span class="n">chr</span> <span class="o">.</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="n">ord</span> <span class="sc">'a'</span><span class="p">))</span> <span class="o">$</span> <span class="p">(`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">26</span><span class="p">)</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span> <span class="mi">13</span><span class="p">)</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="o">-</span> <span class="n">ord</span> <span class="sc">'a'</span><span class="p">))</span> <span class="o">.</span> <span class="n">ord</span> <span class="o">$</span> <span class="n">c</span> 
-    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="n">isUpper</span> <span class="n">c</span> <span class="o">=</span> <span class="n">chr</span> <span class="o">.</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="n">ord</span> <span class="sc">'A'</span><span class="p">))</span> <span class="o">$</span> <span class="p">(`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">26</span><span class="p">)</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span> <span class="mi">13</span><span class="p">)</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="o">-</span> <span class="n">ord</span> <span class="sc">'A'</span><span class="p">))</span> <span class="o">.</span> <span class="n">ord</span> <span class="o">$</span> <span class="n">c</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="n">isUpper</span> <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">toUpper</span> <span class="o">.</span> <span class="n">rot13Char</span> <span class="o">.</span> <span class="n">toLower</span><span class="p">)</span> <span class="n">c</span>
     <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
 
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
@@ -1275,7 +1304,7 @@ pre.rouge {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-09 04:41:20 UTC
+Last updated 2022-08-09 09:26:14 UTC
 </div>
 </div>
 </body>

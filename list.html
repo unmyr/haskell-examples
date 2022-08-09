@@ -970,6 +970,7 @@ pre.rouge {
 <ul class="sectlevel2">
 <li><a href="#_list_comprehension_リストの内包表記">List comprehension (リストの内包表記)</a></li>
 <li><a href="#_infinite_lists">Infinite lists</a></li>
+<li><a href="#_rotate_a_list">Rotate a list</a></li>
 <li><a href="#_square_of_list_in_haskell">Square of list in Haskell</a></li>
 <li><a href="#_foldl_and_foldr">foldl and foldr</a></li>
 </ul>
@@ -1183,40 +1184,6 @@ pre.rouge {
 </div>
 </div>
 </li>
-<li>
-<p>Program to left rotate a list</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">rotate_l</span> <span class="n">a</span> <span class="o">=</span> <span class="n">tail</span> <span class="n">a</span> <span class="o">++</span> <span class="n">take</span> <span class="mi">1</span> <span class="n">a</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="n">rotate_l</span>
-<span class="n">rotate_l</span> <span class="o">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_l</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_l</span> <span class="o">$</span> <span class="n">rotate_l</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_l</span> <span class="o">$</span> <span class="n">rotate_l</span> <span class="o">$</span> <span class="n">rotate_l</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Program to right rotate a list</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">rotate_r</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">last</span> <span class="n">a</span><span class="p">]</span> <span class="o">++</span> <span class="n">init</span> <span class="n">a</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="n">rotate_r</span>
-<span class="n">rotate_r</span> <span class="o">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_r</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_r</span> <span class="o">$</span> <span class="n">rotate_r</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_r</span> <span class="o">$</span> <span class="n">rotate_r</span> <span class="o">$</span> <span class="n">rotate_r</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_l</span> <span class="o">$</span> <span class="n">rotate_r</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span></code></pre>
-</div>
-</div>
-</li>
 </ul>
 </div>
 <div class="sect2">
@@ -1369,6 +1336,64 @@ pre.rouge {
 <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">]</span>
 <span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">take</span> <span class="mi">10</span> <span class="p">[</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">]</span> <span class="p">]</span>
 <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rotate_a_list">Rotate a list</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Program to left rotate a list</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">rotate_l</span> <span class="n">a</span> <span class="o">=</span> <span class="n">tail</span> <span class="n">a</span> <span class="o">++</span> <span class="n">take</span> <span class="mi">1</span> <span class="n">a</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="n">rotate_l</span>
+<span class="n">rotate_l</span> <span class="o">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_l</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_l</span> <span class="o">$</span> <span class="n">rotate_l</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_l</span> <span class="o">$</span> <span class="n">rotate_l</span> <span class="o">$</span> <span class="n">rotate_l</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Program to right rotate a list</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">rotate_r</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">last</span> <span class="n">a</span><span class="p">]</span> <span class="o">++</span> <span class="n">init</span> <span class="n">a</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="n">rotate_r</span>
+<span class="n">rotate_r</span> <span class="o">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_r</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_r</span> <span class="o">$</span> <span class="n">rotate_r</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_r</span> <span class="o">$</span> <span class="n">rotate_r</span> <span class="o">$</span> <span class="n">rotate_r</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rotate_l</span> <span class="o">$</span> <span class="n">rotate_r</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Rotate by 3 places</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">rot3</span> <span class="n">s</span> <span class="o">=</span> <span class="n">drop</span> <span class="mi">3</span> <span class="n">s</span> <span class="o">++</span> <span class="n">take</span> <span class="mi">3</span> <span class="n">s</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rot3</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">9</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">rot3'</span> <span class="n">s</span> <span class="o">=</span> <span class="n">take</span> <span class="p">(</span><span class="n">length</span> <span class="n">s</span><span class="p">)</span> <span class="o">$</span> <span class="n">drop</span> <span class="mi">3</span> <span class="o">$</span> <span class="n">cycle</span> <span class="n">s</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">rot3'</span> <span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">9</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span></code></pre>
 </div>
 </div>
 </li>
@@ -1775,7 +1800,7 @@ traceMyFoldrLH f [] (5:[6, 7, 8, ...]) = (5 * 5) : [6, 7, 8, ...]</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-09 04:41:20 UTC
+Last updated 2022-08-09 09:26:14 UTC
 </div>
 </div>
 </body>
