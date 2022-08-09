@@ -188,39 +188,6 @@ Prelude> [1, 2, 3] ++ [4, 5, 6]
 [1,2,3,4,5,6]
 ----
 
-
-* Program to left rotate a list
-+
-[source,haskell]
-----
-Prelude> let rotate_l a = tail a ++ take 1 a
-Prelude> :t rotate_l
-rotate_l :: [a] -> [a]
-Prelude> rotate_l [1, 2, 3]
-[2,3,1]
-Prelude> rotate_l $ rotate_l [1, 2, 3]
-[3,1,2]
-Prelude> rotate_l $ rotate_l $ rotate_l [1, 2, 3]
-[1,2,3]
-----
-
-* Program to right rotate a list
-+
-[source,haskell]
-----
-Prelude> let rotate_r a = [last a] ++ init a
-Prelude> :t rotate_r
-rotate_r :: [a] -> [a]
-Prelude> rotate_r [1, 2, 3]
-[3,1,2]
-Prelude> rotate_r $ rotate_r [1, 2, 3]
-[2,3,1]
-Prelude> rotate_r $ rotate_r $ rotate_r [1, 2, 3]
-[1,2,3]
-Prelude> rotate_l $ rotate_r [1, 2, 3]
-[1,2,3]
-----
-
 === List comprehension (リストの内包表記)
 
 * Filter multiples of 3 from a List
@@ -356,6 +323,56 @@ Prelude> take 10 $ map (+ 1) [1..]
 [2,3,4,5,6,7,8,9,10,11]
 Prelude> take 10 [ x + 1 | x <- [1..] ]
 [2,3,4,5,6,7,8,9,10,11]
+----
+
+=== Rotate a list
+
+* Program to left rotate a list
++
+[source,haskell]
+----
+Prelude> let rotate_l a = tail a ++ take 1 a
+Prelude> :t rotate_l
+rotate_l :: [a] -> [a]
+Prelude> rotate_l [1, 2, 3]
+[2,3,1]
+Prelude> rotate_l $ rotate_l [1, 2, 3]
+[3,1,2]
+Prelude> rotate_l $ rotate_l $ rotate_l [1, 2, 3]
+[1,2,3]
+----
+
+* Program to right rotate a list
++
+[source,haskell]
+----
+Prelude> let rotate_r a = [last a] ++ init a
+Prelude> :t rotate_r
+rotate_r :: [a] -> [a]
+Prelude> rotate_r [1, 2, 3]
+[3,1,2]
+Prelude> rotate_r $ rotate_r [1, 2, 3]
+[2,3,1]
+Prelude> rotate_r $ rotate_r $ rotate_r [1, 2, 3]
+[1,2,3]
+Prelude> rotate_l $ rotate_r [1, 2, 3]
+[1,2,3]
+----
+
+* Rotate by 3 places
++
+[source,haskell]
+----
+Prelude> let rot3 s = drop 3 s ++ take 3 s
+Prelude> rot3 [0..9]
+[3,4,5,6,7,8,9,0,1,2]
+----
++
+[source,haskell]
+----
+Prelude> let rot3' s = take (length s) $ drop 3 $ cycle s
+Prelude> rot3' [0..9]
+[3,4,5,6,7,8,9,0,1,2]
 ----
 
 === Square of list in Haskell
