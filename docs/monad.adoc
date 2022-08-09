@@ -54,3 +54,32 @@ Prelude> pure (+) <*> (Nothing :: Maybe Int) <*> Just (5 :: Int)
 Nothing
 ----
 
+* lookup
++
+[source,haskell]
+----
+Prelude> let products = [("Orange", 400), ("Apple", 480), ("Banana", 200)] :: [(String, Int)]
+Prelude> lookup "Banana" products
+Just 200
+Prelude> fmap (* 5) $ lookup "Banana" products
+Just 1000
+Prelude> pure (* 5) <*> lookup "Banana" products
+Just 1000
+Prelude> lookup "Banana" products >>= \n -> pure (n * 5)
+Just 1000
+Prelude> lookup "Peach" products
+Nothing
+Prelude> fmap (* 5) $ lookup "Peach" products
+Nothing
+----
+
+* Data.Map.lookup
++
+[source,haskell]
+----
+Prelude> productMap = Data.Map.fromList ([("Orange", 400), ("Apple", 480), ("Banana", 200)] :: [(String, Int)])
+Prelude> Data.Map.lookup "Orange" productMap
+Just 400
+Prelude> Data.Map.lookup "Peach" productMap
+Nothing
+----
