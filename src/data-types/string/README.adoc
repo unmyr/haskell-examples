@@ -72,9 +72,20 @@ Prelude Data.Char> chr (ord 'z' - 1)
 [source,haskell]
 .Using Enum
 ----
-> (toEnum . (+1) . fromEnum) 'a' :: Char
+Prelude> :m + Data.Char
+Prelude Data.Char> (toEnum . (+1) . fromEnum) 'a' :: Char
 'b'
-> (toEnum . (+ (-1)) . fromEnum) 'z' :: Char
+Prelude Data.Char> (toEnum . (+ (-1)) . fromEnum) 'z' :: Char
+'y'
+----
++
+[source,haskell]
+.Using Enum
+----
+Prelude> :m + Data.Char
+Prelude Data.Char> toEnum $ (fromEnum 'a' + 1) :: Char
+'b'
+Prelude Data.Char> toEnum $ (fromEnum 'z' - 1) :: Char
 'y'
 ----
 
