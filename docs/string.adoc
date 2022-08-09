@@ -10,6 +10,67 @@ endif::[]
 
 == Char & String
 
+=== Covert to integer
+
+* Id
++
+[source,haskell]
+.Using Data.Char
+----
+> import Data.Char
+> (chr . ord) 'a'
+'a'
+----
++
+[source,haskell]
+.Using Enum
+----
+> (toEnum . fromEnum) 'a' :: Char
+'a'
+----
+
+* Get Int value
++
+[source,haskell]
+.Using Data.Char
+----
+> import Data.Char (chr, ord)
+> ord 'a'
+97
+> chr 97
+'a'
+----
++
+[source,haskell]
+.Using Enum
+----
+> fromEnum 'a'
+97
+> toEnum 97 :: Char
+'a'
+----
+
+* Increment / decrement
++
+[source,haskell]
+.Using Data.Char
+----
+> import Data.Char
+> (chr . (+ 1) . ord) 'a'
+'b'
+> (chr . (+ (-1)) . ord) 'z'
+'y'
+----
++
+[source,haskell]
+.Using Enum
+----
+> (toEnum . (+1) . fromEnum) 'a' :: Char
+'b'
+> (toEnum . (+ (-1)) . fromEnum) 'z' :: Char
+'y'
+----
+
 === Concatenate vector of chars into single string
 
 * Chars
