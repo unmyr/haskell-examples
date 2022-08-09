@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<title>criterion</title>
+<title>Char &amp; String</title>
 <style>
 @import url(https://fonts.googleapis.com/css?family=Varela+Round|Open+Sans:400italic,600italic,400,600|Ubuntu+Mono:400);
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
@@ -966,13 +966,13 @@ pre.rouge {
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_criterion">criterion</a>
+<li><a href="#_char_string">Char &amp; String</a>
 <ul class="sectlevel2">
-<li><a href="#_install_criterion">Install criterion</a></li>
-<li><a href="#_code">Code</a></li>
-<li><a href="#_build">Build</a></li>
-<li><a href="#_run">Run</a></li>
-<li><a href="#_report">Report</a></li>
+<li><a href="#_covert_to_integer">Covert to integer</a></li>
+<li><a href="#_concatenate_vector_of_chars_into_single_string">Concatenate vector of chars into single string</a></li>
+<li><a href="#_concatenate_vector_of_strings_into_single_string">Concatenate vector of strings into single string</a></li>
+<li><a href="#_join_strings_with_a_delimiter">Join strings with a delimiter</a></li>
+<li><a href="#_rot13">ROT13</a></li>
 </ul>
 </li>
 </ul>
@@ -981,117 +981,100 @@ pre.rouge {
 <div id="content">
 <div class="paragraph">
 <p><a href="index.html">Haskell</a> |
-<a href="string.html">Char&amp;String</a> |
+<a href="#">Char&amp;String</a> |
 <a href="list.html">List</a> |
 <a href="install.html">Install</a> |
-<a href="#">Criterion</a> |
+<a href="criterion.html">Criterion</a> |
 <a href="math.html">Math</a> |
 <a href="monad.html">Monad</a><br></p>
 </div>
 <div class="sect1">
-<h2 id="_criterion">criterion</h2>
+<h2 id="_char_string">Char &amp; String</h2>
 <div class="sectionbody">
-<div class="ulist">
-<div class="title">References</div>
-<ul>
-<li>
-<p><a href="http://www.serpentine.com/criterion/tutorial.html" target="_blank" rel="noopener">A criterion tutorial</a></p>
-</li>
-</ul>
-</div>
 <div class="sect2">
-<h3 id="_install_criterion">Install criterion</h3>
+<h3 id="_covert_to_integer">Covert to integer</h3>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://hackage.haskell.org/package/criterion" target="_blank" rel="noopener">criterion: Robust, reliable performance measurement and analysis</a></p>
+<p>Id</p>
+<div class="listingblock">
+<div class="title">Using Data.Char</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">&gt;</span> <span class="kr">import</span> <span class="nn">Data.Char</span>
+<span class="o">&gt;</span> <span class="p">(</span><span class="n">chr</span> <span class="o">.</span> <span class="n">ord</span><span class="p">)</span> <span class="sc">'a'</span>
+<span class="sc">'a'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Using Enum</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">&gt;</span> <span class="p">(</span><span class="n">toEnum</span> <span class="o">.</span> <span class="n">fromEnum</span><span class="p">)</span> <span class="sc">'a'</span> <span class="o">::</span> <span class="kt">Char</span>
+<span class="sc">'a'</span></code></pre>
+</div>
+</div>
 </li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell">cabal <span class="nb">install </span>criterion</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p><strong>NOTE</strong><br>
-Install failed in WSL 1 following errors:</p>
-<details>
-<summary class="title">Message details</summary>
-<div class="content">
+<p>Get Int value</p>
 <div class="listingblock">
+<div class="title">Using Data.Char</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>cabal <span class="nb">install </span>criterion
-<span class="go">Resolving dependencies...
-cabal: Could not resolve dependencies:
-trying: criterion-1.5.13.0 (user goal)
-trying: base-4.9.1.0/installed-4.9... (dependency of criterion-1.5.13.0)
-trying: text-1.2.2.2/installed-9UQ... (dependency of criterion-1.5.13.0)
-next goal: microstache (dependency of criterion-1.5.13.0)
-rejecting: microstache-1.0.2.1 (conflict: text==1.2.2.2/installed-9UQ...,
-</span><span class="gp">microstache =&gt;</span><span class="w"> </span>text&gt;<span class="o">=</span>1.2.3.0 <span class="o">&amp;&amp;</span> &lt;1.3 <span class="o">||</span> <span class="o">&gt;=</span>2.0 <span class="o">&amp;&amp;</span> &lt;2.1<span class="o">)</span>
-<span class="go">trying: microstache-1.0.2
-trying: base-compat-0.12.1 (dependency of criterion-measurement-0.1.3.0)
-next goal: aeson (dependency of criterion-1.5.13.0)
-</span><span class="gp">rejecting: aeson-2.1.0.0 (conflict: microstache =&gt;</span><span class="w"> </span>aeson&gt;<span class="o">=</span>0.11 <span class="o">&amp;&amp;</span> &lt;1.6 <span class="o">||</span>
-<span class="gp">&gt;</span><span class="o">=</span>2.0.0.0 <span class="o">&amp;&amp;</span> &lt;2.1<span class="o">)</span>
-<span class="gp">rejecting: aeson-2.0.3.0 (conflict: text==1.2.2.2/installed-9UQ..., aeson =&gt;</span><span class="w">
-</span><span class="gp">text&gt;</span><span class="o">=</span>1.2.3.0 <span class="o">&amp;&amp;</span> &lt;1.3 <span class="o">||</span> <span class="o">&gt;=</span>2.0 <span class="o">&amp;&amp;</span> &lt;2.1<span class="o">)</span>
-<span class="go">rejecting: aeson-2.0.2.0, aeson-2.0.1.0, aeson-2.0.0.0, aeson-1.5.6.0,
-</span><span class="gp">aeson-1.5.5.1 (conflict: text==1.2.2.2/installed-9UQ..., aeson =&gt;</span><span class="w">
-</span><span class="gp">text&gt;</span><span class="o">=</span>1.2.3.0 <span class="o">&amp;&amp;</span> &lt;1.3<span class="o">)</span>
-<span class="gp">rejecting: aeson-1.5.5.0 (conflict: base==4.9.1.0/installed-4.9..., aeson =&gt;</span><span class="w">
-</span><span class="go">base&lt;0)
-rejecting: aeson-1.5.4.1, aeson-1.5.4.0, aeson-1.5.3.0, aeson-1.5.2.0,
-aeson-1.5.1.0, aeson-1.5.0.0, aeson-1.4.7.1, aeson-1.4.7.0, aeson-1.4.6.0,
-aeson-1.4.5.0, aeson-1.4.4.0, aeson-1.4.3.0, aeson-1.4.2.0 (conflict:
-</span><span class="gp">text==1.2.2.2/installed-9UQ..., aeson =&gt;</span><span class="w"> </span>text&gt;<span class="o">=</span>1.2.3.0 <span class="o">&amp;&amp;</span> &lt;1.3<span class="o">)</span>
-<span class="go">rejecting: aeson-1.4.1.0, aeson-1.4.0.0, aeson-1.3.1.1, aeson-1.3.1.0
-</span><span class="gp">(conflict: base-compat==0.12.1, aeson =&gt;</span><span class="w"> </span>base-compat&gt;<span class="o">=</span>0.9.1 <span class="o">&amp;&amp;</span> &lt;0.11<span class="o">)</span>
-<span class="go">rejecting: aeson-1.3.0.0, aeson-1.2.4.0, aeson-1.2.3.0, aeson-1.2.2.0,
-aeson-1.2.1.0, aeson-1.2.0.0, aeson-1.1.2.0, aeson-1.1.1.0, aeson-1.1.0.0,
-aeson-1.0.2.1, aeson-1.0.2.0, aeson-1.0.1.0, aeson-1.0.0.0 (conflict:
-</span><span class="gp">base-compat==0.12.1, aeson =&gt;</span><span class="w"> </span>base-compat&gt;<span class="o">=</span>0.9.1 <span class="o">&amp;&amp;</span> &lt;0.10<span class="o">)</span>
-<span class="go">rejecting: aeson-0.11.3.0, aeson-0.11.2.1, aeson-0.11.2.0, aeson-0.11.1.4,
-aeson-0.11.1.3, aeson-0.11.1.2, aeson-0.11.1.1, aeson-0.11.1.0,
-aeson-0.11.0.0, aeson-0.9.0.1, aeson-0.9.0.0, aeson-0.8.1.1, aeson-0.8.1.0,
-aeson-0.8.0.2, aeson-0.7.0.6, aeson-0.7.0.4, aeson-0.6.2.1, aeson-0.6.2.0,
-aeson-0.6.1.0, aeson-0.6.0.2, aeson-0.6.0.1, aeson-0.6.0.0, aeson-0.5.0.0,
-aeson-0.4.0.1, aeson-0.4.0.0, aeson-0.3.2.14, aeson-0.3.2.13, aeson-0.3.2.12,
-aeson-0.3.2.11, aeson-0.3.2.10, aeson-0.3.2.9, aeson-0.3.2.8, aeson-0.3.2.7,
-aeson-0.3.2.6, aeson-0.3.2.5, aeson-0.3.2.4, aeson-0.3.2.3, aeson-0.3.2.2,
-aeson-0.3.2.1, aeson-0.3.2.0, aeson-0.3.1.1, aeson-0.3.1.0, aeson-0.3.0.0,
-aeson-0.2.0.0, aeson-0.1.0.0, aeson-0.10.0.0, aeson-0.8.0.1, aeson-0.8.0.0,
-aeson-0.7.0.5, aeson-0.7.0.3, aeson-0.7.0.2, aeson-0.7.0.1, aeson-0.7.0.0
-</span><span class="gp">(conflict: criterion =&gt;</span><span class="w"> </span>aeson&gt;<span class="o">=</span>1 <span class="o">&amp;&amp;</span> &lt;2.2<span class="o">)</span>
-<span class="go">Backjump limit reached (currently 2000, change with --max-backjumps or try to
-run with --reorder-goals).
-</span><span class="gp">[10:54:08] haskell-examples$</span><span class="w"> </span>ghci
-<span class="go">GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
-</span><span class="gp">Prelude&gt;</span><span class="w"> </span>import criterion
-<span class="go">
-</span><span class="gp">&lt;interactive&gt;</span>:1:8: error: parse error on input ‘criterion’
-<span class="gp">Prelude&gt;</span><span class="w">
-</span><span class="go">Leaving GHCi.</span></code></pre>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">&gt;</span> <span class="kr">import</span> <span class="nn">Data.Char</span> <span class="p">(</span><span class="nf">chr</span><span class="p">,</span> <span class="nf">ord</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">ord</span> <span class="sc">'a'</span>
+<span class="mi">97</span>
+<span class="o">&gt;</span> <span class="n">chr</span> <span class="mi">97</span>
+<span class="sc">'a'</span></code></pre>
 </div>
-</div>
-</div>
-</details>
-<div class="paragraph">
-<p>As a workarounds, Rerun with the <code>--reorder-goals</code> option</p>
 </div>
 <div class="listingblock">
+<div class="title">Using Enum</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>cabal <span class="nb">install </span>criterion <span class="nt">--reorder-goals</span>
-<span class="go">Resolving dependencies...
-Downloading Only-0.1...
-...snip...
-Downloading criterion-1.5.13.0...
-Configuring criterion-1.5.13.0...
-Building criterion-1.5.13.0...
-Installed criterion-1.5.13.0</span></code></pre>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">&gt;</span> <span class="n">fromEnum</span> <span class="sc">'a'</span>
+<span class="mi">97</span>
+<span class="o">&gt;</span> <span class="n">toEnum</span> <span class="mi">97</span> <span class="o">::</span> <span class="kt">Char</span>
+<span class="sc">'a'</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Increment / decrement</p>
+<div class="listingblock">
+<div class="title">Using Data.Char</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">import</span> <span class="nn">Data.Char</span> <span class="p">(</span><span class="nf">chr</span><span class="p">,</span> <span class="nf">ord</span><span class="p">)</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">chr</span> <span class="o">.</span> <span class="p">(</span><span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">.</span> <span class="n">ord</span><span class="p">)</span> <span class="sc">'a'</span>
+<span class="sc">'b'</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">chr</span> <span class="o">.</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">.</span> <span class="n">ord</span><span class="p">)</span> <span class="sc">'z'</span>
+<span class="sc">'y'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Using Data.Char</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">m</span> <span class="o">+</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">&gt;</span> <span class="n">chr</span> <span class="p">(</span><span class="n">ord</span> <span class="sc">'a'</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="sc">'b'</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">&gt;</span> <span class="n">chr</span> <span class="p">(</span><span class="n">ord</span> <span class="sc">'z'</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="sc">'y'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Using Enum</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">m</span> <span class="o">+</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">toEnum</span> <span class="o">.</span> <span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">.</span> <span class="n">fromEnum</span><span class="p">)</span> <span class="sc">'a'</span> <span class="o">::</span> <span class="kt">Char</span>
+<span class="sc">'b'</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">toEnum</span> <span class="o">.</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">.</span> <span class="n">fromEnum</span><span class="p">)</span> <span class="sc">'z'</span> <span class="o">::</span> <span class="kt">Char</span>
+<span class="sc">'y'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Using Enum</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">m</span> <span class="o">+</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">&gt;</span> <span class="n">toEnum</span> <span class="o">$</span> <span class="p">(</span><span class="n">fromEnum</span> <span class="sc">'a'</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Char</span>
+<span class="sc">'b'</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Char</span><span class="o">&gt;</span> <span class="n">toEnum</span> <span class="o">$</span> <span class="p">(</span><span class="n">fromEnum</span> <span class="sc">'z'</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">::</span> <span class="kt">Char</span>
+<span class="sc">'y'</span></code></pre>
 </div>
 </div>
 </li>
@@ -1099,67 +1082,191 @@ Installed criterion-1.5.13.0</span></code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_code">Code</h3>
+<h3 id="_concatenate_vector_of_chars_into_single_string">Concatenate vector of chars into single string</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Chars</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Criterion.Main</span>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="p">[</span><span class="sc">'a'</span><span class="p">,</span> <span class="sc">'b'</span><span class="p">,</span> <span class="sc">'c'</span><span class="p">]</span>
+<span class="s">"abc"</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Using the colon(<code>:</code>) operator to prepend chars</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="sc">'a'</span><span class="o">:</span><span class="sc">'b'</span><span class="o">:</span><span class="sc">'c'</span><span class="o">:</span><span class="kt">[]</span>
+<span class="s">"abc"</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_concatenate_vector_of_strings_into_single_string">Concatenate vector of strings into single string</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Using <code>(++)</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="p">(</span><span class="o">++</span><span class="p">)</span>
+<span class="p">(</span><span class="o">++</span><span class="p">)</span> <span class="o">::</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="s">"abc"</span> <span class="o">++</span> <span class="s">"123"</span> <span class="o">++</span> <span class="s">"cdf"</span>
+<span class="s">"abc123cdf"</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Using <code>concat</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">t</span> <span class="n">concat</span>
+<span class="n">concat</span> <span class="o">::</span> <span class="kt">Foldable</span> <span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">concat</span> <span class="p">[</span><span class="s">"abc"</span><span class="p">,</span> <span class="s">"123"</span><span class="p">,</span> <span class="s">"cdf"</span><span class="p">]</span>
+<span class="s">"abc123cdf"</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Using <code>Control.Monad.join</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Control</span><span class="o">.</span><span class="kt">Monad</span><span class="o">.</span><span class="n">join</span> <span class="p">[</span><span class="s">"abc"</span><span class="p">,</span> <span class="s">"123"</span><span class="p">,</span> <span class="s">"cdf"</span><span class="p">]</span>
+<span class="s">"abc123cdf"</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">import</span> <span class="nn">Control.Monad</span>
+<span class="kt">Prelude</span> <span class="kt">Control</span><span class="o">.</span><span class="kt">Monad</span><span class="o">&gt;</span> <span class="n">join</span> <span class="p">[</span><span class="s">"abc"</span><span class="p">,</span> <span class="s">"123"</span><span class="p">,</span> <span class="s">"cdf"</span><span class="p">]</span>
+<span class="s">"abc123cdf"</span>
+<span class="kt">Prelude</span> <span class="kt">Control</span><span class="o">.</span><span class="kt">Monad</span><span class="o">&gt;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>You can also use the list monad to reduce the list to a single string, then re-wrap the result in a list.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="p">[</span><span class="s">"abc"</span><span class="p">,</span> <span class="s">"123"</span><span class="p">,</span> <span class="s">"cdf"</span><span class="p">]</span> <span class="o">&gt;&gt;=</span> <span class="n">id</span>
+<span class="s">"abc123cdf"</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>using <code>foldr</code> and <code>foldl</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldr</span> <span class="p">(</span><span class="nf">\</span><span class="n">s_prepend</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s_prepend</span> <span class="o">++</span> <span class="n">s</span><span class="p">)</span> <span class="s">""</span> <span class="p">[</span><span class="s">"abc"</span><span class="p">,</span> <span class="s">"123"</span><span class="p">,</span> <span class="s">"cdf"</span><span class="p">]</span>
+<span class="s">"abc123cdf"</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">foldl</span> <span class="p">(</span><span class="nf">\</span><span class="n">s</span> <span class="n">s_add</span> <span class="o">-&gt;</span> <span class="n">s</span> <span class="o">++</span> <span class="n">s_add</span><span class="p">)</span> <span class="s">""</span> <span class="p">[</span><span class="s">"abc"</span><span class="p">,</span> <span class="s">"123"</span><span class="p">,</span> <span class="s">"cdf"</span><span class="p">]</span>
+<span class="s">"abc123cdf"</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_join_strings_with_a_delimiter">Join strings with a delimiter</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Using <code>Data.List.intercalate</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">List</span><span class="o">.</span><span class="n">intercalate</span> <span class="s">", "</span> <span class="p">[</span><span class="s">"John"</span><span class="p">,</span> <span class="s">"Due"</span><span class="p">]</span>
+<span class="s">"John, Due"</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">import</span> <span class="nn">Data.List</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">List</span><span class="o">&gt;</span> <span class="n">intercalate</span> <span class="s">", "</span> <span class="p">[</span><span class="s">"John"</span><span class="p">,</span> <span class="s">"Due"</span><span class="p">]</span>
+<span class="s">"John, Due"</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">List</span><span class="o">&gt;</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rot13">ROT13</h3>
+<div class="listingblock">
+<div class="title">src/data-types/string/rot13_decoder_1.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Char</span> <span class="p">(</span><span class="nf">chr</span><span class="p">,</span> <span class="nf">ord</span><span class="p">)</span>
 
-<span class="n">sum'</span><span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">xs</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">sum</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-<span class="n">sum_foldr</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="n">foldr</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="n">a</span>
-<span class="n">sum_foldl</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="n">foldl</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="mi">0</span> <span class="n">a</span>
+<span class="n">decodeRot13</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
+<span class="n">decodeRot13</span> <span class="n">s</span> <span class="o">=</span> <span class="n">map</span> <span class="n">rot13Char</span> <span class="n">s</span>
+  <span class="kr">where</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="sc">'a'</span> <span class="o">&lt;=</span> <span class="n">c</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="sc">'m'</span> <span class="o">=</span> <span class="n">chr</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span>   <span class="mi">13</span> <span class="p">)</span> <span class="o">$</span> <span class="n">ord</span> <span class="n">c</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="sc">'n'</span> <span class="o">&lt;=</span> <span class="n">c</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="sc">'z'</span> <span class="o">=</span> <span class="n">chr</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">13</span><span class="p">))</span> <span class="o">$</span> <span class="n">ord</span> <span class="n">c</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="sc">'A'</span> <span class="o">&lt;=</span> <span class="n">c</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="sc">'M'</span> <span class="o">=</span> <span class="n">chr</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span>   <span class="mi">13</span> <span class="p">)</span> <span class="o">$</span> <span class="n">ord</span> <span class="n">c</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="sc">'N'</span> <span class="o">&lt;=</span> <span class="n">c</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="sc">'Z'</span> <span class="o">=</span> <span class="n">chr</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">13</span><span class="p">))</span> <span class="o">$</span> <span class="n">ord</span> <span class="n">c</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
 
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
-  <span class="n">defaultMain</span> <span class="p">[</span>
-    <span class="n">bgroup</span> <span class="s">"sum"</span> <span class="p">[</span>
-      <span class="n">bench</span> <span class="s">"sum'"</span> <span class="o">$</span> <span class="n">whnf</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">],</span>
-      <span class="n">bench</span> <span class="s">"sum(foldr)"</span> <span class="o">$</span> <span class="n">whnf</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">],</span>
-      <span class="n">bench</span> <span class="s">"sum(foldl)"</span> <span class="o">$</span> <span class="n">whnf</span> <span class="n">sum'</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000000</span><span class="p">]</span>
-      <span class="p">]</span>
-    <span class="p">]</span></code></pre>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">show</span> <span class="p">((</span><span class="n">decodeRot13</span> <span class="s">""</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span><span class="p">)</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">show</span> <span class="p">((</span><span class="n">decodeRot13</span> <span class="s">"Lbh penpxrq gur pbqr!"</span><span class="p">)</span> <span class="o">==</span> <span class="s">"You cracked the code!"</span><span class="p">)</span></code></pre>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_build">Build</h3>
 <div class="listingblock">
+<div class="title">src/data-types/string/rot13_decoder_2.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghc <span class="nt">-O</span> <span class="nt">-o</span> <span class="nb">sum </span>sum.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">import</span> <span class="nn">Data.Char</span> <span class="p">(</span><span class="nf">chr</span><span class="p">,</span> <span class="nf">isLower</span><span class="p">,</span> <span class="nf">isUpper</span><span class="p">,</span> <span class="nf">ord</span><span class="p">)</span>
+
+<span class="n">decodeRot13</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
+<span class="n">decodeRot13</span> <span class="n">s</span> <span class="o">=</span> <span class="n">map</span> <span class="n">rot13Char</span> <span class="n">s</span> 
+  <span class="kr">where</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="n">isLower</span> <span class="n">c</span> <span class="o">=</span> <span class="n">chr</span> <span class="o">.</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="n">ord</span> <span class="sc">'a'</span><span class="p">))</span> <span class="o">$</span> <span class="p">(`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">26</span><span class="p">)</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span> <span class="mi">13</span><span class="p">)</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="o">-</span> <span class="n">ord</span> <span class="sc">'a'</span><span class="p">))</span> <span class="o">.</span> <span class="n">ord</span> <span class="o">$</span> <span class="n">c</span> 
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">|</span> <span class="n">isUpper</span> <span class="n">c</span> <span class="o">=</span> <span class="n">chr</span> <span class="o">.</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="n">ord</span> <span class="sc">'A'</span><span class="p">))</span> <span class="o">$</span> <span class="p">(`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">26</span><span class="p">)</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span> <span class="mi">13</span><span class="p">)</span> <span class="o">$</span> <span class="p">(</span><span class="o">+</span> <span class="p">(</span><span class="o">-</span> <span class="n">ord</span> <span class="sc">'A'</span><span class="p">))</span> <span class="o">.</span> <span class="n">ord</span> <span class="o">$</span> <span class="n">c</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">show</span> <span class="p">((</span><span class="n">decodeRot13</span> <span class="s">""</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span><span class="p">)</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">show</span> <span class="p">((</span><span class="n">decodeRot13</span> <span class="s">"Lbh penpxrq gur pbqr!"</span><span class="p">)</span> <span class="o">==</span> <span class="s">"You cracked the code!"</span><span class="p">)</span></code></pre>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_run">Run</h3>
 <div class="listingblock">
+<div class="title">src/data-types/string/rot13_decoder_3.hs</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>./sum <span class="nt">--output</span> sum_reports.html
-<span class="go">benchmarking sum/sum'
-time                 411.7 ms   (321.4 ms .. 592.4 ms)
-                     0.978 R²   (0.958 R² .. 1.000 R²)
-mean                 428.9 ms   (395.6 ms .. 468.9 ms)
-std dev              44.13 ms   (16.58 ms .. 60.32 ms)
-variance introduced by outliers: 23% (moderately inflated)
+<pre class="rouge highlight"><code data-lang="haskell"><span class="n">decodeRot13</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">String</span>
+<span class="n">decodeRot13</span> <span class="n">s</span> <span class="o">=</span> <span class="n">map</span> <span class="n">rot13Char</span> <span class="n">s</span>
+  <span class="kr">where</span>
+    <span class="c1">-- [('a','n'),('b','o'), ...,('z','m')]</span>
+    <span class="n">lowerMap</span> <span class="o">=</span> <span class="n">zip</span> <span class="p">[</span><span class="sc">'a'</span><span class="o">..</span><span class="sc">'z'</span><span class="p">]</span> <span class="p">(</span><span class="n">take</span> <span class="p">(</span><span class="n">length</span> <span class="p">[</span><span class="sc">'a'</span><span class="o">..</span><span class="sc">'z'</span><span class="p">])</span> <span class="p">(</span><span class="n">drop</span> <span class="mi">13</span> <span class="p">(</span><span class="n">cycle</span> <span class="p">[</span><span class="sc">'a'</span><span class="o">..</span><span class="sc">'z'</span><span class="p">])))</span>
+    <span class="c1">-- [('A','N'),('B','O'), ...,('Z','M')]</span>
+    <span class="n">upperMap</span> <span class="o">=</span> <span class="n">zip</span> <span class="p">[</span><span class="sc">'A'</span><span class="o">..</span><span class="sc">'Z'</span><span class="p">]</span> <span class="p">(</span><span class="n">take</span> <span class="p">(</span><span class="n">length</span> <span class="p">[</span><span class="sc">'A'</span><span class="o">..</span><span class="sc">'Z'</span><span class="p">])</span> <span class="p">(</span><span class="n">drop</span> <span class="mi">13</span> <span class="p">(</span><span class="n">cycle</span> <span class="p">[</span><span class="sc">'A'</span><span class="o">..</span><span class="sc">'Z'</span><span class="p">])))</span>
+    <span class="n">alphaMap</span> <span class="o">=</span> <span class="n">lowerMap</span> <span class="o">++</span> <span class="n">upperMap</span>
+    <span class="n">rot13Char</span> <span class="n">c</span> <span class="o">=</span> <span class="kr">case</span> <span class="n">lookup</span> <span class="n">c</span> <span class="n">alphaMap</span> <span class="kr">of</span>
+        <span class="kt">Just</span> <span class="n">value</span> <span class="o">-&gt;</span> <span class="n">value</span>
+        <span class="kt">Nothing</span> <span class="o">-&gt;</span> <span class="n">c</span>
 
-benchmarking sum/sum(foldr)
-time                 438.4 ms   (326.4 ms .. 555.2 ms)
-                     0.987 R²   (0.985 R² .. 1.000 R²)
-mean                 430.1 ms   (376.1 ms .. 455.0 ms)
-std dev              40.28 ms   (18.49 ms .. 51.71 ms)
-variance introduced by outliers: 22% (moderately inflated)
-
-benchmarking sum/sum(foldl)
-time                 429.0 ms   (358.2 ms .. 545.7 ms)
-                     0.990 R²   (0.986 R² .. 1.000 R²)
-mean                 426.7 ms   (391.5 ms .. 452.3 ms)
-std dev              34.74 ms   (17.84 ms .. 47.26 ms)
-variance introduced by outliers: 21% (moderately inflated)</span></code></pre>
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">show</span> <span class="p">((</span><span class="n">decodeRot13</span> <span class="s">""</span><span class="p">)</span> <span class="o">==</span> <span class="s">""</span><span class="p">)</span>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">show</span> <span class="p">((</span><span class="n">decodeRot13</span> <span class="s">"Lbh penpxrq gur pbqr!"</span><span class="p">)</span> <span class="o">==</span> <span class="s">"You cracked the code!"</span><span class="p">)</span></code></pre>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_report">Report</h3>
-<div class="imageblock">
+<div class="listingblock">
+<div class="title">Results</div>
 <div class="content">
-<img src="images/criterion_sum_report.png" alt="criterion sum report">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">decodeRot13</span> <span class="s">""</span>
+<span class="s">""</span>
+<span class="o">*</span><span class="kt">Main</span><span class="o">&gt;</span> <span class="n">decodeRot13</span> <span class="s">"Lbh penpxrq gur pbqr!"</span>
+<span class="s">"You cracked the code!"</span></code></pre>
 </div>
 </div>
 </div>
