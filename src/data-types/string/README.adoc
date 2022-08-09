@@ -8,6 +8,7 @@ endif::[]
 
 === Covert to integer
 
+
 * Id
 +
 [source,haskell]
@@ -51,10 +52,20 @@ endif::[]
 [source,haskell]
 .Using Data.Char
 ----
-> import Data.Char
-> (chr . (+ 1) . ord) 'a'
+Prelude> import Data.Char (chr, ord)
+Prelude Data.Char> (chr . (+ 1) . ord) 'a'
 'b'
-> (chr . (+ (-1)) . ord) 'z'
+Prelude Data.Char> (chr . (+ (-1)) . ord) 'z'
+'y'
+----
++
+[source,haskell]
+.Using Data.Char
+----
+Prelude> :m + Data.Char
+Prelude Data.Char> chr (ord 'a' + 1)
+'b'
+Prelude Data.Char> chr (ord 'z' - 1)
 'y'
 ----
 +
