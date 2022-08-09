@@ -969,10 +969,13 @@ pre.rouge {
 <li><a href="#_char_string">Char &amp; String</a>
 <ul class="sectlevel2">
 <li><a href="#_covert_to_integer">Covert to integer</a></li>
+<li><a href="#_read_from_string">Read from String</a></li>
 <li><a href="#_concatenate_vector_of_chars_into_single_string">Concatenate vector of chars into single string</a></li>
 <li><a href="#_concatenate_vector_of_strings_into_single_string">Concatenate vector of strings into single string</a></li>
 <li><a href="#_join_strings_with_a_delimiter">Join strings with a delimiter</a></li>
+<li><a href="#_word_unwords">word / unwords</a></li>
 <li><a href="#_rot13">ROT13</a></li>
+<li><a href="#_io">IO</a></li>
 </ul>
 </li>
 </ul>
@@ -983,6 +986,7 @@ pre.rouge {
 <p><a href="index.html">Haskell</a> |
 <a href="#">Char&amp;String</a> |
 <a href="list.html">List</a> |
+<a href="datetime.html">DateTime</a> |
 <a href="install.html">Install</a> |
 <a href="criterion.html">Criterion</a> |
 <a href="math.html">Math</a> |
@@ -1111,6 +1115,66 @@ pre.rouge {
 </div>
 </div>
 <div class="sect2">
+<h3 id="_read_from_string">Read from String</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"123"</span> <span class="o">::</span> <span class="kt">Int</span>
+<span class="mi">123</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"123"</span> <span class="o">::</span> <span class="kt">Double</span>
+<span class="mf">123.0</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"[1, 2, 3]"</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"[1, 3.141592, NaN, Infinity, -Infinity, 3.1e5, 3.1e-4]"</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">3.141592</span><span class="p">,</span><span class="kt">NaN</span><span class="p">,</span><span class="kt">Infinity</span><span class="p">,</span><span class="o">-</span><span class="kt">Infinity</span><span class="p">,</span><span class="mf">310000.0</span><span class="p">,</span><span class="mf">3.1e-4</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"(1, 'a')"</span> <span class="o">::</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Char</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sc">'a'</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Date/Time</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Date</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">m</span> <span class="o">+</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Time</span><span class="o">.</span><span class="kt">Calendar</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Time</span><span class="o">.</span><span class="kt">Calendar</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"2019-08-31"</span> <span class="o">::</span> <span class="kt">Day</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Time</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="o">:</span><span class="n">m</span> <span class="o">+</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Time</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Time</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"2019-08-31"</span> <span class="o">::</span> <span class="kt">Day</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Time</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"12:12:31"</span> <span class="o">::</span> <span class="kt">TimeOfDay</span>
+<span class="mi">12</span><span class="o">:</span><span class="mi">12</span><span class="o">:</span><span class="mi">31</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Time</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"2019-08-31 12:12:31"</span> <span class="o">::</span> <span class="kt">UTCTime</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span> <span class="mi">12</span><span class="o">:</span><span class="mi">12</span><span class="o">:</span><span class="mi">31</span> <span class="kt">UTC</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Time</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"2019-08-31 12:12:31.123456"</span> <span class="o">::</span> <span class="kt">UTCTime</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span> <span class="mi">12</span><span class="o">:</span><span class="mi">12</span><span class="o">:</span><span class="mf">31.123456</span> <span class="kt">UTC</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Time</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"2019-08-31 12:12:31.123456Z"</span> <span class="o">::</span> <span class="kt">UTCTime</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span> <span class="mi">12</span><span class="o">:</span><span class="mi">12</span><span class="o">:</span><span class="mf">31.123456</span> <span class="kt">UTC</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Time</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"2019-08-31 12:12:31.123456"</span> <span class="o">::</span> <span class="kt">LocalTime</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span> <span class="mi">12</span><span class="o">:</span><span class="mi">12</span><span class="o">:</span><span class="mf">31.123456</span>
+<span class="kt">Prelude</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Time</span><span class="o">&gt;</span> <span class="n">read</span> <span class="s">"2019-08-31 12:12:31.123456+09:00"</span> <span class="o">::</span> <span class="kt">ZonedTime</span>
+<span class="mi">2019</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">31</span> <span class="mi">12</span><span class="o">:</span><span class="mi">12</span><span class="o">:</span><span class="mf">31.123456</span> <span class="o">+</span><span class="mi">0900</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_concatenate_vector_of_chars_into_single_string">Concatenate vector of chars into single string</h3>
 <div class="ulist">
 <ul>
@@ -1229,6 +1293,21 @@ pre.rouge {
 </div>
 </div>
 <div class="sect2">
+<h3 id="_word_unwords">word / unwords</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">words</span> <span class="s">"foo bar baz"</span>
+<span class="p">[</span><span class="s">"foo"</span><span class="p">,</span><span class="s">"bar"</span><span class="p">,</span><span class="s">"baz"</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">unwords</span> <span class="p">[</span><span class="s">"foo"</span><span class="p">,</span><span class="s">"bar"</span><span class="p">,</span><span class="s">"baz"</span><span class="p">]</span>
+<span class="s">"foo bar baz"</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">lines</span> <span class="s">"hello</span><span class="se">\n</span><span class="s">world"</span>
+<span class="p">[</span><span class="s">"hello"</span><span class="p">,</span><span class="s">"world"</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">unlines</span> <span class="p">[</span><span class="s">"hello"</span><span class="p">,</span><span class="s">"world"</span><span class="p">]</span>
+<span class="s">"hello</span><span class="se">\n</span><span class="s">world</span><span class="se">\n</span><span class="s">"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_rot13">ROT13</h3>
 <div class="ulist">
 <ul>
@@ -1312,12 +1391,33 @@ pre.rouge {
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_io">IO</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">writeFile</span> <span class="s">"temp.txt"</span> <span class="o">$</span> <span class="n">show</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">readFile</span> <span class="s">"temp.txt"</span>
+<span class="s">"[1,2,3]"</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">do</span> <span class="p">{</span><span class="n">cs</span> <span class="o">&lt;-</span> <span class="n">readFile</span> <span class="s">"temp.txt"</span><span class="p">;</span> <span class="n">return</span> <span class="p">(</span><span class="n">read</span> <span class="n">cs</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])}</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">writeFile</span> <span class="s">"temp.txt"</span> <span class="o">$</span> <span class="n">unlines</span> <span class="o">$</span> <span class="n">map</span> <span class="n">show</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">readFile</span> <span class="s">"temp.txt"</span>
+<span class="s">"1</span><span class="se">\n</span><span class="s">2</span><span class="se">\n</span><span class="s">3</span><span class="se">\n</span><span class="s">4</span><span class="se">\n</span><span class="s">5</span><span class="se">\n</span><span class="s">"</span>
+<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">do</span> <span class="n">cs</span> <span class="o">&lt;-</span> <span class="n">readFile</span> <span class="s">"temp.txt"</span><span class="p">;</span> <span class="n">return</span> <span class="o">$</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">read</span> <span class="n">x</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">$</span> <span class="n">lines</span> <span class="n">cs</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-09 11:42:11 UTC
+Last updated 2022-08-09 13:52:14 UTC
 </div>
 </div>
 </body>
