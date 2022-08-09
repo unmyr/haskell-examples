@@ -1,6 +1,7 @@
 <<index.adoc#,Haskell>> {vbar}
 <<string.adoc#,Char&String>> {vbar}
 <<list.adoc#,List>> {vbar}
+<<datetime.adoc#,DateTime>> {vbar}
 <<install.adoc#,Install>> {vbar}
 <<criterion.adoc#,Criterion>> {vbar}
 <<math.adoc#,Math>> {vbar}

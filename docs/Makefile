@@ -10,6 +10,7 @@ include $(DOC_ROOT)/asciidoc.mk
 HTML_LIST=\
 mkdir_and_copy \
 $(DEST_DIR)/criterion.html \
+$(DEST_DIR)/datetime.html \
 $(DEST_DIR)/install.html \
 $(DEST_DIR)/list.html \
 $(DEST_DIR)/math.html \
