@@ -92,6 +92,14 @@ Prelude Data.Char> toEnum $ (fromEnum 'z' - 1) :: Char
 'y'
 ----
 
+* Check letter case
++
+[source,haskell]
+.src/data-types/string/check_case.hs
+----
+include::../src/data-types/string/check_case.hs[]
+----
+
 === Concatenate vector of chars into single string
 
 * Chars
