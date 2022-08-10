@@ -974,6 +974,7 @@ pre.rouge {
 <li><a href="#_fibonacci_sequence">Fibonacci sequence</a></li>
 <li><a href="#_prime_number">Prime number</a></li>
 <li><a href="#_complex_number">Complex number</a></li>
+<li><a href="#_monte_carlo_method">Monte Carlo Method</a></li>
 <li><a href="#_group">Group</a>
 <ul class="sectlevel3">
 <li><a href="#_c2">C<sub>2</sub></a></li>
@@ -1356,6 +1357,51 @@ pre.rouge {
 <p><a href="https://stackoverflow.com/questions/48100794/differences-between-complex-number-implementations-in-haskell-and-python" target="_blank" rel="noopener">Differences between complex number implementations in Haskell and Python - Stack Overflow</a></p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_monte_carlo_method">Monte Carlo Method</h3>
+<div class="listingblock">
+<div class="title">src/math/monte-carlo/src/Main.hs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="haskell"><span class="kr">module</span> <span class="nn">Main</span> <span class="kr">where</span>
+<span class="kr">import</span> <span class="nn">System.Random</span>
+<span class="kr">import</span> <span class="nn">System.Environment</span> <span class="p">(</span><span class="nf">getArgs</span><span class="p">)</span>
+<span class="kr">import</span> <span class="nn">Text.Printf</span>
+
+<span class="n">computeNorms</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]</span>
+<span class="n">computeNorms</span> <span class="kt">[]</span>  <span class="o">=</span> <span class="kt">[]</span>
+<span class="n">computeNorms</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="kt">[]</span>
+<span class="n">computeNorms</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">y</span><span class="o">:</span><span class="n">xs2</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">)</span> <span class="o">:</span> <span class="p">(</span><span class="n">computeNorms</span> <span class="n">xs2</span><span class="p">)</span>
+
+<span class="n">calcPi</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="kt">Double</span>
+<span class="n">calcPi</span> <span class="n">n</span> <span class="n">xs</span> <span class="o">=</span>
+  <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="p">((</span><span class="mi">4</span> <span class="o">::</span> <span class="kt">Double</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">fromIntegral</span> <span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">fromIntegral</span> <span class="n">n</span><span class="p">))</span>
+  <span class="o">$</span> <span class="n">length</span> <span class="o">$</span> <span class="n">filter</span> <span class="p">(</span><span class="o">==</span> <span class="kt">True</span><span class="p">)</span> <span class="o">$</span> <span class="n">take</span> <span class="n">n</span>
+  <span class="o">$</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="n">xs</span>
+
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">args</span> <span class="o">&lt;-</span> <span class="n">getArgs</span>
+  <span class="kr">let</span> <span class="n">str_num_trials</span> <span class="o">=</span> <span class="n">args</span> <span class="o">!!</span> <span class="mi">0</span>
+      <span class="n">num_trials</span> <span class="o">=</span> <span class="n">read</span> <span class="n">str_num_trials</span> <span class="o">::</span> <span class="kt">Int</span>
+
+  <span class="c1">-- gen &lt;- newStdGen</span>
+  <span class="c1">-- let monte_carlo_pi = calcPi num_trials (computeNorms (randomRs (0, 1) (gen) :: [Double]))</span>
+
+  <span class="kr">let</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="kr">let</span> <span class="n">monte_carlo_pi</span> <span class="o">=</span> <span class="n">calcPi</span> <span class="n">num_trials</span> <span class="p">(</span><span class="n">computeNorms</span> <span class="p">(</span><span class="n">randomRs</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="n">seed</span><span class="p">)</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]))</span>
+
+  <span class="n">printf</span> <span class="s">"trial=%d, result=%f, error=%.10f</span><span class="se">\n</span><span class="s">"</span> <span class="p">(</span><span class="n">num_trials</span><span class="p">)</span> <span class="p">(</span><span class="n">monte_carlo_pi</span><span class="p">)</span> <span class="p">(</span><span class="n">abs</span> <span class="p">(</span><span class="n">monte_carlo_pi</span> <span class="o">-</span> <span class="n">pi</span><span class="p">))</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Results</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>cabal v2-run <span class="nt">--</span> all 100000
+<span class="go">Up to date
+trial=100000, result=3.13896, error=0.0026326536</span></code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2443,7 +2489,7 @@ si * i * j * k = i
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-09 13:52:14 UTC
+Last updated 2022-08-10 12:44:23 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
