@@ -14,16 +14,27 @@ calcPi n xs =
   $ length $ filter (== True) $ take n
   $ map (\x -> x < 1) xs
 
+runMonteCarloNoSeed :: Int -> IO ()
+runMonteCarloNoSeed num_trials = do
+  gen <- newStdGen
+  let monte_carlo_pi = calcPi num_trials (computeNorms (randomRs (0, 1) (gen) :: [Double]))
+  printf "trial=%10d, result=%.10f, error=%.10f\n" (num_trials) (monte_carlo_pi) (abs (monte_carlo_pi - pi))
+
+runMonteCarloWithSeed :: Int -> Int -> IO ()
+runMonteCarloWithSeed num_trials seed = do
+  let monte_carlo_pi = calcPi num_trials (computeNorms (randomRs (0, 1) (mkStdGen seed) :: [Double]))
+  printf "trial=%10d, result=%.10f, error=%.10f\n" (num_trials) (monte_carlo_pi) (abs (monte_carlo_pi - pi))
+
 main :: IO ()
 main = do
   args <- getArgs
   let str_num_trials = args !! 0
       num_trials = read str_num_trials :: Int
 
-  -- gen <- newStdGen
-  -- let monte_carlo_pi = calcPi num_trials (computeNorms (randomRs (0, 1) (gen) :: [Double]))
+  let trialList = [1, 10, 100, 1000, 10000, 100000, 1000000, 10000000]
+  putStrLn "-- runMonteCarloNoSeed"
+  mapM_ (\n -> runMonteCarloNoSeed n) trialList
 
   let seed = 1
-  let monte_carlo_pi = calcPi num_trials (computeNorms (randomRs (0, 1) (mkStdGen seed) :: [Double]))
-
-  printf "trial=%d, result=%f, error=%.10f\n" (num_trials) (monte_carlo_pi) (abs (monte_carlo_pi - pi))
+  putStrLn $ "\n-- runMonteCarloWithSeed: seed=" ++ (show seed)
+  mapM_ (\n -> runMonteCarloWithSeed n seed) trialList

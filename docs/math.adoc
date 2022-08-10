@@ -312,7 +312,25 @@ include::../src/math/monte-carlo/src/Main.hs[]
 ----
 $ cabal v2-run -- all 100000
 Up to date
-trial=100000, result=3.13896, error=0.0026326536
+-- runMonteCarloNoSeed
+trial=         1, result=4.0000000000, error=0.8584073464
+trial=        10, result=2.8000000000, error=0.3415926536
+trial=       100, result=3.0800000000, error=0.0615926536
+trial=      1000, result=3.1760000000, error=0.0344073464
+trial=     10000, result=3.1180000000, error=0.0235926536
+trial=    100000, result=3.1458000000, error=0.0042073464
+trial=   1000000, result=3.1390600000, error=0.0025326536
+trial=  10000000, result=3.1413908000, error=0.0002018536
+
+-- runMonteCarloWithSeed: seed=1
+trial=         1, result=4.0000000000, error=0.8584073464
+trial=        10, result=3.2000000000, error=0.0584073464
+trial=       100, result=3.0800000000, error=0.0615926536
+trial=      1000, result=3.1160000000, error=0.0255926536
+trial=     10000, result=3.1268000000, error=0.0147926536
+trial=    100000, result=3.1389600000, error=0.0026326536
+trial=   1000000, result=3.1408120000, error=0.0007806536
+trial=  10000000, result=3.1413364000, error=0.0002562536
 ----
 
 === Group
