@@ -299,6 +299,22 @@ include::../src/math/complex.hs[]
 .References
 * https://stackoverflow.com/questions/48100794/differences-between-complex-number-implementations-in-haskell-and-python[Differences between complex number implementations in Haskell and Python - Stack Overflow^]
 
+=== Monte Carlo Method
+
+[source,haskell]
+.src/math/monte-carlo/src/Main.hs
+----
+include::../src/math/monte-carlo/src/Main.hs[]
+----
+
+[source,console]
+.Results
+----
+$ cabal v2-run -- all 100000
+Up to date
+trial=100000, result=3.13896, error=0.0026326536
+----
+
 === Group
 
 ==== C~2~
