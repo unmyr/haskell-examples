@@ -39,6 +39,6 @@ main = do
     putStrLn "-- runMonteCarloNoSeed"
     mapM_ (\n -> runMonteCarloNoSeed n) trialList
 
-    putStrLn $ "\n-- runMonteCarloWithSeed: seed=" ++ (show seed)
     let seed = 1
+    putStrLn $ "\n-- runMonteCarloWithSeed: seed=" ++ (show seed)
     mapM_ (\n -> runMonteCarloWithSeed n seed) trialList
