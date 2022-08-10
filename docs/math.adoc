@@ -333,6 +333,10 @@ trial=   1000000, result=3.1408120000, error=0.0007806536
 trial=  10000000, result=3.1413364000, error=0.0002562536
 ----
 
+.References
+* https://p4a.seas.gwu.edu/2019-Fall/L15-monte-carlo-methods.html[Monte Carlo Methods^] +
+  monte carlo simulation trials count - Google Search
+
 === Group
 
 ==== C~2~
