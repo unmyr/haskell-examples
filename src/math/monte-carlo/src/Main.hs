@@ -28,13 +28,15 @@ runMonteCarloWithSeed num_trials seed = do
 main :: IO ()
 main = do
   args <- getArgs
-  let str_num_trials = args !! 0
-      num_trials = read str_num_trials :: Int
+  if 1 == length args then do
+    let str_num_trials = args !! 0
+        num_trials = read str_num_trials :: Int
+    runMonteCarloWithSeed num_trials 1
+  else do
+    let trialList = [1, 10, 10^2, 10^3, 10^4, 10^5, 10^6, 10^7]
+    putStrLn "-- runMonteCarloNoSeed"
+    mapM_ (\n -> runMonteCarloNoSeed n) trialList
 
-  let trialList = [1, 10, 100, 1000, 10000, 100000, 1000000, 10000000]
-  putStrLn "-- runMonteCarloNoSeed"
-  mapM_ (\n -> runMonteCarloNoSeed n) trialList
-
-  let seed = 1
-  putStrLn $ "\n-- runMonteCarloWithSeed: seed=" ++ (show seed)
-  mapM_ (\n -> runMonteCarloWithSeed n seed) trialList
+    let seed = 1
+    putStrLn $ "\n-- runMonteCarloWithSeed: seed=" ++ (show seed)
+    mapM_ (\n -> runMonteCarloWithSeed n seed) trialList

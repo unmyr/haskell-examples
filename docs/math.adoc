@@ -310,17 +310,17 @@ include::../src/math/monte-carlo/src/Main.hs[]
 [source,console]
 .Results
 ----
-$ cabal v2-run -- all 100000
+$ cabal v2-run
 Up to date
 -- runMonteCarloNoSeed
-trial=         1, result=4.0000000000, error=0.8584073464
+trial=         1, result=0.0000000000, error=3.1415926536
 trial=        10, result=2.8000000000, error=0.3415926536
-trial=       100, result=3.0800000000, error=0.0615926536
-trial=      1000, result=3.1760000000, error=0.0344073464
-trial=     10000, result=3.1180000000, error=0.0235926536
-trial=    100000, result=3.1458000000, error=0.0042073464
-trial=   1000000, result=3.1390600000, error=0.0025326536
-trial=  10000000, result=3.1413908000, error=0.0002018536
+trial=       100, result=3.3200000000, error=0.1784073464
+trial=      1000, result=3.1960000000, error=0.0544073464
+trial=     10000, result=3.1360000000, error=0.0055926536
+trial=    100000, result=3.1355600000, error=0.0060326536
+trial=   1000000, result=3.1412320000, error=0.0003606536
+trial=  10000000, result=3.1416380000, error=0.0000453464
 
 -- runMonteCarloWithSeed: seed=1
 trial=         1, result=4.0000000000, error=0.8584073464
