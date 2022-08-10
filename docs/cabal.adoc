@@ -1,0 +1,33 @@
+ifndef::leveloffset[]
+:toc: left
+:toclevels: 3
+:icons: font
+
+include::header.adoc[]
+endif::[]
+
+== Cabal
+
+* Build
++
+[source,console]
+----
+$ cabal v2-build --ghc-options=-Wall
+----
+
+* Run
++
+[source,console]
+----
+$ cabal v2-run --ghc-options=-Wall
+----
+
+* Clean
++
+[source,console]
+----
+$ cabal v2-clean
+----
+
+.References
+* https://stackoverflow.com/questions/10519740/specify-ghc-options-at-command-line-via-cabal-cabal-install-without-editing-c[haskell - Specify ghc options at command line via cabal (cabal-install) without editing .cabal files of packages - Stack Overflow^]

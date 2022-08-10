@@ -1,4 +1,5 @@
 <<index.adoc#,Haskell>> {vbar}
+<<cabal.adoc#,Cabal>> {var}
 <<string.adoc#,Char&String>> {vbar}
 <<list.adoc#,List>> {vbar}
 <<datetime.adoc#,DateTime>> {vbar}

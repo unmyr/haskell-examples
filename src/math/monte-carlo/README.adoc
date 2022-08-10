@@ -1,5 +1,5 @@
 
-== Dice test
+== Monte Carlo simulation
 
 === Create project
 
@@ -16,21 +16,21 @@ $ cabal init --non-interactive --cabal-version=2.4 \
 
 [source,console]
 ----
-$ cabal v2-build
+$ cabal v2-build --ghc-options=-Wall
 ----
 
 === Run
 
 [source,console]
 ----
-$ cabal v2-run -- all 100000
+$ cabal v2-run --ghc-options=-Wall -- all 100000
 Up to date
 trial=    100000, result=3.1389600000, error=0.0026326536
 ----
 
 [source,console]
 ----
-$ cabal v2-run
+$ cabal v2-run --ghc-options=-Wall
 Up to date
 -- runMonteCarloNoSeed
 trial=         1, result=0.0000000000, error=3.1415926536
@@ -53,7 +53,13 @@ trial=   1000000, result=3.1408120000, error=0.0007806536
 trial=  10000000, result=3.1413364000, error=0.0002562536
 ----
 
+=== Clean
+
+[source,console]
+----
+$ cabal v2-clean
+----
+
 === References
 
-* https://cabal.readthedocs.io/en/latest/nix-local-build.html[4.1. Quickstart — Cabal 3.9.0.0 User's Guide^]
 * https://stackoverflow.com/questions/66441802/why-is-this-monte-carlo-haskell-program-so-slow[performance - Why is this Monte Carlo Haskell program so slow? - Stack Overflow^]

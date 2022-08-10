@@ -16,16 +16,23 @@ $ cabal init --non-interactive --cabal-version=2.4 \
 
 [source,console]
 ----
-$ cabal v2-build
+$ cabal v2-build --ghc-options=-Wall
 ----
 
 === Run
 
 [source,console]
 ----
-$ cabal v2-run
+$ cabal v2-run --ghc-options=-Wall
 Up to date
 3
+----
+
+=== Clean
+
+[source,console]
+----
+$ cabal v2-clean
 ----
 
 === References
