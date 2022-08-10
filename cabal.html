@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<title>Monad</title>
+<title>Cabal</title>
 <style>
 @import url(https://fonts.googleapis.com/css?family=Varela+Round|Open+Sans:400italic,600italic,400,600|Ubuntu+Mono:400);
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
@@ -966,119 +966,60 @@ pre.rouge {
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_monad">Monad</a>
-<ul class="sectlevel2">
-<li><a href="#_references">References</a></li>
-<li><a href="#_functor">Functor</a></li>
-<li><a href="#_list">List</a></li>
-<li><a href="#_maybe">Maybe</a></li>
-</ul>
-</li>
+<li><a href="#_cabal">Cabal</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="paragraph">
 <p><a href="index.html">Haskell</a> |
-<a href="cabal.html">Cabal</a> {var}
+<a href="#">Cabal</a> {var}
 <a href="string.html">Char&amp;String</a> |
 <a href="list.html">List</a> |
 <a href="datetime.html">DateTime</a> |
 <a href="install.html">Install</a> |
 <a href="criterion.html">Criterion</a> |
 <a href="math.html">Math</a> |
-<a href="#">Monad</a><br></p>
+<a href="monad.html">Monad</a><br></p>
 </div>
 <div class="sect1">
-<h2 id="_monad">Monad</h2>
+<h2 id="_cabal">Cabal</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_references">References</h3>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://learnyouahaskell.com/functors-applicative-functors-and-monoids" target="_blank" rel="noopener">Functors, Applicative Functors and Monoids - Learn You a Haskell for Great Good!</a></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_functor">Functor</h3>
+<p>Build</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Just</span> <span class="mi">1</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
-<span class="kt">Just</span> <span class="mi">2</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Nothing</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
-<span class="kt">Nothing</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
-<span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span></code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_list">List</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]),</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="p">]</span>
-<span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="o">&lt;*&gt;</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span> <span class="o">&lt;*&gt;</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
-<span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)]</span></code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_maybe">Maybe</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="mi">5</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="kt">Just</span> <span class="mi">8</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="p">(</span><span class="kt">Nothing</span> <span class="o">::</span> <span class="kt">Maybe</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="kt">Nothing</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="mi">3</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="mi">5</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="kt">Just</span> <span class="mi">8</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="mi">3</span> <span class="o">&lt;*&gt;</span> <span class="p">(</span><span class="kt">Nothing</span> <span class="o">::</span> <span class="kt">Maybe</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="kt">Nothing</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="p">(</span><span class="kt">Nothing</span> <span class="o">::</span> <span class="kt">Maybe</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="kt">Just</span> <span class="p">(</span><span class="mi">5</span> <span class="o">::</span> <span class="kt">Int</span><span class="p">)</span>
-<span class="kt">Nothing</span></code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>lookup</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kr">let</span> <span class="n">products</span> <span class="o">=</span> <span class="p">[(</span><span class="s">"Orange"</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="p">(</span><span class="s">"Apple"</span><span class="p">,</span> <span class="mi">480</span><span class="p">),</span> <span class="p">(</span><span class="s">"Banana"</span><span class="p">,</span> <span class="mi">200</span><span class="p">)]</span> <span class="o">::</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">lookup</span> <span class="s">"Banana"</span> <span class="n">products</span>
-<span class="kt">Just</span> <span class="mi">200</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">fmap</span> <span class="p">(</span><span class="o">*</span> <span class="mi">5</span><span class="p">)</span> <span class="o">$</span> <span class="n">lookup</span> <span class="s">"Banana"</span> <span class="n">products</span>
-<span class="kt">Just</span> <span class="mi">1000</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="o">*</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&lt;*&gt;</span> <span class="n">lookup</span> <span class="s">"Banana"</span> <span class="n">products</span>
-<span class="kt">Just</span> <span class="mi">1000</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">lookup</span> <span class="s">"Banana"</span> <span class="n">products</span> <span class="o">&gt;&gt;=</span> <span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">pure</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
-<span class="kt">Just</span> <span class="mi">1000</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">lookup</span> <span class="s">"Peach"</span> <span class="n">products</span>
-<span class="kt">Nothing</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">fmap</span> <span class="p">(</span><span class="o">*</span> <span class="mi">5</span><span class="p">)</span> <span class="o">$</span> <span class="n">lookup</span> <span class="s">"Peach"</span> <span class="n">products</span>
-<span class="kt">Nothing</span></code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>cabal v2-build <span class="nt">--ghc-options</span><span class="o">=</span><span class="nt">-Wall</span></code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Data.Map.lookup</p>
+<p>Run</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="haskell"><span class="kt">Prelude</span><span class="o">&gt;</span> <span class="n">productMap</span> <span class="o">=</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Map</span><span class="o">.</span><span class="n">fromList</span> <span class="p">([(</span><span class="s">"Orange"</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="p">(</span><span class="s">"Apple"</span><span class="p">,</span> <span class="mi">480</span><span class="p">),</span> <span class="p">(</span><span class="s">"Banana"</span><span class="p">,</span> <span class="mi">200</span><span class="p">)]</span> <span class="o">::</span> <span class="p">[(</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)])</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Map</span><span class="o">.</span><span class="n">lookup</span> <span class="s">"Orange"</span> <span class="n">productMap</span>
-<span class="kt">Just</span> <span class="mi">400</span>
-<span class="kt">Prelude</span><span class="o">&gt;</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Map</span><span class="o">.</span><span class="n">lookup</span> <span class="s">"Peach"</span> <span class="n">productMap</span>
-<span class="kt">Nothing</span></code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>cabal v2-run <span class="nt">--ghc-options</span><span class="o">=</span><span class="nt">-Wall</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Clean</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>cabal v2-clean</code></pre>
 </div>
 </div>
 </li>
 </ul>
 </div>
+<div class="ulist">
+<div class="title">References</div>
+<ul>
+<li>
+<p><a href="https://stackoverflow.com/questions/10519740/specify-ghc-options-at-command-line-via-cabal-cabal-install-without-editing-c" target="_blank" rel="noopener">haskell - Specify ghc options at command line via cabal (cabal-install) without editing .cabal files of packages - Stack Overflow</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
