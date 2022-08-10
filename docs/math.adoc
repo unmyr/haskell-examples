@@ -299,7 +299,7 @@ include::../src/math/complex.hs[]
 .References
 * https://stackoverflow.com/questions/48100794/differences-between-complex-number-implementations-in-haskell-and-python[Differences between complex number implementations in Haskell and Python - Stack Overflow^]
 
-=== Monte Carlo Method
+=== Monte Carlo simulation
 
 [source,haskell]
 .src/math/monte-carlo/src/Main.hs
