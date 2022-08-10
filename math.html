@@ -1380,19 +1380,30 @@ pre.rouge {
   <span class="o">$</span> <span class="n">length</span> <span class="o">$</span> <span class="n">filter</span> <span class="p">(</span><span class="o">==</span> <span class="kt">True</span><span class="p">)</span> <span class="o">$</span> <span class="n">take</span> <span class="n">n</span>
   <span class="o">$</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="n">xs</span>
 
+<span class="n">runMonteCarloNoSeed</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">runMonteCarloNoSeed</span> <span class="n">num_trials</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">gen</span> <span class="o">&lt;-</span> <span class="n">newStdGen</span>
+  <span class="kr">let</span> <span class="n">monte_carlo_pi</span> <span class="o">=</span> <span class="n">calcPi</span> <span class="n">num_trials</span> <span class="p">(</span><span class="n">computeNorms</span> <span class="p">(</span><span class="n">randomRs</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">gen</span><span class="p">)</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]))</span>
+  <span class="n">printf</span> <span class="s">"trial=%10d, result=%.10f, error=%.10f</span><span class="se">\n</span><span class="s">"</span> <span class="p">(</span><span class="n">num_trials</span><span class="p">)</span> <span class="p">(</span><span class="n">monte_carlo_pi</span><span class="p">)</span> <span class="p">(</span><span class="n">abs</span> <span class="p">(</span><span class="n">monte_carlo_pi</span> <span class="o">-</span> <span class="n">pi</span><span class="p">))</span>
+
+<span class="n">runMonteCarloWithSeed</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">runMonteCarloWithSeed</span> <span class="n">num_trials</span> <span class="n">seed</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="kr">let</span> <span class="n">monte_carlo_pi</span> <span class="o">=</span> <span class="n">calcPi</span> <span class="n">num_trials</span> <span class="p">(</span><span class="n">computeNorms</span> <span class="p">(</span><span class="n">randomRs</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="n">seed</span><span class="p">)</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]))</span>
+  <span class="n">printf</span> <span class="s">"trial=%10d, result=%.10f, error=%.10f</span><span class="se">\n</span><span class="s">"</span> <span class="p">(</span><span class="n">num_trials</span><span class="p">)</span> <span class="p">(</span><span class="n">monte_carlo_pi</span><span class="p">)</span> <span class="p">(</span><span class="n">abs</span> <span class="p">(</span><span class="n">monte_carlo_pi</span> <span class="o">-</span> <span class="n">pi</span><span class="p">))</span>
+
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
   <span class="n">args</span> <span class="o">&lt;-</span> <span class="n">getArgs</span>
   <span class="kr">let</span> <span class="n">str_num_trials</span> <span class="o">=</span> <span class="n">args</span> <span class="o">!!</span> <span class="mi">0</span>
       <span class="n">num_trials</span> <span class="o">=</span> <span class="n">read</span> <span class="n">str_num_trials</span> <span class="o">::</span> <span class="kt">Int</span>
 
-  <span class="c1">-- gen &lt;- newStdGen</span>
-  <span class="c1">-- let monte_carlo_pi = calcPi num_trials (computeNorms (randomRs (0, 1) (gen) :: [Double]))</span>
+  <span class="kr">let</span> <span class="n">trialList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">,</span> <span class="mi">10000000</span><span class="p">]</span>
+  <span class="n">putStrLn</span> <span class="s">"-- runMonteCarloNoSeed"</span>
+  <span class="n">mapM_</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">runMonteCarloNoSeed</span> <span class="n">n</span><span class="p">)</span> <span class="n">trialList</span>
 
   <span class="kr">let</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span>
-  <span class="kr">let</span> <span class="n">monte_carlo_pi</span> <span class="o">=</span> <span class="n">calcPi</span> <span class="n">num_trials</span> <span class="p">(</span><span class="n">computeNorms</span> <span class="p">(</span><span class="n">randomRs</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="n">mkStdGen</span> <span class="n">seed</span><span class="p">)</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]))</span>
-
-  <span class="n">printf</span> <span class="s">"trial=%d, result=%f, error=%.10f</span><span class="se">\n</span><span class="s">"</span> <span class="p">(</span><span class="n">num_trials</span><span class="p">)</span> <span class="p">(</span><span class="n">monte_carlo_pi</span><span class="p">)</span> <span class="p">(</span><span class="n">abs</span> <span class="p">(</span><span class="n">monte_carlo_pi</span> <span class="o">-</span> <span class="n">pi</span><span class="p">))</span></code></pre>
+  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"</span><span class="se">\n</span><span class="s">-- runMonteCarloWithSeed: seed="</span> <span class="o">++</span> <span class="p">(</span><span class="n">show</span> <span class="n">seed</span><span class="p">)</span>
+  <span class="n">mapM_</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">runMonteCarloWithSeed</span> <span class="n">n</span> <span class="n">seed</span><span class="p">)</span> <span class="n">trialList</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1400,7 +1411,25 @@ pre.rouge {
 <div class="content">
 <pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>cabal v2-run <span class="nt">--</span> all 100000
 <span class="go">Up to date
-trial=100000, result=3.13896, error=0.0026326536</span></code></pre>
+-- runMonteCarloNoSeed
+trial=         1, result=4.0000000000, error=0.8584073464
+trial=        10, result=2.8000000000, error=0.3415926536
+trial=       100, result=3.0800000000, error=0.0615926536
+trial=      1000, result=3.1760000000, error=0.0344073464
+trial=     10000, result=3.1180000000, error=0.0235926536
+trial=    100000, result=3.1458000000, error=0.0042073464
+trial=   1000000, result=3.1390600000, error=0.0025326536
+trial=  10000000, result=3.1413908000, error=0.0002018536
+
+-- runMonteCarloWithSeed: seed=1
+trial=         1, result=4.0000000000, error=0.8584073464
+trial=        10, result=3.2000000000, error=0.0584073464
+trial=       100, result=3.0800000000, error=0.0615926536
+trial=      1000, result=3.1160000000, error=0.0255926536
+trial=     10000, result=3.1268000000, error=0.0147926536
+trial=    100000, result=3.1389600000, error=0.0026326536
+trial=   1000000, result=3.1408120000, error=0.0007806536
+trial=  10000000, result=3.1413364000, error=0.0002562536</span></code></pre>
 </div>
 </div>
 </div>
@@ -2489,7 +2518,7 @@ si * i * j * k = i
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-10 12:44:23 UTC
+Last updated 2022-08-10 13:36:44 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
