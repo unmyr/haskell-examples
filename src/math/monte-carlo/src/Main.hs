@@ -5,7 +5,7 @@ import Text.Printf
 
 computeNorms :: [Double] -> [Double]
 computeNorms []  = []
-computeNorms [x] = []
+computeNorms [_] = []
 computeNorms (x:y:xs2) = (x*x + y*y) : (computeNorms xs2)
 
 calcPi :: Int -> [Double] -> Double
@@ -33,10 +33,12 @@ main = do
         num_trials = read str_num_trials :: Int
     runMonteCarloWithSeed num_trials 1
   else do
-    let trialList = [1, 10, 10^2, 10^3, 10^4, 10^5, 10^6, 10^7]
+    -- [1, 10, 100, 1000, 10000, 100000, 1000000, 10000000]
+    let trialList = map (\n -> (10::Int)^n) ([0..7] :: [Int])
+
     putStrLn "-- runMonteCarloNoSeed"
     mapM_ (\n -> runMonteCarloNoSeed n) trialList
 
-    let seed = 1
     putStrLn $ "\n-- runMonteCarloWithSeed: seed=" ++ (show seed)
+    let seed = 1
     mapM_ (\n -> runMonteCarloWithSeed n seed) trialList
