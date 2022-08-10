@@ -974,7 +974,7 @@ pre.rouge {
 <li><a href="#_fibonacci_sequence">Fibonacci sequence</a></li>
 <li><a href="#_prime_number">Prime number</a></li>
 <li><a href="#_complex_number">Complex number</a></li>
-<li><a href="#_monte_carlo_method">Monte Carlo Method</a></li>
+<li><a href="#_monte_carlo_simulation">Monte Carlo simulation</a></li>
 <li><a href="#_group">Group</a>
 <ul class="sectlevel3">
 <li><a href="#_c2">C<sub>2</sub></a></li>
@@ -1360,7 +1360,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_monte_carlo_method">Monte Carlo Method</h3>
+<h3 id="_monte_carlo_simulation">Monte Carlo simulation</h3>
 <div class="listingblock">
 <div class="title">src/math/monte-carlo/src/Main.hs</div>
 <div class="content">
@@ -1394,32 +1394,34 @@ pre.rouge {
 <span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
 <span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
   <span class="n">args</span> <span class="o">&lt;-</span> <span class="n">getArgs</span>
-  <span class="kr">let</span> <span class="n">str_num_trials</span> <span class="o">=</span> <span class="n">args</span> <span class="o">!!</span> <span class="mi">0</span>
-      <span class="n">num_trials</span> <span class="o">=</span> <span class="n">read</span> <span class="n">str_num_trials</span> <span class="o">::</span> <span class="kt">Int</span>
+  <span class="kr">if</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">length</span> <span class="n">args</span> <span class="kr">then</span> <span class="kr">do</span>
+    <span class="kr">let</span> <span class="n">str_num_trials</span> <span class="o">=</span> <span class="n">args</span> <span class="o">!!</span> <span class="mi">0</span>
+        <span class="n">num_trials</span> <span class="o">=</span> <span class="n">read</span> <span class="n">str_num_trials</span> <span class="o">::</span> <span class="kt">Int</span>
+    <span class="n">runMonteCarloWithSeed</span> <span class="n">num_trials</span> <span class="mi">1</span>
+  <span class="kr">else</span> <span class="kr">do</span>
+    <span class="kr">let</span> <span class="n">trialList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">7</span><span class="p">]</span>
+    <span class="n">putStrLn</span> <span class="s">"-- runMonteCarloNoSeed"</span>
+    <span class="n">mapM_</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">runMonteCarloNoSeed</span> <span class="n">n</span><span class="p">)</span> <span class="n">trialList</span>
 
-  <span class="kr">let</span> <span class="n">trialList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">,</span> <span class="mi">10000000</span><span class="p">]</span>
-  <span class="n">putStrLn</span> <span class="s">"-- runMonteCarloNoSeed"</span>
-  <span class="n">mapM_</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">runMonteCarloNoSeed</span> <span class="n">n</span><span class="p">)</span> <span class="n">trialList</span>
-
-  <span class="kr">let</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span>
-  <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"</span><span class="se">\n</span><span class="s">-- runMonteCarloWithSeed: seed="</span> <span class="o">++</span> <span class="p">(</span><span class="n">show</span> <span class="n">seed</span><span class="p">)</span>
-  <span class="n">mapM_</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">runMonteCarloWithSeed</span> <span class="n">n</span> <span class="n">seed</span><span class="p">)</span> <span class="n">trialList</span></code></pre>
+    <span class="kr">let</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"</span><span class="se">\n</span><span class="s">-- runMonteCarloWithSeed: seed="</span> <span class="o">++</span> <span class="p">(</span><span class="n">show</span> <span class="n">seed</span><span class="p">)</span>
+    <span class="n">mapM_</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">runMonteCarloWithSeed</span> <span class="n">n</span> <span class="n">seed</span><span class="p">)</span> <span class="n">trialList</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Results</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>cabal v2-run <span class="nt">--</span> all 100000
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>cabal v2-run
 <span class="go">Up to date
 -- runMonteCarloNoSeed
-trial=         1, result=4.0000000000, error=0.8584073464
+trial=         1, result=0.0000000000, error=3.1415926536
 trial=        10, result=2.8000000000, error=0.3415926536
-trial=       100, result=3.0800000000, error=0.0615926536
-trial=      1000, result=3.1760000000, error=0.0344073464
-trial=     10000, result=3.1180000000, error=0.0235926536
-trial=    100000, result=3.1458000000, error=0.0042073464
-trial=   1000000, result=3.1390600000, error=0.0025326536
-trial=  10000000, result=3.1413908000, error=0.0002018536
+trial=       100, result=3.3200000000, error=0.1784073464
+trial=      1000, result=3.1960000000, error=0.0544073464
+trial=     10000, result=3.1360000000, error=0.0055926536
+trial=    100000, result=3.1355600000, error=0.0060326536
+trial=   1000000, result=3.1412320000, error=0.0003606536
+trial=  10000000, result=3.1416380000, error=0.0000453464
 
 -- runMonteCarloWithSeed: seed=1
 trial=         1, result=4.0000000000, error=0.8584073464
@@ -1431,6 +1433,15 @@ trial=    100000, result=3.1389600000, error=0.0026326536
 trial=   1000000, result=3.1408120000, error=0.0007806536
 trial=  10000000, result=3.1413364000, error=0.0002562536</span></code></pre>
 </div>
+</div>
+<div class="ulist">
+<div class="title">References</div>
+<ul>
+<li>
+<p><a href="https://p4a.seas.gwu.edu/2019-Fall/L15-monte-carlo-methods.html" target="_blank" rel="noopener">Monte Carlo Methods</a><br>
+monte carlo simulation trials count - Google Search</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -2518,7 +2529,7 @@ si * i * j * k = i
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-10 13:36:44 UTC
+Last updated 2022-08-10 14:03:24 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
