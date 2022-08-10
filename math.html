@@ -1371,7 +1371,7 @@ pre.rouge {
 
 <span class="n">computeNorms</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]</span>
 <span class="n">computeNorms</span> <span class="kt">[]</span>  <span class="o">=</span> <span class="kt">[]</span>
-<span class="n">computeNorms</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="kt">[]</span>
+<span class="n">computeNorms</span> <span class="p">[</span><span class="kr">_</span><span class="p">]</span> <span class="o">=</span> <span class="kt">[]</span>
 <span class="n">computeNorms</span> <span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="n">y</span><span class="o">:</span><span class="n">xs2</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">)</span> <span class="o">:</span> <span class="p">(</span><span class="n">computeNorms</span> <span class="n">xs2</span><span class="p">)</span>
 
 <span class="n">calcPi</span> <span class="o">::</span> <span class="kt">Int</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Double</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="kt">Double</span>
@@ -1399,12 +1399,14 @@ pre.rouge {
         <span class="n">num_trials</span> <span class="o">=</span> <span class="n">read</span> <span class="n">str_num_trials</span> <span class="o">::</span> <span class="kt">Int</span>
     <span class="n">runMonteCarloWithSeed</span> <span class="n">num_trials</span> <span class="mi">1</span>
   <span class="kr">else</span> <span class="kr">do</span>
-    <span class="kr">let</span> <span class="n">trialList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="o">^</span><span class="mi">7</span><span class="p">]</span>
+    <span class="c1">-- [1, 10, 100, 1000, 10000, 100000, 1000000, 10000000]</span>
+    <span class="kr">let</span> <span class="n">trialList</span> <span class="o">=</span> <span class="n">map</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="mi">10</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span><span class="o">^</span><span class="n">n</span><span class="p">)</span> <span class="p">([</span><span class="mi">0</span><span class="o">..</span><span class="mi">7</span><span class="p">]</span> <span class="o">::</span> <span class="p">[</span><span class="kt">Int</span><span class="p">])</span>
+
     <span class="n">putStrLn</span> <span class="s">"-- runMonteCarloNoSeed"</span>
     <span class="n">mapM_</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">runMonteCarloNoSeed</span> <span class="n">n</span><span class="p">)</span> <span class="n">trialList</span>
 
-    <span class="kr">let</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">putStrLn</span> <span class="o">$</span> <span class="s">"</span><span class="se">\n</span><span class="s">-- runMonteCarloWithSeed: seed="</span> <span class="o">++</span> <span class="p">(</span><span class="n">show</span> <span class="n">seed</span><span class="p">)</span>
+    <span class="kr">let</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">mapM_</span> <span class="p">(</span><span class="nf">\</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">runMonteCarloWithSeed</span> <span class="n">n</span> <span class="n">seed</span><span class="p">)</span> <span class="n">trialList</span></code></pre>
 </div>
 </div>
@@ -2529,7 +2531,7 @@ si * i * j * k = i
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-10 14:03:24 UTC
+Last updated 2022-08-10 14:27:02 UTC
 </div>
 </div>
 <script type="text/x-mathjax-config">
