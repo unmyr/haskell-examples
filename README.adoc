@@ -8,8 +8,10 @@ endif::[]
 
 .Environment
 * Ubuntu 18.04 LTS
-* Haskell Stack
-** GHC 8.10.4
+** Haskell Stack: GHC 8.10.4
+
+* Ubuntu 22.04 LTS
+** Haskell Stack: GHC 9.4.8
 
 === Install WSL
 
@@ -22,11 +24,23 @@ sudo apt install haskell-platform
 
 . Check version
 +
+--
+* Ubuntu 18.04 LTS
++
 [source,console]
 ----
 $ ghci --version
 The Glorious Glasgow Haskell Compilation System, version 8.0.2
 ----
+
+* Ubuntu 22.04 LTS
++
+[source,console]
+----
+$ ghci --version
+The Glorious Glasgow Haskell Compilation System, version 8.8.4
+----
+--
 
 === Install other Ubuntu
 
@@ -66,6 +80,49 @@ Version 2.5.1, Git revision d6ab861544918185236cf826cb2028abb266d6d5 x86_64 hpac
 $ stack setup
 ----
 
+=== Install Haskell and GHCup
+
+* https://www.haskell.org/ghcup/install/[Installation - GHCup^]
+
+//^
+
+. Install system requirements
++
+[source,shell]
+----
+sudo apt install -y build-essential curl libffi-dev libffi8ubuntu1 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5
+----
+
+. Install GHCup
++
+[source,shell]
+----
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+----
+
+. Reload terminal
++
+[source,shell]
+----
+exec $SHELL -l
+----
+
+. Check version
++
+[source,console]
+----
+$ ghci --version
+The Glorious Glasgow Haskell Compilation System, version 9.4.8
+----
+
+. Check version
++
+[source,console]
+----
+$ stack --version
+Version 2.13.1, Git revision 8102bb8afce90fc954f48efae38b87f37cabc988 x86_64 hpack-0.36.0
+----
+
 === Using GHCi
 
 . Run ghci
@@ -73,17 +130,17 @@ $ stack setup
 [source,console]
 ----
 $ ghci src/hello.hs
-GHCi, version 8.0.2: http://www.haskell.org/ghc/  :? for help
-[1 of 1] Compiling Main             ( src/hello.hs, interpreted )
-Ok, modules loaded: Main.
-*Main> 
+GHCi, version 9.4.8: https://www.haskell.org/ghc/  :? for help
+[1 of 2] Compiling Main             ( src/hello.hs, interpreted )
+Ok, one module loaded.
+ghci> 
 ----
 
 . Execute main
 +
 [source,haskell]
 ----
-*Main> main
+ghci> main
 Hello world!
 ----
 
@@ -91,6 +148,6 @@ Hello world!
 +
 [source,haskell]
 ----
-*Main> :quit
+ghci> :quit
 Leaving GHCi.
 ----
