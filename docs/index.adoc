@@ -227,32 +227,37 @@ include::../src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_s
 [source,console]
 ----
 $ ghci src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs
+GHCi, version 9.4.8: https://www.haskell.org/ghc/  :? for help
+[1 of 2] Compiling Main             ( src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs, interpreted )
+Ok, one module loaded.
+...snip...
 ----
 +
-+
-[source,haskell]
+[source,console]
+.ghci src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs
 ----
-*Main> :show modules
+ghci> :show modules
 Main             ( src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs, interpreted )
-*Main> :info Vertex
+ghci> :info Vertex
+type Vertex :: *
 data Vertex = Vertex Int Int
         -- Defined at src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:1
-instance [safe] Show Vertex
+instance Show Vertex
   -- Defined at src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:40
-*Main> :t Vertex
+ghci> :t Vertex
 Vertex :: Int -> Int -> Vertex
-*Main> a = Vertex 3 4
-*Main> a
+ghci> a = Vertex 3 4
+ghci> a
 Vertex 3 4
-*Main> (\(Vertex x _) -> x) a
+ghci> (\(Vertex x _) -> x) a
 3
-*Main> (\(Main.Vertex x _) -> x) a
+ghci> (\(Main.Vertex x _) -> x) a
 3
-*Main> (\(Vertex _ y) -> y) a
+ghci> (\(Vertex _ y) -> y) a
 4
-*Main> (\(Vertex x y) -> sqrt(fromIntegral (x*x + y*y))) a
+ghci> (\(Vertex x y) -> sqrt(fromIntegral (x*x + y*y))) a
 5.0
-*Main> main
+ghci> main
 Vertex 3 4
 3
 3
