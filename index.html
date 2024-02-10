@@ -1185,44 +1185,44 @@ A qualified import makes the imported entities available only in qualified form,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs</code></pre>
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">$</span><span class="w"> </span>ghci src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs
+<span class="go">GHCi, version 9.4.8: https://www.haskell.org/ghc/  :? for help
+[1 of 2] Compiling Main             ( src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs, interpreted )
+Ok, one module loaded.
+...snip...</span></code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>+</p>
-</div>
-</li>
-</ul>
 </div>
 <div class="listingblock">
+<div class="title">ghci src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs</div>
 <div class="content">
-<pre>*Main&gt; :show modules
-Main             ( src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs, interpreted )
-*Main&gt; :info Vertex
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">ghci&gt;</span><span class="w"> </span>:show modules
+<span class="go">Main             ( src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs, interpreted )
+</span><span class="gp">ghci&gt;</span><span class="w"> </span>:info Vertex
+<span class="go">type Vertex :: *
 data Vertex = Vertex Int Int
         -- Defined at src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:1
-instance [safe] Show Vertex
+instance Show Vertex
   -- Defined at src/data-types/composite-types/ex1_no_named_fields/vertex_deriving_show.hs:1:40
-*Main&gt; :t Vertex
-Vertex :: Int -&gt; Int -&gt; Vertex
-*Main&gt; a = Vertex 3 4
-*Main&gt; a
-Vertex 3 4
-*Main&gt; (\(Vertex x _) -&gt; x) a
+</span><span class="gp">ghci&gt;</span><span class="w"> </span>:t Vertex
+<span class="gp">Vertex :: Int -&gt;</span><span class="w"> </span>Int -&gt; Vertex
+<span class="gp">ghci&gt;</span><span class="w"> </span>a <span class="o">=</span> Vertex 3 4
+<span class="gp">ghci&gt;</span><span class="w"> </span>a
+<span class="go">Vertex 3 4
+</span><span class="gp">ghci&gt;</span><span class="w"> </span><span class="o">(</span><span class="se">\(</span>Vertex x _<span class="o">)</span> -&gt; x<span class="o">)</span> a
+<span class="go">3
+</span><span class="gp">ghci&gt;</span><span class="w"> </span><span class="o">(</span><span class="se">\(</span>Main.Vertex x _<span class="o">)</span> -&gt; x<span class="o">)</span> a
+<span class="go">3
+</span><span class="gp">ghci&gt;</span><span class="w"> </span><span class="o">(</span><span class="se">\(</span>Vertex _ y<span class="o">)</span> -&gt; y<span class="o">)</span> a
+<span class="go">4
+</span><span class="gp">ghci&gt;</span><span class="w"> </span><span class="o">(</span><span class="se">\(</span>Vertex x y<span class="o">)</span> -&gt; sqrt<span class="o">(</span>fromIntegral <span class="o">(</span>x<span class="k">*</span>x + y<span class="k">*</span>y<span class="o">)))</span> a
+<span class="go">5.0
+</span><span class="gp">ghci&gt;</span><span class="w"> </span>main
+<span class="go">Vertex 3 4
 3
-*Main&gt; (\(Main.Vertex x _) -&gt; x) a
 3
-*Main&gt; (\(Vertex _ y) -&gt; y) a
 4
-*Main&gt; (\(Vertex x y) -&gt; sqrt(fromIntegral (x*x + y*y))) a
 5.0
-*Main&gt; main
-Vertex 3 4
-3
-3
-4
-5.0
-Vertex 2 3</pre>
+Vertex 2 3</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -1265,8 +1265,10 @@ Vertex 2 3</pre>
 <span class="kt">Vertex</span> <span class="mi">2</span> <span class="mi">3</span></code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>With filed name</p>
 <div class="listingblock">
@@ -1301,10 +1303,8 @@ Vertex 2 3</pre>
 <span class="gp">$</span><span class="w"> </span>ghci Main.hs</code></pre>
 </div>
 </div>
-</li>
-</ul>
-</div>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>Show modules</p>
 <div class="listingblock">
@@ -1364,6 +1364,9 @@ instance [safe] Show Vertex -- Defined at Euclidean2D.hs:3:10
 <span class="mi">4</span>
 <span class="mf">5.0</span></code></pre>
 </div>
+</div>
+</li>
+</ul>
 </div>
 </li>
 </ul>
@@ -2794,7 +2797,7 @@ Floating is a type class.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-28 06:35:32 UTC
+Last updated 2024-02-10 08:24:30 UTC
 </div>
 </div>
 </body>
